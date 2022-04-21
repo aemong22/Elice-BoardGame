@@ -8,13 +8,17 @@
     "@babel/core": "^7.17.9",
     "@babel/node": "^7.16.8",
     "@babel/plugin-transform-runtime": "^7.17.0",
-    "@babel/preset-env": "^7.16.11"
+    "@babel/preset-env": "^7.16.11",
+    "dotenv": "^16.0.0"
   },
   "dependencies": {
+    "@sindresorhus/is": "^4.6.0",
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.0",
+    "redis": "^4.0.6",
     "uuid": "^8.3.2"
   },
   "scripts": {

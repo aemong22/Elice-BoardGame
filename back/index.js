@@ -1,8 +1,11 @@
+// import "dotenv/config";
 import { app } from "./src/app";
+import { SERVER_PORT } from "./src/config";
 
-console.log(process.env.SERVER_PORT);
-const PORT = process.env.SERVER_PORT || 5001;
+// .env로 적용 안돼서 config 파일로 대체
+// const PORT = process.env.SERVER_PORT || 5001;
+const PORT = SERVER_PORT || 5001;
 
 app.listen(PORT, () => {
-  console.log(`정상적으로 서버를 시작하였습니다.  http://localhost:${PORT}`);
+  console.log(`server is running on http://localhost:${PORT}`);
 });
