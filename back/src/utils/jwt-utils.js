@@ -1,16 +1,15 @@
-import { redisClient } from "./redis";
-import { promisify } from "util";
 import jwt from "jsonwebtoken";
+import { JWT_SECRET_KEY } from "../config";
 
-const secret = process.env.SECRET;
+const secret = JWT_SECRET_KEY;
 
 exports.sign = (user) => {
   const payload = {
-    id: user.id,
+    id: user._id,
   };
   return jwt.sign(payload, secret, {
     algorithm: "HS256",
-    expiresIn: "1h",
+    expiresIn: "30m",
   });
 };
 
@@ -56,33 +55,3 @@ exports.refreshVerify = async (token, userId) => {
     return false;
   }
 };
-
-// module.exports = {
-//   sign: (user) => {
-//     const payload = {
-//       id: user._id,
-//     };
-//     return jwt.sign(payload, secret, {
-//       algorithm: "HS256",
-//       expiresIn: "1h",
-//     });
-//   },
-
-//   verify: (token) => {
-//     let decoded = null;
-//     try {
-//       decoded = jwt.verify(token, secret);
-//       return {
-//         ok: true,
-//         _id: decoded._id,
-//       };
-//     } catch (error) {
-//       return {
-//         ok: false,
-//         message: error.message,
-//       };
-//     }
-//   },
-
-//   refresh: () => {},
-// };

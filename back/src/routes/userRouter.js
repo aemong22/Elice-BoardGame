@@ -2,6 +2,7 @@ import is from "@sindresorhus/is";
 import { Router } from "express";
 import { login_required } from "../middlewares/login_required";
 import { userAuthService } from "../services/userService";
+import { refresh } from "../utils/refresh";
 
 const userAuthRouter = Router();
 
@@ -47,13 +48,22 @@ userAuthRouter.get("/userlist", async (req, res, next) => {
   }
 });
 
-userAuthRouter.post("/login", async (req, res, next) => {
+userAuthRouter.post("/user/login", async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    res.status(200).json({ message: "succ" });
+
+    const user = await userAuthService.getSingleUser({ email, password });
+
+    if (user.errorMessage) {
+      throw new Error(user.errorMessage);
+    }
+
+    res.status(200).json(user);
   } catch (error) {
     next(error);
   }
 });
+
+userAuthRouter.get("/refresh", refresh);
 
 export { userAuthRouter };
