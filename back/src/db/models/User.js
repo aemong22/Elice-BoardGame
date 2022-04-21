@@ -9,6 +9,10 @@ class User {
         const user = await UserModel.findOne({ user_name });
         return user;
     }
+    static async findAll() {
+        const users = await UserModel.find({});
+        return users;
+    }
 }
 
 export { User };
