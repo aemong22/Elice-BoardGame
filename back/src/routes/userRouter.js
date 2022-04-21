@@ -7,44 +7,53 @@ const userAuthRouter = Router();
 
 // 회원가입
 userAuthRouter.post("/user/register", async (req, res, next) => {
-    try {
-        if (is.emptyObject(req.body)) {
-            throw new Error(
-                "headers의 Content-Type을 application/json으로 설정해주세요"
-            );
-        }
-
-        const user_name = req.body.user_name;
-        const email = req.body.email;
-        const password = req.body.password;
-        const phone_number = req.body.phone_number;
-
-        const createdUser = await userAuthService.addUser({
-            user_name,
-            email,
-            password,
-            phone_number,
-        });
-
-        if (createdUser.errorMessage) {
-            throw new Error(createdUser.errorMessage);
-        }
-
-        res.status(200).json(createdUser);
-    } catch (error) {
-        next(error);
+  try {
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        "headers의 Content-Type을 application/json으로 설정해주세요"
+      );
     }
+
+    const user_name = req.body.user_name;
+    const email = req.body.email;
+    const password = req.body.password;
+    const phone_number = req.body.phone_number;
+
+    const createdUser = await userAuthService.addUser({
+      user_name,
+      email,
+      password,
+      phone_number,
+    });
+
+    if (createdUser.errorMessage) {
+      throw new Error(createdUser.errorMessage);
+    }
+
+    res.status(200).json(createdUser);
+  } catch (error) {
+    next(error);
+  }
 });
 
 // 모든 회원 정보 가져오기
 userAuthRouter.get("/userlist", async (req, res, next) => {
-    try {
-        const users = await userAuthService.getUsers();
+  try {
+    const users = await userAuthService.getUsers();
 
-        res.status(200).json(users);
-    } catch (error) {
-        next(error);
-    }
+    res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+});
+
+userAuthRouter.post("/login", async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    res.status(200).json({ message: "succ" });
+  } catch (error) {
+    next(error);
+  }
 });
 
 export { userAuthRouter };
