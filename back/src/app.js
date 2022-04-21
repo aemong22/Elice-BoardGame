@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import { userAuthRouter } from "./routes/userRouter";
 
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 
@@ -16,6 +17,8 @@ db;
 // express.urlencoded: 주로 Form submit 에 의해 만들어지는 URL-Encoded 형태의 데이터를 인식하고 핸들링할 수 있게 함.
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use(userAuthRouter);
 
 app.use(errorMiddleware);
 export { app };
