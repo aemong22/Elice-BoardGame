@@ -1,4 +1,5 @@
 import { sign, verify, refreshVerify } from "./jwt-utils";
+import { User } from "../db";
 import jwt from "jsonwebtoken";
 
 const refresh = async (req, res) => {
@@ -17,6 +18,16 @@ const refresh = async (req, res) => {
       res.status(401).json({
         ok: false,
         message: "No authorized",
+      });
+    }
+
+    let user = null;
+    try {
+      user = await User.findByUserId({ _id: decoded.id });
+    } catch (error) {
+      res.status(401).json({
+        ok: false,
+        message: error.message,
       });
     }
 

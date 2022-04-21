@@ -3,6 +3,7 @@ import { Router } from "express";
 import { login_required } from "../middlewares/login_required";
 import { userAuthService } from "../services/userService";
 import { refresh } from "../utils/refresh";
+import { authJWT } from "../middlewares/authJWT";
 
 const userAuthRouter = Router();
 
@@ -65,5 +66,7 @@ userAuthRouter.post("/user/login", async (req, res, next) => {
 });
 
 userAuthRouter.get("/refresh", refresh);
-
+userAuthRouter.get("/tokenTest", authJWT, (req, res) => {
+  console.log(req.id);
+});
 export { userAuthRouter };
