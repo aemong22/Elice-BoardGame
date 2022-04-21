@@ -6,8 +6,8 @@ class Token {
     return token;
   }
 
-  static async getToken() {
-    const userToken = await TokenModel.find({});
+  static async getToken({ user_id }) {
+    const userToken = await TokenModel.findOne({ user_id });
     return userToken;
   }
 }

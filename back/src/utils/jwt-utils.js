@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { JWT_SECRET_KEY } from "../config";
+import { Token } from "../db";
 
 const secret = JWT_SECRET_KEY;
 
@@ -36,12 +37,11 @@ exports.refresh = () => {
   });
 };
 
-exports.refreshVerify = async (token, userId) => {
-  const getAsync = promisify(redisClient.get).bind(redisClient);
-
+exports.refreshVerify = async (token, user_id) => {
   try {
-    const data = await getAsync(userId); // refresh token 가져오기
-    if (token === data) {
+    // refresh token 가져오기
+    const refresh_token = await Token.getToken({ user_id });
+    if (token === refresh_token) {
       try {
         jwt.verify(token, secret);
         return true;
