@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import { userAuthRouter } from "./routes/userRouter";
 
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 import { userRouter } from "./routes/userRouter";
@@ -18,6 +19,7 @@ db;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(userRouter);
+app.use(userAuthRouter);
+
 app.use(errorMiddleware);
 export { app };

@@ -1,33 +1,50 @@
+import is from "@sindresorhus/is";
 import { Router } from "express";
+import { login_required } from "../middlewares/login_required";
+import { userAuthService } from "../services/userService";
 
-import jwt from "../utils/jwt-utils";
-import { redisClient } from "../utils/redis";
-import { authJWT } from "../middlewares/authJWT";
+const userAuthRouter = Router();
 
-const userRouter = Router();
+// 회원가입
+userAuthRouter.post("/user/register", async (req, res, next) => {
+    try {
+        if (is.emptyObject(req.body)) {
+            throw new Error(
+                "headers의 Content-Type을 application/json으로 설정해주세요"
+            );
+        }
 
-userRouter.post("/login", (req, res, next) => {
-  if (success) {
-    const accessToken = jwt.sign(user);
-    const refreshToken = jwt.refresh();
+        const user_name = req.body.user_name;
+        const email = req.body.email;
+        const password = req.body.password;
+        const phone_number = req.body.phone_number;
 
-    redisClient.set(user._id, refreshToken);
+        const createdUser = await userAuthService.addUser({
+            user_name,
+            email,
+            password,
+            phone_number,
+        });
 
-    res.status(200).json({
-      ok: true,
-      data: {
-        accessToken,
-        refreshToken,
-      },
-    });
-  } else {
-    res.status(401).json({
-      ok: false,
-      message: "password is incorrect",
-    });
-  }
+        if (createdUser.errorMessage) {
+            throw new Error(createdUser.errorMessage);
+        }
+
+        res.status(200).json(createdUser);
+    } catch (error) {
+        next(error);
+    }
 });
 
-userRouter.get("/userInfo", authJWT, (req, res, next) => {});
+// 모든 회원 정보 가져오기
+userAuthRouter.get("/userlist", async (req, res, next) => {
+    try {
+        const users = await userAuthService.getUsers();
 
-export { userRouter };
+        res.status(200).json(users);
+    } catch (error) {
+        next(error);
+    }
+});
+
+export { userAuthRouter };
