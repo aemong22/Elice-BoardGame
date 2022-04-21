@@ -31,6 +31,12 @@ class userAuthService {
 
         return createdUser;
     }
+
+    // 모든 유저 목록 가져오기
+    static async getUsers() {
+        const users = await User.findAll();
+        return users;
+    }
 }
 
 export { userAuthService };
