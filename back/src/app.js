@@ -3,6 +3,7 @@ import cors from "cors";
 import { userAuthRouter } from "./routes/userRouter";
 
 import { errorMiddleware } from "./middlewares/errorMiddleware";
+import { userRouter } from "./routes/userRouter";
 
 const app = express();
 // CORS 에러 방지
