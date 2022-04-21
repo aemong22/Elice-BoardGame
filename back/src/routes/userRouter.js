@@ -36,4 +36,15 @@ userAuthRouter.post("/user/register", async (req, res, next) => {
     }
 });
 
+// 모든 회원 정보 가져오기
+userAuthRouter.get("/userlist", async (req, res, next) => {
+    try {
+        const users = await userAuthService.getUsers();
+
+        res.status(200).json(users);
+    } catch (error) {
+        next(error);
+    }
+});
+
 export { userAuthRouter };
