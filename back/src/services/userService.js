@@ -37,6 +37,31 @@ class userAuthService {
         const users = await User.findAll();
         return users;
     }
+
+    //비밀번호 찾기 후 변경
+    static async setPassword({ user_name, toUpdate }) {
+        // 우선 해당 id 의 유저가 db에 존재하는지 여부 확인
+        let user = await User.findByUserName({ user_name });
+
+        // db에서 찾지 못한 경우, 에러 메시지 반환
+        if (!user) {
+            const errorMessage =
+                "가입 내역이 없습니다. 다시 한 번 확인해 주세요.";
+            return { errorMessage };
+        }
+
+        if (toUpdate.password) {
+            const hashedPassword = await bcrypt.hash(toUpdate.password, 10);
+            const fieldToUpdate = "password";
+            const newValue = hashedPassword;
+            user = await User.updatePassword({
+                user_name,
+                fieldToUpdate,
+                newValue,
+            });
+        }
+        return user;
+    }
 }
 
 export { userAuthService };

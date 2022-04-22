@@ -13,6 +13,19 @@ class User {
         const users = await UserModel.find({});
         return users;
     }
+
+    static async updatePassword({ user_name, fieldToUpdate, newValue }) {
+        const filter = { user_name: user_name };
+        const update = { [fieldToUpdate]: newValue };
+        const option = { returnOriginal: false };
+
+        const updatedUser = await UserModel.findOneAndUpdate(
+            filter,
+            update,
+            option
+        );
+        return updatedUser;
+    }
 }
 
 export { User };
