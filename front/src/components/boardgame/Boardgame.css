@@ -1,0 +1,40 @@
+.boardgame-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.boardgame-category {
+    height: 100%;
+}
+
+.boardgame-wrapper {
+    width: 1300px;
+    margin-left: 2px;
+    background-color: #e2e2e2;
+}
+
+.boardgame-sort {
+    width: 100%;
+    height: 60px;
+    display: flex;
+
+}
+
+.boardgame-filterd {
+    margin: 20px;
+}
+
+.boardgame-sort-items {
+    margin: auto 0 0 auto;
+    display: flex;
+}
+
+.boardgames {
+    height: 70%;
+    margin: 50px;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    background-color: white;
+}
