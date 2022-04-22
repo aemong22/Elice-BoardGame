@@ -1,0 +1,11 @@
+#wrapper {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("/public/image/intro.png");
+  background-size: 80% 100%;
+  background-repeat: no-repeat;
+}
+
+#title {
+  font-size: larger;
+}
