@@ -22,4 +22,5 @@ app.use(express.urlencoded({ extended: false }));
 app.use(userAuthRouter);
 
 app.use(errorMiddleware);
+
 export { app };
