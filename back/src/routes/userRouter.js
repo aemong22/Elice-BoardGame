@@ -66,8 +66,8 @@ userAuthRouter.post("/user/login", async (req, res, next) => {
   }
 });
 
-userAuthRouter.get("/user/:id", authJWT, async (req, res) => {
-  // id로 검색
+userAuthRouter.get("/user/:id", authJWT, async (req, res, next) => {
+  // 사용자를 id로 검색
   try {
     const _id = req.params.id;
     const user = await userAuthService.getUserInfo({ _id });
@@ -77,8 +77,24 @@ userAuthRouter.get("/user/:id", authJWT, async (req, res) => {
   }
 });
 
-userAuthRouter.get("/user/current", authJWT, (req, res) => {
+userAuthRouter.get("/currentUser", authJWT, async (req, res, next) => {
   // 내 정보 보기
+  try {
+    // jwt토큰에서 추출된 사용자 id를 가지고 db에서 사용자 정보를 찾음.
+    const _id = req.currentUserId;
+    console.log(_id);
+    const currentUserInfo = await userAuthService.getUserInfo({
+      _id,
+    });
+
+    if (currentUserInfo.errorMessage) {
+      throw new Error(currentUserInfo.errorMessage);
+    }
+
+    res.status(200).json(currentUserInfo);
+  } catch (error) {
+    next(error);
+  }
 });
 
 userAuthRouter.get("/token/refresh", refresh);
