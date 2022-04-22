@@ -13,7 +13,7 @@ exports.sign = (user) => {
     // 암호화 방식
     algorithm: "HS256",
     // 만료 시간
-    expiresIn: "2s",
+    expiresIn: "10m",
   });
 };
 

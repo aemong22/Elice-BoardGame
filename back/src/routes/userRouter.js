@@ -4,6 +4,7 @@ import { login_required } from "../middlewares/login_required";
 import { userAuthService } from "../services/userService";
 import { refresh } from "../utils/refresh";
 import { authJWT } from "../middlewares/authJWT";
+import { User } from "../db";
 
 const userAuthRouter = Router();
 
@@ -65,7 +66,20 @@ userAuthRouter.post("/user/login", async (req, res, next) => {
   }
 });
 
-userAuthRouter.get("/tokenTest", authJWT, (req, res) => {});
+userAuthRouter.get("/user/:id", authJWT, async (req, res) => {
+  // id로 검색
+  try {
+    const _id = req.params.id;
+    const user = await userAuthService.getUserInfo({ _id });
+    res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+});
+
+userAuthRouter.get("/user/current", authJWT, (req, res) => {
+  // 내 정보 보기
+});
 
 userAuthRouter.get("/token/refresh", refresh);
 

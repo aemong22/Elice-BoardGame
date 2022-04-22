@@ -82,6 +82,16 @@ class userAuthService {
 
     return logedinUser;
   }
+
+  static async getUserInfo({ _id }) {
+    const user = await User.findByUserId({ _id });
+
+    if (!user) {
+      const errorMessage = "해당 메일은 가입 내역이 없습니다.";
+      return { errorMessage };
+    }
+    return user;
+  }
 }
 
 export { userAuthService };
