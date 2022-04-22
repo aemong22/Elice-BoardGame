@@ -4,6 +4,7 @@ function App() {
   return (
     <div>
       <LoginForm />
+      <img src="image/intro.png" alt="주사위" style={{ width: "80%" }} />
     </div>
   );
 }
