@@ -1,0 +1,10 @@
+#login-modal {
+  border-radius: 30px;
+  border : solid 2px;
+  width : 400px;
+  height : 550px;
+}
+
+#login-modal > img {
+  width:90px;
+}
