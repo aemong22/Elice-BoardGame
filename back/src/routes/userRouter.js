@@ -65,8 +65,8 @@ userAuthRouter.post("/user/login", async (req, res, next) => {
   }
 });
 
-userAuthRouter.get("/refresh", refresh);
-userAuthRouter.get("/tokenTest", authJWT, (req, res) => {
-  console.log(req.id);
-});
+userAuthRouter.get("/tokenTest", authJWT, (req, res) => {});
+
+userAuthRouter.get("/token/refresh", refresh);
+
 export { userAuthRouter };

@@ -3,6 +3,7 @@ import { User } from "../db";
 import jwt from "jsonwebtoken";
 
 const refresh = async (req, res) => {
+  // access token이 살아있는지 확인하고 만료되면 다시 발급
   if (req.headers.authorization && req.headers.refresh) {
     const authToken = req.headers.authorization.split(" ")[1];
     const refreshToken = req.headers.refresh;
@@ -25,10 +26,11 @@ const refresh = async (req, res) => {
     try {
       user = await User.findByUserId({ _id: decoded.id });
     } catch (error) {
-      res.status(401).json({
+      return {
         ok: false,
         message: error.message,
-      });
+      };
+      // res.status(401).json({});
     }
 
     // access token이 디코딩 되면 user_id를 가져와 refresh token을 검증
@@ -69,4 +71,5 @@ const refresh = async (req, res) => {
     });
   }
 };
+
 export { refresh };
