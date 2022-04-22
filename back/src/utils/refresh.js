@@ -30,7 +30,6 @@ const refresh = async (req, res) => {
         ok: false,
         message: error.message,
       };
-      // res.status(401).json({});
     }
 
     // access token이 디코딩 되면 user_id를 가져와 refresh token을 검증

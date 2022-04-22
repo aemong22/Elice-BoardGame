@@ -19,7 +19,7 @@ const authJWT = (req, res, next) => {
     }
   } else {
     console.log("No verified access token");
-    res.status(400).send("This page for logged in user");
+    res.status(400).json("This page for logged in user");
   }
 };
 
