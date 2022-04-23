@@ -11,7 +11,9 @@ function Home() {
     // 유저 로그인 상태 관련 코드 추가하기
 
     // 만약 로그인 된 상태가 아니라면 intro 페이지로 이동시키기
-    navigate("/intro", { replace: true });
+    useEffect(() => {
+        navigate("/intro", { replace: true });
+    }, [params, navigate]);
 
     return (
         <>
