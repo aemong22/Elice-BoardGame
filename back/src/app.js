@@ -1,7 +1,9 @@
 import express from "express";
 import cors from "cors";
+import { userAuthRouter } from "./routes/userRouter";
 
 import { errorMiddleware } from "./middlewares/errorMiddleware";
+import { userRouter } from "./routes/userRouter";
 
 const app = express();
 // CORS 에러 방지
@@ -17,5 +19,8 @@ db;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use(userAuthRouter);
+
 app.use(errorMiddleware);
+
 export { app };
