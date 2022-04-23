@@ -39,9 +39,9 @@ class userAuthService {
     }
 
     //비밀번호 찾기 후 변경
-    static async setPassword({ user_name, toUpdate }) {
+    static async setPassword({ email, toUpdate }) {
         // 우선 해당 id 의 유저가 db에 존재하는지 여부 확인
-        let user = await User.findByUserName({ user_name });
+        let user = await User.findByEmail({ email });
 
         // db에서 찾지 못한 경우, 에러 메시지 반환
         if (!user) {
@@ -55,7 +55,7 @@ class userAuthService {
             const fieldToUpdate = "password";
             const newValue = hashedPassword;
             user = await User.updatePassword({
-                user_name,
+                email,
                 fieldToUpdate,
                 newValue,
             });

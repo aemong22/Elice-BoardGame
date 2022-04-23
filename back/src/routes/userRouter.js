@@ -52,7 +52,7 @@ userAuthRouter.get("/userlist", async (req, res, next) => {
 //비밀번호 찾기 API
 userAuthRouter.post("/user/reset_password", async (req, res, next) => {
     try {
-        const user_name = req.body.user_name;
+        const email = req.body.email;
 
         const generatedAuthNumber = Math.floor(Math.random() * 10 ** 8)
             .toString()
@@ -60,7 +60,7 @@ userAuthRouter.post("/user/reset_password", async (req, res, next) => {
 
         const toUpdate = { password: generatedAuthNumber };
         const resetPassword = await userAuthService.setPassword({
-            user_name,
+            email,
             toUpdate,
         });
 
@@ -82,7 +82,7 @@ userAuthRouter.post("/user/reset_password", async (req, res, next) => {
         // send mail with defined transport object
         let info = await transporter.sendMail({
             from: `"nuri" <${process.env.NODEMAILER_USER}>`,
-            to: resetPassword.email,
+            to: email,
             subject: "비밀번호 변경입니다",
             text: generatedAuthNumber,
             html: `<b>변경된 비밀번호 입니다.<br/>${generatedAuthNumber}</b>`,
