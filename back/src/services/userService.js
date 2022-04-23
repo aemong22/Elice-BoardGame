@@ -73,7 +73,6 @@ class userAuthService {
         const { _id, user_name, phone_number } = user;
 
         const logedinUser = {
-            token,
             _id,
             email,
             user_name,
