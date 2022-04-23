@@ -1,5 +1,6 @@
+import { bottomNavigationClasses } from "@mui/material";
 import "./Intro.css";
-// import RegisterBtn from "./RegisterBtn";
+import RegisterBtn from "./RegisterBtn";
 
 const Intro = () => {
   return (
@@ -15,7 +16,7 @@ const Intro = () => {
           </span>
         </div>
 
-        {/* <RegisterBtn /> */}
+        <RegisterBtn onClick />
       </div>
     </div>
   );
