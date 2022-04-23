@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 
-const RegisterBtn = () => {
+const RegisterBtn = ({ handleOpen, setOpen }) => {
   const IOSSwitch = styled((props) => (
     <Switch
       focusVisibleClassName=".Mui-focusVisible"
@@ -65,7 +65,7 @@ const RegisterBtn = () => {
   }));
   return (
     <FormControlLabel
-      control={<IOSSwitch sx={{ m: 1 }} defaultChecked={false} />}
+      control={<IOSSwitch sx={{ m: 1 }} defaultChecked onChange={handleOpen} />}
     />
   );
 };

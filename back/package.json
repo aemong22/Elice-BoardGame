@@ -12,7 +12,6 @@
     "dotenv": "^16.0.0"
   },
   "dependencies": {
-    "@sindresorhus/is": "^4.6.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "express": "^4.17.3",
