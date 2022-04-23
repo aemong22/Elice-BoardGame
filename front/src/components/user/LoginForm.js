@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import "./user.css";
-import { textAlign } from "@mui/system";
 import * as Api from "../../api";
 
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../store/actions/userAction";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
 function LoginForm({ setOpen, handleClose }) {
   const [findPW, setFindPW] = useState(false);
@@ -112,7 +111,11 @@ function LoginForm({ setOpen, handleClose }) {
             ID/PW찾기
           </Button>
           <span className="login-bottom">|</span>
-          <Button variant="text" className="login-bottom">
+          <Button
+            variant="text"
+            className="login-bottom"
+            onClick={() => navigate("/register")}
+          >
             회원가입
           </Button>
         </>
@@ -141,7 +144,11 @@ function LoginForm({ setOpen, handleClose }) {
           <div className="findPW-detail">
             아직 회원이 아니시면 회원가입을 해주세요.
           </div>
-          <Button variant="text" className="login-bottom">
+          <Button
+            variant="text"
+            className="login-bottom"
+            onClick={() => navigate("/register")}
+          >
             회원가입
           </Button>
         </>

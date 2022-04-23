@@ -18,7 +18,7 @@ function Home() {
     }
 
     setIsFetchCompleted(true);
-  }, [params, userState, navigate]);
+  }, [userState, navigate]);
 
   if (!isFetchCompleted) {
     return <div>로딩중...</div>;
