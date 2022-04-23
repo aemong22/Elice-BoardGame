@@ -1,6 +1,6 @@
 # 프로젝트 기획서
 
-## 보드게임 추천 서비스
+## BORINII(후보)
 
 ### `주제`
 
@@ -8,20 +8,22 @@
 
 ### 팀 구성원 및 역할
 
-| 이름   | 역할                      |
-| ------ | ------------------------- |
-| 김애림 | 프론트엔드 개발           |
-| 노누리 | 백엔드 개발/최종 발표     |
-| 송가람 | 프론트엔드 개발           |
-| 안민영 | 프론트엔드 개발/중간 발표 |
-| 소범기 | 백엔드 개발/데이터 분석   |
-| 이상원 | 백엔드 개발/팀장          |
+| 이름   | 역할                          |
+| ------ | ----------------------------- |
+| 김애림 | 프론트엔드 개발               |
+| 노누리 | 백엔드 개발/**최종 발표**     |
+| 송가람 | 프론트엔드 개발               |
+| 안민영 | 프론트엔드 개발/**중간 발표** |
+| 소범기 | 백엔드 개발/데이터 분석       |
+| 이상원 | 백엔드 개발/팀장              |
 
 ## `Datasets`
 
 ### Datasets
 
-- Board game review data(kaggle)
+- [BoardGameGeek Reviews](https://www.kaggle.com/datasets/jvanelteren/boardgamegeek-reviews)
+- [Fantastic Board Games: TU Wien DOPP 3 Submission](https://www.kaggle.com/code/bananalee67/fantastic-board-games-tu-wien-dopp-3-submission)
+- [Board Games Dataset](https://www.kaggle.com/datasets/bananalee67/board-games-dataset)
 
 ### Insight
 
@@ -38,6 +40,8 @@
 ### 가설 설정
 
 - 보드게임 리뷰의 코사인 유사도로 유사한 보드게임을 얻을 수 있음
+- 보드게임의 comment에 따른 워드 클라우드 추출(보드게임의 특성 파악)
+- 사용자가 추천한 플레이어 수와 연령대 시각화로 보드게임 정보 가독성 높임
 
 ### 데이터 분석 기술, 라이브러리 사용 계획
 
@@ -47,6 +51,8 @@
 ### 데이터 분석 종류(시각화)
 
 - 보드게임 리뷰 데이터의 comment를 사용한 워드 클라우드
+- 사용자가 추천한 플레이어 수를 막대 그래프로 표현
+- 사용자가 추천한 연령대를 막대 그래프로 표현
 
 ## `서비스 설명`
 
