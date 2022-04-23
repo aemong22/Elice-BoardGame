@@ -1,4 +1,3 @@
-import { bottomNavigationClasses } from "@mui/material";
 import "./Intro.css";
 import RegisterBtn from "./RegisterBtn";
 
