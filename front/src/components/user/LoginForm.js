@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import "./user.css";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../store/actions/userAction";
+import { Button } from "@mui/material";
 import { textAlign } from "@mui/system";
+import * as Api from "../../api";
+import "./user.css";
+
 function LoginForm({ setOpen, handleClose }) {
   const [findPW, setFindPW] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const validateEmail = (email) => {
     return email
       .toLowerCase()
@@ -27,6 +34,26 @@ function LoginForm({ setOpen, handleClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    try {
+      // "user/login" 엔드포인트로 post요청함.
+      const res = await Api.post("user/login", {
+        email,
+        password,
+      });
+      // 유저 정보는 response의 data임.
+      const user = res.data;
+      // JWT 토큰은 유저 정보의 token임.
+      const jwtToken = user.token;
+      // sessionStorage에 "userToken"이라는 키로 JWT 토큰을 저장함.
+      sessionStorage.setItem("userToken", jwtToken);
+      // userDispatch 함수를 이용해 로그인 성공 상태로 만듦.
+      dispatch(loginUser(user));
+
+      // 기본 페이지로 이동함.
+      navigate("/", { replace: true });
+    } catch (err) {
+      alert("이메일 또는 비밀번호가 유효하지 않습니다.");
+    }
     console.log(email, password);
   };
 
