@@ -4,6 +4,7 @@
   width : 400px;
   height : 450px;
   text-align :center;
+  background-color: #ffffff;
 }
 
 #modal > img {
@@ -22,7 +23,6 @@
   margin:20px;
   width : 85%;
   border-radius : 30px;
-  padding : 10px;
   border: none;
   color: white;
   background-color: #E3D5CA;
@@ -34,8 +34,7 @@
 #modal > .login-bottom {
   color : gray;
   background-color: white;
-  border:none;
-  margin: 20px 5px 10px 5px;
+  border:solid 1px;
+  margin: 10px 3px;
   font-size: 10px;
-
 }
