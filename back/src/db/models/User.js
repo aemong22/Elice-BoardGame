@@ -13,6 +13,28 @@ class User {
         const users = await UserModel.find({});
         return users;
     }
+
+    static async findByEmail({ email }) {
+        const user = await UserModel.findOne({ email });
+        return user;
+    }
+
+    static async findByUserId({ _id }) {
+        const user = await UserModel.findOne({ _id });
+        return user;
+    }
+    static async updatePassword({ email, fieldToUpdate, newValue }) {
+        const filter = { email: email };
+        const update = { [fieldToUpdate]: newValue };
+        const option = { returnOriginal: false };
+
+        const updatedUser = await UserModel.findOneAndUpdate(
+            filter,
+            update,
+            option
+        );
+        return updatedUser;
+    }
 }
 
 export { User };
