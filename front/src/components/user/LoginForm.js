@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Button } from "@mui/material";
-
+import { useNavigate } from "react-router-dom";
 import "./user.css";
 import { textAlign } from "@mui/system";
 function LoginForm({ setOpen, handleClose }) {
   const [findPW, setFindPW] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   const validateEmail = (email) => {
     return email
       .toLowerCase()
@@ -85,7 +85,7 @@ function LoginForm({ setOpen, handleClose }) {
             ID/PW찾기
           </Button>
           <span className="login-bottom">|</span>
-          <Button variant="text" className="login-bottom">
+          <Button variant="text" className="login-bottom" onClick={() => navigate("/register")}>
             회원가입
           </Button>
         </>
@@ -114,7 +114,7 @@ function LoginForm({ setOpen, handleClose }) {
           <div className="findPW-detail">
             아직 회원이 아니시면 회원가입을 해주세요.
           </div>
-          <Button variant="text" className="login-bottom">
+          <Button variant="text" className="login-bottom" onClick={() => navigate("/register")}>
             회원가입
           </Button>
         </>
