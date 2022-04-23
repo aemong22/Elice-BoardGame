@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import config from "../config";
+import { User } from "./models/User";
+import { Token } from "./models/Token";
 
 const DB_URL = `${config.MONGODB_URL}/${config.CLUSTER_NANE}?retryWrites=true&w=majority`;
 
@@ -15,4 +17,4 @@ db.on("error", (error) =>
   )
 );
 
-export { db };
+export { User, Token };

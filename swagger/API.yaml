@@ -1,0 +1,100 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: board_game_project
+  description: 'elice 2nd project'
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/nowgnas/board_game/1.0.0
+paths:
+  /:
+    get:
+      summary: home
+      responses:
+        '200':
+          description: 'ok'
+  /login:
+    post:
+      summary: login
+      parameters:
+        - name: email
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'OK'
+
+  /todos/{id}: 
+    get: 
+      summary: Returns a user by ID
+      parameters: 
+        - name: id
+          in: path
+          required: true 
+          description: The ID of the user to return 
+          schema:
+            type: integer
+      responses:
+          '200' : 
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    userId: 
+                      type: integer
+                    id:
+                      type: integer
+                    title:
+                      type: boolean
+  /user/register:
+   post:
+      summary: user register
+      parameters:
+        - name: user_name
+          in: query
+          required: true
+          description: user name 
+          schema:
+            type: string
+        - name: email
+          in: query
+          required: true
+          description: user email 
+          schema:
+            type: string
+        - name: password
+          in: query
+          required: true
+          description: user password
+          schema:
+            type: string
+        - name: phone_number
+          in: query
+          required: true
+          description: user phone_number 
+          schema:
+            type: string
+      responses:
+       '200':
+          description: 'OK'
+          content:
+            application/json:
+             schema:
+                type: object
+                properties:
+                  _id: 
+                    type: string
+                  email:
+                    type: string
+                  phone_number:
+                    type: string
