@@ -1,9 +1,10 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
+
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 
-const RegisterBtn = () => {
+const RegisterBtn = ({ handleOpen, setOpen }) => {
   const IOSSwitch = styled((props) => (
     <Switch
       focusVisibleClassName=".Mui-focusVisible"
@@ -50,9 +51,6 @@ const RegisterBtn = () => {
       width: 130,
       height: 50,
       borderRadius: 30 / 1,
-      backgroundImage: `url("/public/image/getstarted.png")`,
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center",
     },
     "& .MuiSwitch-track": {
       borderRadius: 20 / 1,
@@ -65,7 +63,7 @@ const RegisterBtn = () => {
   }));
   return (
     <FormControlLabel
-      control={<IOSSwitch sx={{ m: 1 }} defaultChecked={false} />}
+      control={<IOSSwitch sx={{ m: 1 }} defaultChecked onChange={handleOpen} />}
     />
   );
 };
