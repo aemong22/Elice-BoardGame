@@ -63,11 +63,12 @@ class userAuthService {
         const token = sign(user._id);
         const refresh_token = refresh();
 
-        const newUserToken = { user_id: user._id, refresh_token };
-
-        const refreshTokenInsert = await Token.create({ newUserToken });
-
-        const { _id, user_name, phone_number } = user;
+        // refresh token 저장 시 update로 사용
+        // refresh token 이 없으면 저장하기
+        const refreshTokenInsert = await Token.updateRefresh({
+            _id: user._id,
+            refresh_token,
+        });
 
         const logedinUser = {
             token,
