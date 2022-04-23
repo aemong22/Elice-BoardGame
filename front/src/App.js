@@ -3,7 +3,8 @@ import Home from "./components/Home";
 import Intro from "./components/intro/Intro";
 import Boardgame from "./components/boardgame/Boardgame";
 import About from "./components/about/About";
-
+import { useState, useEffect } from "react";
+import * as Api from "./api";
 import { useDispatch } from "react-redux";
 import { loginUser } from "./store/actions/userAction";
 

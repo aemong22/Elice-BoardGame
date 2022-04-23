@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import * as Api from "../api";
-import Header from "./Header";
+import Header from "./header";
 import { useSelector } from "react-redux";
 
 function Home() {
+  const params = useParams();
   const navigate = useNavigate();
   const [isFetchCompleted, setIsFetchCompleted] = useState(false);
   const userState = useSelector((state) => state.userReducer.user);

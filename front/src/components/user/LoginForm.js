@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import "./user.css";
 import { textAlign } from "@mui/system";
+import * as Api from "../../api";
 
 import { useDispatch } from "react-redux";
-import { loginUser } from "./store/actions/userAction";
+import { loginUser } from "../../store/actions/userAction";
 
 function LoginForm({ setOpen, handleClose }) {
   const [findPW, setFindPW] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const validateEmail = (email) => {
     return email
