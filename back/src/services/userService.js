@@ -1,8 +1,10 @@
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
-import { User } from "../db";
+import { User, Token } from "../db";
 import { UserModel } from "../db/schemas/user";
+import config from "../config";
+import { sign, refresh } from "../utils/jwt-utils";
 
 class userAuthService {
     // 유저 정보 추가하기
@@ -36,6 +38,59 @@ class userAuthService {
     static async getUsers() {
         const users = await User.findAll();
         return users;
+    }
+
+    static async getSingleUser({ email, password }) {
+        const user = await User.findByEmail({ email });
+
+        if (!user) {
+            const errorMessage = "해당 이메일은 가입 내역이 없습니다.";
+            return { errorMessage };
+        }
+
+        const correctPasswordHash = user.password;
+        const isPasswordCorrect = await bcrypt.compare(
+            password,
+            correctPasswordHash
+        );
+
+        if (!isPasswordCorrect) {
+            const errorMessage = "비밀번호가 일치하지 않습니다.";
+            return { errorMessage };
+        }
+
+        // 로그인 성공 시 토큰 생성
+        const token = sign(user._id);
+        const refresh_token = refresh();
+
+        const newUserToken = { user_id: user._id, refresh_token };
+
+        const refreshTokenInsert = await Token.create({ newUserToken });
+
+        const { _id, user_name, phone_number } = user;
+
+        const logedinUser = {
+            token,
+            _id,
+            email,
+            user_name,
+            phone_number,
+            token,
+            refresh_token,
+            errorMessage: null,
+        };
+
+        return logedinUser;
+    }
+
+    static async getUserInfo({ _id }) {
+        const user = await User.findByUserId({ _id });
+
+        if (!user) {
+            const errorMessage = "해당 메일은 가입 내역이 없습니다.";
+            return { errorMessage };
+        }
+        return user;
     }
 
     //비밀번호 찾기 후 변경
