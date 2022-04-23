@@ -70,6 +70,8 @@ class userAuthService {
             refresh_token,
         });
 
+        const { _id, user_name, phone_number } = user;
+
         const logedinUser = {
             token,
             _id,
