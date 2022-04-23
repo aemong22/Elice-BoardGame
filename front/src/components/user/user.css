@@ -1,0 +1,41 @@
+#modal {
+  border-radius: 30px;
+  border : solid 2px;
+  width : 400px;
+  height : 450px;
+  text-align :center;
+}
+
+#modal > img {
+  margin-top:50px;
+  width:65px;
+}
+#modal > .login > .login-input{
+  margin-top:20px;
+  border-radius : 5px;
+  width : 80%;
+  padding : 10px;
+  border : 1px solid #d6ccc2;
+}
+
+#modal > .login-button{
+  margin:20px;
+  width : 85%;
+  border-radius : 30px;
+  padding : 10px;
+  border: none;
+  color: white;
+  background-color: #E3D5CA;
+  font-weight: bold;
+  font-size: 20px;
+
+}
+
+#modal > .login-bottom {
+  color : gray;
+  background-color: white;
+  border:none;
+  margin: 20px 5px 10px 5px;
+  font-size: 10px;
+
+}
