@@ -1,24 +1,15 @@
 import "./App.css";
-import LoginForm from "./components/user/LoginForm";
-import { Button, Modal } from "@mui/material";
-import { useState } from "react";
+import Intro from "./components/intro/Intro";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 function App() {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
   return (
-    <div>
-      <Button variant="contained" onClick={handleOpen}>
-        Login
-      </Button>
-      <Modal open={open}>
-        <LoginForm setOpen={setOpen} handleClose={handleClose} />
-      </Modal>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" exact element={<Intro />} />
+        <Route path="*" element={<Intro />} />
+      </Routes>
+    </Router>
   );
 }
 
