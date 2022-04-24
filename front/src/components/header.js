@@ -11,6 +11,7 @@ function Header() {
                     <li onClick={() => navigate("/")}>Home</li>
                     <li onClick={() => navigate("/about")}>About</li>
                     <li onClick={() => navigate("/boardgame")}>Boardgame</li>
+                    <li>MyPage</li>
                 </ul>
             </div>
         </>
