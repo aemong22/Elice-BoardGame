@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import * as Api from "../api";
-import Header from "./header";
+import Header from "./Header";
 import { useSelector } from "react-redux";
 
 function Home() {
@@ -27,7 +27,17 @@ function Home() {
   return (
     <>
       <Header />
-      <div style={{ width:"100%", height:"100vh", backgroundColor:"#e2e2e2", display:"flex", justifyContent: "space-around", alignItems: "center", fontSize: "3rem" }}>
+      <div
+        style={{
+          width: "100%",
+          height: "100vh",
+          backgroundColor: "#e2e2e2",
+          display: "flex",
+          justifyContent: "space-around",
+          alignItems: "center",
+          fontSize: "3rem",
+        }}
+      >
         Home!
       </div>
     </>

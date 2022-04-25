@@ -9,25 +9,27 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-#modal >#button >.closebutton {
+
+#modal .closebutton {
   color:black;
   border-radius: 30px;
   margin:2px;
 }
+
 #modal > img {
   width:65px;
   margin:10px;
 }
-#modal .login-input{
+.login-input{
   margin-top:20px;
   border-radius : 5px;
-  width : 80%;
+  width : 81%;
   padding : 10px;
   border : 1px solid #d6ccc2;
 }
 
 #modal > .login-button{
-  margin:20px;
+  margin-bottom:10px;
   width : 85%;
   border-radius : 30px;
   border: none;
@@ -59,7 +61,6 @@
   width:80%;
   text-align: left;
   margin : 0 auto;
-  
 }
 
 .or {
@@ -87,3 +88,44 @@
   color: gray;
   margin: 3px;
 }
+
+
+#register {
+  border-radius: 30px;
+  width : 450px;
+  height : 550px;
+  padding : 10px;
+  text-align :center;
+  background-color: #ffffff;
+  border:solid 1px #A79F97;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#register .create-account {
+  font-size : 32px;
+  font-weight: bold;
+  color : #A79F97;
+  margin : 10px;
+}
+
+#register .closebutton {
+  color:black;
+  border-radius: 30px;
+  margin:2px;
+}
+
+#register .createbutton {
+  margin:10px;
+  width : 80%;
+  border-radius : 30px;
+  border: none;
+  color: white;
+  background-color: #D4CCC3;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+
