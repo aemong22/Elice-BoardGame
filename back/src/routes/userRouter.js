@@ -83,7 +83,7 @@ userAuthRouter.get("/user/:id", authJWT, async (req, res, next) => {
 userAuthRouter.post("/user/reset_password", async (req, res, next) => {
   try {
     const email = req.body.email;
-
+    console.log(email);
     const generatedAuthNumber = Math.floor(Math.random() * 10 ** 8)
       .toString()
       .padStart(8, "0");
