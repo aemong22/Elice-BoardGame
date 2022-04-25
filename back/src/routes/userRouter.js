@@ -154,5 +154,5 @@ userAuthRouter.get("/currentUser", authJWT, async (req, res, next) => {
 
 userAuthRouter.get("/token/refresh", refresh);
 
-userAuthRouter.get("/dataset", insertData);
+userAuthRouter.post("/dataset", insertData);
 export { userAuthRouter };

@@ -1,8 +1,7 @@
-import { TokenModel } from "../schemas/token";
-
-class Token {
-  static async getToken({ user_id }) {
-    const userToken = await TokenModel.findOne({ user_id });
+import { BoardGameModel } from "../schemas/boardgame";
+class Boardame {
+  static async insert({ item }) {
+    const userToken = await BoardGameModel.create(item);
     return userToken;
   }
 
@@ -17,4 +16,4 @@ class Token {
   }
 }
 
-export { Token };
+export { Boardame };

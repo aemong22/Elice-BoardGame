@@ -3,16 +3,16 @@ import { Schema, model } from "mongoose";
 const BoardGameSchema = new Schema(
   {
     index: {
-      type: String,
+      type: Number,
       unique: true,
       required: true,
     },
     unNamed: {
-      type: String,
+      type: Number,
       required: true,
     },
     gameId: {
-      type: String,
+      type: Number,
       required: true,
     },
     gameName: {
@@ -20,25 +20,25 @@ const BoardGameSchema = new Schema(
       required: true,
     },
     year: {
-      type: String,
+      type: Number,
       required: true,
     },
     rank: {
-      type: String,
+      type: Number,
       required: true,
     },
     averageRating: {
       // Rating이 맞나 ??
-      type: String,
+      type: Number,
       required: true,
     },
     bayesAverage: {
       // bayes 를 db에 넣을것인가???
-      type: String,
+      type: Number,
       required: true,
     },
     userRated: {
-      type: String,
+      type: Number,
       required: true,
     },
     url: {
@@ -50,31 +50,31 @@ const BoardGameSchema = new Schema(
       required: true,
     },
     minPlayer: {
-      type: String,
+      type: Number,
       required: true,
     },
     maxPlayer: {
-      type: String,
+      type: Number,
       required: true,
     },
     minAge: {
-      type: String,
+      type: Number,
       required: true,
     },
     playingTime: {
-      type: String,
+      type: Number,
       required: true,
     },
     minPlayingTime: {
-      type: String,
+      type: Number,
       required: true,
     },
     maxPlayingTime: {
-      type: String,
+      type: Number,
       required: true,
     },
     complexityAverage: {
-      type: String,
+      type: Number,
       required: true,
     },
     domains: {
@@ -86,7 +86,7 @@ const BoardGameSchema = new Schema(
       required: true,
     },
     recommendId: {
-      type: [String],
+      type: [Number],
       required: true,
     },
   },
