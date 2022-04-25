@@ -3,16 +3,16 @@ import { Schema, model } from "mongoose";
 const BoardGameSchema = new Schema(
   {
     index: {
-      type: Integer,
+      type: String,
       unique: true,
       required: true,
     },
     unNamed: {
-      type: Integer,
+      type: String,
       required: true,
     },
     gameId: {
-      type: Integer,
+      type: String,
       required: true,
     },
     gameName: {
@@ -20,25 +20,25 @@ const BoardGameSchema = new Schema(
       required: true,
     },
     year: {
-      type: Integer,
+      type: String,
       required: true,
     },
     rank: {
-      type: Integer,
+      type: String,
       required: true,
     },
     averageRating: {
       // Rating이 맞나 ??
-      type: Integer,
+      type: String,
       required: true,
     },
     bayesAverage: {
       // bayes 를 db에 넣을것인가???
-      type: Integer,
+      type: String,
       required: true,
     },
     userRated: {
-      type: Integer,
+      type: String,
       required: true,
     },
     url: {
@@ -50,31 +50,31 @@ const BoardGameSchema = new Schema(
       required: true,
     },
     minPlayer: {
-      type: Integer,
+      type: String,
       required: true,
     },
     maxPlayer: {
-      type: Integer,
+      type: String,
       required: true,
     },
     minAge: {
-      type: Integer,
+      type: String,
       required: true,
     },
     playingTime: {
-      type: Integer,
+      type: String,
       required: true,
     },
     minPlayingTime: {
-      type: Integer,
+      type: String,
       required: true,
     },
     maxPlayingTime: {
-      type: Integer,
+      type: String,
       required: true,
     },
     complexityAverage: {
-      type: Integer,
+      type: String,
       required: true,
     },
     domains: {
@@ -86,7 +86,7 @@ const BoardGameSchema = new Schema(
       required: true,
     },
     recommendId: {
-      type: [Integer],
+      type: [String],
       required: true,
     },
   },
@@ -95,6 +95,6 @@ const BoardGameSchema = new Schema(
   }
 );
 
-const BoardGameModel = model("Token", BoardGameSchema);
+const BoardGameModel = model("Boardame", BoardGameSchema);
 
 export { BoardGameModel };
