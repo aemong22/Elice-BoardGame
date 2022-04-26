@@ -58,6 +58,18 @@ const RegisterBtn = ({ open, handleOpen }) => {
       height: 50,
       borderRadius: 30 / 1,
     },
+    "& .MuiSwitch-thumb:before": {
+      content: "'Get started'",
+      fontSize: "1.1rem",
+      color: "gray",
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      left: 0,
+      top: 0,
+      textAlign: "center",
+      lineHeight: "50px",
+    },
     "& .MuiSwitch-track": {
       borderRadius: 20 / 1,
       backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "#39393D",
