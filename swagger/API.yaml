@@ -178,6 +178,18 @@ paths:
           description: "mail 전송 완료"
         '404':
           description: "이메일이 없습니다.!"
+  /boardGames:
+    get:
+      tags:
+        - boardGame
+      summary: 모든 보드게임 불러오기 
+      responses:
+        '200':
+          description: "모든 보드게임의 정보를 불러온다" 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoardGame'
 components:
   securitySchemes:
     bearerAuth:
@@ -201,5 +213,75 @@ components:
           type: string
         phone_number:
           type: string
+    BoardGame:
+      type: object
+      required:
+        - index
+        - unNamed
+        - gameId
+        - gameName
+        - year
+        - rank
+        - averageRating
+        - bayesAverage
+        - userRated
+        - url
+        - thumbnail
+        - minPlayer
+        - maxPlayer
+        - minAge
+        - playingTime
+        - minPlayingTime
+        - maxPlayingTime
+        - complexityAverage
+        - domains
+        - image
+        - description
+        - recommendId
+      properties:
+        index:
+          type: number
+        unNamed:
+          type: number
+        gameId:
+          type: number
+        gameName:
+          type: string
+        year:
+          type: number
+        rank:
+          type: number
+        averageRating:
+          type: number
+        bayesAverage:
+          type: number
+        userRated:
+          type: number
+        url:
+          type: string
+        thumbnail:
+          type: string
+        minPlayer:
+          type: number
+        maxPlayer:
+          type: number
+        minAge:
+          type: number
+        playingTime:
+          type: number
+        minPlayingTime:
+          type: number
+        maxPlayingTime:
+          type: number
+        complexityAverage:
+          type: number
+        domains:
+          type: string
+        image:
+          type: string
+        description:
+          type: string
+        recommendId:
+          type: array  
 security:
   - bearerAuth: []
