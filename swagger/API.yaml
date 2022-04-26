@@ -148,6 +148,8 @@ paths:
                     type: string
                   phone_number:
                     type: string
+                  image:
+                    type: string
   /users:
     get:
       tags:
@@ -201,6 +203,8 @@ components:
         password:
           type: string
         phone_number:
+          type: string
+        image:
           type: string
 security:
   - bearerAuth: []
