@@ -1,24 +1,72 @@
 import { useState } from "react"
-import "./BoardgameCategory.css"
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import Collapse from '@mui/material/Collapse';
+import Checkbox from '@mui/material/Checkbox';
 
 function BoardgameCategory() {
-    const [openMenu, setOpenMenu] = useState(false)
+    const [openPlayers, setOpenPlayers] = useState(false);
+    const [openCategory, setOpenCategory] = useState(false);
 
-    const toggleMenu = () => {
-        setOpenMenu(openMenu => !openMenu)
-    }
+    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   
-    return(
-        <div className='boardgame-category-container'>
-            <div className='boardgame-category-title'>
-                <li onClick={ toggleMenu }>인원수</li>         
-            </div>
-            <div className={ openMenu ? 'show-menu' : 'hide-menu' }> 
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-            </div>
-        </div>
+    return (
+      <>
+        <List
+            sx={{ width: '100%', maxWidth: '260px', bgcolor: '#e2e2e2', py:'0' }}
+            component="nav"
+            aria-labelledby="nested-list-subheader"
+        >
+          <ListItemButton onClick={() => { setOpenPlayers(!openPlayers) }}>
+            <ListItemText primary="Players" />
+            {/* {open ? <ExpandLess /> : <ExpandMore />} */}
+          </ListItemButton>
+          <Collapse in={openPlayers} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding sx={{ bgcolor: 'background.paper' }}>
+              <ListItemButton sx={{ height: '40px' }}>
+                <Checkbox {...label} defaultChecked />
+                <ListItemText primary="2" />
+              </ListItemButton>
+              <ListItemButton sx={{ height: '40px' }}>
+                <Checkbox {...label} defaultChecked />
+                <ListItemText primary="3" />
+              </ListItemButton>
+              <ListItemButton sx={{ height: '40px' }}>
+                <Checkbox {...label} defaultChecked />
+                <ListItemText primary="4" />
+              </ListItemButton>
+            </List>
+          </Collapse>
+        </List>
+
+        <List
+          sx={{ width: '100%', maxWidth: '260px', bgcolor: '#e2e2e2', py:'0' }}
+          component="nav"
+          aria-labelledby="nested-list-subheader"
+        >
+          <ListItemButton onClick={() => { setOpenCategory(!openCategory) }}>
+          <ListItemText primary="Category" />
+          {/* {open ? <ExpandLess /> : <ExpandMore />} */}
+          </ListItemButton>
+          <Collapse in={openCategory} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding sx={{ bgcolor: 'background.paper' }}>
+              <ListItemButton sx={{ height: '40px' }}>
+                <Checkbox {...label} defaultChecked />
+                <ListItemText primary='Economic' />
+              </ListItemButton>
+              <ListItemButton sx={{ height: '40px' }}>
+                <Checkbox {...label} defaultChecked />
+                <ListItemText primary='Negotiation' />
+              </ListItemButton>
+              <ListItemButton sx={{ height: '40px' }}>
+                <Checkbox {...label} defaultChecked />
+                <ListItemText primary='Card Game' />
+              </ListItemButton>
+            </List>
+          </Collapse>
+        </List>
+        </>
     )
 }
 
