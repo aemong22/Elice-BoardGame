@@ -3,7 +3,6 @@ import { Router } from "express";
 import { userAuthService } from "../services/userService";
 import { refresh } from "../utils/refresh";
 import { authJWT } from "../middlewares/authJWT";
-import { User } from "../db";
 import nodemailer from "nodemailer";
 import config from "../config";
 

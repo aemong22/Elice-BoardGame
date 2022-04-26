@@ -12,4 +12,15 @@ boardGameRouter.get("/boardGames", async (req, res, next) => {
   }
 });
 
+boardGameRouter.get("/games/player/:nums", async (req, res, next) => {
+  try {
+    const player = req.params.nums;
+    const gameByPlayer = await boardGameService.getGameByPlayer({ player });
+
+    res.status(200).json(gameByPlayer);
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { boardGameRouter };
