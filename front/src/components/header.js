@@ -23,7 +23,7 @@ function Header() {
           <li onClick={() => navigate("/")}>Home</li>
           <li onClick={() => navigate("/about")}>About</li>
           <li onClick={() => navigate("/boardgame")}>Boardgame</li>
-          <li>MyPage</li>
+          <li onClick={() => navigate("/mypage")}>MyPage</li>
           <li onClick={logout} style={{ cursor: "pointer" }}>
             Logout
           </li>
