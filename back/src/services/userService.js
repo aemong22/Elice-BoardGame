@@ -35,7 +35,7 @@ class userAuthService {
     }
 
     // 모든 유저 목록 가져오기
-    static async getUsers() {
+    static async getUser() {
         const users = await User.findAll();
         return users;
     }

@@ -42,7 +42,7 @@ userAuthRouter.post("/user/register", async (req, res, next) => {
 // 모든 회원 정보 가져오기
 userAuthRouter.get("/users", async (req, res, next) => {
     try {
-        const users = await userAuthService.getUsers();
+        const users = await userAuthService.getUser();
 
         res.status(200).json(users);
     } catch (error) {
