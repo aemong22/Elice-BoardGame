@@ -190,6 +190,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BoardGame'
+  /games/player/{nums}:
+    get:
+      tags:
+        - boardGame
+      summary: player 수로 보드게임 조회
+      parameters:
+        - name: nums
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          $ref: '#/components/schemas/BoardGame'
+        '400':
+          description: access token이 유효하지 않습니다.
 components:
   securitySchemes:
     bearerAuth:
