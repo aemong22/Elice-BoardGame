@@ -1,7 +1,7 @@
 import "./Intro.css";
 import RegisterBtn from "./RegisterBtn";
 import LoginForm from "../user/LoginForm";
-import { Button, Modal } from "@mui/material";
+import { Modal } from "@mui/material";
 import { useState } from "react";
 
 const Intro = () => {
@@ -27,7 +27,7 @@ const Intro = () => {
           </span>
         </div>
         <div>
-          <RegisterBtn setOpen={setOpen} />
+          <RegisterBtn open={open} handleOpen={handleOpen} />
           <Modal open={open}>
             <LoginForm setOpen={setOpen} handleClose={handleClose} />
           </Modal>
