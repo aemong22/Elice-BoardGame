@@ -10,7 +10,7 @@ class userAuthService {
     // 유저 정보 추가하기
     static async addUser({ user_name, email, password, phone_number }) {
         // 아이디 중복 확인
-        const user = await User.findByUserName({ user_name });
+        const user = await User.findByEmail({ email });
         if (user) {
             const errorMessage =
                 "현재 이 아이디는 사용중입니다. 다른 아이디를 입력해주세요.";
