@@ -8,7 +8,7 @@ import { sign, refresh } from "../utils/jwt-utils";
 
 class userAuthService {
     // 유저 정보 추가하기
-    static async addUser({ user_name, email, password, phone_number }) {
+    static async addUser({ user_name, email, password, phone_number, image }) {
         // 아이디 중복 확인
         const user = await User.findByEmail({ email });
         if (user) {
@@ -25,6 +25,7 @@ class userAuthService {
             email,
             password: hashPasswd,
             phone_number,
+            image,
         };
 
         // db에 저장

@@ -21,12 +21,14 @@ userAuthRouter.post("/user/register", async (req, res, next) => {
         const email = req.body.email;
         const password = req.body.password;
         const phone_number = req.body.phone_number;
+        const image = req.body.image;
 
         const createdUser = await userAuthService.addUser({
             user_name,
             email,
             password,
             phone_number,
+            image,
         });
 
         if (createdUser.errorMessage) {
