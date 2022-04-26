@@ -1,10 +1,12 @@
 import BoardgameCategory from "./BoardgameCategory"
 import BoardgameCard from "./BoardgameCard"
 import "./Boardgame.css"
+import Header from "../Header";
 
 function Boardgame() {
     return (
         <>
+            <Header />
             <div className='boardgame-container'>
                 <div className='boardgame-category'>
                     <BoardgameCategory></BoardgameCategory>
