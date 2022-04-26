@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import config from "../config";
 import { User } from "./models/User";
 import { Token } from "./models/Token";
+import { Boardame } from "./models/BoardGame";
 
 const DB_URL = `${config.MONGODB_URL}/${config.CLUSTER_NANE}?retryWrites=true&w=majority`;
 
@@ -17,4 +18,4 @@ db.on("error", (error) =>
   )
 );
 
-export { User, Token };
+export { User, Token, Boardame };

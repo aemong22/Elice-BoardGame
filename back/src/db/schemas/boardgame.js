@@ -28,12 +28,10 @@ const BoardGameSchema = new Schema(
       required: true,
     },
     averageRating: {
-      // Rating이 맞나 ??
       type: Number,
       required: true,
     },
     bayesAverage: {
-      // bayes 를 db에 넣을것인가???
       type: Number,
       required: true,
     },
