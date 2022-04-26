@@ -107,7 +107,7 @@ paths:
           description: access token, refresh token 모두 만료되었습니다
         '400':
           description: token이 헤더에 없거나 access token이 만료되지 않았습니다.
-  /user/{id}:
+  /users/{id}:
     get:
       tags:
         - user

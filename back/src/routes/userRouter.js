@@ -66,7 +66,7 @@ userAuthRouter.post("/user/login", async (req, res, next) => {
     }
 });
 
-userAuthRouter.get("/user/:id", authJWT, async (req, res, next) => {
+userAuthRouter.get("/users/:id", authJWT, async (req, res, next) => {
     // 사용자를 id로 검색
     try {
         const _id = req.params.id;
