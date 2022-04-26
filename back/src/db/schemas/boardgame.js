@@ -85,6 +85,10 @@ const BoardGameSchema = new Schema(
       type: String,
       required: true,
     },
+    description: {
+      type: String,
+      required: true,
+    },
     recommendId: {
       type: [Number],
       required: true,
