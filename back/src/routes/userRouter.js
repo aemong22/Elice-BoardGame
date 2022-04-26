@@ -3,9 +3,10 @@ import { Router } from "express";
 import { userAuthService } from "../services/userService";
 import { refresh } from "../utils/refresh";
 import { authJWT } from "../middlewares/authJWT";
-import { User } from "../db";
 import nodemailer from "nodemailer";
 import config from "../config";
+
+import { insertData } from "../mock";
 
 const userAuthRouter = Router();
 
@@ -152,4 +153,5 @@ userAuthRouter.get("/currentUser", authJWT, async (req, res, next) => {
 
 userAuthRouter.get("/token/refresh", refresh);
 
+userAuthRouter.get("/dataset", insertData);
 export { userAuthRouter };

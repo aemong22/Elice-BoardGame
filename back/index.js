@@ -7,5 +7,5 @@ import { SERVER_PORT } from "./src/config";
 const PORT = SERVER_PORT || 5001;
 
 app.listen(PORT, () => {
-  console.log(`server is running on http://localhost:${PORT}`);
+    console.log(`server is running on http://localhost:${PORT}`);
 });
