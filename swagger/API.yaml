@@ -6,95 +6,201 @@ info:
 servers:
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/nowgnas/board_game/1.0.0
+    url: http://localhost:5001
+tags:
+  - name: user
+    description: User 스키마를 이용한 기능
+  - name: board
 paths:
-  /:
-    get:
-      summary: home
-      responses:
-        '200':
-          description: 'ok'
-  /login:
-    post:
-      summary: login
-      parameters:
-        - name: email
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: password
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: 'OK'
-
-  /todos/{id}: 
-    get: 
-      summary: Returns a user by ID
-      parameters: 
-        - name: id
-          in: path
-          required: true 
-          description: The ID of the user to return 
-          schema:
-            type: integer
-      responses:
-          '200' : 
-            description: OK
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    userId: 
-                      type: integer
-                    id:
-                      type: integer
-                    title:
-                      type: boolean
   /user/register:
-   post:
-      summary: user register
-      parameters:
-        - name: user_name
-          in: query
-          required: true
-          description: user name 
-          schema:
-            type: string
-        - name: email
-          in: query
-          required: true
-          description: user email 
-          schema:
-            type: string
-        - name: password
-          in: query
-          required: true
-          description: user password
-          schema:
-            type: string
-        - name: phone_number
-          in: query
-          required: true
-          description: user phone_number 
-          schema:
-            type: string
+    post:
+      tags:
+        - user
+      summary: 회원가입
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
       responses:
-       '200':
-          description: 'OK'
+        '200':
+          description: "회원가입 성공!"
+        '404':
+          description: "백엔드 실행하셨나요? 포트번호는 5001번 인가요?"
+  /user/login:
+    post:
+      tags:
+        - user
+      summary: 로그인
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: "로그인 성공"
           content:
             application/json:
-             schema:
+              schema:
                 type: object
                 properties:
-                  _id: 
+                  token:
+                    type: string
+                  _id:
+                    type: string
+                  email:
+                    type: string
+                  user_name:
+                    type: string
+                  phone_number:
+                    type: string
+                  refresh_token:
+                    type: string
+                  errorMessage:
+                    type: string
+                    default: null
+        '400':
+          description: "없는 이메일 입니다."
+        '404':
+          description: "백엔드 실행하셨나요? 포트번호는 5001번 인가요?"
+  /token/refresh:
+    get:
+      tags:
+        - user
+      summary: access token 확인 및 refresh token 재발급하는 곳!
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Refresh
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: refresh token이 유효하므로 access token 재발급 완료
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      accessToken:
+                        type: string
+                      refreshToken:
+                        type: string
+        '401':
+          description: access token, refresh token 모두 만료되었습니다
+        '400':
+          description: token이 헤더에 없거나 access token이 만료되지 않았습니다.
+  /user/{id}:
+    get:
+      tags:
+        - user
+      summary: 개인 유저 정보 가져오기
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/schemas/User'
+        '400':
+          description: access token이 유효하지 않습니다.
+  /currentUser:
+    get:
+      tags:
+        - user
+      summary: 현재 유저의 정보 가져오기
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 유저 정보 가져오기 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  user_name:
                     type: string
                   email:
                     type: string
                   phone_number:
                     type: string
+  /userlist:
+    get:
+      tags:
+        - user
+      summary: 유저 목록 출력(DB 확인용)
+      responses:
+        '200':
+          description: "userlist get"
+          content:
+            application/json:
+              schema:
+                $ref : "#/components/schemas/User"
+  /user/reset_password:
+    post:
+      tags:
+        - user
+      summary: 비밀번호 찾기
+      requestBody:
+         required: true
+         content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        '200':
+          description: "mail 전송 완료"
+        '404':
+          description: "이메일이 없습니다.!"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      type: object
+      required:
+        - user_name
+        - email
+        - password
+        - phone_number
+      properties:
+        user_name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        phone_number:
+          type: string
+security:
+  - bearerAuth: []
