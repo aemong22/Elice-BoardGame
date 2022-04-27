@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import "./user.css";
+import * as Api from "../../api";
+import RegisterForm from "./RegisterForm";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../store/actions/userAction";
-import { Button } from "@mui/material";
-import { textAlign } from "@mui/system";
-import * as Api from "../../api";
-import "./user.css";
+import { useNavigate } from "react-router-dom";
+import { Button, Grid, TextField, Box } from "@mui/material";
 
-function LoginForm({ setOpen, handleClose }) {
+function LoginForm({ handleClose }) {
   const [findPW, setFindPW] = useState(false);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const navigate = useNavigate();
+  const [password, setPassword] = useState("");
+  const [register, setRegister] = useState(false);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const validateEmail = (email) => {
     return email
@@ -57,96 +59,146 @@ function LoginForm({ setOpen, handleClose }) {
     console.log(email, password);
   };
 
+  const handleFindPw = async (e) => {
+    e.preventDefault();
+
+    try {
+      const reset = await Api.post(`user/reset_password`, {
+        email,
+      });
+      console.log("여기이이", reset);
+      if (reset.data.status === "Success") {
+        alert("메일을 전송했습니다.");
+        // 로그인 페이지로 이동함.
+        setFindPW(false);
+      } else {
+        alert("존재하지 않는 이메일입니다여기이이?.");
+      }
+    } catch (err) {
+      alert("존재하지 않는 이메일입니다.");
+      console.log("비밀번호 전송에 실패했습니다.", err);
+    }
+  };
+
   return (
-    <div id="modal">
-      <div id="button" style={{ textAlign: "right" }}>
-        <Button variant="text" className="closebutton" onClick={handleClose}>
-          x
-        </Button>
-      </div>
-
-      <img src="image/dice.png" alt="주사위" />
-      {!findPW ? (
-        <>
-          <div className="login">
-            <input
-              className="login-input"
-              name="email"
-              type="text"
-              placeholder="E-MAIL"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            {!isEmailValid && (
-              <div className="text-success">
-                이메일 형식이 올바르지 않습니다.
-              </div>
-            )}
-
-            <input
-              className="login-input"
-              name="password"
-              type="text"
-              placeholder="PASSWORD"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {!isPasswordValid && (
-              <div className="text-success">비밀번호는 4글자 이상입니다.</div>
-            )}
-          </div>
-
-          <Button
-            className="login-button"
-            onClick={handleSubmit}
-            disabled={!isFormValid}
-          >
-            LOGIN
-          </Button>
-
-          <div className="sns-login">sns 로그인</div>
-
-          <Button
-            variant="text"
-            className="login-bottom"
-            onClick={() => setFindPW(true)}
-          >
-            ID/PW찾기
-          </Button>
-          <span className="login-bottom">|</span>
-          <Button variant="text" className="login-bottom" onClick={() => navigate("/register")}>
-            회원가입
-          </Button>
-        </>
+    <>
+      {register ? (
+        <RegisterForm setRegister={setRegister} handleClose={handleClose} />
       ) : (
-        <>
-          <div id="findPw">비밀번호 재설정</div>
+        <Box id="modal">
+          <Grid id="button" style={{ textAlign: "right" }}>
+            <Button
+              variant="text"
+              className="closebutton"
+              onClick={handleClose}
+            >
+              x
+            </Button>
+          </Grid>
 
-          <input
-            className="login-input"
-            name="email"
-            type="text"
-            placeholder="E-MAIL"
-          />
+          <img src="image/dice.png" alt="주사위" />
+          {!findPW ? (
+            <>
+              <Grid className="login">
+                <TextField
+                  id="login-input"
+                  type="email"
+                  style={{ width: "80%", margin: "10px", height: "60px" }}
+                  label="E-MAIL"
+                  size="small"
+                  onChange={(e) => setEmail(e.target.value)}
+                  helperText={
+                    isEmailValid ? "" : "이메일 형식이 올바르지 않습니다."
+                  }
+                />
+                <TextField
+                  type="password"
+                  style={{ width: "80%", margin: "10px", height: "60px" }}
+                  label="PASSWORD"
+                  size="small"
+                  onChange={(e) => setPassword(e.target.value)}
+                  helperText={
+                    isPasswordValid ? "" : "비밀번호는 4글자 이상입니다."
+                  }
+                />
+              </Grid>
 
-          <Button className="login-button">찾기</Button>
-
-          <div className="findPW-detail">
-            <div>
-              입력한 E-Mail로 임시 비밀번호를 보내드립니다.
+              <Button
+                className="login-button"
+                onClick={handleSubmit}
+                disabled={!isFormValid}
+              >
+                LOGIN
+              </Button>
+              <Box className="or">or</Box>
               <br />
-              <br />
-              입력후 찾기 버튼을 눌러주세요.
-            </div>
-          </div>
-          <div className="or">or</div>
-          <div className="findPW-detail">
-            아직 회원이 아니시면 회원가입을 해주세요.
-          </div>
-          <Button variant="text" className="login-bottom" onClick={() => navigate("/register")}>
-            회원가입
-          </Button>
-        </>
+              <Box className="sns-login">sns 로그인</Box>
+
+              <Button
+                variant="text"
+                className="login-bottom"
+                onClick={() => setFindPW(true)}
+              >
+                ID/PW찾기
+              </Button>
+              <span className="login-bottom">|</span>
+              <Button
+                variant="text"
+                className="login-bottom"
+                onClick={() => setRegister(true)}
+              >
+                회원가입
+              </Button>
+            </>
+          ) : (
+            <>
+              <Box id="findPw">비밀번호 재설정</Box>
+
+              <TextField
+                id="login-input"
+                type="email"
+                style={{ width: "80%", margin: "20px", height: "65px" }}
+                label="E-MAIL"
+                size="small"
+                onChange={(e) => setEmail(e.target.value)}
+                helperText={
+                  isEmailValid ? "" : "이메일 형식이 올바르지 않습니다."
+                }
+              />
+
+              <Button
+                className="login-button"
+                onClick={handleFindPw}
+                disabled={!isEmailValid}
+              >
+                찾기
+              </Button>
+
+              <Box className="findPW-detail">
+                <Grid>
+                  입력한 E-Mail로 임시 비밀번호를 보내드립니다.
+                  <br />
+                  <br />
+                  입력후 찾기 버튼을 눌러주세요.
+                </Grid>
+              </Box>
+              <Box className="or">or</Box>
+              <Box className="findPW-detail">
+                아직 회원이 아니시면 회원가입을 해주세요.
+              </Box>
+
+              <Button
+                variant="text"
+                className="login-bottom"
+                onClick={() => (setRegister(true), setFindPW(false))}
+              >
+                회원가입
+              </Button>
+            </>
+          )}
+        </Box>
       )}
-    </div>
+    </>
   );
 }
 

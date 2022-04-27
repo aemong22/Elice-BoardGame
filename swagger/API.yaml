@@ -181,6 +181,35 @@ paths:
           description: "mail 전송 완료"
         '404':
           description: "이메일이 없습니다.!"
+  /boardGames:
+    get:
+      tags:
+        - boardGame
+      summary: 모든 보드게임 불러오기 
+      responses:
+        '200':
+          description: "모든 보드게임의 정보를 불러온다" 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoardGame'
+  /games/player/{nums}:
+    # 수정 필요 
+    get:
+      tags:
+        - boardGame
+      summary: player 수로 보드게임 조회
+      parameters:
+        - name: nums
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          $ref: '#/components/schemas/BoardGame'
+        '400':
+          description: access token이 유효하지 않습니다.
 components:
   securitySchemes:
     bearerAuth:
@@ -206,5 +235,75 @@ components:
           type: string
         image:
           type: string
+    BoardGame:
+      type: object
+      required:
+        - index
+        - un_named
+        - game_id
+        - game_name
+        - year
+        - rank
+        - average_rating
+        - bayes_average
+        - user_rated
+        - url
+        - thumbnail
+        - min_player
+        - max_player
+        - min_age
+        - playing_time
+        - min_playing_time
+        - max_playing_time
+        - complexity_average
+        - domains
+        - image
+        - description
+        - recommend_id
+      properties:
+        index:
+          type: number
+        un_named:
+          type: number
+        game_id:
+          type: number
+        game_name:
+          type: string
+        year:
+          type: number
+        rank:
+          type: number
+        average_rating:
+          type: number
+        bayes_average:
+          type: number
+        user_rated:
+          type: number
+        url:
+          type: string
+        thumbnail:
+          type: string
+        min_player:
+          type: number
+        max_player:
+          type: number
+        min_age:
+          type: number
+        playing_time:
+          type: number
+        min_playing_time:
+          type: number
+        max_playing_time:
+          type: number
+        complexity_average:
+          type: number
+        domains:
+          type: string
+        image:
+          type: string
+        description:
+          type: string
+        recommend_id:
+          type: array  
 security:
   - bearerAuth: []
