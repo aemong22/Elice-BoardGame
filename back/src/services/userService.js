@@ -33,7 +33,7 @@ class userAuthService {
 
     // 모든 유저 목록 가져오기
     static async getUser() {
-        const users = await UserRepository.findAll();
+        const users = await UserModel.find({});
         return users;
     }
 
