@@ -101,8 +101,8 @@ userAuthRouter.post("/user/reset_password", async (req, res, next) => {
             port: 587,
             secure: false,
             auth: {
-                user: `${config.NODEMAILER_USER}`,
-                pass: `${config.NODEMAILER_PASS}`,
+                user: `${process.env.NODEMAILER_USER}`,
+                pass: `${process.env.NODEMAILER_PASS}`,
             },
         });
 
