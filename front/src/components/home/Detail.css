@@ -1,0 +1,15 @@
+#detail_wrapper {
+  width: 100%;
+  height: 500px;
+  background-color: gray;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#detail_title {
+  font-size: 2.5rem;
+  margin-left: 100px;
+  font-weight: 700;
+}
