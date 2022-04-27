@@ -28,7 +28,7 @@ function Home() {
       <Header />
       <div id="main_wrapper">
         <div id="main_title_wrapper">
-          <div id="title">Boardmon으로 보드게임을 시작해보자!</div>
+          <div id="main_title">Boardmon으로 보드게임을 시작해보자!</div>
           <div id="subtitle">
             세상엔 너무 많은 보드게임이 있어 무엇을 골라야 할지 고민이 될 때
             <br />
@@ -40,7 +40,7 @@ function Home() {
         <div id="main_visual_wrapper">
           <img
             alt="보드게임테이블"
-            style={{ width: "40%", height: "70%" }}
+            style={{ width: "40%", height: "80%" }}
             src="/image/main_visual2.png"
           />
 
