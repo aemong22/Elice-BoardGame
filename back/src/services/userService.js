@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import { UserRepository, TokenRepository } from "../db";
 import { sign, refresh } from "../utils/jwt-utils";
 import { UserModel } from "../db/schemas/user";
+import { TokenModel } from "../db/schemas/token";
 
 class userAuthService {
     // 유저 정보 추가하기
@@ -38,7 +39,7 @@ class userAuthService {
     }
 
     static async getSingleUser({ email, password }) {
-        const user = await UserRepository.findByEmail({ email });
+        const user = await await UserModel.findOne({ email });
 
         if (!user) {
             const errorMessage = "해당 이메일은 가입 내역이 없습니다.";
@@ -62,10 +63,11 @@ class userAuthService {
 
         // refresh token 저장 시 update로 사용
         // refresh token 이 없으면 저장하기
-        const refreshTokenInsert = await TokenRepository.updateRefresh({
-            _id: user._id,
-            refresh_token,
-        });
+        const refreshTokenInsert = await TokenModel.updateOne(
+            { _id: user._id },
+            { _id: user._id, refresh_token },
+            { upsert: true }
+        );
 
         const { _id, user_name, phone_number } = user;
 
