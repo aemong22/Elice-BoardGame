@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import "./Home.css";
 import Header from "../Header";
 import Chart from "./Chart";
+import Detail from "./Detail";
 
 function Home() {
   const navigate = useNavigate();
@@ -53,6 +54,7 @@ function Home() {
         </div>
       </div>
       <Chart />
+      <Detail />
     </>
   );
 }
