@@ -7,15 +7,15 @@ const BoardGameSchema = new Schema(
             unique: true,
             required: true,
         },
-        un_named: {
+        unNamed: {
             type: Number,
             required: true,
         },
-        game_id: {
+        gameId: {
             type: Number,
             required: true,
         },
-        game_name: {
+        gameName: {
             type: String,
             required: true,
         },
@@ -27,15 +27,15 @@ const BoardGameSchema = new Schema(
             type: Number,
             required: true,
         },
-        average_rating: {
+        averageRating: {
             type: Number,
             required: true,
         },
-        bayes_average: {
+        bayesAverage: {
             type: Number,
             required: true,
         },
-        user_rated: {
+        userRated: {
             type: Number,
             required: true,
         },
@@ -47,31 +47,31 @@ const BoardGameSchema = new Schema(
             type: String,
             required: true,
         },
-        min_player: {
+        minPlayer: {
             type: Number,
             required: true,
         },
-        max_player: {
+        maxPlayer: {
             type: Number,
             required: true,
         },
-        min_age: {
+        minAge: {
             type: Number,
             required: true,
         },
-        playing_time: {
+        playingTime: {
             type: Number,
             required: true,
         },
-        min_playing_time: {
+        minPlayingTime: {
             type: Number,
             required: true,
         },
-        max_playing_time: {
+        maxPlayingTime: {
             type: Number,
             required: true,
         },
-        complexity_average: {
+        complexityAverage: {
             type: Number,
             required: true,
         },
@@ -87,7 +87,7 @@ const BoardGameSchema = new Schema(
             type: String,
             required: true,
         },
-        recommend_id: {
+        recommendId: {
             type: [Number],
             required: true,
         },
