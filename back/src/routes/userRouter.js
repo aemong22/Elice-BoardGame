@@ -17,6 +17,8 @@ userAuthRouter.post("/user/login", userController.userLogin);
 
 userAuthRouter.get("/users/:id", authJWT, userController.findUserById);
 
+userAuthRouter.get("/currentUser", authJWT, userController.getCurrentUser);
+
 //비밀번호 찾기 API
 userAuthRouter.post("/user/reset_password", userController.findPassword);
 
