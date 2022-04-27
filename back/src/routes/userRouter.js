@@ -4,7 +4,6 @@ import { userAuthService } from "../services/userService";
 import { refresh } from "../utils/refresh";
 import { authJWT } from "../middlewares/authJWT";
 import nodemailer from "nodemailer";
-import config from "../config";
 
 const userAuthRouter = Router();
 
