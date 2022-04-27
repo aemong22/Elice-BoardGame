@@ -1,4 +1,4 @@
-import { BoardGameModel } from "../db/schemas";
+import { BoardGameModel } from "../db/schemas/boardgame";
 
 class boardGameService {
     // service에서 바로 요청

@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-import { UserRepository } from "./models/User";
-import { TokenRepository } from "./models/Token";
 import "dotenv/config";
 
 const DB_URL = `${process.env.MONGODB_URL}/${process.env.CLUSTER_NANE}?retryWrites=true&w=majority`;
@@ -18,5 +16,3 @@ db.on("error", (error) =>
         `********************\nDatabase connection error....\nCannot connect to ${process.env.CLUSTER_NANE}\n********************\n ${error}`
     )
 );
-
-export { UserRepository, TokenRepository };
