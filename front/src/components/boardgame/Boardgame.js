@@ -7,14 +7,14 @@ import "./Boardgame.css"
 import * as Api from "../../api";
 
 function Boardgame() {
+    const [openCategory, setOpenCategory] = useState(false);
     const [boardgames, setBoardgames] = useState([]);
 
     useEffect(() => {
         try {
             Api.get("boardGames").then((res) => {
                 setBoardgames(res.data);
-                console.log(res.data)
-            });
+            })
         } catch (err) {
             console.log("errer message: ", err)
         }
@@ -23,21 +23,22 @@ function Boardgame() {
     const boardgameList = boardgames.map((boardgame) => (
         <BoardgameCard
             name={boardgame.game_name}
+            min_player={boardgame.min_player}
+            max_player={boardgame.max_player}
             domains={boardgame.domains}
-            description={boardgame.description}
+            image={boardgame.image}
         />
     ));
 
-
-
     return (
         <>
+            <button onClick={() => setOpenCategory(!openCategory) }> --- </button>
             <div className='header'>
                 <Header />
             </div>
             <div className='boardgame-container'>
-                <div className='boardgame-category'>
-                    <BoardgameCategory></BoardgameCategory>
+                <div className={ openCategory ? 'boardgame-category active' : 'boardgame-category' }>
+                    <BoardgameCategory />
                 </div>
                 <div className='boardgame-wrapper'>
                     {/* <div className='boardgame-sort'>
@@ -50,7 +51,6 @@ function Boardgame() {
                     </div> */}
                     <div className='boardgames'>
                         {boardgameList}
-                        <BoardgameCard></BoardgameCard>
                     </div>
                 </div>
             </div>

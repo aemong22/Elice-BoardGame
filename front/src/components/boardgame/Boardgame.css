@@ -5,10 +5,21 @@
 
 .boardgame-category {
     width: 260px;
+    height: 100%;
+    position: fixed;
+    left: -260px;
+    z-index: 999;
+    transition: all 0.3s;
+}
+
+.boardgame-category.active {
+    left: 0;
 }
 
 .boardgame-wrapper {
     width: 100%;
+    /* position: fixed;
+    left: 0; */
     border-left: #e2e2e255 solid 2px;
 }
 
