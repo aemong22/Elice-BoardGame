@@ -17,7 +17,7 @@ class Boardame {
     static async findByPlayer({ player, sortType }) {
         const findByPlayer = await BoardGameModel.find({
             minPlayer: { $gte: player },
-        }).sort({});
+        }).sort({ rank: -1 });
         return findByPlayer;
     }
 
