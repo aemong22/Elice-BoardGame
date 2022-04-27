@@ -7,9 +7,13 @@ import { CardActionArea } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import Button from '@mui/material/Button';
 
 // @mui/icons-material 설치
-function BoardgameCard({ name, domains, description }) {
+function BoardgameCard({ name, min_player, max_player, domains, image }) {
+
+  const domainList = domains.split(',')
+  
   return (
     <Card sx={{ width: 250, maxWidth: 270, my: 10 }}>
       <CardActionArea>
@@ -17,12 +21,12 @@ function BoardgameCard({ name, domains, description }) {
           component="img"
           height="140"
           maxHeight="140"
-          image=""
-          alt="-"
+          image={image}
+          alt={name}
           sx={{ background: 'gray'}}
         />
         <CardContent sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-          <Typography gutterBottom variant="h5" component="span" sx={{ m: 'auto 0' }}>
+          <Typography gutterBottom variant="h6" component="span" sx={{ m: 'auto 0' }}>
             {name}
           </Typography>
           <CardActions disableSpacing>
@@ -31,13 +35,20 @@ function BoardgameCard({ name, domains, description }) {
             </IconButton>
           </CardActions>
           <Typography component="div" sx={{ width: 100, height: 0 }}></Typography>
-          <Typography variant="body2" color="text.secondary" sx={{ width: '90%' }}>
-            {description}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      
 
+          <div>
+            <Button variant="outlined" disabled sx={{ fontSize: '0.5rem', borderRadius: '100px', m: '2px' }}>
+              {min_player}~{max_player}인용
+            </Button>
+            {domainList.map((domain) => (
+              <Button variant="outlined" disabled sx={{ fontSize: '0.5rem', borderRadius: '100px', m: '2px' }}>
+                {domain}
+              </Button>
+            ))}
+          </div>
+        </CardContent>
+
+      </CardActionArea>
     </Card>
   );
 }

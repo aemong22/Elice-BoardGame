@@ -6,6 +6,7 @@ import Collapse from '@mui/material/Collapse';
 import Checkbox from '@mui/material/Checkbox';
 
 function BoardgameCategory() {
+    const [openMenu, setOpenMenu] = useState(false);
     const [openPlayers, setOpenPlayers] = useState(false);
     const [openCategory, setOpenCategory] = useState(false);
 
@@ -25,15 +26,15 @@ function BoardgameCategory() {
           <Collapse in={openPlayers} timeout="auto" unmountOnExit>
             <List component="div" disablePadding sx={{ bgcolor: 'background.paper' }}>
               <ListItemButton sx={{ height: '40px' }}>
-                <Checkbox {...label} defaultChecked />
+                <Checkbox {...label} />
                 <ListItemText primary="2" />
               </ListItemButton>
               <ListItemButton sx={{ height: '40px' }}>
-                <Checkbox {...label} defaultChecked />
+                <Checkbox {...label} />
                 <ListItemText primary="3" />
               </ListItemButton>
               <ListItemButton sx={{ height: '40px' }}>
-                <Checkbox {...label} defaultChecked />
+                <Checkbox {...label} />
                 <ListItemText primary="4" />
               </ListItemButton>
             </List>
@@ -52,15 +53,15 @@ function BoardgameCategory() {
           <Collapse in={openCategory} timeout="auto" unmountOnExit>
             <List component="div" disablePadding sx={{ bgcolor: 'background.paper' }}>
               <ListItemButton sx={{ height: '40px' }}>
-                <Checkbox {...label} defaultChecked />
+                <Checkbox {...label} />
                 <ListItemText primary='Economic' />
               </ListItemButton>
               <ListItemButton sx={{ height: '40px' }}>
-                <Checkbox {...label} defaultChecked />
+                <Checkbox {...label} />
                 <ListItemText primary='Negotiation' />
               </ListItemButton>
               <ListItemButton sx={{ height: '40px' }}>
-                <Checkbox {...label} defaultChecked />
+                <Checkbox {...label} />
                 <ListItemText primary='Card Game' />
               </ListItemButton>
             </List>
