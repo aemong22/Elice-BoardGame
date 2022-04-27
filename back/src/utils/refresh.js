@@ -72,3 +72,14 @@ const refresh = async (req, res) => {
 };
 
 export { refresh };
+// util에서 res를 하는게 어색함
+// utilService authService
+// 상위 레벨 try catch 걸고 메세지랑 에러를 담는 클래스를 따로
+// node 에서는 구현이 까다로움... nest js의 장점(에러 처리 미들웨엉가 깔끔)
+// 미들웨어로 처리
+// refresh 함수를 쪼개보는것을 먼저 하기
+// 쪼개면 res를 할 필요없이 token 확인만
+// controller에서 응답, 처리
+// verify
+// controller에서 응답, 오류 처리
+// 인증 특화된 서비스 생성 - 토큰 관련 친구들 다룩 ㅣ
