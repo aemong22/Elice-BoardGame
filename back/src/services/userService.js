@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
 import { UserRepository, TokenRepository } from "../db";
 import { sign, refresh } from "../utils/jwt-utils";
-import { UserModel } from "../db/schemas/user";
 
 class userAuthService {
     // 유저 정보 추가하기
