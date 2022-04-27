@@ -21,22 +21,31 @@ class boardGameService {
         // 랭킹 ranking
         // 리뷰 review
         // 평점 rating
-        switch (category) {
-            case player:
+        // category.category,  category.value
+        switch (category.category) {
+            case "player":
+                const games = await Boardame.findByPlayer({
+                    player: category.value,
+                    sortType,
+                });
                 break;
-            case age:
+            case "age":
                 break;
-            case theme:
+            case "theme":
                 break;
-            case time:
+            case "time":
                 break;
-            case complexity:
+            case "complexity":
                 break;
             case null:
                 break;
             default:
                 break;
         }
+    }
+
+    static async findCondition({}) {
+        const games = 0;
     }
 }
 

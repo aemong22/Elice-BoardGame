@@ -32,4 +32,8 @@ boardGameRouter.post("/games/category/sort", async (req, res, next) => {
 
 boardGameRouter.get("/insertGames", insertData);
 
+boardGameRouter.get("/condition", async (req, res, next) => {
+    const getGame = 9;
+});
+
 export { boardGameRouter };

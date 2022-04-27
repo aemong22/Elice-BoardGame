@@ -23,6 +23,7 @@ class User {
         const user = await UserModel.findOne({ _id });
         return user;
     }
+
     static async updatePassword({ email, fieldToUpdate, newValue }) {
         const filter = { email: email };
         const update = { [fieldToUpdate]: newValue };

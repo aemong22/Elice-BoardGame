@@ -15,6 +15,15 @@ class Boardame {
     }
 
     static async findByPlayer({ player, sortType }) {
+        switch (sortType) {
+            case "":
+                //
+                break;
+
+            default:
+                break;
+        }
+
         const findByPlayer = await BoardGameModel.find({
             minPlayer: { $gte: player },
         }).sort({ rank: -1 });
