@@ -233,63 +233,63 @@ components:
       type: object
       required:
         - index
-        - unNamed
-        - gameId
-        - gameName
+        - un_named
+        - game_id
+        - game_name
         - year
         - rank
-        - averageRating
-        - bayesAverage
-        - userRated
+        - average_rating
+        - bayes_average
+        - user_rated
         - url
         - thumbnail
-        - minPlayer
-        - maxPlayer
-        - minAge
-        - playingTime
-        - minPlayingTime
-        - maxPlayingTime
-        - complexityAverage
+        - min_player
+        - max_player
+        - min_age
+        - playing_time
+        - min_playing_time
+        - max_playing_time
+        - complexity_average
         - domains
         - image
         - description
-        - recommendId
+        - recommend_id
       properties:
         index:
           type: number
-        unNamed:
+        un_named:
           type: number
-        gameId:
+        game_id:
           type: number
-        gameName:
+        game_name:
           type: string
         year:
           type: number
         rank:
           type: number
-        averageRating:
+        average_rating:
           type: number
-        bayesAverage:
+        bayes_average:
           type: number
-        userRated:
+        user_rated:
           type: number
         url:
           type: string
         thumbnail:
           type: string
-        minPlayer:
+        min_player:
           type: number
-        maxPlayer:
+        max_player:
           type: number
-        minAge:
+        min_age:
           type: number
-        playingTime:
+        playing_time:
           type: number
-        minPlayingTime:
+        min_playing_time:
           type: number
-        maxPlayingTime:
+        max_playing_time:
           type: number
-        complexityAverage:
+        complexity_average:
           type: number
         domains:
           type: string
@@ -297,7 +297,7 @@ components:
           type: string
         description:
           type: string
-        recommendId:
+        recommend_id:
           type: array  
 security:
   - bearerAuth: []
