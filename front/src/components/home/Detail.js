@@ -19,6 +19,14 @@ const Detail = () => {
         />
         <div className="detail_title">400여종의 보드게임</div>
       </div>
+      <div id="detail_wrapper_bottom">
+        <div className="detail_title">이젠 뭘 적어야 하나</div>
+        <img
+          alt="보드게임 가족끼리"
+          src="/image/detail_visual3.png"
+          style={{ width: "45%" }}
+        />
+      </div>
     </>
   );
 };
