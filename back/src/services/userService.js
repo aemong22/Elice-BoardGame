@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
-import { User, Token } from "../db";
+import { User, TokenRepository } from "../db";
 import { UserModel } from "../db/schemas/user";
 import config from "../config";
 import { sign, refresh } from "../utils/jwt-utils";
@@ -65,7 +65,7 @@ class userAuthService {
 
         // refresh token 저장 시 update로 사용
         // refresh token 이 없으면 저장하기
-        const refreshTokenInsert = await Token.updateRefresh({
+        const refreshTokenInsert = await TokenRepository.updateRefresh({
             _id: user._id,
             refresh_token,
         });
@@ -79,7 +79,6 @@ class userAuthService {
             phone_number,
             token,
             refresh_token,
-            errorMessage: null,
         };
 
         return logedinUser;
