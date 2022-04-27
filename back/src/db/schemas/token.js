@@ -5,6 +5,7 @@ const TokenSchema = new Schema(
         user_id: {
             type: String,
             required: true,
+            unique: true,
         },
         refresh_token: {
             type: String,
