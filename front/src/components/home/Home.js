@@ -41,13 +41,13 @@ function Home() {
         <div id="main_visual_wrapper">
           <img
             alt="보드게임테이블"
-            style={{ width: "40%", height: "80%" }}
+            style={{ width: "40%", height: "90%" }}
             src="/image/main_visual2.png"
           />
 
           <img
             alt="보드게임도구"
-            style={{ width: "35%", height: "60%" }}
+            style={{ width: "40%", height: "70%" }}
             src="/image/main_visual.png"
           />
         </div>

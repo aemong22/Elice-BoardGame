@@ -11,6 +11,7 @@ import {
   Filler,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import "./Chart.css";
 
 ChartJS.register(
   CategoryScale,
@@ -77,14 +78,15 @@ export const data = {
 
 const Chart = () => {
   return (
-    <div
-      style={{
-        position: "relative",
-        height: "50vh",
-        padding: "25%",
-      }}
-    >
-      <Line options={options} data={data} />
+    <div id="chart_wrapper">
+      <div id="chart_title">"세상엔 보드게임이 너무 많아!"</div>
+      <div id="chart_subtitle">
+        <span style={{ color: "#A98E64" }}>보드게임</span>의 수는{" "}
+        <span style={{ color: "#A98E64" }}>22년간</span> 꾸준히 증가
+      </div>
+      <div id="chart_visual">
+        <Line options={options} data={data} />
+      </div>
     </div>
   );
 };
