@@ -34,6 +34,7 @@ const refresh = async (req, res) => {
 
         // access token이 디코딩 되면 user_id를 가져와 refresh token을 검증
         const refreshResult = refreshVerify(refreshToken, decoded.id);
+        console.log(refreshResult);
 
         // 재발급을 위해서는 access token이 만료되엉야 함
         if (authResult.ok === false && authResult.message === "jwt expired") {
