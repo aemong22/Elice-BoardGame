@@ -10,6 +10,7 @@ servers:
 tags:
   - name: user
     description: User 스키마를 이용한 기능
+  - name: board
 paths:
   /user/register:
     post:
@@ -106,7 +107,7 @@ paths:
           description: access token, refresh token 모두 만료되었습니다
         '400':
           description: token이 헤더에 없거나 access token이 만료되지 않았습니다.
-  /user/{id}:
+  /users/{id}:
     get:
       tags:
         - user
@@ -147,7 +148,7 @@ paths:
                     type: string
                   phone_number:
                     type: string
-  /userlist:
+  /users:
     get:
       tags:
         - user
@@ -191,6 +192,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/BoardGame'
   /games/player/{nums}:
+    # 수정 필요 
     get:
       tags:
         - boardGame
