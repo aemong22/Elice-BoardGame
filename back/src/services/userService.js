@@ -96,7 +96,7 @@ class userAuthService {
     //비밀번호 찾기 후 변경
     static async setPassword({ email, toUpdate }) {
         // 우선 해당 id 의 유저가 db에 존재하는지 여부 확인
-        let user = await UserRepository.findByEmail({ email });
+        let user = await UserModel.findOne({ email });
 
         // db에서 찾지 못한 경우, 에러 메시지 반환
         if (!user) {
@@ -107,13 +107,11 @@ class userAuthService {
 
         if (toUpdate.password) {
             const hashedPassword = await bcrypt.hash(toUpdate.password, 10);
-            const fieldToUpdate = "password";
-            const newValue = hashedPassword;
-            user = await UserRepository.updatePassword({
-                email,
-                fieldToUpdate,
-                newValue,
-            });
+            const filter = { email: email };
+            const update = { ["password"]: hashedPassword };
+            const option = { returnOriginal: false };
+
+            user = await UserModel.findOneAndUpdate(filter, update, option);
         }
         return user;
     }
