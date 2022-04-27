@@ -1,9 +1,35 @@
+import React, { useState, useEffect } from "react";
 import BoardgameCategory from "./BoardgameCategory"
 import BoardgameCard from "./BoardgameCard"
-import "./Boardgame.css"
 import Header from "../Header";
+import "./Boardgame.css"
+
+import * as Api from "../../api";
 
 function Boardgame() {
+    const [boardgames, setBoardgames] = useState([]);
+
+    useEffect(() => {
+        try {
+            Api.get("boardGames").then((res) => {
+                setBoardgames(res.data);
+                console.log(res.data)
+            });
+        } catch (err) {
+            console.log("errer message: ", err)
+        }
+    }, []);
+
+    const boardgameList = boardgames.map((boardgame) => (
+        <BoardgameCard
+            name={boardgame.game_name}
+            domains={boardgame.domains}
+            description={boardgame.description}
+        />
+    ));
+
+
+
     return (
         <>
             <div className='header'>
@@ -23,12 +49,7 @@ function Boardgame() {
                         </div>
                     </div> */}
                     <div className='boardgames'>
-                        <BoardgameCard></BoardgameCard>
-                        <BoardgameCard></BoardgameCard>
-                        <BoardgameCard></BoardgameCard>
-                        <BoardgameCard></BoardgameCard>
-                        <BoardgameCard></BoardgameCard>
-                        <BoardgameCard></BoardgameCard>
+                        {boardgameList}
                         <BoardgameCard></BoardgameCard>
                     </div>
                 </div>

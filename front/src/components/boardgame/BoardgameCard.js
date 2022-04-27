@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 // @mui/icons-material 설치
-function BoardgameCard() {
+function BoardgameCard({ name, domains, description }) {
   return (
     <Card sx={{ width: 250, maxWidth: 270, my: 10 }}>
       <CardActionArea>
@@ -23,7 +23,7 @@ function BoardgameCard() {
         />
         <CardContent sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
           <Typography gutterBottom variant="h5" component="span" sx={{ m: 'auto 0' }}>
-            Lizard
+            {name}
           </Typography>
           <CardActions disableSpacing>
             <IconButton aria-label="add to favorites">
@@ -32,7 +32,7 @@ function BoardgameCard() {
           </CardActions>
           <Typography component="div" sx={{ width: 100, height: 0 }}></Typography>
           <Typography variant="body2" color="text.secondary" sx={{ width: '90%' }}>
-            description description
+            {description}
           </Typography>
         </CardContent>
       </CardActionArea>
