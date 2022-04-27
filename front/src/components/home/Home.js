@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../Header";
 import { useSelector } from "react-redux";
 import "./Home.css";
+import Header from "../Header";
+import Chart from "./Chart";
 
 function Home() {
   const navigate = useNavigate();
@@ -51,6 +52,7 @@ function Home() {
           />
         </div>
       </div>
+      <Chart />
     </>
   );
 }
