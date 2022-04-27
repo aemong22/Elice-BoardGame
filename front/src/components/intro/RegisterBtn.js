@@ -63,7 +63,7 @@ const RegisterBtn = ({ handleOpen, setOpen }) => {
   }));
   return (
     <FormControlLabel
-      control={<IOSSwitch sx={{ m: 1 }} defaultChecked onChange={handleOpen} />}
+      control={<IOSSwitch sx={{ m: 1 }} defaultChecked onClick={handleOpen} />}
     />
   );
 };

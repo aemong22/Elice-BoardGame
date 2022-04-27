@@ -10,7 +10,6 @@ import Boardgame from "./components/boardgame/Boardgame";
 import About from "./components/about/About";
 import RegisterForm from "./components/user/RegisterForm";
 
-
 function App() {
   // 유저 로그인 상태 관련 코드 추가하기
   const dispatch = useDispatch();

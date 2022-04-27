@@ -5,6 +5,7 @@ import Header from "./Header";
 import { useSelector } from "react-redux";
 
 function Home() {
+  const params = useParams();
   const navigate = useNavigate();
   const [isFetchCompleted, setIsFetchCompleted] = useState(false);
   const userState = useSelector((state) => state.userReducer.user);
@@ -26,7 +27,17 @@ function Home() {
   return (
     <>
       <Header />
-      <div style={{ width:"100%", height:"100vh", backgroundColor:"#e2e2e2", display:"flex", justifyContent: "space-around", alignItems: "center", fontSize: "3rem" }}>
+      <div
+        style={{
+          width: "100%",
+          height: "100vh",
+          backgroundColor: "#e2e2e2",
+          display: "flex",
+          justifyContent: "space-around",
+          alignItems: "center",
+          fontSize: "3rem",
+        }}
+      >
         Home!
       </div>
     </>
