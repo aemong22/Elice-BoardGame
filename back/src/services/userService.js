@@ -84,7 +84,7 @@ class userAuthService {
     }
 
     static async getUserInfo({ _id }) {
-        const user = await UserRepository.findByUserId({ _id });
+        const user = await await UserModel.findOne({ _id });
 
         if (!user) {
             const errorMessage = "해당 메일은 가입 내역이 없습니다.";
