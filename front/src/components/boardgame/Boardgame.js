@@ -1,44 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import BoardgameCategory from "./BoardgameCategory"
-import BoardgameCard from "./BoardgameCard"
 import Header from "../Header";
+import BoardgameData from "./BoardgameData";
 import "./Boardgame.css"
-
-import * as Api from "../../api";
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchField from "./SearchField";
 
 function Boardgame() {
     const [openCategory, setOpenCategory] = useState(false);
-    const [boardgames, setBoardgames] = useState([]);
 
-    useEffect(() => {
-        try {
-            Api.get("boardGames").then((res) => {
-                setBoardgames(res.data);
-            })
-        } catch (err) {
-            console.log("errer message: ", err)
-        }
-    }, []);
-
-    const boardgameList = boardgames.map((boardgame) => (
-        <BoardgameCard
-            name={boardgame.game_name}
-            min_player={boardgame.min_player}
-            max_player={boardgame.max_player}
-            domains={boardgame.domains}
-            image={boardgame.image}
-        />
-    ));
+    // 필터에 사용할 변수
+    const [player, setPlayer] = useState([]);
+    const [category, setCategory] = useState([]);
 
     return (
         <>
-            <button onClick={() => setOpenCategory(!openCategory) }> --- </button>
             <div className='header'>
                 <Header />
             </div>
+            <div className='boardgame-header'>
+                <div className='boardgame-header-item' onClick={() => setOpenCategory(!openCategory) }>
+                    <MenuIcon className='boardgame-header-menu-icon'></MenuIcon>
+                    <div className='boardgame-header-menu'>Menu</div>
+                </div>
+                <SearchField />
+            </div>
             <div className='boardgame-container'>
                 <div className={ openCategory ? 'boardgame-category active' : 'boardgame-category' }>
-                    <BoardgameCategory />
+                    <BoardgameCategory 
+                        player={player}
+                        setPlayer={setPlayer}
+                        category={category}
+                        setCategory={setCategory}
+                    />
                 </div>
                 <div className='boardgame-wrapper'>
                     {/* <div className='boardgame-sort'>
@@ -50,7 +44,10 @@ function Boardgame() {
                         </div>
                     </div> */}
                     <div className='boardgames'>
-                        {boardgameList}
+                        <BoardgameData
+                            player={player}
+                            category={category}
+                        />
                     </div>
                 </div>
             </div>

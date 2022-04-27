@@ -1,16 +1,24 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
-import Checkbox from '@mui/material/Checkbox';
 
-function BoardgameCategory() {
-    const [openMenu, setOpenMenu] = useState(false);
+function BoardgameCategory({ player, setPlayer }) {
     const [openPlayers, setOpenPlayers] = useState(false);
     const [openCategory, setOpenCategory] = useState(false);
 
-    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+    const changeHandler = (checked, id) => {
+      if (checked) {
+        setPlayer([...player, id]);
+      } else {
+        setPlayer(player.filter((el) => el !== id));
+      }
+    };
+
+    useEffect(() => {
+      console.log(player);
+    }, [player]);
   
     return (
       <>
@@ -26,15 +34,36 @@ function BoardgameCategory() {
           <Collapse in={openPlayers} timeout="auto" unmountOnExit>
             <List component="div" disablePadding sx={{ bgcolor: 'background.paper' }}>
               <ListItemButton sx={{ height: '40px' }}>
-                <Checkbox {...label} />
+                <input 
+                  id='2'
+                  type="checkbox" 
+                  onChange={(e)=>{
+                    changeHandler(e.currentTarget.checked, '2')
+                  }}
+                  checked={player.includes('2') ? true : false}
+                />
                 <ListItemText primary="2" />
               </ListItemButton>
               <ListItemButton sx={{ height: '40px' }}>
-                <Checkbox {...label} />
+                <input 
+                  id='3'
+                  type="checkbox" 
+                  onChange={(e)=>{
+                    changeHandler(e.currentTarget.checked, '3')
+                  }}
+                  checked={player.includes('3') ? true : false}
+                />
                 <ListItemText primary="3" />
               </ListItemButton>
               <ListItemButton sx={{ height: '40px' }}>
-                <Checkbox {...label} />
+                <input 
+                  id='4'
+                  type="checkbox" 
+                  onChange={(e)=>{
+                    changeHandler(e.currentTarget.checked, '4')
+                  }}
+                  checked={player.includes('4') ? true : false}
+                />
                 <ListItemText primary="4" />
               </ListItemButton>
             </List>
@@ -53,15 +82,36 @@ function BoardgameCategory() {
           <Collapse in={openCategory} timeout="auto" unmountOnExit>
             <List component="div" disablePadding sx={{ bgcolor: 'background.paper' }}>
               <ListItemButton sx={{ height: '40px' }}>
-                <Checkbox {...label} />
+                <input 
+                  id='Economic'
+                  type="checkbox" 
+                  onChange={(e)=>{
+                    changeHandler(e.currentTarget.checked, 'Economic')
+                  }}
+                  checked={player.includes('Economic') ? true : false}
+                />
                 <ListItemText primary='Economic' />
               </ListItemButton>
               <ListItemButton sx={{ height: '40px' }}>
-                <Checkbox {...label} />
+                <input 
+                  id='Negotiation'
+                  type="checkbox" 
+                  onChange={(e)=>{
+                    changeHandler(e.currentTarget.checked, 'Negotiation')
+                  }}
+                  checked={player.includes('Negotiation') ? true : false}
+                />
                 <ListItemText primary='Negotiation' />
               </ListItemButton>
               <ListItemButton sx={{ height: '40px' }}>
-                <Checkbox {...label} />
+                <input 
+                  id='Card Game'
+                  type="checkbox" 
+                  onChange={(e)=>{
+                    changeHandler(e.currentTarget.checked, 'Card Game')
+                  }}
+                  checked={player.includes('Card Game') ? true : false}
+                />
                 <ListItemText primary='Card Game' />
               </ListItemButton>
             </List>
