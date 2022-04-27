@@ -16,7 +16,7 @@ class Boardame {
 
     static async findByPlayer({ player, sortType }) {
         switch (sortType) {
-            case "":
+            case "rank":
                 //
                 break;
 
