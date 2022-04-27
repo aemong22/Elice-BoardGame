@@ -19,7 +19,7 @@
 }
 
 #chart_visual {
-  height: 50%;
+  width: 50%;
   padding: 100px;
   position: relative;
 }
