@@ -22,7 +22,7 @@ const Title = styled(Grid)`
   font-size: 20px;
   font-weight: bold;
   color: black;
-  padding: 5%;
+  padding: 3%;
 `;
 
 const StyledInput = styled(InputBase)`
@@ -31,7 +31,6 @@ const StyledInput = styled(InputBase)`
   background: white;
   border-radius: 8px;
   border: 1px solid #d6ccc2;
-
   &:hover {
     border-color: #d4ccc3;
   }
@@ -51,8 +50,8 @@ const SubTitle = styled(Grid)`
 `;
 
 const SubContent = styled(Grid)`
-  padding: 3%;
-  height: 15%;
+  padding: 1%;
+  height: 17%;
 `;
 
 const HelperText = styled(FormHelperText)`

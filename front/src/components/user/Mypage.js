@@ -23,6 +23,7 @@ function Mypage() {
   const fetchPorfolioOwner = async () => {
     const res = await Api.get("currentUser");
     setOwnerData(res.data);
+    console.log("여기당", ownerData);
   };
 
   useEffect(() => {

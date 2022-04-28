@@ -15,12 +15,14 @@ import {
   HelperText,
   MyButton,
 } from "./ProfileStyle";
+import { blue } from "@mui/material/colors";
 
 function Profile({ ownerData, setOwnerData }) {
   const [img, setImg] = useState(ownerData.image);
 
   const region = "ap-northeast-2";
   const bucket = "pinkpig-bucket";
+
   AWS.config.update({
     region: region,
     accessKeyId: "AKIAWDTZYO4YUEOUKMEF", //process.env.S3_ACCESS_KEY_ID,
@@ -88,88 +90,82 @@ function Profile({ ownerData, setOwnerData }) {
     <>
       <MyBox>
         <Title>회원 정보 수정</Title>
-        <Content>
-          <SubContent>
+        <form onSubmit={handleSubmit} style={{ height: "100%" }}>
+          <Content>
+            <SubTitle>프로필 사진 변경하기</SubTitle>
             <StyledInput
+              style={{ width: "50%" }}
               type="file"
               id="upload"
               className="image-upload"
               onChange={handleFileInput}
             />
-            <img
-              alt=""
-              className="profile-img"
-              src={`https://pinkpig-bucket.s3.ap-northeast-2.amazonaws.com/${ownerData.image}.png`}
-              style={{ width: "10%" }}
-            />
-          </SubContent>
-          <SubContent>
-            <SubTitle>이름</SubTitle>
-            <StyledInput
-              type="text"
-              required
-              value={user_name}
-              onChange={(e) => {
-                setUser_name(e.target.value);
-              }}
-            />
-          </SubContent>
+            <SubContent>
+              <SubTitle>이름</SubTitle>
+              <StyledInput
+                type="text"
+                required
+                value={user_name}
+                onChange={(e) => {
+                  setUser_name(e.target.value);
+                }}
+              />
+            </SubContent>
 
-          <SubContent>
-            <SubTitle>이메일</SubTitle>
-            <StyledInput
-              type="text"
-              required
-              disabled={true}
-              value={ownerData.email}
-            />
-            <HelperText> 변경하실 수 없습니다.</HelperText>
-          </SubContent>
+            <SubContent>
+              <SubTitle>이메일</SubTitle>
+              <StyledInput
+                type="text"
+                required
+                disabled={true}
+                value={ownerData.email}
+              />
+              <HelperText> 변경하실 수 없습니다.</HelperText>
+            </SubContent>
 
-          <SubContent>
-            <SubTitle>비밀번호</SubTitle>
-            <StyledInput
-              type="text"
-              required
-              placeholder="비밀번호 변경"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {isPasswordValid ? null : (
-              <HelperText> 4자리 이상 입력해주세요.</HelperText>
-            )}
-          </SubContent>
+            <SubContent>
+              <SubTitle>비밀번호</SubTitle>
+              <StyledInput
+                type="text"
+                required
+                placeholder="비밀번호 변경"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {isPasswordValid ? null : (
+                <HelperText> 4자리 이상 입력해주세요.</HelperText>
+              )}
+            </SubContent>
 
-          <SubContent>
-            <SubTitle>비밀번호 확인</SubTitle>
-            <StyledInput
-              type="text"
-              required
-              placeholder="비밀번호 확인"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            {isPasswordSame ? null : (
-              <HelperText>비밀번호가 일치하지 않습니다.</HelperText>
-            )}
-          </SubContent>
+            <SubContent>
+              <SubTitle>비밀번호 확인</SubTitle>
+              <StyledInput
+                type="text"
+                required
+                placeholder="비밀번호 확인"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              {isPasswordSame ? null : (
+                <HelperText>비밀번호가 일치하지 않습니다.</HelperText>
+              )}
+            </SubContent>
 
-          <SubContent>
-            <SubTitle>전화번호</SubTitle>
-            <StyledInput
-              type="text"
-              placeholder="전화번호 변경"
-              required
-              value={phone_number}
-              onChange={(e) => setPhone_number(e.target.value)}
-            />
-          </SubContent>
-          <SubContent style={{ textAlign: "center" }}>
-            <StylesProvider injectFirst>
-              <MyButton type="submit" onClick={handleSubmit}>
-                변경하기
-              </MyButton>
-            </StylesProvider>
-          </SubContent>
-        </Content>
+            <SubContent>
+              <SubTitle>전화번호</SubTitle>
+              <StyledInput
+                type="text"
+                placeholder="전화번호 변경"
+                required
+                value={phone_number}
+                onChange={(e) => setPhone_number(e.target.value)}
+              />
+            </SubContent>
+            <SubContent style={{ textAlign: "center", height: "10%" }}>
+              <StylesProvider injectFirst>
+                <MyButton type="submit">변경하기</MyButton>
+              </StylesProvider>
+            </SubContent>
+          </Content>
+        </form>
       </MyBox>
     </>
   );
