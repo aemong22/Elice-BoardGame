@@ -10,6 +10,15 @@ class boardgameController {
         }
     }
 
+    static async findRecentlyGames(req, res, next) {
+        try {
+            const recentlyGames = await boardGameService.findRecentlyGames();
+            res.status(200).json(recentlyGames);
+        } catch (error) {
+            next(error);
+        }
+    }
+
     static async findByCondition(req, res, next) {
         try {
         } catch (error) {}

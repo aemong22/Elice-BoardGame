@@ -97,6 +97,6 @@ const BoardGameSchema = new Schema(
     }
 );
 
-const BoardGameModel = model("Boardame", BoardGameSchema);
+const BoardGameModel = model("Boardgame", BoardGameSchema);
 
 export { BoardGameModel };

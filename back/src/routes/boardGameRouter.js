@@ -7,6 +7,8 @@ const boardGameRouter = Router();
 
 boardGameRouter.get("/boardGames", boardgameController.findAllGames);
 
+boardGameRouter.get("/recentlyGames", boardgameController.findRecentlyGames);
+
 boardGameRouter.get("/condition", boardgameController.findByCondition);
 
 export { boardGameRouter };

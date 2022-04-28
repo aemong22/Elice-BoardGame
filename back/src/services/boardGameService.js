@@ -8,6 +8,11 @@ class boardGameService {
         return boardgames;
     }
 
+    static async findRecentlyGames() {
+        const boardGames = await BoardGameModel2020.find({});
+        return boardGames;
+    }
+
     static async findByCondition() {
         // const games =
     }
