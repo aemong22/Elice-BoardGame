@@ -1,6 +1,7 @@
 import { boardGameService } from "../services/boardGameService";
 import fs from "fs";
 class boardgameController {
+    // 19년도 게임 전체 조회
     static async findAllGames(req, res, next) {
         try {
             const allBoardGame = await boardGameService.findAllGames();
@@ -10,10 +11,24 @@ class boardgameController {
         }
     }
 
+    // 20년 최신 게임 전체 조회
     static async findRecentlyGames(req, res, next) {
         try {
             const recentlyGames = await boardGameService.findRecentlyGames();
             res.status(200).json(recentlyGames);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // 인원수 기준 검색
+    // 프론트 테스트용
+    // min_player <= player <= max_player
+    static async findByPlayer(req, res, next) {
+        try {
+            const player = req.params.player;
+            const games = await boardGameService.findByPlayer({ player });
+            res.status(200).json(games);
         } catch (error) {
             next(error);
         }

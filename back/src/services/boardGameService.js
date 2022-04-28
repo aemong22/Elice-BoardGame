@@ -13,6 +13,31 @@ class boardGameService {
         return boardGames;
     }
 
+    static minPlayerCond(player) {
+        const minPlayer = BoardGameModel.find({
+            min_player: { $gte: player },
+        });
+        return minPlayer;
+    }
+
+    static maxPlayerCond(player) {
+        const maxPlayer = BoardGameModel.find({
+            max_player: { $lte: player },
+        });
+        return maxPlayer;
+    }
+
+    static async findByPlayer({ player }) {
+        const minPlayer = await this.minPlayerCond(player);
+        const maxPlayer = await this.maxPlayerCond(player);
+
+        console.log(minPlayer);
+        const games = await BoardGameModel.aggregate({
+            $setIntersection: [minPlayer, maxPlayer],
+        });
+        return games;
+    }
+
     static async findByCondition() {
         // const games =
     }
