@@ -125,6 +125,40 @@ paths:
           $ref: '#/components/schemas/User'
         '400':
           description: access token이 유효하지 않습니다.
+  /user/{id}:
+    put:
+      tags:
+        - user
+      summary: 개인 유저 정보 수정하기
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_name:
+                    type: string
+                  email:
+                    type: string
+                  phone_number:
+                    type: string
+                  password:
+                    type: string
+                  image:
+                    type: string
+      responses:
+        '200':
+          $ref: '#/components/schemas/User'
+        '400':
+          description: access token이 유효하지 않습니다.
   /currentUser:
     get:
       tags:
@@ -147,6 +181,8 @@ paths:
                   email:
                     type: string
                   phone_number:
+                    type: string
+                  image:
                     type: string
   /users:
     get:
@@ -270,6 +306,8 @@ components:
         password:
           type: string
         phone_number:
+          type: string
+        image:
           type: string
     BoardGame:
       type: object

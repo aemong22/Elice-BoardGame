@@ -5,7 +5,7 @@ import { TokenModel } from "../db/schemas/token";
 
 class userAuthService {
     // 유저 정보 추가하기
-    static async addUser({ user_name, email, password, phone_number }) {
+    static async addUser({ user_name, email, password, phone_number, image }) {
         // 아이디 중복 확인
         const user = await UserModel.findOne({ email });
         if (user) {
@@ -22,6 +22,7 @@ class userAuthService {
             email,
             password: hashPasswd,
             phone_number,
+            image,
         };
 
         // db에 저장
@@ -112,6 +113,55 @@ class userAuthService {
 
             user = await UserModel.findOneAndUpdate(filter, update, option);
         }
+        return user;
+    }
+
+    static async setUser({ _id, toUpdate }) {
+        let user = await UserModel.findOne({ _id });
+
+        if (!user) {
+            const errorMessage =
+                "가입 내역이 없습니다. 다시 한번 확인해주세요.";
+            return { errorMessage };
+        }
+
+        if (toUpdate.user_name) {
+            const filter = { _id };
+            const update = { ["user_name"]: toUpdate.user_name };
+            const option = { returnOriginal: false };
+            user = await UserModel.findOneAndUpdate(filter, update, option);
+        }
+
+        if (toUpdate.email) {
+            const filter = { _id };
+            const update = { ["email"]: toUpdate.email };
+            const option = { returnOriginal: false };
+            user = await UserModel.findOneAndUpdate(filter, update, option);
+        }
+
+        if (toUpdate.password) {
+            const hashedPassword = await bcrypt.hash(toUpdate.password, 10);
+            const filter = { _id };
+            const update = { ["password"]: hashedPassword };
+            const option = { returnOriginal: false };
+
+            user = await UserModel.findOneAndUpdate(filter, update, option);
+        }
+
+        if (toUpdate.phone_number) {
+            const filter = { _id };
+            const update = { ["phone_number"]: toUpdate.phone_number };
+            const option = { returnOriginal: false };
+            user = await UserModel.findOneAndUpdate(filter, update, option);
+        }
+
+        if (toUpdate.image) {
+            const filter = { _id };
+            const update = { ["image"]: toUpdate.image };
+            const option = { returnOriginal: false };
+            user = await UserModel.findOneAndUpdate(filter, update, option);
+        }
+
         return user;
     }
 }
