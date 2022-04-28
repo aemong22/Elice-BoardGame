@@ -9,31 +9,9 @@ import Intro from "./components/intro/Intro";
 import Boardgame from "./components/boardgame/Boardgame";
 import About from "./components/about/About";
 import RegisterForm from "./components/user/RegisterForm";
-import GoogleLoading from "./components/intro/GoogleLoading";
-export const DispatchContext = createContext(null);
-function App() {
-    const [userState, userDispatch] = useReducer(loginReducer, {
-        user: null,
-    });
-    function loginReducer(userState, action) {
-        switch (action.type) {
-            case "LOGIN_SUCCESS":
-                console.log("%c로그인!", "color: #d93d1a;");
-                return {
-                    ...userState,
-                    user: action.payload,
-                };
-            case "LOGOUT":
-                console.log("%c로그아웃!", "color: #d93d1a;");
-                return {
-                    ...userState,
-                    user: null,
-                };
-            default:
-                return userState;
-        }
-    }
+import GoogleLoading from "./components/user/GoogleLoading";
 
+function App() {
     // 유저 로그인 상태 관련 코드 추가하기
     const dispatch = useDispatch();
     const [isFetchCompleted, setIsFetchCompleted] = useState(false);
@@ -62,19 +40,17 @@ function App() {
     }
 
     return (
-        <DispatchContext.Provider value={{ userDispatch }}>
-            <Router>
-                <Routes>
-                    <Route path="/" exact element={<Home />} />
-                    <Route path="/intro" exact element={<Intro />} />
-                    <Route path="/about" exact element={<About />} />
-                    <Route path="/oauth" exact element={<GoogleLoading />} />
-                    <Route path="/boardgame" exact element={<Boardgame />} />
-                    <Route path="/register" exact element={<RegisterForm />} />
-                    <Route path="*" element={<Home />} />
-                </Routes>
-            </Router>
-        </DispatchContext.Provider>
+        <Router>
+            <Routes>
+                <Route path="/" exact element={<Home />} />
+                <Route path="/intro" exact element={<Intro />} />
+                <Route path="/about" exact element={<About />} />
+                <Route path="/oauth" exact element={<GoogleLoading />} />
+                <Route path="/boardgame" exact element={<Boardgame />} />
+                <Route path="/register" exact element={<RegisterForm />} />
+                <Route path="*" element={<Home />} />
+            </Routes>
+        </Router>
     );
 }
 
