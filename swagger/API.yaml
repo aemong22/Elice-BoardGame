@@ -236,7 +236,7 @@ paths:
     get:
       tags:
         - boardGame
-      summary: player 수로 보드게임 조회
+      summary: player 수로 보드게임 조회(공사중)
       parameters:
         - name: player
           in: path
