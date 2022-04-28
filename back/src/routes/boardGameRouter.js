@@ -11,4 +11,6 @@ boardGameRouter.get("/recentlyGames", boardgameController.findRecentlyGames);
 
 boardGameRouter.get("/condition", boardgameController.findByCondition);
 
+boardGameRouter.post("/insertData", boardgameController.insertData);
+
 export { boardGameRouter };

@@ -13,6 +13,7 @@ const BoardGameSchema = new Schema(
         },
         game_id: {
             type: Number,
+            unique: true,
             required: true,
         },
         game_name: {

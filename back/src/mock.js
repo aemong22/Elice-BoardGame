@@ -4,7 +4,7 @@ import { Boardame } from "./db/models/BoardGame";
 
 const insertData = (req, res, next) => {
     fs.readFile(
-        "/Users/nowgnas/projects/board-game-recommendation-project/back/src/recently.json",
+        "/Users/nowgnas/projects/board-game-recommendation-project/back/src/dataset.json",
         (err, json) => {
             if (err) {
                 return console.log(err);
