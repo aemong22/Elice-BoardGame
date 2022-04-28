@@ -144,6 +144,27 @@ class userController {
         }
     }
 
+    static async setUserInfo(req, res, next) {
+        try {
+            const _id = req.params.id;
+
+            const toUpdate = { ...req.body };
+
+            const updatedUser = await userAuthService.setUser({
+                _id,
+                toUpdate,
+            });
+
+            if (updatedUser.errorMessage) {
+                throw new Error(updatedUser.errorMessage);
+            }
+
+            res.status(200).json(updatedUser);
+        } catch (error) {
+            next(error);
+        }
+    }
+
     static async refreshToken(req, res, next) {
         // refresh 함수를 쪼개면 여기서 처리할게 있을수도 있음
     }
