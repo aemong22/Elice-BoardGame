@@ -39,8 +39,19 @@ class boardgameController {
     // 플레이어 수 범위안에 있는 보드게임 조회
     static async findByPlayer(req, res, next) {
         try {
-            const player = req.params.player;
+            const player = req.params.num;
             const games = await boardGameService.findByPlayer({ player });
+            res.status(200).json(games);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // age 기준 조회
+    static async findByAge(req, res, next) {
+        try {
+            const age = req.params.num;
+            const games = await boardGameService.findByAge({ age });
             res.status(200).json(games);
         } catch (error) {
             next(error);

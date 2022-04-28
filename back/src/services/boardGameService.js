@@ -1,4 +1,9 @@
 import { BoardGameModel } from "../db/schemas/boardgame";
+import {
+    rankSort,
+    raitngSort,
+    userRatedSort,
+} from "./sortFuncion/sortFunction";
 
 class boardGameService {
     // service에서 바로 요청
@@ -27,8 +32,16 @@ class boardGameService {
                 { min_player: { $gt: player } },
                 { max_player: { $lt: player } },
             ],
-        });
+            // sort안에서 랭킹순, 등등..
+        }).sort(raitngSort);
+        return games;
+    }
 
+    // 연령별 기준 보드게임 조회
+    static async findByAge({ age }) {
+        const games = await BoardGameModel.find({
+            min_age: { $lte: age },
+        }).sort(raitngSort);
         return games;
     }
 

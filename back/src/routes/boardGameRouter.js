@@ -15,7 +15,9 @@ boardGameRouter.get("/gameInfo/:id", boardgameController.findByGameId);
 
 // 프론트 테스트용
 // 인원수에 따른 조회
-boardGameRouter.get("/games/:player", boardgameController.findByPlayer);
+boardGameRouter.get("/games/player/:num", boardgameController.findByPlayer);
+// 연령대에 따른 조회
+boardGameRouter.get("/games/age/:num", boardgameController.findByAge);
 
 // 수정 중
 boardGameRouter.get("/condition", boardgameController.findByCondition);
