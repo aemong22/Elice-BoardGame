@@ -23,7 +23,6 @@ function Mypage() {
   const fetchPorfolioOwner = async () => {
     const res = await Api.get("currentUser");
     setOwnerData(res.data);
-    await console.log(ownerData);
   };
 
   useEffect(() => {
@@ -43,12 +42,7 @@ function Mypage() {
             <Name>{ownerData.user_name}</Name>
             <Grid>
               <StylesProvider injectFirst>
-                <MyButton
-                  style={{ className: "mybutton" }}
-                  onClick={() => setModify(true)}
-                >
-                  profile
-                </MyButton>
+                <MyButton onClick={() => setModify(true)}>profile</MyButton>
                 <MyButton id="button" onClick={() => setModify(false)}>
                   Favorite
                 </MyButton>

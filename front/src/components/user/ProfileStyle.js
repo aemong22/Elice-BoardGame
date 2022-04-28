@@ -6,6 +6,7 @@ import {
   InputBase,
   FormHelperText,
 } from "@mui/material";
+
 import Button from "@material-ui/core/Button";
 import styled from "styled-components";
 
@@ -38,6 +39,7 @@ const StyledInput = styled(InputBase)`
 
 const Content = styled(Grid)`
   width: 70%;
+  height: 80%;
   margin: 0 auto;
 `;
 
@@ -50,11 +52,28 @@ const SubTitle = styled(Grid)`
 
 const SubContent = styled(Grid)`
   padding: 3%;
-  height: 15%;
+  height: 17%;
 `;
 
 const HelperText = styled(FormHelperText)`
   font-size: 10px;
   color: gray;
 `;
-export { MyBox, Title, StyledInput, Content, SubTitle, SubContent, HelperText };
+
+const MyButton = styled(Button)`
+  width: 100%;
+  background-color: white;
+  font-size: 20px;
+  text-align: center;
+  padding: 5%;
+`;
+export {
+  MyBox,
+  Title,
+  StyledInput,
+  Content,
+  SubTitle,
+  SubContent,
+  HelperText,
+  MyButton,
+};
