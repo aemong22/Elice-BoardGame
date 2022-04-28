@@ -32,37 +32,37 @@ class boardgameController {
         }
     }
 
-    // --------프론트에서 테스트를 위한 코드-------
+    // --------- 보드게임 조건에 따른 조회 -----------
+
     // 인원수 기준 검색
-    // 프론트 테스트용
     // min_player <= player <= max_player
     // 플레이어 수 범위안에 있는 보드게임 조회
-    static async findByPlayer(req, res, next) {
-        try {
-            const player = req.params.num;
-            const type = "rank";
-            const games = await boardGameService.findByPlayer({ player, type });
-            res.status(200).json(games);
-        } catch (error) {
-            next(error);
-        }
-    }
 
-    // age 기준 조회
-    static async findByAge(req, res, next) {
-        try {
-            const age = req.params.num;
-            const games = await boardGameService.findByAge({ age });
-            res.status(200).json(games);
-        } catch (error) {
-            next(error);
-        }
-    }
+    static async findCondition(req, res, next) {
+        const { player, age, theme, time, complexity, type } = req.body;
+        let games = null;
 
-    // 수정 중
-    static async findByCondition(req, res, next) {
-        try {
-        } catch (error) {}
+        if (player !== "") {
+            // 인원수에 따른 조회
+            games = await boardGameService.findByPlayer({ player, type });
+        } else if (age !== "") {
+            // 연령에 따른 조회
+            games = await boardGameService.findByAge({ age, type });
+        } else if (theme !== "") {
+            // 테마에 따른 조회
+            const games = await boardGameService.findByPlayer({ theme, type });
+        } else if (time !== "") {
+            // 게임 시간에 따른 조회
+            const games = await boardGameService.findByPlayer({ time, type });
+        } else if (complexity !== "") {
+            // 난이도에 따른 조회
+            const games = await boardGameService.findByPlayer({
+                complexity,
+                type,
+            });
+        }
+
+        res.status(200).json(games);
     }
 }
 

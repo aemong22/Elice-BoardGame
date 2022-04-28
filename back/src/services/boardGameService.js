@@ -6,6 +6,21 @@ import {
 } from "./sortFuncion/sortFunction";
 
 class boardGameService {
+    // 정렬 type 설정
+    // service에 이 코드가 존재해도 되는지 궁금 ..??
+    static sortType({ type }) {
+        switch (type) {
+            case "rank":
+                return rankSort;
+            case "rating":
+                return raitngSort;
+            case "userRated":
+                return userRatedSort;
+            default:
+                return null;
+        }
+    }
+
     // service에서 바로 요청
     static async findAllGames() {
         // 모든 보드게임 검색 - 저장된 순서대로 나옴
@@ -25,20 +40,6 @@ class boardGameService {
         return games;
     }
 
-    // 정렬 type 설정
-    static sortType({ type }) {
-        switch (type) {
-            case "rank":
-                return rankSort;
-            case "rating":
-                return raitngSort;
-            case "userRated":
-                return userRatedSort;
-            default:
-                return null;
-        }
-    }
-
     // player 기준 범위 안 보드게임 조회
     static async findByPlayer({ player, type }) {
         const games = await BoardGameModel.find({
@@ -48,6 +49,10 @@ class boardGameService {
             ],
             // sort안에서 랭킹순, 등등..
         }).sort(this.sortType({ type }));
+
+        if (games.length === 0) {
+            return new Error("조회된 데이터가 없습니다.");
+        }
         return games;
     }
 
@@ -57,11 +62,6 @@ class boardGameService {
             min_age: { $lte: age },
         }).sort(this.sortType({ type }));
         return games;
-    }
-
-    // 수정 중
-    static async findByCondition() {
-        // const games =
     }
 }
 

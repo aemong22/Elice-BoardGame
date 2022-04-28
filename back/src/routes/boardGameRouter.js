@@ -13,13 +13,9 @@ boardGameRouter.get("/recentlyGames", recentBoardGameController.findAllGames);
 // 19년도 데이터 game_id 기준 조회: 상세 페이지
 boardGameRouter.get("/gameInfo/:id", boardgameController.findByGameId);
 
-// 프론트 테스트용
-// 인원수에 따른 조회
-boardGameRouter.get("/games/player/:num", boardgameController.findByPlayer);
-// 연령대에 따른 조회
-boardGameRouter.get("/games/age/:num", boardgameController.findByAge);
+// --------보드게임 상세 조회---------
 
-// 수정 중
-boardGameRouter.get("/condition", boardgameController.findByCondition);
+// condition test
+boardGameRouter.post("/games/condition", boardgameController.findCondition);
 
 export { boardGameRouter };
