@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import * as Api from "../../api";
 import { StylesProvider } from "@material-ui/core";
+import { useSelector } from "react-redux";
 import {
   MyBox,
   Title,
@@ -23,10 +24,12 @@ function Profile({ ownerData, setOwnerData }) {
   const isPasswordValid = password.length >= 4;
   const isPasswordSame = password === confirmPassword;
 
+  console.log("유저데이터", ownerData);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await Api.put(`users/${ownerData.id}`, {
+    const res = await Api.put(`user/${ownerData._id}`, {
       user_name,
       email,
       password,
@@ -34,6 +37,7 @@ function Profile({ ownerData, setOwnerData }) {
     });
     const updateUser = res.data;
     setUser_name(updateUser);
+    console.log(updateUser);
 
     alert("정보를 수정했습니다.");
   };
