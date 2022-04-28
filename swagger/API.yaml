@@ -227,14 +227,54 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BoardGame'
-  /games/player/{nums}:
+  /recentlyGames:
+    get:
+      tags:
+        - boardGame
+      summary: 최근 보드게임 조회 
+      responses:
+        '200':
+          description: "최신 보드게임 조회(20년)"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoardGame2020'
+  /gameInfo/{id}:
+    get:
+      tags:
+        - boardGame
+      summary: board game game_id 기준 조회
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          $ref : '#/components/schemas/BoardGame'
+  /games/minPlayer/{player}:
+    get:
+      tags:
+        - boardGame
+      summary: min player 기준 조회 프론트 테스트용
+      parameters:
+        - name: player
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          $ref: '#/components/schemas/BoardGame'
+  /games/{player}:
     # 수정 필요 
     get:
       tags:
         - boardGame
-      summary: player 수로 보드게임 조회
+      summary: player 수로 보드게임 조회(공사중)
       parameters:
-        - name: nums
+        - name: player
           in: path
           required: true
           schema:
@@ -339,5 +379,71 @@ components:
           type: string
         recommend_id:
           type: array  
+    BoardGame2020:
+      type: object
+      required:
+        - index
+        - un_named
+        - game_id
+        - game_name
+        - year
+        - rank
+        - average_rating
+        - bayes_average
+        - user_rated
+        - url
+        - thumbnail
+        - min_player
+        - max_player
+        - min_age
+        - playing_time
+        - min_playing_time
+        - max_playing_time
+        - complexity_average
+        - image
+        - description
+      properties:
+        index:
+          type: number
+        un_named:
+          type: number
+        game_id:
+          type: number
+        game_name:
+          type: string
+        year:
+          type: number
+        rank:
+          type: number
+        average_rating:
+          type: number
+        bayes_average:
+          type: number
+        user_rated:
+          type: number
+        url:
+          type: string
+        thumbnail:
+          type: string
+        min_player:
+          type: number
+        max_player:
+          type: number
+        min_age:
+          type: number
+        playing_time:
+          type: number
+        min_playing_time:
+          type: number
+        max_playing_time:
+          type: number
+        complexity_average:
+          type: number
+        domains:
+          type: string
+        image:
+          type: string
+        description:
+          type: string
 security:
   - bearerAuth: []
