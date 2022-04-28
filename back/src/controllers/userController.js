@@ -168,6 +168,11 @@ class userController {
     static async refreshToken(req, res, next) {
         // refresh 함수를 쪼개면 여기서 처리할게 있을수도 있음
     }
+
+    static async googleLogin(req, res, next) {
+        console.log("googleLogin");
+        res.status(200).json("hello");
+    }
 }
 
 export { userController };
