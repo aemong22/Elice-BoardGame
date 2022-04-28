@@ -1,42 +1,40 @@
-import { Boardame } from "../db";
+import { BoardGameModel } from "../db/schemas/boardgame";
 
 class boardGameService {
-    static async getAllBoardGames() {
-        const boardGames = await Boardame.findAllBoardGames();
+    // service에서 바로 요청
+    static async findAllGames() {
+        // 모든 보드게임 검색 - 저장된 순서대로 나옴
+        const boardgames = await BoardGameModel.find({});
+        return boardgames;
+    }
+
+    // 최신 게임 전체 조회
+    static async findRecentlyGames() {
+        const boardGames = await BoardGameModel2020.find({});
         return boardGames;
     }
 
-    static async getGameByPlayer({ player }) {
-        const games = await Boardame.findByPlayer({ player });
+    // game_id로 조회
+    static async findByGameId({ gameId }) {
+        const games = await BoardGameModel.findOne({ game_id: gameId });
         return games;
     }
 
-    static async getGameByCondition({ category, sortType }) {
-        // 인원수 player
-        // 연령 age
-        // 테마 theme
-        // 게임시간 time
-        // 난이도 complexity
+    // player 기준 범위 안 보드게임 조회
+    static async findByPlayer({ player }) {
+        const games = await BoardGameModel.find({
+            $nor: [
+                { min_player: { $gt: player } },
+                { max_player: { $lt: player } },
+            ],
+        });
 
-        // 랭킹 ranking
-        // 리뷰 review
-        // 평점 rating
-        switch (category) {
-            case player:
-                break;
-            case age:
-                break;
-            case theme:
-                break;
-            case time:
-                break;
-            case complexity:
-                break;
-            case null:
-                break;
-            default:
-                break;
-        }
+        return games;
+    }
+
+    // 수정 중
+    static async findByCondition() {
+        // const games =
     }
 }
 

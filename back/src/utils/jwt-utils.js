@@ -1,8 +1,7 @@
 import jwt from "jsonwebtoken";
-import { JWT_SECRET_KEY } from "../config";
 import { Token } from "../db";
 
-const secret = JWT_SECRET_KEY;
+const secret = process.env.JWT_SECRET_KEY;
 
 exports.sign = (user) => {
     // jwt 방식 access token 생성

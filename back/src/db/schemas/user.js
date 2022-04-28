@@ -5,6 +5,7 @@ const UserSchema = new Schema(
         user_name: {
             type: String,
             required: true,
+            unique: true,
         },
         email: {
             type: String,
@@ -18,6 +19,10 @@ const UserSchema = new Schema(
         phone_number: {
             type: String,
             required: true,
+        },
+        image: {
+            type: String,
+            required: false,
         },
     },
     {

@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const BoardGameSchema = new Schema(
+const BoardGame2020 = new Schema(
     {
         index: {
             type: Number,
@@ -13,7 +13,6 @@ const BoardGameSchema = new Schema(
         },
         game_id: {
             type: Number,
-            unique: true,
             required: true,
         },
         game_name: {
@@ -78,7 +77,7 @@ const BoardGameSchema = new Schema(
         },
         domains: {
             type: String,
-            required: true,
+            required: false,
         },
         image: {
             type: String,
@@ -88,16 +87,12 @@ const BoardGameSchema = new Schema(
             type: String,
             required: true,
         },
-        recommend_id: {
-            type: [Number],
-            required: true,
-        },
     },
     {
         timestamps: true,
     }
 );
 
-const BoardGameModel = model("Boardgame", BoardGameSchema);
+const BoardGameModel2020 = model("BoardGame2020", BoardGame2020);
 
-export { BoardGameModel };
+export { BoardGameModel2020 };
