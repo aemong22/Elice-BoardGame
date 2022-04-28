@@ -36,24 +36,12 @@ class boardgameController {
     // 인원수 기준 검색
     // 프론트 테스트용
     // min_player <= player <= max_player
+    // 플레이어 수 범위안에 있는 보드게임 조회
     static async findByPlayer(req, res, next) {
         try {
             const player = req.params.player;
             const games = await boardGameService.findByPlayer({ player });
             res.status(200).json(games);
-        } catch (error) {
-            next(error);
-        }
-    }
-
-    // 최소 인원수 이상 조회
-    static async findByMinPlayer(req, res, next) {
-        try {
-            const player = req.params.player;
-            const gameByminPlayer = await boardGameService.minPlayerCond({
-                player,
-            });
-            res.status(200).json(gameByminPlayer);
         } catch (error) {
             next(error);
         }
