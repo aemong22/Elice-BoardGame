@@ -46,7 +46,7 @@ function App() {
         <Route path="/intro" exact element={<Intro />} />
         <Route path="/about" exact element={<About />} />
         <Route path="/boardgame" exact element={<Boardgame />} />
-        <Route path="/boardgame/:id" exact element={<BoardgameDetail />} />
+        <Route path="/boardgame/detail" exact element={<BoardgameDetail />} />
         <Route path="/register" exact element={<RegisterForm />} />
         <Route path="*" element={<Home />} />
       </Routes>
