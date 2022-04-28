@@ -15,7 +15,7 @@ import {
 
 function Profile({ ownerData, setOwnerData }) {
   const [user_name, setUser_name] = useState(ownerData.user_name);
-  const [email, setEmail] = useState(ownerData.email);
+  const email = ownerData.email;
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phone_number, setPhone_number] = useState(ownerData?.phone_number);
@@ -57,7 +57,12 @@ function Profile({ ownerData, setOwnerData }) {
 
           <SubContent>
             <SubTitle>이메일</SubTitle>
-            <StyledInput type="text" disabled={true} value={ownerData.email} />
+            <StyledInput
+              type="text"
+              required
+              disabled={true}
+              value={ownerData.email}
+            />
             <HelperText> 변경하실 수 없습니다.</HelperText>
           </SubContent>
 
@@ -97,7 +102,7 @@ function Profile({ ownerData, setOwnerData }) {
               onChange={(e) => setPhone_number(e.target.value)}
             />
           </SubContent>
-          <SubContent>
+          <SubContent style={{ textAlign: "center" }}>
             <StylesProvider injectFirst>
               <MyButton onClick={handleSubmit}>변경하기</MyButton>
             </StylesProvider>

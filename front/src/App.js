@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "./store/actions/userAction";
 import * as Api from "./api";
 
+import Profile from "./components/user/Profile";
 import Home from "./components/Home";
 import Intro from "./components/intro/Intro";
 import Boardgame from "./components/boardgame/Boardgame";
@@ -48,6 +49,7 @@ function App() {
         <Route path="/boardgame" exact element={<Boardgame />} />
         <Route path="/register" exact element={<RegisterForm />} />
         <Route path="/mypage" exact element={<Mypage />} />
+        <Route path="/profile" exact element={<Profile />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>

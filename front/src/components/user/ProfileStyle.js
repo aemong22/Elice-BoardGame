@@ -61,11 +61,18 @@ const HelperText = styled(FormHelperText)`
 `;
 
 const MyButton = styled(Button)`
-  width: 100%;
-  background-color: white;
+  width: 60%;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #d6ccc2;
   font-size: 20px;
   text-align: center;
-  padding: 5%;
+  border-radius: 30px;
+  padding: ;
+
+  :hover {
+    background-color: black;
+  }
 `;
 export {
   MyBox,
