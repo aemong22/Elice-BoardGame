@@ -11,6 +11,9 @@ boardGameRouter.get("/boardGames", boardgameController.findAllGames);
 // 20년도 최신 게임 조회
 boardGameRouter.get("/recentlyGames", boardgameController.findRecentlyGames);
 
+// 19년도 데이터 game_id 기준 조회: 상세 페이지
+boardGameRouter.get("/gameInfo/:id", boardgameController.findByGameId);
+
 // 인원수에 따른 조회
 // 프론트 테스트용
 boardGameRouter.get("/games/:player", boardgameController.findByPlayer);

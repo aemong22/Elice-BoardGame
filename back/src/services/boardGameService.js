@@ -13,6 +13,11 @@ class boardGameService {
         return boardGames;
     }
 
+    static async findByGameId({ gameId }) {
+        const games = await BoardGameModel.findOne({ game_id: gameId });
+        return games;
+    }
+
     static minPlayerCond(player) {
         const minPlayer = BoardGameModel.find({
             min_player: { $gte: player },

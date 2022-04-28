@@ -21,6 +21,17 @@ class boardgameController {
         }
     }
 
+    // game_id를 기준으로 19년도 보드게임 데이터 탐색
+    static async findByGameId(req, res, next) {
+        try {
+            const gameId = req.params.id;
+            const games = await boardGameService.findByGameId({ gameId });
+            res.status(200).json(games);
+        } catch (error) {
+            next(error);
+        }
+    }
+
     // 인원수 기준 검색
     // 프론트 테스트용
     // min_player <= player <= max_player

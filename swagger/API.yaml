@@ -203,6 +203,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BoardGame2020'
+  /gameInfo/{id}:
+    get:
+      tags:
+        - boardGame
+      summary: board game game_id 기준 조회
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          $ref : '#/components/schemas/BoardGame'
   /games/{player}:
     # 수정 필요 
     get:
