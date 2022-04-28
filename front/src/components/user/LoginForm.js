@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../../store/actions/userAction";
 import { useNavigate } from "react-router-dom";
 import { Button, Grid, TextField, Box } from "@mui/material";
+import GoogleIcon from "@mui/icons-material/Google";
 
 function LoginForm({ handleClose }) {
   const [findPW, setFindPW] = useState(false);
@@ -132,7 +133,11 @@ function LoginForm({ handleClose }) {
               </Button>
               <Box className="or">or</Box>
               <br />
-              <Box className="sns-login">sns 로그인</Box>
+              <Button className="sns-login">
+                <GoogleIcon className="google-login-icon" />
+                Google
+              </Button>
+              <br />
 
               <Button
                 variant="text"
