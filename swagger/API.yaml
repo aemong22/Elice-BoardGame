@@ -253,20 +253,6 @@ paths:
       responses:
         '200':
           $ref : '#/components/schemas/BoardGame'
-  /games/minPlayer/{player}:
-    get:
-      tags:
-        - boardGame
-      summary: min player 기준 조회 프론트 테스트용
-      parameters:
-        - name: player
-          in: path
-          required: true
-          schema:
-            type: number
-      responses:
-        '200':
-          $ref: '#/components/schemas/BoardGame'
   /games/{player}:
     # 수정 필요 
     get:
