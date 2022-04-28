@@ -25,15 +25,29 @@ class boardGameService {
         return games;
     }
 
+    // 정렬 type 설정
+    static sortType({ type }) {
+        switch (type) {
+            case "rank":
+                return rankSort;
+            case "rating":
+                return raitngSort;
+            case "userRated":
+                return userRatedSort;
+            default:
+                return null;
+        }
+    }
+
     // player 기준 범위 안 보드게임 조회
-    static async findByPlayer({ player }) {
+    static async findByPlayer({ player, type }) {
         const games = await BoardGameModel.find({
             $nor: [
                 { min_player: { $gt: player } },
                 { max_player: { $lt: player } },
             ],
             // sort안에서 랭킹순, 등등..
-        }).sort(raitngSort);
+        }).sort(this.sortType({ type }));
         return games;
     }
 
@@ -41,7 +55,7 @@ class boardGameService {
     static async findByAge({ age }) {
         const games = await BoardGameModel.find({
             min_age: { $lte: age },
-        }).sort(raitngSort);
+        }).sort(this.sortType({ type }));
         return games;
     }
 

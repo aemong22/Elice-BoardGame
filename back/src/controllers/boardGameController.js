@@ -40,7 +40,8 @@ class boardgameController {
     static async findByPlayer(req, res, next) {
         try {
             const player = req.params.num;
-            const games = await boardGameService.findByPlayer({ player });
+            const type = "rank";
+            const games = await boardGameService.findByPlayer({ player, type });
             res.status(200).json(games);
         } catch (error) {
             next(error);
