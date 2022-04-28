@@ -52,12 +52,13 @@ const SubTitle = styled(Grid)`
 
 const SubContent = styled(Grid)`
   padding: 3%;
-  height: 17%;
+  height: 15%;
 `;
 
 const HelperText = styled(FormHelperText)`
   font-size: 10px;
   color: gray;
+  padding-left: 1%;
 `;
 
 const MyButton = styled(Button)`

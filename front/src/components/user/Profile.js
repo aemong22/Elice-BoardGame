@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import * as Api from "../../api";
 import { StylesProvider } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import AWS from "aws-sdk";
+
 import {
   MyBox,
   Title,
@@ -15,6 +17,46 @@ import {
 } from "./ProfileStyle";
 
 function Profile({ ownerData, setOwnerData }) {
+  const [img, setImg] = useState(ownerData.image);
+
+  const region = "ap-northeast-2";
+  const bucket = "pinkpig-bucket";
+  AWS.config.update({
+    region: region,
+    accessKeyId: "AKIAWDTZYO4YUEOUKMEF", //process.env.S3_ACCESS_KEY_ID,
+    secretAccessKey: "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", //process.env.S3_SECRET_ACCESS_KEY,
+  });
+
+  const handleFileInput = async (e) => {
+    // input 태그를 통해 선택한 파일 객체
+    const file = e.target.files[0];
+    setImg(ownerData._id);
+
+    // img 필드에 id값 업로드
+    await Api.put(`user/${ownerData._id}`, {
+      image: ownerData._id,
+    });
+
+    const upload = new AWS.S3.ManagedUpload({
+      params: {
+        Bucket: bucket, // 버킷 이름
+        Key: ownerData._id + ".png", // 유저 아이디
+        Body: file, // 파일 객체
+      },
+    });
+
+    const promise = upload.promise();
+    promise.then(
+      function () {
+        alert("이미지 업로드에 성공했습니다.");
+        window.location.reload();
+      },
+      function (err) {
+        return console.log("오류가 발생했습니다: ", err);
+      }
+    );
+  };
+
   const [user_name, setUser_name] = useState(ownerData.user_name);
   const email = ownerData.email;
   const [password, setPassword] = useState("");
@@ -47,6 +89,20 @@ function Profile({ ownerData, setOwnerData }) {
       <MyBox>
         <Title>회원 정보 수정</Title>
         <Content>
+          <SubContent>
+            <StyledInput
+              type="file"
+              id="upload"
+              className="image-upload"
+              onChange={handleFileInput}
+            />
+            <img
+              alt=""
+              className="profile-img"
+              src={`https://pinkpig-bucket.s3.ap-northeast-2.amazonaws.com/${ownerData.image}.png`}
+              style={{ width: "10%" }}
+            />
+          </SubContent>
           <SubContent>
             <SubTitle>이름</SubTitle>
             <StyledInput
@@ -108,7 +164,9 @@ function Profile({ ownerData, setOwnerData }) {
           </SubContent>
           <SubContent style={{ textAlign: "center" }}>
             <StylesProvider injectFirst>
-              <MyButton onClick={handleSubmit}>변경하기</MyButton>
+              <MyButton type="submit" onClick={handleSubmit}>
+                변경하기
+              </MyButton>
             </StylesProvider>
           </SubContent>
         </Content>

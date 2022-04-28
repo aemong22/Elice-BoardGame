@@ -37,7 +37,13 @@ function Mypage() {
           <MyBox2>
             <Title>My Page</Title>
             <ImgGrid>
-              <Photo />
+              <Photo
+                style={{
+                  backgroundImage: `url(https://pinkpig-bucket.s3.ap-northeast-2.amazonaws.com/${ownerData.image}.png)`,
+                  backgroundSize: "100% 100%",
+                  backgroundRepeat: "no-repeat",
+                }}
+              />
             </ImgGrid>
             <Name>{ownerData.user_name}</Name>
             <Grid>

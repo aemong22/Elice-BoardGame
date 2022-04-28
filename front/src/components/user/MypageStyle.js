@@ -39,9 +39,7 @@ const ImgGrid = styled(Grid)`
 `;
 
 const Photo = styled(Grid)`
-  border: solid 4px blue;
   border-radius: 100%;
-  color: blue;
   height: 80%;
   aspect-ratio: 1 / 1;
   margin: 10%;
