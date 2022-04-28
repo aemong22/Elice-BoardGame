@@ -16,12 +16,6 @@ class boardGameService {
     static async findByCondition() {
         // const games =
     }
-
-    static async insertBoardgame({ item }) {
-        // insert data
-        const insert = await BoardGameModel.create(item);
-        return insert;
-    }
 }
 
 export { boardGameService };
