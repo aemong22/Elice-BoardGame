@@ -63,6 +63,39 @@ class boardGameService {
         }).sort(this.sortType({ type }));
         return games;
     }
+
+    // theme 기준 정렬
+    static async findByTheme({ theme, type }) {
+        const games = await BoardGameModel.find({
+            theme: { $in: [theme] },
+        }).sort(this.sortType({ type }));
+        return games;
+    }
+
+    // 시간 기준 정렬
+    static async findByTime({ time, type }) {
+        const games = await BoardGameModel.find({
+            $nor: [
+                { min_playing_time: { $gt: time } },
+                { max_playing_time: { $lt: time } },
+            ],
+        }).sort(this.sortType({ type }));
+
+        if (games.length === 0) {
+            return new Error("조회된 데이터가 없습니다.");
+        }
+        return games;
+    }
+
+    static async findByComplexity({ complexity, type }) {
+        const games = await BoardGameModel.find({
+            complexity_average: {
+                $gte: Math.floor(complexity),
+                $lte: Math.floor(complexity) + 1,
+            },
+        }).sort(this.sortType({ type }));
+        return games;
+    }
 }
 
 export { boardGameService };

@@ -35,7 +35,6 @@ class boardgameController {
     // --------- 보드게임 조건에 따른 조회 -----------
 
     // 인원수 기준 검색
-    // min_player <= player <= max_player
     // 플레이어 수 범위안에 있는 보드게임 조회
 
     static async findCondition(req, res, next) {
@@ -44,20 +43,29 @@ class boardgameController {
 
         if (player !== "") {
             // 인원수에 따른 조회
-            games = await boardGameService.findByPlayer({ player, type });
+            games = await boardGameService.findByPlayer({
+                player: parseInt(player),
+                type,
+            });
         } else if (age !== "") {
             // 연령에 따른 조회
-            games = await boardGameService.findByAge({ age, type });
+            games = await boardGameService.findByAge({
+                age: parseInt(age),
+                type,
+            });
         } else if (theme !== "") {
             // 테마에 따른 조회
-            const games = await boardGameService.findByPlayer({ theme, type });
+            games = await boardGameService.findByTheme({ theme, type });
         } else if (time !== "") {
             // 게임 시간에 따른 조회
-            const games = await boardGameService.findByPlayer({ time, type });
+            games = await boardGameService.findByTime({
+                time: parseInt(time),
+                type,
+            });
         } else if (complexity !== "") {
             // 난이도에 따른 조회
-            const games = await boardGameService.findByPlayer({
-                complexity,
+            games = await boardGameService.findByComplexity({
+                complexity: parseFloat(complexity),
                 type,
             });
         }

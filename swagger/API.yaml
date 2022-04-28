@@ -265,9 +265,9 @@ paths:
               type: object
               properties:
                 player:
-                  type: number
+                  type: string
                 age:
-                  type: number
+                  type: string
                 theme:
                   type: string
                 time:
