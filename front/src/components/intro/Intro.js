@@ -25,13 +25,7 @@ const Intro = () => {
                     <span id="sub_title">
                         다양한 보드게임을 추천받고 원하는 게임을 선택해보세요!
                     </span>
-                    <a
-                        href="https://accounts.google.com/o/oauth2/v2/auth?
-scope=https://www.googleapis.com/auth/analytics.readonly&
-access_type=offline&
-include_granted_scopes=true&state=state_parameter_passthrough_value&
-redirect_uri=http://localhost:5001/oauth/google&response_type=code&client_id=74651602496-cli9c5rhrpb72fs07gvsramgr43dlu4o.apps.googleusercontent.com"
-                    >
+                    <a href="https://accounts.google.com/o/oauth2/auth?client_id=74651602496-cli9c5rhrpb72fs07gvsramgr43dlu4o.apps.googleusercontent.com&redirect_uri=http://localhost:3000/oauth&response_type=token&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile">
                         OAuth
                     </a>
                 </div>
