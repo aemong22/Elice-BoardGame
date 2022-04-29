@@ -91,7 +91,7 @@ class userController {
         throw new Error(resetPassword.errorMessage);
       }
       */
-
+      const user = await userAuthService.getUserInfoByEmail({ email });
       let transporter = nodemailer.createTransport({
         service: "gmail",
         host: "smtp.gmail.com",
@@ -108,7 +108,7 @@ class userController {
         from: `"nuri" <${process.env.NODEMAILER_USER}>`,
         to: email,
         subject: "비밀번호 변경입니다",
-        html: `<b>변경된 비밀번호 입니다.<br/>http://localhost:3000/pwlink/${email}</b>`,
+        html: `<b><a href="http://localhost:3000/pwlink/${user._id}">비밀번호 변경!</a></b>`,
       });
 
       console.log("Message sent: %s", info.messageId);
@@ -147,6 +147,7 @@ class userController {
   static async setUserInfo(req, res, next) {
     try {
       const _id = req.params.id;
+      console.log("here");
 
       const toUpdate = { ...req.body };
 
