@@ -4,13 +4,14 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "./store/actions/userAction";
 import * as Api from "./api";
 
-import Profile from "./components/user/Profile";
+import PwLink from "./components/user/PwLink";
+import Profile from "./components/mypage/Profile";
 import Home from "./components/Home";
 import Intro from "./components/intro/Intro";
 import Boardgame from "./components/boardgame/Boardgame";
 import About from "./components/about/About";
 import RegisterForm from "./components/user/RegisterForm";
-import Mypage from "./components/user/Mypage";
+import Mypage from "./components/mypage/Mypage";
 
 function App() {
   // 유저 로그인 상태 관련 코드 추가하기
@@ -50,6 +51,7 @@ function App() {
         <Route path="/register" exact element={<RegisterForm />} />
         <Route path="/mypage" exact element={<Mypage />} />
         <Route path="/profile" exact element={<Profile />} />
+        <Route path="/pwlink/:userId" exact element={<PwLink />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>

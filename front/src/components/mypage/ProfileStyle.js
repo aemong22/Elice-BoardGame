@@ -16,6 +16,8 @@ const MyBox = styled(Box)`
   width: 70%;
   height: 100%;
   float: right;
+
+  overflow-y: scroll;
 `;
 
 const Title = styled(Grid)`

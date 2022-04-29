@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import * as Api from "../../api";
 
 import Header from "../Header";

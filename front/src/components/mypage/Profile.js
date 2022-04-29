@@ -15,7 +15,6 @@ import {
   HelperText,
   MyButton,
 } from "./ProfileStyle";
-import { blue } from "@mui/material/colors";
 
 function Profile({ ownerData, setOwnerData }) {
   const [img, setImg] = useState(ownerData.image);
@@ -36,7 +35,7 @@ function Profile({ ownerData, setOwnerData }) {
 
     // img 필드에 id값 업로드
     await Api.put(`user/${ownerData._id}`, {
-      image: ownerData._id,
+      image: img,
     });
 
     const upload = new AWS.S3.ManagedUpload({
@@ -89,7 +88,7 @@ function Profile({ ownerData, setOwnerData }) {
   return (
     <>
       <MyBox>
-        <Title>회원 정보 수정</Title>
+        <Title>Edit your profile</Title>
         <form onSubmit={handleSubmit} style={{ height: "100%" }}>
           <Content>
             <SubTitle>프로필 사진 변경하기</SubTitle>
