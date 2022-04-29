@@ -13,11 +13,11 @@ function Boardgame() {
     const [player, setPlayer] = useState([]);
     const [category, setCategory] = useState([]);
 
-    useEffect(() => {
-        // test
-        console.log(player);
-        console.log(category);
-      }, [player, category]);
+    // useEffect(() => {
+    //     // test
+    //     console.log(player);
+    //     console.log(category);
+    //   }, [player, category]);
 
     return (
         <>

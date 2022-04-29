@@ -11,15 +11,15 @@ function BoardgameData({ player, category }) {
     const offset = (page - 1) * limit;
 
     // 보드게임 전체 데이터 불러오기
-    // useEffect(() => {
-    //     try {
-    //         Api.get("boardGames").then((res) => {
-    //             setBoardgames(res.data);
-    //         })
-    //     } catch (err) {
-    //         console.log("errer message: ", err)
-    //     }
-    // }, []);
+    useEffect(() => {
+        try {
+            Api.get("recentlyGames").then((res) => {
+                setBoardgames(res.data);
+            })
+        } catch (err) {
+            console.log("errer message: ", err)
+        }
+    }, []);
 
 
     /*
@@ -66,15 +66,15 @@ useEffect(()=>{
 
 
     // 보드게임 플레이어 수로 데이터 불러오기
-    useEffect(() => {
-        try {
-            Api.get("games", player[0]).then((res) => {
-                setBoardgames(res.data);
-            })
-        } catch (err) {
-            console.log("errer message: ", err)
-        }
-    }, [player]);
+    // useEffect(() => {
+    //     try {
+    //         Api.get("games", player[0]).then((res) => {
+    //             setBoardgames(res.data);
+    //         })
+    //     } catch (err) {
+    //         console.log("errer message: ", err)
+    //     }
+    // }, [player]);
 
     const boardgameList = boardgames.map((boardgame) => (
         <BoardgameCard
