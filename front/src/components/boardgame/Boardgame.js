@@ -39,6 +39,8 @@ function Boardgame() {
                 <BoardgameCategory 
                     condition={condition}
                     setCondition={setCondition}
+                    open={open}
+                    setOpen={setOpen}
                 />
             </div>
         </>
