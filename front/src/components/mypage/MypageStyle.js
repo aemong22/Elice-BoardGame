@@ -1,11 +1,12 @@
 import { Grid, Box } from "@mui/material";
 import Button from "@material-ui/core/Button";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 const MyBox = styled(Box)`
   border: solid 1px #d6ccc2;
   border-radius: 30px;
   border-shadow: 0 2px 3px 0;
+  position: relative;
   height: 80vh;
   margin: 5vh;
   paddin: 0;

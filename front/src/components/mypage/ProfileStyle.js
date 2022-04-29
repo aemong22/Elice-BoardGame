@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 
 import Button from "@material-ui/core/Button";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 const MyBox = styled(Box)`
   border-radius: 0 30px 30px 0;
@@ -16,7 +16,6 @@ const MyBox = styled(Box)`
   width: 70%;
   height: 100%;
   float: right;
-
   overflow-y: scroll;
 `;
 
@@ -53,7 +52,8 @@ const SubTitle = styled(Grid)`
 
 const SubContent = styled(Grid)`
   padding: 1%;
-  height: 17%;
+  height: auto;
+  margin-bottom: 16px;
 `;
 
 const HelperText = styled(FormHelperText)`

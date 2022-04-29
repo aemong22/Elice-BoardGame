@@ -17,6 +17,7 @@ import {
 } from "./ProfileStyle";
 
 function Profile({ ownerData, setOwnerData }) {
+  //이미지 넣는 코드
   const [img, setImg] = useState(ownerData.image);
 
   const region = "ap-northeast-2";
@@ -58,12 +59,12 @@ function Profile({ ownerData, setOwnerData }) {
     );
   };
 
+  //회원정보 변경 코드
   const [user_name, setUser_name] = useState(ownerData.user_name);
   const email = ownerData.email;
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phone_number, setPhone_number] = useState(ownerData?.phone_number);
-
   const isPasswordValid = password.length >= 4;
   const isPasswordSame = password === confirmPassword;
 
@@ -79,8 +80,10 @@ function Profile({ ownerData, setOwnerData }) {
       phone_number,
     });
     const updateUser = res.data;
-    setUser_name(updateUser);
+    setOwnerData(updateUser);
     console.log(updateUser);
+    setPassword("");
+    setConfirmPassword("");
 
     alert("정보를 수정했습니다.");
   };
@@ -126,6 +129,7 @@ function Profile({ ownerData, setOwnerData }) {
               <SubTitle>비밀번호</SubTitle>
               <StyledInput
                 type="text"
+                value={password}
                 required
                 placeholder="비밀번호 변경"
                 onChange={(e) => setPassword(e.target.value)}
@@ -140,6 +144,7 @@ function Profile({ ownerData, setOwnerData }) {
               <StyledInput
                 type="text"
                 required
+                value={confirmPassword}
                 placeholder="비밀번호 확인"
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />

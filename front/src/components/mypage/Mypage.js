@@ -18,7 +18,7 @@ import {
 
 function Mypage() {
   const [Modify, setModify] = useState(true);
-  const [ownerData, setOwnerData] = useState([]);
+  const [ownerData, setOwnerData] = useState(undefined);
 
   const fetchPorfolioOwner = async () => {
     const res = await Api.get("currentUser");
@@ -40,13 +40,13 @@ function Mypage() {
             <ImgGrid>
               <Photo
                 style={{
-                  backgroundImage: `url(https://pinkpig-bucket.s3.ap-northeast-2.amazonaws.com/${ownerData.image}.png)`,
+                  backgroundImage: `url(https://pinkpig-bucket.s3.ap-northeast-2.amazonaws.com/${ownerData?.image}.png)`,
                   backgroundSize: "100% 100%",
                   backgroundRepeat: "no-repeat",
                 }}
               />
             </ImgGrid>
-            <Name>{ownerData.user_name}</Name>
+            <Name>{ownerData?.user_name}</Name>
             <Grid>
               <StylesProvider injectFirst>
                 <MyButton onClick={() => setModify(true)}>profile</MyButton>
@@ -56,9 +56,11 @@ function Mypage() {
               </StylesProvider>
             </Grid>
           </MyBox2>
-          {Modify ? (
-            <Profile ownerData={ownerData} setOwnerData={setOwnerData} />
-          ) : null}
+          {Modify
+            ? ownerData && (
+                <Profile ownerData={ownerData} setOwnerData={setOwnerData} />
+              )
+            : null}
         </MyBox>
       </Container>
     </>
