@@ -21,6 +21,7 @@ function Member() {
   return (
     <div className="member-container">
       <div className="member-background">
+        <div className="member-sizer"></div>
         <div className="member-1st-floor">
           <HtmlTooltip
             title={
