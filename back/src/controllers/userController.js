@@ -1,6 +1,7 @@
 import { userAuthService } from "../services/userService";
 import is from "@sindresorhus/is";
 import nodemailer from "nodemailer";
+import axios from "axios";
 
 class userController {
   static async userRegister(req, res, next) {
@@ -168,6 +169,21 @@ class userController {
 
   static async refreshToken(req, res, next) {
     // refresh 함수를 쪼개면 여기서 처리할게 있을수도 있음
+  }
+
+  static async googleLogin(req, res, next) {
+    try {
+      const { accessToken } = req.body;
+      const { data } = await axios.get(
+        `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${accessToken}`
+      );
+
+      const user = await userAuthService.findOrCreate({ data });
+
+      res.status(200).json(user);
+    } catch (error) {
+      next(error);
+    }
   }
 }
 

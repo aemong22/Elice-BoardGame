@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext, useReducer } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser } from "./store/actions/userAction";
@@ -52,8 +52,8 @@ function App() {
         <Route path="/register" exact element={<RegisterForm />} />
         <Route path="/mypage" exact element={<Mypage />} />
         <Route path="/profile" exact element={<Profile />} />
+        <Route path="/oauth" exact element={<GoogleLoading />} />
         <Route path="/pwlink/:userId" exact element={<PwLink />} />
-        <Route path="/test" element={<GoogleLoading />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>
