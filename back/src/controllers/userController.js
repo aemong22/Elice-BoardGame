@@ -171,16 +171,18 @@ class userController {
     }
 
     static async googleLogin(req, res, next) {
-        console.log("googleLogin");
-        const { accessToken } = req.body;
-        console.log(accessToken);
-        const { data } = await axios.get(
-            `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${accessToken}`
-        );
+        try {
+            const { accessToken } = req.body;
+            const { data } = await axios.get(
+                `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${accessToken}`
+            );
 
-        const user = await userAuthService.findOrCreate({ data });
+            const user = await userAuthService.findOrCreate({ data });
 
-        res.status(200).json(user);
+            res.status(200).json(user);
+        } catch (error) {
+            next(error);
+        }
     }
 }
 
