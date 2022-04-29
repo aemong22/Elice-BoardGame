@@ -21,6 +21,8 @@ userAuthRouter.put("/user/:id", authJWT, userController.setUserInfo);
 
 userAuthRouter.get("/currentUser", authJWT, userController.getCurrentUser);
 
+userAuthRouter.post("/oauth/google", userController.googleLogin);
+
 //비밀번호 찾기 API
 userAuthRouter.post("/user/reset_password", userController.findPassword);
 
