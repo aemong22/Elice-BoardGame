@@ -253,23 +253,32 @@ paths:
       responses:
         '200':
           $ref : '#/components/schemas/BoardGame'
-  /games/{player}:
-    # 수정 필요 
-    get:
+  /games/condition:
+    post:
       tags:
         - boardGame
-      summary: player 수로 보드게임 조회(공사중)
-      parameters:
-        - name: player
-          in: path
-          required: true
-          schema:
-            type: number
+      summary: condition 조회 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                player:
+                  type: string
+                age:
+                  type: string
+                theme:
+                  type: string
+                time:
+                  type: string
+                complexity:
+                  type: string
+                type:
+                  type: string
       responses:
         '200':
           $ref: '#/components/schemas/BoardGame'
-        '400':
-          description: access token이 유효하지 않습니다.
 components:
   securitySchemes:
     bearerAuth:
