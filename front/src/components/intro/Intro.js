@@ -27,9 +27,12 @@ const Intro = () => {
                     </span>
                 </div>
                 <div>
-                    <RegisterBtn handleOpen={handleOpen} />
+                    <RegisterBtn open={open} handleOpen={handleOpen} />
                     <Modal open={open}>
-                        <LoginForm handleClose={handleClose} />
+                        <LoginForm
+                            setOpen={setOpen}
+                            handleClose={handleClose}
+                        />
                     </Modal>
                 </div>
             </div>
