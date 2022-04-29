@@ -48,7 +48,9 @@ class boardGameService {
                 { max_player: { $lt: player } },
             ],
             // sort안에서 랭킹순, 등등..
-        }).sort(this.sortType({ type }));
+        })
+            .sort(this.sortType({ type }))
+            .limit(10);
 
         if (games.length === 0) {
             return new Error("조회된 데이터가 없습니다.");
