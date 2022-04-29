@@ -1,7 +1,11 @@
 import "./Intro.css";
 import RegisterBtn from "./RegisterBtn";
 import LoginForm from "../user/LoginForm";
+<<<<<<< HEAD
 import { Button, Dialog, Modal } from "@mui/material";
+=======
+import { Modal } from "@mui/material";
+>>>>>>> 240eeb3e1ece6329482f311de0e8fa18f6142870
 import { useState } from "react";
 
 const Intro = () => {
@@ -27,10 +31,10 @@ const Intro = () => {
           </span>
         </div>
         <div>
-          <RegisterBtn handleOpen={handleOpen} />
-          <Dialog open={open}>
-            <LoginForm handleClose={handleClose} />
-          </Dialog>
+          <RegisterBtn open={open} handleOpen={handleOpen} />
+          <Modal open={open}>
+            <LoginForm setOpen={setOpen} handleClose={handleClose} />
+          </Modal>
         </div>
       </div>
     </div>
