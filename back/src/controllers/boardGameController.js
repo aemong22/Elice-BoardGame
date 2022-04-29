@@ -49,6 +49,7 @@ class boardgameController {
             });
         } else if (age !== "") {
             // 연령에 따른 조회
+            // 인원수 5명 이상은 그냥 다 조회하기
             games = await boardGameService.findByAge({
                 age: parseInt(age),
                 type,
