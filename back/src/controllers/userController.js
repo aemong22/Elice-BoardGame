@@ -77,7 +77,7 @@ class userController {
     try {
       const email = req.body.email;
 
-      const generatedAuthNumber = Math.floor(Math.random() * 10 ** 8)
+      /*const generatedAuthNumber = Math.floor(Math.random() * 10 ** 8)
         .toString()
         .padStart(8, "0");
 
@@ -90,6 +90,7 @@ class userController {
       if (resetPassword.errorMessage) {
         throw new Error(resetPassword.errorMessage);
       }
+      */
 
       let transporter = nodemailer.createTransport({
         service: "gmail",
@@ -97,8 +98,8 @@ class userController {
         port: 587,
         secure: false,
         auth: {
-          user: `${config.NODEMAILER_USER}`,
-          pass: `${config.NODEMAILER_PASS}`,
+          user: `${process.env.NODEMAILER_USER}`,
+          pass: `${process.env.NODEMAILER_PASS}`,
         },
       });
 
@@ -107,8 +108,7 @@ class userController {
         from: `"nuri" <${process.env.NODEMAILER_USER}>`,
         to: email,
         subject: "비밀번호 변경입니다",
-        text: generatedAuthNumber,
-        html: `<b>변경된 비밀번호 입니다.<br/>${generatedAuthNumber}</b>`,
+        html: `<b>변경된 비밀번호 입니다.<br/>http://localhost:3000/pwlink/${email}</b>`,
       });
 
       console.log("Message sent: %s", info.messageId);
