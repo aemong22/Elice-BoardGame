@@ -84,7 +84,18 @@ class userAuthService {
     }
 
     static async getUserInfo({ _id }) {
-        const user = await await UserModel.findOne({ _id });
+        const user = await UserModel.findOne({ _id });
+
+        if (!user) {
+            const errorMessage = "해당 메일은 가입 내역이 없습니다.";
+            return { errorMessage };
+        }
+        return user;
+    }
+
+    //email로 회원정보 찾기
+    static async getUserInfoByEmail({ email }) {
+        const user = await UserModel.findOne({ email });
 
         if (!user) {
             const errorMessage = "해당 메일은 가입 내역이 없습니다.";

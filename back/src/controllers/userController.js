@@ -77,19 +77,20 @@ class userController {
         try {
             const email = req.body.email;
 
-            const generatedAuthNumber = Math.floor(Math.random() * 10 ** 8)
-                .toString()
-                .padStart(8, "0");
+            // const generatedAuthNumber = Math.floor(Math.random() * 10 ** 8)
+            //     .toString()
+            //     .padStart(8, "0");
 
-            const toUpdate = { password: generatedAuthNumber };
-            const resetPassword = await userAuthService.setPassword({
-                email,
-                toUpdate,
-            });
+            // const toUpdate = { password: generatedAuthNumber };
+            // const resetPassword = await userAuthService.setPassword({
+            //     email,
+            //     toUpdate,
+            // });
 
-            if (resetPassword.errorMessage) {
-                throw new Error(resetPassword.errorMessage);
-            }
+            // if (resetPassword.errorMessage) {
+            //     throw new Error(resetPassword.errorMessage);
+            // }
+            const user = await userAuthService.getUserInfoByEmail({ email });
 
             let transporter = nodemailer.createTransport({
                 service: "gmail",
@@ -97,8 +98,8 @@ class userController {
                 port: 587,
                 secure: false,
                 auth: {
-                    user: `${config.NODEMAILER_USER}`,
-                    pass: `${config.NODEMAILER_PASS}`,
+                    user: `${process.env.NODEMAILER_USER}`,
+                    pass: `${process.env.NODEMAILER_PASS}`,
                 },
             });
 
@@ -106,9 +107,9 @@ class userController {
             let info = await transporter.sendMail({
                 from: `"nuri" <${process.env.NODEMAILER_USER}>`,
                 to: email,
-                subject: "비밀번호 변경입니다",
-                text: generatedAuthNumber,
-                html: `<b>변경된 비밀번호 입니다.<br/>${generatedAuthNumber}</b>`,
+                subject: "비밀번호 변경 링크입니다",
+                text: "아래 링크를 타고 비밀번호를 변경해주세요!",
+                html: `<b><a href="http://localhost:3000/pwlink/${user._id}">비밀번호 변경!</a></b>`,
             });
 
             console.log("Message sent: %s", info.messageId);
