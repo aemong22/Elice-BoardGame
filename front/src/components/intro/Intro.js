@@ -31,25 +31,13 @@ const Intro = () => {
                 </div>
                 <div>
                     <RegisterBtn handleOpen={handleOpen} />
-                    <Dialog open={open}>
+                    <Modal open={open}>
                         <LoginForm handleClose={handleClose} />
-                    </Dialog>
+                    </Modal>
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
     );
-=======
-        <div>
-          <RegisterBtn open={open} handleOpen={handleOpen} />
-          <Modal open={open}>
-            <LoginForm setOpen={setOpen} handleClose={handleClose} />
-          </Modal>
-        </div>
-      </div>
-    </div>
-  );
->>>>>>> 66be1fb72f4fe6ce6ed75bbaee38df8f52734309
 };
 
 export default Intro;
