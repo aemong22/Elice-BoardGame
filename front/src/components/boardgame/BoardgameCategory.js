@@ -15,10 +15,6 @@ function BoardgameCategory({ player, setPlayer }) {
         setPlayer(player.filter((el) => el !== id));
       }
     };
-
-    useEffect(() => {
-      console.log(player);
-    }, [player]);
   
     return (
       <>
@@ -65,6 +61,17 @@ function BoardgameCategory({ player, setPlayer }) {
                   checked={player.includes('4') ? true : false}
                 />
                 <ListItemText primary="4" />
+              </ListItemButton>
+              <ListItemButton sx={{ height: '40px' }}>
+                <input 
+                  id='5'
+                  type="checkbox" 
+                  onChange={(e)=>{
+                    changeHandler(e.currentTarget.checked, '5')
+                  }}
+                  checked={player.includes('5') ? true : false}
+                />
+                <ListItemText primary="5" />
               </ListItemButton>
             </List>
           </Collapse>
