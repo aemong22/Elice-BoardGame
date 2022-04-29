@@ -6,36 +6,37 @@ import * as Api from "./api";
 
 import PwLink from "./components/user/PwLink";
 import Profile from "./components/mypage/Profile";
-import Home from "./components/Home";
+import Home from "./components/home/Home";
 import Intro from "./components/intro/Intro";
 import Boardgame from "./components/boardgame/Boardgame";
 import About from "./components/about/About";
 import RegisterForm from "./components/user/RegisterForm";
 import Mypage from "./components/mypage/Mypage";
+import GoogleLoading from "./components/user/GoogleLoading";
 
 function App() {
   // 유저 로그인 상태 관련 코드 추가하기
   const dispatch = useDispatch();
   const [isFetchCompleted, setIsFetchCompleted] = useState(false);
-  const fetchCurrentUser = async () => {
-    try {
-      // 이전에 발급받은 토큰이 있다면, 이를 가지고 유저 정보를 받아옴.
-      const res = await Api.get("currentUser");
-      const currentUser = res.data;
-
-      // userDispatch 함수를 통해 로그인 성공 상태로 만듦.
-      dispatch(loginUser(currentUser));
-
-      console.log("%c sessionStorage에 토큰 있음.", "color: #d93d1a;");
-    } catch {
-      console.log("%c SessionStorage에 토큰 없음.", "color: #d93d1a;");
-    }
-    setIsFetchCompleted(true);
-  };
 
   useEffect(() => {
+    const fetchCurrentUser = async () => {
+      try {
+        // 이전에 발급받은 토큰이 있다면, 이를 가지고 유저 정보를 받아옴.
+        const res = await Api.get("currentUser");
+        const currentUser = res.data;
+
+        // userDispatch 함수를 통해 로그인 성공 상태로 만듦.
+        dispatch(loginUser(currentUser));
+
+        console.log("%c sessionStorage에 토큰 있음.", "color: #d93d1a;");
+      } catch {
+        console.log("%c SessionStorage에 토큰 없음.", "color: #d93d1a;");
+      }
+      setIsFetchCompleted(true);
+    };
     fetchCurrentUser();
-  }, []);
+  }, [dispatch]);
 
   if (!isFetchCompleted) {
     return <div>로딩중...</div>;
@@ -52,6 +53,7 @@ function App() {
         <Route path="/mypage" exact element={<Mypage />} />
         <Route path="/profile" exact element={<Profile />} />
         <Route path="/pwlink/:userId" exact element={<PwLink />} />
+        <Route path="/test" element={<GoogleLoading />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>

@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../../store/actions/userAction";
 import { useNavigate } from "react-router-dom";
 import { Button, Grid, TextField, Box } from "@mui/material";
+import OAuthBtn from "./OAuthBtn";
 
 function LoginForm({ handleClose }) {
   const [findPW, setFindPW] = useState(false);
@@ -132,7 +133,8 @@ function LoginForm({ handleClose }) {
               </Button>
               <Box className="or">or</Box>
               <br />
-              <Box className="sns-login">sns 로그인</Box>
+              <OAuthBtn />
+              <br />
 
               <Button
                 variant="text"

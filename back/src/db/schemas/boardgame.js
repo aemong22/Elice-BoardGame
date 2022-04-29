@@ -13,6 +13,7 @@ const BoardGameSchema = new Schema(
         },
         game_id: {
             type: Number,
+            unique: true,
             required: true,
         },
         game_name: {
@@ -97,6 +98,6 @@ const BoardGameSchema = new Schema(
     }
 );
 
-const BoardGameModel = model("Boardame", BoardGameSchema);
+const BoardGameModel = model("Boardgame", BoardGameSchema);
 
 export { BoardGameModel };
