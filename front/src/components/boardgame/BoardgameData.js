@@ -37,6 +37,7 @@ function BoardgameData({ condition }) {
     const boardgameList = boardgames.map((boardgame) => (
         <BoardgameCard
             key={boardgame.game_id}
+            id={boardgame.game_id}
             name={boardgame.game_name}
             min_player={boardgame.min_player}
             max_player={boardgame.max_player}

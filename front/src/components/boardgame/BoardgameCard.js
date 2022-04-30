@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -9,15 +10,16 @@ import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Button from '@mui/material/Button';
 
-function BoardgameCard({ name, min_player, max_player, domains, image }) {
-
+function BoardgameCard({ id, name, min_player, max_player, domains, image }) {
+  const navigate = useNavigate();
+  
   const maxLength = 13;
   const boardgameName = name.length > maxLength ? name.substr(0, maxLength) + '...' : name;
   const domainList = (domains === '' ? ['nothing'] : domains.split(','));
   
   return (
     <Card sx={{ width: 250, maxWidth: 270, my: 10 }}>
-      <CardActionArea>
+      <CardActionArea onClick={() => navigate(`/boardgame/detail/:${id}`)}>
         <CardMedia
           component="img"
           height="240"

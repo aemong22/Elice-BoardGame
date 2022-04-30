@@ -47,7 +47,7 @@ function App() {
         <Route path="/intro" exact element={<Intro />} />
         <Route path="/about" exact element={<About />} />
         <Route path="/boardgame" exact element={<Boardgame />} />
-        <Route path="/boardgame/detail" exact element={<BoardgameDetail />} />
+        <Route path="/boardgame/detail/:id" exact element={<BoardgameDetail />} />
         <Route path="/register" exact element={<RegisterForm />} />
         <Route path="/oauth" exact element={<GoogleLoading />} />
         <Route path="*" element={<Home />} />
