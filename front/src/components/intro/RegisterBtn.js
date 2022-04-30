@@ -77,7 +77,9 @@ const RegisterBtn = ({ open, handleOpen }) => {
             handleOpen();
           }}
         />
-    );
+      }
+    />
+  );
 };
 
 export default RegisterBtn;
