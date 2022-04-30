@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import { sign, refresh } from "../utils/jwt-utils";
 import { UserModel } from "../db/schemas/user";
 import { TokenModel } from "../db/schemas/token";
+import { createClient } from "redis";
 
 class userAuthService {
     // 유저 정보 추가하기
@@ -94,7 +95,20 @@ class userAuthService {
     }
 
     //비밀번호 찾기 후 변경
-    static async setPassword({ email, toUpdate }) {
+    static async setPassword({ resetToken, toUpdate }) {
+        const client = createClient();
+
+        client.on("error", (err) => console.log("Redis Client Error", err));
+
+        await client.connect();
+        const email = await client.get(resetToken);
+
+        if (!email) {
+            const errorMessage =
+                "유효 토큰이 없습니다. 다시 한 번 비밀번호 찾기를 진행해주세요.";
+            return { errorMessage };
+        }
+
         // 우선 해당 id 의 유저가 db에 존재하는지 여부 확인
         let user = await UserModel.findOne({ email });
 
@@ -178,6 +192,31 @@ class userAuthService {
 
         const userinfo = await this.getSingleUser({ email, password });
         return userinfo;
+    }
+
+    //redis 토큰 생성
+    static async redisToken({ email }) {
+        const user = await UserModel.findOne({ email });
+
+        if (!user) {
+            const errorMessage =
+                "해당 이메일은 존재하지 않습니다. 다시 한 번 확인해주세요.";
+            return { errorMessage };
+        }
+
+        const client = createClient();
+
+        client.on("error", (err) => console.log("Redis Client Error", err));
+
+        await client.connect();
+        const token = sign(email);
+
+        await client.set(token, email);
+        console.log(client.get(token));
+
+        client.expire(token, 300);
+
+        return token;
     }
 }
 
