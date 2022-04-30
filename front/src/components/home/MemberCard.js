@@ -5,11 +5,11 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 
-function MemberCard() {
+function MemberCard({ name, position, quote }) {
   return (
     <Card
       sx={{
-        maxWidth: 320,
+        maxWidth: 350,
         borderRadius: "15px",
         bgcolor: "#F4F2EF",
       }}
@@ -28,13 +28,13 @@ function MemberCard() {
           G
         </Avatar>
         <Typography variant="h5" color="text.secondary">
-          송가람
+          {name}
         </Typography>
-        <Typography sx={{ mb: "20px" }} variant="h6" color="text.secondary">
-          프론트엔드
+        <Typography sx={{ mb: "15px" }} variant="h6" color="text.secondary">
+          {position}
         </Typography>
         <Typography variant="body1" color="text.secondary">
-          한마디 : 리액트 정신 안차리지
+          한마디 : {quote}
         </Typography>
       </CardContent>
     </Card>
