@@ -38,7 +38,9 @@ function BoardgameCard({ name, min_player, max_player, domains, image }) {
           </div>
           <div style={{ height: 100, alignItems: 'start' }}>
             <Button variant="outlined" disabled sx={{ fontSize: '0.5rem', borderRadius: '100px', m: '2px' }}>
-              {min_player}~{max_player}인용
+              { min_player === max_player ? 
+                <span>{max_player}인용</span> : <span>{min_player}~{max_player}인용</span>
+              }
             </Button>
             {domainList[0] === '' ? null 
               : domainList.map((domain) => (
