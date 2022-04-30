@@ -48,9 +48,7 @@ class boardGameService {
                 { max_player: { $lt: player } },
             ],
             // sort안에서 랭킹순, 등등..
-        })
-            .sort(this.sortType({ type }))
-            .limit(10);
+        }).sort(this.sortType({ type }));
 
         if (games.length === 0) {
             return new Error("조회된 데이터가 없습니다.");
@@ -59,7 +57,7 @@ class boardGameService {
     }
 
     // 연령별 기준 보드게임 조회
-    static async findByAge({ age }) {
+    static async findByAge({ age, type }) {
         const games = await BoardGameModel.find({
             min_age: { $lte: age },
         }).sort(this.sortType({ type }));
