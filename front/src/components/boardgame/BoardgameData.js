@@ -45,7 +45,7 @@ function BoardgameData({ condition }) {
         />
     ));
 
-    console.log(boardgameList);
+    // console.log(boardgameList);
 
     return (
         <>

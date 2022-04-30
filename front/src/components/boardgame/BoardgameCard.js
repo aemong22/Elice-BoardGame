@@ -36,8 +36,7 @@ function BoardgameCard({ name, min_player, max_player, domains, image }) {
               </IconButton>
             </CardActions>
           </div>
-          <Typography component="div" sx={{ width: 100, height: 0 }}></Typography>
-          <div>
+          <div style={{ height: 100, alignItems: 'start' }}>
             <Button variant="outlined" disabled sx={{ fontSize: '0.5rem', borderRadius: '100px', m: '2px' }}>
               {min_player}~{max_player}인용
             </Button>
