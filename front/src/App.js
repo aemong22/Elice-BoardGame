@@ -53,7 +53,7 @@ function App() {
         <Route path="/mypage" exact element={<Mypage />} />
         <Route path="/profile" exact element={<Profile />} />
         <Route path="/oauth" exact element={<GoogleLoading />} />
-        <Route path="/pwlink/:userId" exact element={<PwLink />} />
+        <Route path="/pwlink/:rtoken" exact element={<PwLink />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>

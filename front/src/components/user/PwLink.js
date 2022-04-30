@@ -3,22 +3,18 @@ import { useParams } from "react-router-dom";
 import * as Api from "../../api";
 
 function PwLink() {
-  const { userId } = useParams();
+  const { rtoken } = useParams();
   const [pw, setPw] = useState("");
-  console.log(userId);
+  console.log(rtoken);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const reset = await Api.put(`user/${userId}`, {
+      const reset = await Api.post(`user/reset_password`, {
+        resetToken: rtoken,
         password: pw,
       });
-      if (reset.data.status === "Success") {
-        alert("비밀번호 변경 성공");
-        // 로그인 페이지로 이동함.
-      } else {
-        alert("비밀번호 변경 실패");
-      }
+      alert("비밀번호 변경 성공");
     } catch (err) {
       alert("비밀번호 변경 실패");
       console.log("실패이유", err);

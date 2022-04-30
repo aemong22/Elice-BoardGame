@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import { sign, refresh } from "../utils/jwt-utils";
 import { UserModel } from "../db/schemas/user";
 import { TokenModel } from "../db/schemas/token";
+import { createClient } from "redis";
 
 class userAuthService {
   // 유저 정보 추가하기
@@ -93,18 +94,21 @@ class userAuthService {
     return user;
   }
 
-  static async getUserInfoByEmail({ email }) {
-    const user = await UserModel.findOne({ email });
+  //비밀번호 찾기 후 변경
+  static async setPassword({ resetToken, toUpdate }) {
+    const client = createClient();
 
-    if (!user) {
-      const errorMessage = "해당 메일은 가입 내역이 없습니다.";
+    client.on("error", (err) => console.log("Redis Client Error", err));
+
+    await client.connect();
+    const email = await client.get(resetToken);
+
+    if (!email) {
+      const errorMessage =
+        "유효 토큰이 없습니다. 다시 한 번 비밀번호 찾기를 진행해주세요.";
       return { errorMessage };
     }
-    return user;
-  }
 
-  //비밀번호 찾기 후 변경
-  static async setPassword({ email, toUpdate }) {
     // 우선 해당 id 의 유저가 db에 존재하는지 여부 확인
     let user = await UserModel.findOne({ email });
 
@@ -132,7 +136,7 @@ class userAuthService {
       const errorMessage = "가입 내역이 없습니다. 다시 한번 확인해주세요.";
       return { errorMessage };
     }
-    console.log(user);
+
     if (toUpdate.user_name) {
       const filter = { _id };
       const update = { ["user_name"]: toUpdate.user_name };
@@ -172,6 +176,7 @@ class userAuthService {
 
     return user;
   }
+
   //oauth 로그인 및 회원가입을 위한 함수
   static async findOrCreate({ data }) {
     const email = data.email;
@@ -185,6 +190,31 @@ class userAuthService {
 
     const userinfo = await this.getSingleUser({ email, password });
     return userinfo;
+  }
+
+  //redis 토큰 생성
+  static async redisToken({ email }) {
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+      const errorMessage =
+        "해당 이메일은 존재하지 않습니다. 다시 한 번 확인해주세요.";
+      return { errorMessage };
+    }
+
+    const client = createClient();
+
+    client.on("error", (err) => console.log("Redis Client Error", err));
+
+    await client.connect();
+    const token = sign(email);
+
+    await client.set(token, email);
+    console.log(client.get(token));
+
+    client.expire(token, 300);
+
+    return token;
   }
 }
 

@@ -3,7 +3,8 @@ import BoardgameCard from "./BoardgameCard";
 import BasicPagination from "./BasicPagination";
 import * as Api from "../../api";
 
-function BoardgameData({ player, category }) {
+function BoardgameData({ condition }) {
+    const [first, setFirst] = useState(false);  // 수정하기
     const [boardgames, setBoardgames] = useState([]);
 
     const [limit, setLimit] = useState(9);
@@ -16,65 +17,22 @@ function BoardgameData({ player, category }) {
             Api.get("recentlyGames").then((res) => {
                 setBoardgames(res.data);
             })
+            setFirst(true)
         } catch (err) {
             console.log("errer message: ", err)
         }
     }, []);
 
-
-    /*
-    카테고리 : 인원수 / 연령 / 테마 / 게임시간 / 난이도
-
-    정렬 : 랭킹순 / 평점순 / 리뷰순
-
-    인원수 : 2 / 3 / 4 / 5 이상
-    연령 : 9 / 12 / 15 / 19  
-    난이도 : 1 ~ 5
-    테마(domain) : Thematic / strategy /  family / customizable ...
-    게임시간 (minplaytime) :  30 / 60 / 120~
-
-
-    post("boardgame") {
-players : 2 || "",
-time :234 || "",
-...
-sort : sorting || ""
-}
-
-const [sort, setSort] = useState("")
-
-useEffect(()=>{
-  Api.post('router', {
-  players: player,
-  time: time,
-   ... , 
-  sort: sort,
-  })
-},[players,time, ... , sort])
-
-
-<button
- value="rank"
- onClick={(e)=> setSort(e.target.value)}
- >rank</button>
- 
- <button
- value="review"
- onClick={(e)=> setSort(e.target.value)}
- >review</button>
-    */
-
-
-    // 보드게임 플레이어 수로 데이터 불러오기
-    // useEffect(() => {
-    //     try {
-    //         Api.get("games", player[0]).then((res) => {
-    //             setBoardgames(res.data);
-    //         })
-    //     } catch (err) {
-    //         console.log("errer message: ", err)
-    //     }
-    // }, [player]);
+    // 보드게임 조건 데이터 불러오기
+    useEffect(() => {
+        try {
+            first && Api.post("games/condition", condition).then((res) => {
+                setBoardgames(res.data);
+            });
+        } catch (err) {
+            console.log("errer message: ", err)
+        }
+    }, [condition]);
 
     const boardgameList = boardgames.map((boardgame) => (
         <BoardgameCard
@@ -82,16 +40,18 @@ useEffect(()=>{
             name={boardgame.game_name}
             min_player={boardgame.min_player}
             max_player={boardgame.max_player}
-            domains={boardgame.domains}
+            domains={boardgame.domains === null ? '' : boardgame.domains}
             image={boardgame.image}
         />
     ));
+
+    console.log(boardgameList);
 
     return (
         <>
             {boardgameList.slice(offset, offset + limit)}
 
-            {/* 페이지네이션 */}
+            {/* Pagination */}
             <div style={{ width: '100%', display: 'flex' }}>
                 <div style={{ margin: '0 auto', display: 'flex', alignItems: 'center' }}>
                 <BasicPagination 

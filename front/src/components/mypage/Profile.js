@@ -18,8 +18,6 @@ import {
 
 function Profile({ ownerData, setOwnerData }) {
   //이미지 넣는 코드
-  const [img, setImg] = useState(ownerData.image);
-
   const region = "ap-northeast-2";
   const bucket = "pinkpig-bucket";
 
@@ -31,18 +29,19 @@ function Profile({ ownerData, setOwnerData }) {
 
   const handleFileInput = async (e) => {
     // input 태그를 통해 선택한 파일 객체
+    console.log(ownerData._id);
     const file = e.target.files[0];
-    setImg(ownerData._id);
 
     // img 필드에 id값 업로드
     await Api.put(`user/${ownerData._id}`, {
-      image: img,
+      image: ownerData._id,
     });
 
+    console.log("이미지 성공");
     const upload = new AWS.S3.ManagedUpload({
       params: {
         Bucket: bucket, // 버킷 이름
-        Key: ownerData._id + ".png", // 유저 아이디
+        Key: ownerData._id + ".jpg", // 유저 아이디
         Body: file, // 파일 객체
       },
     });

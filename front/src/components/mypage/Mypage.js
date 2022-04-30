@@ -23,7 +23,7 @@ function Mypage() {
   const fetchPorfolioOwner = async () => {
     const res = await Api.get("currentUser");
     setOwnerData(res.data);
-    console.log("여기당", ownerData);
+    await console.log("여기당", ownerData.image);
   };
 
   useEffect(() => {
@@ -40,7 +40,7 @@ function Mypage() {
             <ImgGrid>
               <Photo
                 style={{
-                  backgroundImage: `url(https://pinkpig-bucket.s3.ap-northeast-2.amazonaws.com/${ownerData?.image}.png)`,
+                  backgroundImage: `url(https://pinkpig-bucket.s3.ap-northeast-2.amazonaws.com/${ownerData?.image}.jpg)`,
                   backgroundSize: "100% 100%",
                   backgroundRepeat: "no-repeat",
                 }}

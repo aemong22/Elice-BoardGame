@@ -64,7 +64,7 @@ function LoginForm({ handleClose }) {
     e.preventDefault();
 
     try {
-      const reset = await Api.post(`user/reset_password`, {
+      const reset = await Api.post(`resetpw`, {
         email,
       });
       console.log("여기이이", reset);
