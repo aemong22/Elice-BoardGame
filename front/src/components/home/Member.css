@@ -9,7 +9,7 @@
 .member-background {
   width: 60%;
   height: auto;
-  background-image: url("/public/image/member_background.png");
+  background-image: url("/public/image/member_bg.png");
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -25,8 +25,8 @@
 
 #member-1 {
   position: absolute;
-  top: 40%;
-  left: 25%;
+  top: 35%;
+  left: 30%;
 }
 
 #member-2 {

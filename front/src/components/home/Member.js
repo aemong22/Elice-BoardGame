@@ -2,18 +2,21 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 // import Button from '@mui/material/Button';
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardContent from "@mui/material/CardContent";
+
+import Avatar from "@mui/material/Avatar";
+
 import Typography from "@mui/material/Typography";
+import { red } from "@mui/material/colors";
 import "./Member.css";
 
-const HtmlTooltip = styled(({ className, ...props }) => (
+const MemberTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: "#f5f5f9",
-    color: "rgba(0, 0, 0, 0.87)",
-    maxWidth: 220,
-    fontSize: theme.typography.pxToRem(12),
-    border: "1px solid #dadde9",
+    backgroundColor: "transparent",
   },
 }));
 
@@ -23,17 +26,49 @@ function Member() {
       <div className="member-background">
         <div className="member-sizer"></div>
         <div className="member-1st-floor">
-          <HtmlTooltip
+          <MemberTooltip
             title={
               <React.Fragment>
-                <Typography color="inherit">Tooltip with HTML</Typography>
-                <em>{"And here's"}</em> <b>{"some"}</b>{" "}
-                <u>{"amazing content"}</u>. {"It's very engaging. Right?"}
+                <Card
+                  sx={{
+                    maxWidth: 320,
+                    borderRadius: "15px",
+                    bgcolor: "#F4F2EF",
+                  }}
+                >
+                  <CardHeader />
+                  <CardContent align="center">
+                    <Avatar
+                      sx={{
+                        bgcolor: red[500],
+                        minWidth: 100,
+                        minHeight: 100,
+                        mb: "20px",
+                      }}
+                      aria-label="profile"
+                    >
+                      G
+                    </Avatar>
+                    <Typography variant="h5" color="text.secondary">
+                      송가람
+                    </Typography>
+                    <Typography
+                      sx={{ mb: "20px" }}
+                      variant="h6"
+                      color="text.secondary"
+                    >
+                      프론트엔드
+                    </Typography>
+                    <Typography variant="body1" color="text.secondary">
+                      한마디 : 리액트 정신 안차리지
+                    </Typography>
+                  </CardContent>
+                </Card>
               </React.Fragment>
             }
           >
             <span id="member-1">span</span>
-          </HtmlTooltip>
+          </MemberTooltip>
           <span id="member-2">span</span>
           <span id="member-3">span</span>
         </div>
