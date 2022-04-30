@@ -178,7 +178,7 @@ class userController {
             from: `"nuri" <${process.env.NODEMAILER_USER}>`,
             to: email,
             subject: "비밀번호 변경 링크입니다",
-            html: `<b>5분 안에 입력해주세요!!<br/><a href="http://localhost:3000/pwlink/${resetToken}">${resetToken}</a></b>`,
+            html: `<b>5분 안에 입력해주세요!!<br/><a href="http://localhost:3000/pwlink/${resetToken}">비밀번호 변경 링크</a></b>`,
         });
 
         console.log("Message sent: %s", info.messageId);
