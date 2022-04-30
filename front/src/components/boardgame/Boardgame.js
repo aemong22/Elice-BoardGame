@@ -3,7 +3,7 @@ import BoardgameCategory from "./BoardgameCategory";
 import BoardgameData from "./BoardgameData";
 import Header from "../Header";
 import "./Boardgame.css";
-import MenuIcon from '@mui/icons-material/Menu';
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import SearchField from "./SearchField";
 
 function Boardgame() {
@@ -25,8 +25,14 @@ function Boardgame() {
                 </div>
                 <div className='boardgame-header'>
                     <div className='boardgame-header-item' onClick={() => setOpen(!open) }>
-                        <MenuIcon className='boardgame-header-menu-icon'></MenuIcon>
-                        <div className='boardgame-header-menu'>Menu</div>
+                        <FilterAltOutlinedIcon className='boardgame-header-menu-icon' />
+                        <div className='boardgame-header-menu'>
+                        {
+                            Object.keys(condition).map((key) => (
+                                condition[key] !== '' ? key : null
+                            ))
+                        }
+                        </div>
                     </div>
                     <SearchField />
                 </div>

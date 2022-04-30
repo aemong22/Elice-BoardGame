@@ -3,9 +3,9 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 
 function BoardgameCategory({ open, setOpen, condition, setCondition }) {
     const [openPlayer, setOpenPlayer] = useState(false);
