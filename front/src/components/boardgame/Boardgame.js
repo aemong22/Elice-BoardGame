@@ -7,17 +7,15 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchField from "./SearchField";
 
 function Boardgame() {
-    const [open, setOpen] = React.useState(false);
-
-    // 필터에 사용할 변수
-    const [player, setPlayer] = useState([]);
-    const [category, setCategory] = useState([]);
-
-    // useEffect(() => {
-    //     // test
-    //     console.log(player);
-    //     console.log(category);
-    //   }, [player, category]);
+    const [open, setOpen] = useState(false);
+    const [condition, setCondition] = useState({ 
+        "player": "",
+        "age": "",
+        "theme": "",
+        "time": "",
+        "complexity": "",
+        "type": ""
+    })
 
     return (
         <>
@@ -33,19 +31,16 @@ function Boardgame() {
             </div>
             <div className='boardgame-container'>
                 <div className='boardgames'>
-                    <BoardgameData
-                        player={player}
-                        category={category}
-                    />
+                    <BoardgameData condition={condition} />
                 </div>
             </div>
 
             <div className={ open ? 'boardgame-category active' : 'boardgame-category' }>
                 <BoardgameCategory 
-                    player={player}
-                    setPlayer={setPlayer}
-                    category={category}
-                    setCategory={setCategory}
+                    condition={condition}
+                    setCondition={setCondition}
+                    open={open}
+                    setOpen={setOpen}
                 />
             </div>
         </>
