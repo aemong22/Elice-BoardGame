@@ -13,10 +13,20 @@ const MyBox = styled(Box)`
 `;
 
 const Title = styled(Grid)`
+  border: solid 1px;
   font-size: 20px;
   font-weight: bold;
   color: black;
   padding: 3%;
+`;
+
+const Total = styled(Grid)`
+  border: solid 1px;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  text-align: right;
+  padding-bottom: 3%;
 `;
 
 const StyledInput = styled(InputBase)`
@@ -31,7 +41,8 @@ const StyledInput = styled(InputBase)`
 `;
 
 const Content = styled(Grid)`
-  width: 70%;
+  border: solid 1px;
+  width: 90%;
   height: 80%;
   margin: 0 auto;
 `;
@@ -78,4 +89,5 @@ export {
   SubContent,
   HelperText,
   MyButton,
+  Total,
 };

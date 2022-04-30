@@ -91,7 +91,7 @@ function Profile({ ownerData, setOwnerData }) {
     <>
       <MyBox>
         <Title>Edit your profile</Title>
-        <form onSubmit={handleSubmit} style={{ height: "100%" }}>
+        <form onSubmit={handleSubmit} style={{ height: "80%" }}>
           <Content>
             <SubTitle>프로필 사진 변경하기</SubTitle>
             <StyledInput

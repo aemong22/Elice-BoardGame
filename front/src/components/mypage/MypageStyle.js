@@ -7,8 +7,8 @@ const MyBox = styled(Box)`
   border-radius: 30px;
   border-shadow: 0 2px 3px 0;
   position: relative;
-  height: 80vh;
-  margin: 5vh;
+  height: 83vh;
+  margin: 4vh;
   paddin: 0;
   box-shadow: 0 5px 18px -7px rgba(0, 0, 0, 1);
 `;
