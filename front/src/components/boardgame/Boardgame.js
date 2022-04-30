@@ -29,12 +29,11 @@ function Boardgame() {
                 </div>
                 <SearchField />
             </div>
-            <div className='boardgame-container'>
+            <div className={ open ? 'boardgame-container-slide' : 'boardgame-container' }>
                 <div className='boardgames'>
                     <BoardgameData condition={condition} />
                 </div>
             </div>
-
             <div className={ open ? 'boardgame-category active' : 'boardgame-category' }>
                 <BoardgameCategory 
                     condition={condition}

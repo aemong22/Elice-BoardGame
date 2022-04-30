@@ -23,12 +23,16 @@
 
 .boardgame-container {
     width: 100%;
-    display: flex;
+    transition: all 0.3s;
+}
+
+.boardgame-container-slide {
+    margin-left: 260px; 
 }
 
 .boardgames {
     width: 900px;
-    margin: 50px 15% 50px auto;  /* 수정하기 */
+    margin: 50px auto;
     display: flex; 
     flex-wrap: wrap;
     justify-content: space-between;
