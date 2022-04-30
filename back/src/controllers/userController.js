@@ -1,6 +1,7 @@
 import { userAuthService } from "../services/userService";
 import is from "@sindresorhus/is";
 import nodemailer from "nodemailer";
+import axios from "axios";
 
 class userController {
     static async userRegister(req, res, next) {
@@ -73,17 +74,15 @@ class userController {
         }
     }
 
+    //비밀번호'만' 변경하는 controller
     static async findPassword(req, res, next) {
         try {
-            const email = req.body.email;
+            const resetToken = req.body.resetToken;
+            const password = req.body.password;
 
-            const generatedAuthNumber = Math.floor(Math.random() * 10 ** 8)
-                .toString()
-                .padStart(8, "0");
-
-            const toUpdate = { password: generatedAuthNumber };
+            const toUpdate = { password };
             const resetPassword = await userAuthService.setPassword({
-                email,
+                resetToken,
                 toUpdate,
             });
 
@@ -91,34 +90,7 @@ class userController {
                 throw new Error(resetPassword.errorMessage);
             }
 
-            let transporter = nodemailer.createTransport({
-                service: "gmail",
-                host: "smtp.gmail.com",
-                port: 587,
-                secure: false,
-                auth: {
-                    user: `${config.NODEMAILER_USER}`,
-                    pass: `${config.NODEMAILER_PASS}`,
-                },
-            });
-
-            // send mail with defined transport object
-            let info = await transporter.sendMail({
-                from: `"nuri" <${process.env.NODEMAILER_USER}>`,
-                to: email,
-                subject: "비밀번호 변경입니다",
-                text: generatedAuthNumber,
-                html: `<b>변경된 비밀번호 입니다.<br/>${generatedAuthNumber}</b>`,
-            });
-
-            console.log("Message sent: %s", info.messageId);
-            // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-            res.status(200).json({
-                status: "Success",
-                code: 200,
-                message: "Sent Auth Email",
-            });
+            res.status(200).json(resetPassword);
         } catch (error) {
             next(error);
         }
@@ -167,6 +139,56 @@ class userController {
 
     static async refreshToken(req, res, next) {
         // refresh 함수를 쪼개면 여기서 처리할게 있을수도 있음
+    }
+
+    static async googleLogin(req, res, next) {
+        try {
+            const { accessToken } = req.body;
+            const { data } = await axios.get(
+                `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${accessToken}`
+            );
+
+            const user = await userAuthService.findOrCreate({ data });
+
+            res.status(200).json(user);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // 받은 email을 이용하여 resetToken 생성, 링크 전송
+    static async resetToken(req, res, next) {
+        const email = req.body.email;
+
+        const resetToken = await userAuthService.redisToken({ email });
+
+        let transporter = nodemailer.createTransport({
+            service: "gmail",
+            host: "smtp.gmail.com",
+            port: 587,
+            secure: false,
+            auth: {
+                user: `${process.env.NODEMAILER_USER}`,
+                pass: `${process.env.NODEMAILER_PASS}`,
+            },
+        });
+
+        // send mail with defined transport object
+        let info = await transporter.sendMail({
+            from: `"nuri" <${process.env.NODEMAILER_USER}>`,
+            to: email,
+            subject: "비밀번호 변경 링크입니다",
+            html: `<b>5분 안에 입력해주세요!!<br/><a href="http://localhost:3000/pwlink/${resetToken}">비밀번호 변경 링크</a></b>`,
+        });
+
+        console.log("Message sent: %s", info.messageId);
+        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+        res.status(200).json({
+            status: "Success",
+            code: 200,
+            message: "Sent Auth Email",
+        });
     }
 }
 
