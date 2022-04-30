@@ -25,46 +25,48 @@
 
 #member-1 {
   position: absolute;
-  top: 35%;
+  top: 30%;
   left: 30%;
+  width: 5%;
+  height: 8%;
 }
 
 #member-2 {
   position: absolute;
-  top: 40%;
+  top: 35%;
   left: 55%;
+  width: 5%;
+  height: 10%;
 }
 
 #member-3 {
   position: absolute;
-  top: 40%;
+  top: 38%;
   left: 70%;
+  width: 5%;
+  height: 10%;
 }
 
 #member-4 {
   position: absolute;
-  top: 70%;
+  top: 56%;
   left: 10%;
+  width: 5%;
+  height: 10%;
 }
 
 #member-5 {
   position: absolute;
-  top: 70%;
-  left: 45%;
+  top: 60%;
+  left: 44%;
+  width: 5%;
+  height: 10%;
 }
 
 #member-6 {
   position: absolute;
-  top: 70%;
+  top: 58%;
   left: 85%;
+  width: 5%;
+  height: 10%;
 }
-
-/* .member-1st-floor {
-  display: flex;
-  flex-direction: row;
-}
-
-.member-2nd-floor {
-  display: flex;
-  flex-direction: row;
-} */

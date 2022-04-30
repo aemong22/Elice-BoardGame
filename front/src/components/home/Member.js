@@ -63,7 +63,7 @@ function Member() {
             </React.Fragment>
           }
         >
-          <span id="member-1">span</span>
+          <span id="member-1" />
         </MemberTooltip>
 
         <MemberTooltip
@@ -78,7 +78,7 @@ function Member() {
             </React.Fragment>
           }
         >
-          <span id="member-2">span</span>
+          <span id="member-2" />
         </MemberTooltip>
 
         <MemberTooltip
@@ -93,7 +93,7 @@ function Member() {
             </React.Fragment>
           }
         >
-          <span id="member-3">span</span>
+          <span id="member-3" />
         </MemberTooltip>
 
         <MemberTooltip
@@ -108,7 +108,7 @@ function Member() {
             </React.Fragment>
           }
         >
-          <span id="member-4">span</span>
+          <span id="member-4" />
         </MemberTooltip>
 
         <MemberTooltip
@@ -123,7 +123,7 @@ function Member() {
             </React.Fragment>
           }
         >
-          <span id="member-5">span</span>
+          <span id="member-5" />
         </MemberTooltip>
 
         <MemberTooltip
@@ -138,7 +138,7 @@ function Member() {
             </React.Fragment>
           }
         >
-          <span id="member-6">span</span>
+          <span id="member-6" />
         </MemberTooltip>
       </div>
     </div>
