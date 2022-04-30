@@ -45,7 +45,7 @@ function Member() {
       quote: "전 이만 가보겠습니다.",
     },
   };
-
+  console.log(Object.keys(member)[2]);
   return (
     <div className="member-container">
       <div className="member-background">
@@ -58,6 +58,7 @@ function Member() {
                 name={member.noori.name}
                 position={member.noori.position}
                 quote={member.noori.quote}
+                src={`/image/${Object.keys(member)[2]}_pic.png`}
               />
             </React.Fragment>
           }
@@ -72,6 +73,7 @@ function Member() {
                 name={member.garam.name}
                 position={member.garam.position}
                 quote={member.garam.quote}
+                src={`/image/${Object.keys(member)[0]}_pic.png`}
               />
             </React.Fragment>
           }
@@ -86,6 +88,7 @@ function Member() {
                 name={member.aerim.name}
                 position={member.aerim.position}
                 quote={member.aerim.quote}
+                src={`/image/${Object.keys(member)[4]}_pic.png`}
               />
             </React.Fragment>
           }
@@ -100,6 +103,7 @@ function Member() {
                 name={member.sangwon.name}
                 position={member.sangwon.position}
                 quote={member.sangwon.quote}
+                src={`/image/${Object.keys(member)[1]}_pic.png`}
               />
             </React.Fragment>
           }
@@ -114,6 +118,7 @@ function Member() {
                 name={member.minyeong.name}
                 position={member.minyeong.position}
                 quote={member.minyeong.quote}
+                src={`/image/${Object.keys(member)[3]}_pic.png`}
               />
             </React.Fragment>
           }
@@ -128,6 +133,7 @@ function Member() {
                 name={member.beomgi.name}
                 position={member.beomgi.position}
                 quote={member.beomgi.quote}
+                src={`/image/${Object.keys(member)[5]}_pic.png`}
               />
             </React.Fragment>
           }
