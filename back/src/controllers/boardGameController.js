@@ -41,6 +41,9 @@ class boardgameController {
         const category = req.query.category || null;
         const cat_val = req.query.val1 || null;
         const type = req.query.type || null;
+        const page = req.query.page || 1;
+        const perPage = req.query.perPage || 10;
+
         let games = null;
 
         switch (category) {
@@ -48,31 +51,44 @@ class boardgameController {
                 games = await boardGameService.findByPlayer({
                     player: parseInt(cat_val),
                     type,
+                    page,
+                    perPage,
                 });
                 break;
             case "age":
                 games = await boardGameService.findByAge({
                     age: parseInt(cat_val),
                     type,
+                    page,
+                    perPage,
                 });
                 break;
             case "theme":
-                games = await boardGameService.findByTheme({ cat_val, type });
+                games = await boardGameService.findByTheme({
+                    cat_val,
+                    type,
+                    page,
+                    perPage,
+                });
                 break;
             case "time":
                 games = await boardGameService.findByTime({
                     time: parseInt(cat_val),
                     type,
+                    page,
+                    perPage,
                 });
                 break;
             case "complexity":
                 games = await boardGameService.findByComplexity({
                     complexity: parseFloat(cat_val),
                     type,
+                    page,
+                    perPage,
                 });
                 break;
             default:
-                games = await boardGameService.findAllGames();
+                games = await boardGameService.findAllGames({ page, perPage });
                 break;
         }
         res.status(200).json(games);

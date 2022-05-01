@@ -278,7 +278,16 @@ paths:
                   type: string
       responses:
         '200':
-          $ref: '#/components/schemas/BoardGame'
+          description: "보드게임 검색 전체 페이지 개수와 페이지당 보드게임 정보 반환"
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  totalPage: 
+                    type: number
+                  games: 
+                    $ref: '#/components/schemas/BoardGame'
   /games/category:
     get:
       tags:
@@ -300,6 +309,16 @@ paths:
           required: false
           schema:
             type: string
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: number
+        - name: perPage
+          in: query
+          required: false
+          schema:
+            type: number
       responses:
         '200':
           $ref: '#/components/schemas/BoardGame'
