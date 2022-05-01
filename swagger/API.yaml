@@ -232,6 +232,17 @@ paths:
       tags:
         - boardGame
       summary: 최근 보드게임 조회 
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: number
+        - name: perPage
+          in: query
+          required: false
+          schema:
+            type: number
       responses:
         '200':
           description: "최신 보드게임 조회(20년)"
@@ -253,33 +264,7 @@ paths:
       responses:
         '200':
           $ref : '#/components/schemas/BoardGame'
-  /games/condition:
-    post:
-      tags:
-        - boardGame
-      summary: condition 조회 
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                player:
-                  type: string
-                age:
-                  type: string
-                theme:
-                  type: string
-                time:
-                  type: string
-                complexity:
-                  type: string
-                type:
-                  type: string
-      responses:
-        '200':
-          $ref: '#/components/schemas/BoardGame'
-  /games/category:
+  /games/conditions:
     get:
       tags:
         - boardGame
@@ -300,9 +285,28 @@ paths:
           required: false
           schema:
             type: string
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: number
+        - name: perPage
+          in: query
+          required: false
+          schema:
+            type: number
       responses:
         '200':
-          $ref: '#/components/schemas/BoardGame'
+          description: "보드게임 검색 전체 페이지 개수와 페이지당 보드게임 정보 반환"
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  totalPage: 
+                    type: number
+                  games: 
+                    $ref: '#/components/schemas/BoardGame'
 components:
   securitySchemes:
     bearerAuth:
