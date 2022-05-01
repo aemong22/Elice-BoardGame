@@ -3,7 +3,6 @@ import { BoardGameModel2020 } from "../db/schemas/boardgame2020";
 
 class boardGameService {
     // 정렬 type 설정
-    // service에 이 코드가 존재해도 되는지 궁금 ..??
     static sortType({ type }) {
         switch (type) {
             case "rank":
