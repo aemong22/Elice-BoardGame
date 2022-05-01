@@ -1,4 +1,5 @@
 import { BoardGameModel } from "../db/schemas/boardgame";
+import { BoardGameModel2020 } from "../db/schemas/boardgame2020";
 
 class boardGameService {
     // 정렬 type 설정
@@ -35,8 +36,14 @@ class boardGameService {
 
     // 최신 게임 전체 조회(보드게임 메인 페이지 default 조회)
     static async findByRecentlyGames({ page, perPage }) {
-        const boardGames = await BoardGameModel2020.find({});
-        return boardGames;
+        const total = await BoardGameModel2020.countDocuments({});
+        const boardGames = await BoardGameModel2020.find({})
+            .skip(perPage * (page - 1))
+            .limit(perPage);
+
+        const totalPage = Math.ceil(total / perPage);
+
+        return { totalPage, boardGames };
     }
 
     // game_id로 조회

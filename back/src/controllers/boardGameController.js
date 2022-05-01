@@ -14,7 +14,13 @@ class boardgameController {
     // 20년 최신 게임 전체 조회
     static async findRecentlyGames(req, res, next) {
         try {
-            const recentlyGames = await boardGameService.findByRecentlyGames();
+            const page = req.query.page || 1;
+            const perPage = req.query.perPage || 10;
+
+            const recentlyGames = await boardGameService.findByRecentlyGames({
+                page,
+                perPage,
+            });
             res.status(200).json(recentlyGames);
         } catch (error) {
             next(error);
