@@ -1,16 +1,22 @@
-import Pagination from '@mui/material/Pagination';
+import Pagination from "@mui/material/Pagination";
 
 function BasicPagination({ total, limit, page, setPage }) {
     const pages = Math.ceil(total / limit);
     const handleChange = (event, value) => {
-      setPage(value);
+        setPage(value);
     };
 
     return (
-      <>
-        <Pagination count={pages} page={page} onChange={handleChange} showFirstButton showLastButton />
-        
-        {/* <nav style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '4px', margin: '16px' }}>
+        <>
+            <Pagination
+                count={pages}
+                page={page}
+                onChange={handleChange}
+                showFirstButton
+                showLastButton
+            />
+
+            {/* <nav style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '4px', margin: '16px' }}>
           <button onClick={() => setPage(page - 1)} disabled={page === 1}>
             &lt;
           </button>
@@ -29,8 +35,8 @@ function BasicPagination({ total, limit, page, setPage }) {
             &gt;
           </button>
         </nav> */}
-      </>
+        </>
     );
-  }
+}
 
-  export default BasicPagination;
+export default BasicPagination;

@@ -279,6 +279,30 @@ paths:
       responses:
         '200':
           $ref: '#/components/schemas/BoardGame'
+  /games/category:
+    get:
+      tags:
+        - boardGame
+      summary: condition 조회 params
+      parameters:
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: val1
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/schemas/BoardGame'
 components:
   securitySchemes:
     bearerAuth:

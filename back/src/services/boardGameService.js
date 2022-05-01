@@ -57,7 +57,7 @@ class boardGameService {
     }
 
     // 연령별 기준 보드게임 조회
-    static async findByAge({ age }) {
+    static async findByAge({ age, type }) {
         const games = await BoardGameModel.find({
             min_age: { $lte: age },
         }).sort(this.sortType({ type }));

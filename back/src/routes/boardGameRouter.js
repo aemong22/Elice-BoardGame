@@ -15,7 +15,7 @@ boardGameRouter.get("/gameInfo/:id", boardgameController.findByGameId);
 
 // --------보드게임 상세 조회---------
 
-// condition test
-boardGameRouter.post("/games/condition", boardgameController.findCondition);
+// condition with params
+boardGameRouter.get("/games/category", boardgameController.findByCondition);
 
 export { boardGameRouter };
