@@ -1,5 +1,5 @@
 import { boardGameService } from "../services/boardGameService";
-import fs from "fs";
+
 class boardgameController {
     // 19년도 게임 전체 조회 (search 에서 사용할 것 구현)
     static async findAllGames(req, res, next) {
