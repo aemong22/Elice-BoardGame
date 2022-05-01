@@ -1,7 +1,7 @@
 import { boardGameService } from "../services/boardGameService";
 import fs from "fs";
 class boardgameController {
-    // 19년도 게임 전체 조회
+    // 19년도 게임 전체 조회 (search 에서 사용할 것 구현)
     static async findAllGames(req, res, next) {
         try {
             const allBoardGame = await boardGameService.findAllGames();
@@ -14,7 +14,7 @@ class boardgameController {
     // 20년 최신 게임 전체 조회
     static async findRecentlyGames(req, res, next) {
         try {
-            const recentlyGames = await boardGameService.findRecentlyGames();
+            const recentlyGames = await boardGameService.findByRecentlyGames();
             res.status(200).json(recentlyGames);
         } catch (error) {
             next(error);
@@ -39,7 +39,7 @@ class boardgameController {
     static async findByCondition(req, res, next) {
         // query string으로
         const category = req.query.category || null;
-        const cat_val = req.query.val1 || null;
+        const categoryValue = req.query.val1 || null;
         const type = req.query.type || null;
         const page = req.query.page || 1;
         const perPage = req.query.perPage || 10;
@@ -49,7 +49,7 @@ class boardgameController {
         switch (category) {
             case "player":
                 games = await boardGameService.findByPlayer({
-                    player: parseInt(cat_val),
+                    playerCount: parseInt(categoryValue),
                     type,
                     page,
                     perPage,
@@ -57,7 +57,7 @@ class boardgameController {
                 break;
             case "age":
                 games = await boardGameService.findByAge({
-                    age: parseInt(cat_val),
+                    age: parseInt(categoryValue),
                     type,
                     page,
                     perPage,
@@ -65,7 +65,7 @@ class boardgameController {
                 break;
             case "theme":
                 games = await boardGameService.findByTheme({
-                    cat_val,
+                    categoryValue,
                     type,
                     page,
                     perPage,
@@ -73,7 +73,7 @@ class boardgameController {
                 break;
             case "time":
                 games = await boardGameService.findByTime({
-                    time: parseInt(cat_val),
+                    time: parseInt(categoryValue),
                     type,
                     page,
                     perPage,
@@ -81,7 +81,7 @@ class boardgameController {
                 break;
             case "complexity":
                 games = await boardGameService.findByComplexity({
-                    complexity: parseFloat(cat_val),
+                    complexity: parseFloat(categoryValue),
                     type,
                     page,
                     perPage,
