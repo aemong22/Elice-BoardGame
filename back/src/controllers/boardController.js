@@ -5,3 +5,5 @@ class boardServiceController{
 
     }
 }
+
+export {boardServiceController}
