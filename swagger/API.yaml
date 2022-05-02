@@ -43,8 +43,6 @@ paths:
                   type: string
                 content:
                   type: string
-                comment:
-                  type: array
       responses:
         '200':
           description: "board생성 성공!"

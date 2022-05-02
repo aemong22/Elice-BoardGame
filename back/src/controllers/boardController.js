@@ -12,16 +12,15 @@ class boardServiceController{
 
     static async createContents(req, res, next){
         try {
-            const author = req.body.user_name;
-            const title = req.body.email;
-            const content = req.body.password;
-            const comment = [];
 
+            const author = req.body.author;
+            const title = req.body.title;
+            const content = req.body.content;
+   
             const newContent = await boardService.addContent({
                 author,
                 title,
                 content,
-                comment,
             });
 
             if (newContent.errorMessage) {

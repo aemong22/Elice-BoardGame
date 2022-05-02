@@ -3,9 +3,13 @@ import { BoardContentModel } from "../db/schemas/boardcontents";
 class boardService{
     // content 만들기
     static async addContent({author,title,content,comment}){
-        const newContent = {author,title,content,comment}
+        const newContent = {
+            author,
+            title,
+            content,
+            comment};
 
-        const createNewContents = await BoardContentModel.create({newContent})
+        const createNewContents = await BoardContentModel.create(newContent)
         createNewContents.errorMessage = null;
         
         return createNewContents;
