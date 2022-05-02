@@ -280,7 +280,7 @@ paths:
           required: false
           schema:
             type: string
-        - name: type
+        - name: sortType
           in: query
           required: false
           schema:
