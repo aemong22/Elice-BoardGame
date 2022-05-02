@@ -1,0 +1,472 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: board_game_project
+  description: 'elice 2nd project'
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: http://localhost:5001
+tags:
+  - name: user
+    description: User 스키마를 이용한 기능
+  - name: board
+paths:
+  /user/register:
+    post:
+      tags:
+        - user
+      summary: 회원가입
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        '200':
+          description: "회원가입 성공!"
+        '404':
+          description: "백엔드 실행하셨나요? 포트번호는 5001번 인가요?"
+  /user/login:
+    post:
+      tags:
+        - user
+      summary: 로그인
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: "로그인 성공"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  _id:
+                    type: string
+                  email:
+                    type: string
+                  user_name:
+                    type: string
+                  phone_number:
+                    type: string
+                  refresh_token:
+                    type: string
+                  errorMessage:
+                    type: string
+                    default: null
+        '400':
+          description: "없는 이메일 입니다."
+        '404':
+          description: "백엔드 실행하셨나요? 포트번호는 5001번 인가요?"
+  /token/refresh:
+    get:
+      tags:
+        - user
+      summary: access token 확인 및 refresh token 재발급하는 곳!
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Refresh
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: refresh token이 유효하므로 access token 재발급 완료
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      accessToken:
+                        type: string
+                      refreshToken:
+                        type: string
+        '401':
+          description: access token, refresh token 모두 만료되었습니다
+        '400':
+          description: token이 헤더에 없거나 access token이 만료되지 않았습니다.
+  /users/{id}:
+    get:
+      tags:
+        - user
+      summary: 개인 유저 정보 가져오기
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/schemas/User'
+        '400':
+          description: access token이 유효하지 않습니다.
+  /user/{id}:
+    put:
+      tags:
+        - user
+      summary: 개인 유저 정보 수정하기
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_name:
+                    type: string
+                  email:
+                    type: string
+                  phone_number:
+                    type: string
+                  password:
+                    type: string
+                  image:
+                    type: string
+      responses:
+        '200':
+          $ref: '#/components/schemas/User'
+        '400':
+          description: access token이 유효하지 않습니다.
+  /currentUser:
+    get:
+      tags:
+        - user
+      summary: 현재 유저의 정보 가져오기
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 유저 정보 가져오기 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  user_name:
+                    type: string
+                  email:
+                    type: string
+                  phone_number:
+                    type: string
+                  image:
+                    type: string
+  /users:
+    get:
+      tags:
+        - user
+      summary: 유저 목록 출력(DB 확인용)
+      responses:
+        '200':
+          description: "userlist get"
+          content:
+            application/json:
+              schema:
+                $ref : "#/components/schemas/User"
+  /user/reset_password:
+    post:
+      tags:
+        - user
+      summary: 비밀번호 찾기
+      requestBody:
+         required: true
+         content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        '200':
+          description: "mail 전송 완료"
+        '404':
+          description: "이메일이 없습니다.!"
+  /boardGames:
+    get:
+      tags:
+        - boardGame
+      summary: 모든 보드게임 불러오기 
+      responses:
+        '200':
+          description: "모든 보드게임의 정보를 불러온다" 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoardGame'
+  /recentlyGames:
+    get:
+      tags:
+        - boardGame
+      summary: 최근 보드게임 조회 
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: number
+        - name: perPage
+          in: query
+          required: false
+          schema:
+            type: number
+      responses:
+        '200':
+          description: "최신 보드게임 조회(20년)"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoardGame2020'
+  /gameInfo/{id}:
+    get:
+      tags:
+        - boardGame
+      summary: board game game_id 기준 조회
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          $ref : '#/components/schemas/BoardGame'
+  /games/conditions:
+    get:
+      tags:
+        - boardGame
+      summary: condition 조회 params
+      parameters:
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: val1
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: sortType
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: number
+        - name: perPage
+          in: query
+          required: false
+          schema:
+            type: number
+      responses:
+        '200':
+          description: "보드게임 검색 전체 페이지 개수와 페이지당 보드게임 정보 반환"
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  totalPage: 
+                    type: number
+                  games: 
+                    $ref: '#/components/schemas/BoardGame'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      type: object
+      required:
+        - user_name
+        - email
+        - password
+        - phone_number
+      properties:
+        user_name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        phone_number:
+          type: string
+        image:
+          type: string
+    BoardGame:
+      type: object
+      required:
+        - index
+        - un_named
+        - game_id
+        - game_name
+        - year
+        - rank
+        - average_rating
+        - bayes_average
+        - user_rated
+        - url
+        - thumbnail
+        - min_player
+        - max_player
+        - min_age
+        - playing_time
+        - min_playing_time
+        - max_playing_time
+        - complexity_average
+        - domains
+        - image
+        - description
+        - recommend_id
+      properties:
+        index:
+          type: number
+        un_named:
+          type: number
+        game_id:
+          type: number
+        game_name:
+          type: string
+        year:
+          type: number
+        rank:
+          type: number
+        average_rating:
+          type: number
+        bayes_average:
+          type: number
+        user_rated:
+          type: number
+        url:
+          type: string
+        thumbnail:
+          type: string
+        min_player:
+          type: number
+        max_player:
+          type: number
+        min_age:
+          type: number
+        playing_time:
+          type: number
+        min_playing_time:
+          type: number
+        max_playing_time:
+          type: number
+        complexity_average:
+          type: number
+        domains:
+          type: string
+        image:
+          type: string
+        description:
+          type: string
+        recommend_id:
+          type: array  
+    BoardGame2020:
+      type: object
+      required:
+        - index
+        - un_named
+        - game_id
+        - game_name
+        - year
+        - rank
+        - average_rating
+        - bayes_average
+        - user_rated
+        - url
+        - thumbnail
+        - min_player
+        - max_player
+        - min_age
+        - playing_time
+        - min_playing_time
+        - max_playing_time
+        - complexity_average
+        - image
+        - description
+      properties:
+        index:
+          type: number
+        un_named:
+          type: number
+        game_id:
+          type: number
+        game_name:
+          type: string
+        year:
+          type: number
+        rank:
+          type: number
+        average_rating:
+          type: number
+        bayes_average:
+          type: number
+        user_rated:
+          type: number
+        url:
+          type: string
+        thumbnail:
+          type: string
+        min_player:
+          type: number
+        max_player:
+          type: number
+        min_age:
+          type: number
+        playing_time:
+          type: number
+        min_playing_time:
+          type: number
+        max_playing_time:
+          type: number
+        complexity_average:
+          type: number
+        domains:
+          type: string
+        image:
+          type: string
+        description:
+          type: string
+security:
+  - bearerAuth: []

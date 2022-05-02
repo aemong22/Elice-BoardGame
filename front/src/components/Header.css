@@ -1,0 +1,24 @@
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 20;
+  width: 100%;
+  height: 60px;
+  background-color: white;
+}
+
+.header-navigate {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.header-navigate li {
+  width: auto;
+  font-size: 1.2rem;
+  margin-left: 10px;
+}
+
+.header-navigate li:last-child {
+  margin: auto 1% auto auto;
+}

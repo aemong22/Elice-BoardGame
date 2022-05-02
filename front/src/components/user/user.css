@@ -1,0 +1,140 @@
+#modal {
+  border-radius: 30px;
+  width: 400px;
+  height: 450px;
+  text-align: center;
+  background-color: #ffffff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#modal .closebutton {
+  color: black;
+  border-radius: 30px;
+  margin: 2px;
+}
+
+#modal > img {
+  width: 65px;
+  margin: 10px;
+}
+.login-input {
+  margin-top: 20px;
+  border-radius: 5px;
+  width: 81%;
+  padding: 10px;
+  border: 1px solid #d6ccc2;
+}
+
+#modal > .login-button {
+  margin-bottom: 10px;
+  width: 85%;
+  border-radius: 30px;
+  border: none;
+  color: white;
+  background-color: #e3d5ca;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#modal > .sns-login {
+  background-color: #cd5642;
+  color: white;
+  width: 30%;
+  height: 30px;
+  border-radius: 30px;
+  font-weight: 500;
+  text-transform: none;
+}
+
+.google-login-icon {
+  margin-right: 3px;
+}
+
+#modal > .login-bottom {
+  color: gray;
+  background-color: white;
+  margin: 5px 3px;
+  font-size: 10px;
+}
+#findPw {
+  color: #aea399;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#modal > .findPW-detail {
+  margin: 10px;
+  color: gray;
+  font-size: 12px;
+}
+.findPW-detail > div {
+  width: 80%;
+  text-align: left;
+  margin: 0 auto;
+}
+
+.or {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin: 0 auto;
+  color: #aea399;
+}
+.or::before,
+.or::after {
+  content: "";
+  width: 40%;
+  background: #e3d5ca;
+  height: 0.5px;
+  font-size: 0px;
+  line-height: 0px;
+  margin: auto;
+}
+
+.text-success {
+  font-size: 10px;
+  color: gray;
+  margin: 3px;
+}
+
+#register {
+  border-radius: 30px;
+  width: 450px;
+  height: 550px;
+  padding: 10px;
+  text-align: center;
+  background-color: #ffffff;
+  border: solid 1px #a79f97;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#register .create-account {
+  font-size: 32px;
+  font-weight: bold;
+  color: #a79f97;
+  margin: 10px;
+}
+
+#register .closebutton {
+  color: black;
+  border-radius: 30px;
+  margin: 2px;
+}
+
+#register .createbutton {
+  margin: 10px;
+  width: 80%;
+  border-radius: 30px;
+  border: none;
+  color: white;
+  background-color: #d4ccc3;
+  font-weight: bold;
+  font-size: 20px;
+}
