@@ -1,7 +1,23 @@
+import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import "./Header.css";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../store/actions/userAction";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import "./Header.css";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#716F6F",
+      darker: "#F4F2EF",
+    },
+    neutral: {
+      main: "#64748B",
+      contrastText: "#fff",
+    },
+  },
+});
 
 function Header() {
   const navigate = useNavigate();
@@ -17,14 +33,24 @@ function Header() {
   return (
     <>
       <div className="header">
-        <ul className="header-navigate">
-          <li onClick={() => navigate("/")}>Home</li>
-          <li onClick={() => navigate("/boardgame")}>Boardgame</li>
-          <li>MyPage</li>
-          <li onClick={logout} style={{ cursor: "pointer" }}>
-            Logout
-          </li>
-        </ul>
+        <ThemeProvider theme={theme}>
+          <ul className="header-navigate">
+            <li onClick={() => navigate("/")}>
+              <Button variant="text" color="primary">
+                Home
+              </Button>
+            </li>
+            <li onClick={() => navigate("/boardgame")}>
+              <Button>Boardgame</Button>
+            </li>
+            <li>
+              <Button>Mypage</Button>
+            </li>
+            <li onClick={logout} style={{ cursor: "pointer" }}>
+              <Button>Logout</Button>
+            </li>
+          </ul>
+        </ThemeProvider>
       </div>
     </>
   );
