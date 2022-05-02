@@ -129,11 +129,12 @@ class userAuthService {
                 "가입 내역이 없습니다. 다시 한 번 확인해 주세요.";
             return { errorMessage };
         }
+        console.log(toUpdate.newPassword);
 
-        if (toUpdate.password) {
-            const hashedPassword = await bcrypt.hash(toUpdate.password, 10);
+        if (toUpdate.newPassword) {
+            const hashedPassword = await bcrypt.hash(toUpdate.newPassword, 10);
             const filter = { email: email };
-            const update = { ["password"]: hashedPassword };
+            const update = { password: hashedPassword };
             const option = { returnOriginal: false };
 
             user = await UserModel.findOneAndUpdate(filter, update, option);
@@ -150,42 +151,21 @@ class userAuthService {
             return { errorMessage };
         }
 
-        if (toUpdate.user_name) {
-            const filter = { _id };
-            const update = { ["user_name"]: toUpdate.user_name };
-            const option = { returnOriginal: false };
-            user = await UserModel.findOneAndUpdate(filter, update, option);
-        }
+        const filter = { _id };
+        const { user_name, email, password, phone_number, image } = toUpdate;
+        const data = {
+            ...(user_name && { user_name }),
+            ...(email && { email }),
+            ...(password && {
+                password: await bcrypt.hash(toUpdate.password, 10),
+            }),
+            ...(phone_number && { phone_number }),
+            ...(image && { image }),
+        };
 
-        if (toUpdate.email) {
-            const filter = { _id };
-            const update = { ["email"]: toUpdate.email };
-            const option = { returnOriginal: false };
-            user = await UserModel.findOneAndUpdate(filter, update, option);
-        }
+        const option = { returnOriginal: false };
 
-        if (toUpdate.password) {
-            const hashedPassword = await bcrypt.hash(toUpdate.password, 10);
-            const filter = { _id };
-            const update = { ["password"]: hashedPassword };
-            const option = { returnOriginal: false };
-
-            user = await UserModel.findOneAndUpdate(filter, update, option);
-        }
-
-        if (toUpdate.phone_number) {
-            const filter = { _id };
-            const update = { ["phone_number"]: toUpdate.phone_number };
-            const option = { returnOriginal: false };
-            user = await UserModel.findOneAndUpdate(filter, update, option);
-        }
-
-        if (toUpdate.image) {
-            const filter = { _id };
-            const update = { ["image"]: toUpdate.image };
-            const option = { returnOriginal: false };
-            user = await UserModel.findOneAndUpdate(filter, update, option);
-        }
+        user = await UserModel.findOneAndUpdate(filter, data, option);
 
         return user;
     }
