@@ -116,13 +116,14 @@ class boardgameController {
         const { keyword, page, perPage } = req.query;
 
         try {
-            const { totalPage, games } = await boardGameService.search({
-                keyword,
-                page,
-                perPage,
-            });
+            const { totalPage, games, errorMessage } =
+                await boardGameService.search({
+                    keyword,
+                    page,
+                    perPage,
+                });
 
-            if (games.errorMessage) throw new Error(games.errorMessage);
+            if (errorMessage) throw new Error(errorMessage);
 
             res.status(200).json({ totalPage, games });
         } catch (error) {

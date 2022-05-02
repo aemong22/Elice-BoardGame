@@ -150,7 +150,7 @@ class boardGameService {
             perPage,
         });
 
-        if (errorMessage) return errorMessage;
+        if (errorMessage) return { errorMessage };
 
         return { totalPage, games };
     }
@@ -169,7 +169,7 @@ class boardGameService {
             perPage,
         });
 
-        if (errorMessage) return errorMessage;
+        if (errorMessage) return { errorMessage };
 
         return { totalPage, games };
     }
@@ -189,11 +189,7 @@ class boardGameService {
             perPage,
         });
 
-        if (errorMessage)
-            return {
-                errorMessage:
-                    "검색하신 keyword에 해당하는 보드게임이 없습니다.",
-            };
+        if (errorMessage) return { errorMessage };
 
         return { totalPage, games };
     }
