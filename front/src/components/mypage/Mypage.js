@@ -3,7 +3,7 @@ import * as Api from "../../api";
 
 import Header from "../Header";
 import Profile from "./Profile";
-import Favorite from "./Favorite";
+// import Favorite from "./Favorite";
 import { Container, Grid } from "@mui/material";
 import { StylesProvider } from "@material-ui/core";
 
@@ -34,10 +34,9 @@ function Mypage() {
   return (
     <>
       <Header />
-      <Container maxWidth="lg" style={{ padding: "0" }}>
+      <Container maxWidth="lg" style={{ padding: "0", marginTop: "70px" }}>
         <MyBox>
           <MyBox2>
-            <Title>My Page</Title>
             <ImgGrid>
               <Photo
                 style={{
@@ -57,13 +56,12 @@ function Mypage() {
               </StylesProvider>
             </Grid>
           </MyBox2>
-          {Modify ? (
-            ownerData && (
-              <Profile ownerData={ownerData} setOwnerData={setOwnerData} />
-            )
-          ) : (
-            <Favorite ownerData={ownerData} />
-          )}
+          {Modify
+            ? ownerData && (
+                <Profile ownerData={ownerData} setOwnerData={setOwnerData} />
+              )
+            : // <Favorite ownerData={ownerData} />
+              null}
         </MyBox>
       </Container>
     </>

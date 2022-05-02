@@ -3,23 +3,24 @@ import Button from "@material-ui/core/Button";
 import styled from "@emotion/styled";
 
 const MyBox = styled(Box)`
-  border: solid 1px #d6ccc2;
-  border-radius: 30px;
+  border: solid 1px #ebebeb;
+  border-radius: 10px;
   border-shadow: 0 2px 3px 0;
   position: relative;
   height: 83vh;
   margin: 4vh;
   paddin: 0;
-  box-shadow: 0 5px 18px -7px rgba(0, 0, 0, 1);
+  box-shadow: 5px 5px 12px -10px rgba(0, 0, 0, 1);
 `;
 
 const MyBox2 = styled(Box)`
-  border-radius: 30px 0 0 30px;
-  color: white;
-  width: 30%;
-  height: 100%;
+  border-radius: 10px;
+  background-color: #f3f0ec;
+  width: 200px;
+  height: auto;
+  padding: 70px 0 50px 0;
   float: left;
-  margin: 0;
+  margin: 1%;
 `;
 
 const Title = styled(Grid)`
@@ -52,6 +53,7 @@ const Name = styled(Grid)`
   color: black;
   text-align: center;
   padding: 7%;
+  margin-bottom: 20px;
 `;
 
 const Profile2 = styled(Box)`

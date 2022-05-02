@@ -57,7 +57,7 @@ const SubTitle = styled(Grid)`
 const SubContent = styled(Grid)`
   padding: 1%;
   height: auto;
-  margin-bottom: 16px;
+  margin-bottom: 30px;
 `;
 
 const HelperText = styled(FormHelperText)`

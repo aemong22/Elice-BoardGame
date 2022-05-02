@@ -4,8 +4,7 @@ import Button from "@material-ui/core/Button";
 import styled from "@emotion/styled";
 
 const MyBox = styled(Box)`
-  border-radius: 0 30px 30px 0;
-  background-color: #f3f0ec;
+  background-color: #ffffff;
   width: 70%;
   height: 100%;
   float: right;
@@ -46,7 +45,7 @@ const SubTitle = styled(Grid)`
 const SubContent = styled(Grid)`
   padding: 1%;
   height: auto;
-  margin-bottom: 16px;
+  margin-bottom: px;
 `;
 
 const HelperText = styled(FormHelperText)`
