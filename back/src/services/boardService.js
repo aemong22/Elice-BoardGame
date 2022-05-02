@@ -1,4 +1,6 @@
 import { BoardContentModel } from "../db/schemas/boardcontents";
+import { BoardCommentModel } from "../db/schemas/boardcomment";
+
 
 class boardService{
     // content 만들기
@@ -27,16 +29,27 @@ class boardService{
         const getContent = await BoardContentModel.findById(contentid);
         return getContent;
     }
-    
+
+    // content 삭제하기
     static async deleteContent({ contentid }){
         const getContent = await BoardContentModel.findByIdAndDelete(contentid);
         return getContent;
     }
+    
+    static async addComment({user_id,content}){
+        const newComment = {
+            user_id,
+            comment
+            };
+        const createNewComment = await BoardCommentModel.create(newComment)
+        createNewComment.errorMessage = null;
+        
+        return createNewComment;
+    }
 
-    // content 삭제하기
-    static async deleteContent({contentid}){
-        const delContents = await BoardContentModel.findOneAndDelete({id : contentid});
-        return delContents;
+    static async deleteComment({commentid}){
+        const delComment = await BoardCommentModel.findByIdAndDelete({id : commentid});
+        return delComment;
     }
 
 }

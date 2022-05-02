@@ -49,6 +49,38 @@ class boardServiceController{
             next(error);
         }
     }
+
+
+    // 대글 관련 newComment
+    static async newComment(req, res, next){
+        try {
+            const user_id = req.body.user_id;
+            const content = req.body.content;
+            const newComment = await boardService.addComment({
+                user_id,
+                content,
+            });
+            if (newComment.errorMessage) {
+                throw new Error(newComment.errorMessage);
+            }
+            res.status(200).json(newComment);
+
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // comment삭제
+    static async deleteComment(req, res, next){
+        try {
+            const conmmentid = req.params.id2;
+            const deletecomment = await boardService.deleteComment({conmmentid});
+            res.status(200).json(deletecomment);
+            console.log("게시물이 삭제되었습니다.")
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export {boardServiceController}
