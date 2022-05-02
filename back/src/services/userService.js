@@ -34,12 +34,12 @@ class userAuthService {
     }
 
     // 모든 유저 목록 가져오기
-    static async getUser() {
+    static async getUsers() {
         const users = await UserModel.find({});
         return users;
     }
 
-    static async getSingleUser({ email, password }) {
+    static async getUser({ email, password }) {
         const user = await await UserModel.findOne({ email });
 
         if (!user) {

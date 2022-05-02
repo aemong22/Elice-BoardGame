@@ -36,7 +36,7 @@ class userController {
 
     static async findAllUser(req, res, next) {
         try {
-            const users = await userAuthService.getUser();
+            const users = await userAuthService.getUsers();
 
             res.status(200).json(users);
         } catch (error) {
@@ -48,7 +48,7 @@ class userController {
         try {
             const { email, password } = req.body;
 
-            const user = await userAuthService.getSingleUser({
+            const user = await userAuthService.getUser({
                 email,
                 password,
             });
