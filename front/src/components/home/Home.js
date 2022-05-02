@@ -10,7 +10,9 @@ import Member from "./Member";
 function Home() {
   const navigate = useNavigate();
   const [isFetchCompleted, setIsFetchCompleted] = useState(false);
-  const userState = useSelector((state) => state.userReducer.user);
+  const userState = useSelector((state) =>
+    state ? state.userReducer.user : {}
+  );
 
   // 만약 로그인 된 상태가 아니라면 intro 페이지로 이동시키기
   useEffect(() => {
