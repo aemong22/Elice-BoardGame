@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const BoardGame2020 = new Schema(
+const RecentBoardGameSchma = new Schema(
     {
         index: {
             type: Number,
@@ -93,6 +93,6 @@ const BoardGame2020 = new Schema(
     }
 );
 
-const BoardGameModel2020 = model("BoardGame2020", BoardGame2020);
+const RecentBoardGameModel = model("BoardGame2020", RecentBoardGameSchma);
 
-export { BoardGameModel2020 };
+export { RecentBoardGameModel };

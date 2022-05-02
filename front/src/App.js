@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext, useReducer } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser } from "./store/actions/userAction";
@@ -9,6 +9,7 @@ import Intro from "./components/intro/Intro";
 import Boardgame from "./components/boardgame/Boardgame";
 import About from "./components/about/About";
 import RegisterForm from "./components/user/RegisterForm";
+import BoardgameDetail from "./components/detail/BoardgameDetail";
 import GoogleLoading from "./components/user/GoogleLoading";
 
 function App() {
@@ -46,8 +47,9 @@ function App() {
         <Route path="/intro" exact element={<Intro />} />
         <Route path="/about" exact element={<About />} />
         <Route path="/boardgame" exact element={<Boardgame />} />
+        <Route path="/boardgame/detail" exact element={<BoardgameDetail />} />
         <Route path="/register" exact element={<RegisterForm />} />
-        <Route path="/test" element={<GoogleLoading />} />
+        <Route path="/oauth" exact element={<GoogleLoading />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>

@@ -5,6 +5,7 @@ import "./Home.css";
 import Header from "../Header";
 import Chart from "./Chart";
 import Detail from "./Detail";
+import Member from "./Member";
 
 function Home() {
   const navigate = useNavigate();
@@ -55,6 +56,7 @@ function Home() {
       </div>
       <Chart />
       <Detail />
+      <Member />
     </>
   );
 }

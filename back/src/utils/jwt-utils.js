@@ -46,15 +46,12 @@ exports.refreshVerify = async (token, user_id) => {
     // refresh token 확인
     try {
         // db에서 refresh token 가져오기
-        const refresh_token = await Token.getToken({ user_id });
-        if (token === refresh_token) {
-            try {
-                jwt.verify(token, secret);
-                return true;
-            } catch (err) {
-                return false;
-            }
-        } else {
+        const refreshToken = await Token.getToken({ user_id });
+
+        if (refreshToken !== token) return false;
+        try {
+            return jwt.verify(token, secret);
+        } catch (error) {
             return false;
         }
     } catch (err) {
