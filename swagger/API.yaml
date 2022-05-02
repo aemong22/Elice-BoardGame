@@ -307,6 +307,39 @@ paths:
                     type: number
                   games: 
                     $ref: '#/components/schemas/BoardGame'
+  /search:
+    get:
+      tags:
+        - boardGame
+      summary: 페이지에서 보드게임 탐색(보드게임 이름, 테마 기준)
+      parameters:
+        - name: keyword
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: number
+        - name: perPage
+          in: query
+          required: false
+          schema:
+            type: number
+      responses:
+        '200':
+          description: "검색어에 연관된 보드게임 조회"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalPage:
+                    type: number
+                  games: 
+                      $ref: '#/components/schemas/BoardGame'
 components:
   securitySchemes:
     bearerAuth:

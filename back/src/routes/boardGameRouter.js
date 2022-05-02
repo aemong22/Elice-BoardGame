@@ -18,6 +18,6 @@ boardGameRouter.get("/gameInfo/:id", boardgameController.findByGameId);
 boardGameRouter.get("/games/conditions", boardgameController.findByCondition);
 
 // 페이지 전체 검색
-boardGameRouter.get("/search");
+boardGameRouter.get("/search", boardgameController.search);
 
 export { boardGameRouter };
