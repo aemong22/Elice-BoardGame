@@ -12,6 +12,43 @@ tags:
     description: User 스키마를 이용한 기능
   - name: board
 paths:
+  /boardcontents:
+    get:
+      tags:
+        - board
+      summary : 모든 board게시판 불러오기 
+      responses:
+        '200':
+          description : "모든 게시판을 정보를 불러온다"
+          content:
+            application/json:
+              schema:
+                $ref : "#/components/schemas/BoardContent"
+    
+  /boardcontents/create:
+    post:
+      tags:
+        - board
+      summary : 게시판 생성하기
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                author:
+                  type: string
+                title:
+                  type: string
+                content:
+                  type: string
+                comment:
+                  type: array
+      responses:
+        '200':
+          description: "board생성 성공!"
+          $ref : "#/components/schemas/BoardContent"
   /user/register:
     post:
       tags:
@@ -440,5 +477,22 @@ components:
           type: string
         description:
           type: string
+    
+    BoardContent:
+        type : object
+        required :
+          - title
+          - content
+          - author
+          - comment
+        properties :
+          title:
+            type: string
+          content:
+            type: string
+          author:
+            type: string
+          comment:
+            type: array
 security:
   - bearerAuth: []
