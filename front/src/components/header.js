@@ -19,7 +19,6 @@ function Header() {
       <div className="header">
         <ul className="header-navigate">
           <li onClick={() => navigate("/")}>Home</li>
-          <li onClick={() => navigate("/about")}>About</li>
           <li onClick={() => navigate("/boardgame")}>Boardgame</li>
           <li>MyPage</li>
           <li onClick={logout} style={{ cursor: "pointer" }}>
