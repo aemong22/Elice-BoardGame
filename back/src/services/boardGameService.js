@@ -33,6 +33,36 @@ class boardGameService {
         return { totalPage, games };
     }
 
+    static async offsetPatinate(findFunc, aggregator, args) {
+        const { size, currentPage } = args;
+        const games = await findFunc();
+        const total = await aggregator();
+
+        const totalPage = Math.ceil(total / size);
+        return {
+            games,
+            totalPage,
+        };
+    }
+
+    static async findGames({ query, sortType, page, perPage }) {
+        const aggregator = async () =>
+            await BoardGameModel.countDocuments(query);
+
+        const findFunc = async () =>
+            await BoardGameModel.find(query)
+                .sort(this.sortType({ sortField: sortType }))
+                .skip(perPage * (page - 1))
+                .limit(perPage);
+
+        const { games, totalPage } = await this.offsetPatinate(
+            findFunc,
+            aggregator,
+            { size: perPage, currentPage: page }
+        );
+        return { totalPage, games };
+    }
+
     // 최신 게임 전체 조회(보드게임 메인 페이지 default 조회)
     static async findByRecentlyGames({ page, perPage }) {
         const total = await RecentBoardGameModel.countDocuments({});
@@ -68,7 +98,7 @@ class boardGameService {
             ],
         };
 
-        const { totalPage, games } = await this.findBoardGame({
+        const { totalPage, games } = await this.findGames({
             query,
             sortType,
             page,
@@ -87,7 +117,7 @@ class boardGameService {
             min_age: { $lte: age },
         };
 
-        const { totalPage, games } = await this.findBoardGame({
+        const { totalPage, games } = await this.findGames({
             query,
             sortType,
             page,
@@ -102,7 +132,7 @@ class boardGameService {
         const query = {
             theme: { $in: [theme] },
         };
-        const { totalPage, games } = await this.findBoardGame({
+        const { totalPage, games } = await this.findGames({
             query,
             sortType,
             page,
@@ -121,7 +151,7 @@ class boardGameService {
             ],
         };
 
-        const { totalPage, games } = await this.findBoardGame({
+        const { totalPage, games } = await this.findGames({
             query,
             sortType,
             page,
@@ -138,7 +168,7 @@ class boardGameService {
                 $lte: Math.floor(complexity) + 1,
             },
         };
-        const { totalPage, games } = await this.findBoardGame({
+        const { totalPage, games } = await this.findGames({
             query,
             sortType,
             page,
