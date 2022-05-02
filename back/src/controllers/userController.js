@@ -17,18 +17,18 @@ class userController {
             const password = req.body.password;
             const phone_number = req.body.phone_number;
 
-            const createdUser = await userAuthService.addUser({
+            const { user, errorMessage } = await userAuthService.addUser({
                 user_name,
                 email,
                 password,
                 phone_number,
             });
 
-            if (createdUser.errorMessage) {
-                throw new Error(createdUser.errorMessage);
+            if (errorMessage) {
+                throw new Error(errorMessage);
             }
 
-            res.status(200).json(createdUser);
+            res.status(200).json(user);
         } catch (error) {
             next(error);
         }
