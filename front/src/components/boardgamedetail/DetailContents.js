@@ -2,10 +2,9 @@ import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import Header from "../Header";
-import "./BoardgameDetail.css";
+import "./DetailContents.css";
 
-function BoardgameDetail() {
+function DetailContents() {
   return (
     <>
       <React.Fragment>
@@ -46,4 +45,4 @@ function BoardgameDetail() {
   );
 }
 
-export default BoardgameDetail;
+export default DetailContents;
