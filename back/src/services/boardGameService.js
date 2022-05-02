@@ -100,7 +100,7 @@ class boardGameService {
     // theme 기준 정렬
     static async findByTheme({ theme, type, page, perPage }) {
         const options = {
-            theme: { $in: [theme] },
+            domains: { $in: [theme] },
         };
         const { totalPage, games } = await this.findBoardGame({
             options,
@@ -137,6 +137,23 @@ class boardGameService {
                 $gte: Math.floor(complexity),
                 $lte: Math.floor(complexity) + 1,
             },
+        };
+        const { totalPage, games } = await this.findBoardGame({
+            options,
+            type,
+            page,
+            perPage,
+        });
+
+        return { totalPage, games };
+    }
+
+    static async search({ keyword, page, perPage }) {
+        const options = {
+            $or: [
+                { game_name: { $in: [keyword] } },
+                { domains: { $in: [keyword] } },
+            ],
         };
         const { totalPage, games } = await this.findBoardGame({
             options,
