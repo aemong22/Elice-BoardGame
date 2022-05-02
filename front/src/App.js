@@ -8,7 +8,7 @@ import Home from "./components/home/Home";
 import Intro from "./components/intro/Intro";
 import Boardgame from "./components/boardgame/Boardgame";
 import RegisterForm from "./components/user/RegisterForm";
-import BoardgameDetail from "./components/detail/BoardgameDetail";
+import BoardgameDetail from "./components/boardgamedetail/BoardgameDetail";
 import GoogleLoading from "./components/user/GoogleLoading";
 import Header from "./components/Header";
 
@@ -47,7 +47,7 @@ function App() {
         <Route path="/" exact element={<Home />} />
         <Route path="/intro" exact element={<Intro />} />
         <Route path="/boardgame" exact element={<Boardgame />} />
-        <Route path="/boardgame/detail/:id" exact element={<BoardgameDetail />} />
+        <Route path="/gameInfo/:id" exact element={<BoardgameDetail />} />
         <Route path="/register" exact element={<RegisterForm />} />
         <Route path="/oauth" exact element={<GoogleLoading />} />
         <Route path="*" element={<Home />} />
