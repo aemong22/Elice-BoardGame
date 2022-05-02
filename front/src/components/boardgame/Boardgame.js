@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import BoardgameCategory from "./BoardgameCategory";
 import Sorting from "./Sorting";
 import BoardgameData from "./BoardgameData";
-import Header from "../Header";
 import "./Boardgame.css";
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import SearchField from "./SearchField";
@@ -42,13 +41,10 @@ function Boardgame() {
     return (
         <>
             <div className={ open ? 'boardgame-container-slide' : 'boardgame-container' }>
-                <div className='header'>
-                    <Header />
-                </div>
                 <div className='boardgame-header'>
                     <div className='boardgame-header-item' onClick={() => setOpen(!open) }>
-                        <FilterAltOutlinedIcon className='boardgame-header-menu-icon' />
-                        <div className='boardgame-header-menu'>
+                        <FilterAltOutlinedIcon className='boardgame-header-filtered-icon' />
+                        <div className='boardgame-header-filtered'>
                         {
                             condition.category !== '' ? (<span>{condition.category} : {condition.val1}</span>): 'filter'
                         }

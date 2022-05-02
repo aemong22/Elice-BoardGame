@@ -15,6 +15,8 @@
     border-bottom: #e2e2e255 solid 2px;
     display: flex;
     align-items: center;
+    margin-top: 50px;
+    color: #716F6F;
 }
 
 .boardgame-header-item {
@@ -27,7 +29,7 @@
     border-right: #e2e2e255 solid 2px;
 }
 
-.boardgame-header-menu-icon {
+.boardgame-header-filtered-icon {
     margin-right: 10px;
 }
 
