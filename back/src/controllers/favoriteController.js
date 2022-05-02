@@ -4,7 +4,7 @@ import is from "@sindresorhus/is";
 class favoriteController {
     static async addFavorite(req, res, next) {
         try {
-            const userId = req.body.userId;
+            const userId = req.currentUserId;
             const boardgameId = req.body.boardgameId;
 
             const favorite = await favoriteAuthService.addFavorite({
@@ -20,7 +20,7 @@ class favoriteController {
 
     static async getFavorites(req, res, next) {
         try {
-            const id = req.params.id;
+            const id = req.currentUserId;
 
             const favorites = await favoriteAuthService.findFavorite({
                 userId: id,

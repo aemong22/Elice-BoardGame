@@ -357,8 +357,6 @@ paths:
             schema:
               type: object
               properties:
-                userId:
-                  type: string
                 boardgameId:
                   type: string
       responses:
@@ -372,19 +370,13 @@ paths:
         '400':
           description:
             해당하는 유저나 보드게임이 존재하지 않음
-  /favorite/{id}:
+  /favorite/user:
     get:
       tags:
         - favorite
       summary: 유저별 찜 목록 가져오기
       security:
         - bearerAuth: []
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: 찜 목록 가져오기 성공

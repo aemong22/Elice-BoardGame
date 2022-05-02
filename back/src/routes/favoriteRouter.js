@@ -11,7 +11,7 @@ const favoriteAuthRouter = Router();
 favoriteAuthRouter.post("/favorite", authJWT, favoriteController.addFavorite);
 
 favoriteAuthRouter.get(
-    "/favorite/:id",
+    "/favorite/user",
     authJWT,
     favoriteController.getFavorites
 );
