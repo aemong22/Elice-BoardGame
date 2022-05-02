@@ -23,10 +23,16 @@ class boardServiceController{
                 content,
                 comment,
             });
+
+            if (newContent.errorMessage) {
+                throw new Error(newContent.errorMessage);
+            }
+
             res.status(200).json(newContent);
         } catch (error) {
             next(error);
         }
+    }
 }
 
 export {boardServiceController}

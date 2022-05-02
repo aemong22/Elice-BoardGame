@@ -7,8 +7,13 @@ const boardRouter = Router();
 // 전체 content 조회
 boardRouter.get("/boardcontents",boardServiceController.findAllContents);
 
-// 선택 content 조회
-boardRouter.get("/boardcontents/:id",boardServiceController);
+// content 추가하기
+boardRouter.post("/boardcontents/create",boardServiceController.createContents);
 
-// content 삭제
-boardRouter.delete("/boardcontents/:id/delete",boardServiceController);
+// // 선택 content 조회
+// boardRouter.get("/boardcontents/:id",boardServiceController);
+
+// // content 삭제
+// boardRouter.delete("/boardcontents/:id/delete",boardServiceController);
+
+export{boardRouter}
