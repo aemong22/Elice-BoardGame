@@ -36,6 +36,7 @@ class boardService{
         return getContent;
     }
     
+    // comment 추가하기
     static async addComment({user_id,content}){
         const newComment = {
             user_id,
@@ -47,6 +48,7 @@ class boardService{
         return createNewComment;
     }
 
+    // comment 삭제하기
     static async deleteComment({commentid}){
         const delComment = await BoardCommentModel.findByIdAndDelete({id : commentid});
         return delComment;
