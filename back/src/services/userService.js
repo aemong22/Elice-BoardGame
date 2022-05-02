@@ -181,7 +181,7 @@ class userAuthService {
             await this.addUser({ user_name, email, password });
         }
 
-        const userinfo = await this.getSingleUser({ email, password });
+        const userinfo = await this.getUser({ email, password });
         return userinfo;
     }
 
