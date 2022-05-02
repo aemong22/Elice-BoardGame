@@ -10,33 +10,40 @@ class boardServiceController{
         }
     }
 
-static async getBoard(req, res, next){
-    try {
-        const contentid = req.params.id;
-        const getboard = await boardService.getContent({contentid});
-        res.status(200).json(getboard);
-    } catch (error) {
-        next(error);
+    static async getBoard(req, res, next){
+        try {
+            const contentid = req.params.id;
+            const getboard = await boardService.getContent({contentid});
+            res.status(200).json(getboard);
+        } catch (error) {
+            next(error);
+        }
     }
-}
+
+    static async deleteBoard(req, res, next){
+        try {
+            const contentid = req.params.id;
+            const deleteboard = await boardService.deleteContent({contentid});
+            res.status(200).json(deleteboard);
+            console.log("게시물이 삭제되었습니다.")
+        } catch (error) {
+            next(error);
+        }
+    }
 
     static async createContents(req, res, next){
         try {
-
             const author = req.body.author;
             const title = req.body.title;
             const content = req.body.content;
-   
             const newContent = await boardService.addContent({
                 author,
                 title,
                 content,
             });
-
             if (newContent.errorMessage) {
                 throw new Error(newContent.errorMessage);
             }
-
             res.status(200).json(newContent);
         } catch (error) {
             next(error);

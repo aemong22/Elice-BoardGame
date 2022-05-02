@@ -14,6 +14,6 @@ boardRouter.post("/boardcontents/create",boardServiceController.createContents);
 boardRouter.get("/boardcontents/:id",boardServiceController.getBoard);
 
 // // content 삭제
-// boardRouter.delete("/boardcontents/:id/delete",boardServiceController);
+boardRouter.delete("/boardcontents/:id/delete",boardServiceController.deleteBoard);
 
 export{boardRouter}
