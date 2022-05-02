@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import BoardgameCategory from "./BoardgameCategory";
+import Sorting from "./Sorting";
 import BoardgameData from "./BoardgameData";
 import Header from "../Header";
 import "./Boardgame.css";
@@ -54,6 +55,9 @@ function Boardgame() {
                         </div>
                     </div>
                     <SearchField />
+                </div>
+                <div className='boardgame-sort'>
+                    <Sorting changeCondition={changeCondition} />
                 </div>
                 <div className='boardgames'>
                     <BoardgameData condition={condition} changeCondition={changeCondition}/>
