@@ -5,7 +5,7 @@ import Container from "@mui/material/Container";
 import Header from "../Header";
 import "./BoardgameDetail.css";
 
-const BoardgameDetail = () => {
+function BoardgameDetail() {
   return (
     <>
       <React.Fragment>
@@ -44,6 +44,6 @@ const BoardgameDetail = () => {
       </React.Fragment>
     </>
   );
-};
+}
 
 export default BoardgameDetail;
