@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./Home.css";
 import Chart from "./Chart";
-import Detail from "./Detail";
+import HomeDetail from "./HomeDetail";
 import Member from "./Member";
 
 function Home() {
@@ -55,7 +55,7 @@ function Home() {
         </div>
       </div>
       <Chart />
-      <Detail />
+      <HomeDetail />
       <Member />
     </>
   );

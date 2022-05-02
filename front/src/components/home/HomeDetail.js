@@ -1,6 +1,6 @@
-import "./Detail.css";
+import "./HomeDetail.css";
 
-function Detail() {
+function HomeDetail() {
   return (
     <>
       <div id="detail_wrapper_top">
@@ -31,4 +31,4 @@ function Detail() {
   );
 }
 
-export default Detail;
+export default HomeDetail;
