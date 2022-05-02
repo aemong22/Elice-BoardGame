@@ -8,7 +8,6 @@ import "./BoardgameDetail.css";
 const BoardgameDetail = () => {
   return (
     <>
-      <Header />
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="md">

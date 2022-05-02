@@ -30,7 +30,6 @@ function Home() {
 
   return (
     <>
-      <Header />
       <div id="main_wrapper">
         <div id="main_title_wrapper">
           <div id="main_title">Boardmon으로 보드게임을 시작해보자!</div>
