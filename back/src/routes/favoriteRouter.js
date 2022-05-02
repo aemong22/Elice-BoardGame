@@ -8,11 +8,11 @@ import { favoriteController } from "../controllers/favoriteController";
 
 const favoriteAuthRouter = Router();
 
-favoriteAuthRouter.post("/favorite", favoriteController.addFavorite);
+favoriteAuthRouter.post("/favorite", authJWT, favoriteController.addFavorite);
 
 favoriteAuthRouter.get(
     "/favorite/:id",
-
+    authJWT,
     favoriteController.getFavorites
 );
 
