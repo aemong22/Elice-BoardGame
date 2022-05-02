@@ -41,12 +41,16 @@ class boardGameService {
                 .skip(perPage * (page - 1))
                 .limit(perPage);
 
+        const errorMessage = !findFunc
+            ? "조건에 맞는 보드게임이 없습니다."
+            : null;
+
         const { games, totalPage } = await this.offsetPatinate(
             findFunc,
             aggregator,
             { size: perPage, currentPage: page }
         );
-        return { totalPage, games };
+        return { totalPage, games, errorMessage };
     }
 
     // 최신 게임 전체 조회(보드게임 메인 페이지 default 조회)
@@ -67,13 +71,6 @@ class boardGameService {
         return games;
     }
 
-    // todo: search 에서 사용할 함수
-    static async findAllGames({ page, perPage }) {
-        // 모든 보드게임 검색 - 저장된 순서대로 나옴
-        const boardgames = await BoardGameModel.find({});
-        return boardgames;
-    }
-
     // player 기준 범위 안 보드게임 조회
     static async findByPlayer({ playerCount, sortType, page, perPage }) {
         // 인원 수 조회 option
@@ -84,7 +81,7 @@ class boardGameService {
             ],
         };
 
-        const { totalPage, games } = await this.findGames({
+        const { totalPage, games, errorMessage } = await this.findGames({
             query,
             sortType,
             page,
@@ -103,7 +100,7 @@ class boardGameService {
             min_age: { $lte: age },
         };
 
-        const { totalPage, games } = await this.findGames({
+        const { totalPage, games, errorMessage } = await this.findGames({
             query,
             sortType,
             page,
@@ -118,12 +115,14 @@ class boardGameService {
         const query = {
             domains: { $regex: theme, $options: "i" },
         };
-        const { totalPage, games } = await this.findGames({
+        const { totalPage, games, errorMessage } = await this.findGames({
             query,
             sortType,
             page,
             perPage,
         });
+
+        if (errorMessage) return errorMessage;
 
         return { totalPage, games };
     }
@@ -137,12 +136,14 @@ class boardGameService {
             ],
         };
 
-        const { totalPage, games } = await this.findGames({
+        const { totalPage, games, errorMessage } = await this.findGames({
             query,
             sortType,
             page,
             perPage,
         });
+
+        if (errorMessage) return errorMessage;
 
         return { totalPage, games };
     }
@@ -154,12 +155,14 @@ class boardGameService {
                 $lte: Math.floor(complexity) + 1,
             },
         };
-        const { totalPage, games } = await this.findGames({
+        const { totalPage, games, errorMessage } = await this.findGames({
             query,
             sortType,
             page,
             perPage,
         });
+
+        if (errorMessage) return errorMessage;
 
         return { totalPage, games };
     }
@@ -172,11 +175,13 @@ class boardGameService {
                 { game_name: { $regex: keyword, $options: "i" } },
             ],
         };
-        const { totalPage, games } = await this.findGames({
+        const { totalPage, games, errorMessage } = await this.findGames({
             query,
             page,
             perPage,
         });
+
+        if (errorMessage) return errorMessage;
 
         return { totalPage, games };
     }

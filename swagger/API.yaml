@@ -218,18 +218,6 @@ paths:
           description: "mail 전송 완료"
         '404':
           description: "이메일이 없습니다.!"
-  /boardGames:
-    get:
-      tags:
-        - boardGame
-      summary: 모든 보드게임 불러오기 
-      responses:
-        '200':
-          description: "모든 보드게임의 정보를 불러온다" 
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BoardGame'
   /recentlyGames:
     get:
       tags:

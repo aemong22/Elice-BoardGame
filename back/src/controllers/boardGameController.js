@@ -1,16 +1,6 @@
 import { boardGameService } from "../services/boardGameService";
 
 class boardgameController {
-    // 19년도 게임 전체 조회 (search 에서 사용할 것 구현)
-    static async findAllGames(req, res, next) {
-        try {
-            const allBoardGame = await boardGameService.findAllGames();
-            res.status(200).json(allBoardGame);
-        } catch (error) {
-            next(error);
-        }
-    }
-
     // 20년 최신 게임 전체 조회
     static async findRecentlyGames(req, res, next) {
         try {
@@ -101,6 +91,11 @@ class boardgameController {
                     });
                     break;
             }
+
+            if (errorMessage) {
+                throw new Error(errorMessage);
+            }
+
             res.status(200).json(games);
         } catch (error) {
             next(error);
