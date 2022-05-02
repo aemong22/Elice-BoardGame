@@ -75,22 +75,22 @@ class userController {
     }
 
     //비밀번호'만' 변경하는 controller
-    static async findPassword(req, res, next) {
+    static async resetPassword(req, res, next) {
         try {
             const resetToken = req.body.resetToken;
-            const password = req.body.password;
+            const newPassword = req.body.password;
 
-            const toUpdate = { password };
-            const resetPassword = await userAuthService.setPassword({
+            const toUpdate = { newPassword };
+            const { user, errorMessage } = await userAuthService.setPassword({
                 resetToken,
                 toUpdate,
             });
 
-            if (resetPassword.errorMessage) {
-                throw new Error(resetPassword.errorMessage);
+            if (errorMessage) {
+                throw new Error(errorMessage);
             }
 
-            res.status(200).json(resetPassword);
+            res.status(200).json(user);
         } catch (error) {
             next(error);
         }
