@@ -212,7 +212,7 @@ class userAuthService {
     await client.set(token, email);
     console.log(client.get(token));
 
-    client.expire(token, 300);
+    client.expire(token, 10);
 
     return token;
   }

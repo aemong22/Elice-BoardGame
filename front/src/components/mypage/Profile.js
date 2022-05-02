@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 import * as Api from "../../api";
 import { StylesProvider } from "@material-ui/core";
-import { useSelector } from "react-redux";
 import AWS from "aws-sdk";
 
 import {

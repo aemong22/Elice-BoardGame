@@ -12,6 +12,7 @@ import Boardgame from "./components/boardgame/Boardgame";
 import About from "./components/about/About";
 import RegisterForm from "./components/user/RegisterForm";
 import Mypage from "./components/mypage/Mypage";
+import BoardgameDetail from "./components/detail/BoardgameDetail";
 import GoogleLoading from "./components/user/GoogleLoading";
 
 function App() {
@@ -54,6 +55,9 @@ function App() {
         <Route path="/profile" exact element={<Profile />} />
         <Route path="/oauth" exact element={<GoogleLoading />} />
         <Route path="/pwlink/:rtoken" exact element={<PwLink />} />
+        <Route path="/boardgame/detail" exact element={<BoardgameDetail />} />
+        <Route path="/register" exact element={<RegisterForm />} />
+        <Route path="/oauth" exact element={<GoogleLoading />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>
