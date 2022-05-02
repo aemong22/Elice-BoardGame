@@ -76,7 +76,7 @@ export const data = {
   ],
 };
 
-const Chart = () => {
+function Chart() {
   return (
     <div id="chart_wrapper">
       <div id="chart_title">"세상엔 보드게임이 너무 많아!"</div>
@@ -89,6 +89,6 @@ const Chart = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Chart;

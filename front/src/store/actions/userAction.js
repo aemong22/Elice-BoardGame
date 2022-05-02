@@ -8,6 +8,8 @@ export const loginUser = (user) => {
 };
 
 export const logoutUser = () => {
+  // sessionStorage 에 저장했던 JWT 토큰을 삭제함.
+  sessionStorage.removeItem("userToken");
   return {
     type: LOGOUT_USER,
     user: null,
