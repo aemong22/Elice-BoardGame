@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import "./DetailContents.css";
 
-function DetailContents() {
+function DetailContents({ gameData }) {
   return (
     <>
       <React.Fragment>
@@ -29,13 +29,8 @@ function DetailContents() {
               }}
             >
               <div className="context">
-                <div className="detail-title">보드게임 이름</div>
-                <div className="detail-description">
-                  보드게임 설명입니다. 보드게임 설명입니다.보드게임
-                  설명입니다.보드게임 설명입니다.보드게임 설명입니다.보드게임
-                  설명입니다.보드게임 설명입니다.보드게임 설명입니다.보드게임
-                  설명입니다.보드게임 설명입니다보드게임 설명입니다.
-                </div>
+                <div className="detail-title">{gameData.game_name}</div>
+                <div className="detail-description">{gameData.description}</div>
               </div>
             </div>
           </Box>
