@@ -4,15 +4,29 @@ import is from "@sindresorhus/is";
 class favoriteController {
     static async addFavorite(req, res, next) {
         try {
-            const email = req.body.email;
-            const boardgame = req.body.boardgame;
+            const userId = req.body.userId;
+            const boardgameId = req.body.boardgameId;
 
             const favorite = await favoriteAuthService.addFavorite({
-                email,
-                boardgame,
+                userId,
+                boardgameId,
             });
 
             res.status(200).json(favorite);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async getFavorites(req, res, next) {
+        try {
+            const id = req.params.id;
+
+            const favorites = await favoriteAuthService.findFavorite({
+                userId: id,
+            });
+
+            res.status(200).json(favorites);
         } catch (error) {
             next(error);
         }

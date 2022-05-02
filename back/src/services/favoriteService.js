@@ -5,9 +5,9 @@ import { UserModel } from "../db/schemas/user";
 import { BoardGameModel } from "../db/schemas/boardgame";
 
 class favoriteAuthService {
-    static async addFavorite({ email, boardgame }) {
-        const user = await UserModel.findOne({ email });
-        const game = await BoardGameModel.findOne({ boardgame });
+    static async addFavorite({ userId, boardgameId }) {
+        const user = await UserModel.findOne({ _id: userId });
+        const game = await BoardGameModel.findOne({ _id: boardgameId });
 
         if (!user) {
             const errorMessage = "해당 메일은 가입 내역이 없습니다.";
@@ -20,11 +20,19 @@ class favoriteAuthService {
         }
 
         const favorite = await FavoriteModel.create({
-            user: email,
+            user: user._id,
             boardgame: game._id,
         });
 
         return favorite;
+    }
+
+    static async findFavorite({ userId }) {
+        const favorites = await FavoriteModel.find({ user: userId }).populate(
+            "boardgame"
+        );
+
+        return favorites;
     }
 }
 
