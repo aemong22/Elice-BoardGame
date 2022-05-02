@@ -4,7 +4,7 @@ class boardServiceController{
     static async findAllContents(req, res, next){
         try {
             const allContents = await boardService.getContents();
-            res.status(200).json(allcontents);
+            res.status(200).json(allContents);
         } catch (error) {
             next(error);
         }

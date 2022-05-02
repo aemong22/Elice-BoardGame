@@ -2,12 +2,14 @@ import { BoardContentModel } from "../db/schemas/boardcontents";
 
 class boardService{
     // content 만들기
-    static async addContent({author,title,content,comment}){
+    static async addContent({author,title,content}){
+        const comment = [];
         const newContent = {
             author,
             title,
             content,
-            comment};
+            comment
+            };
 
         const createNewContents = await BoardContentModel.create(newContent)
         createNewContents.errorMessage = null;
