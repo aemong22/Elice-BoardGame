@@ -141,6 +141,8 @@ class userAuthService {
 
             user = await UserModel.findOneAndUpdate(filter, update, option);
         }
+
+        client.disconnect();
         return user;
     }
 
@@ -198,7 +200,7 @@ class userAuthService {
         }
 
         const client = createClient({
-            url: "redis://boardgame.rrkmly.ng.0001.apn2.cache.amazonaws.com:6379",
+            url: `redis://${process.env.REDIS_URL}:6379`,
         });
 
         client.on("error", (err) => console.log("Redis Client Error", err));
@@ -210,6 +212,8 @@ class userAuthService {
         console.log(client.get(token));
 
         client.expire(token, 300);
+
+        client.disconnect();
 
         return token;
     }
