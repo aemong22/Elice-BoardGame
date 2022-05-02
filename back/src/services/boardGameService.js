@@ -16,23 +16,7 @@ class boardGameService {
         }
     }
 
-    // find board game 함수화
-    static async findBoardGame({ query, sortType, page, perPage }) {
-        // 조건에 따른 전체 보드게임 수 조회
-        const total = await BoardGameModel.countDocuments(query);
-
-        // 조건에 따른 보드게임 조회
-        const games = await BoardGameModel.find(query)
-            .sort(this.sortType({ sortField: sortType }))
-            .skip(perPage * (page - 1))
-            .limit(perPage);
-
-        // 전체 페이지 수 얻기
-        const totalPage = Math.ceil(total / perPage);
-
-        return { totalPage, games };
-    }
-
+    // pagination을 위한 함수
     static async offsetPatinate(findFunc, aggregator, args) {
         const { size, currentPage } = args;
         const games = await findFunc();
@@ -46,9 +30,11 @@ class boardGameService {
     }
 
     static async findGames({ query, sortType, page, perPage }) {
+        // total page 계산
         const aggregator = async () =>
             await BoardGameModel.countDocuments(query);
 
+        // 조건에 따른 보드게임 조회, pagination
         const findFunc = async () =>
             await BoardGameModel.find(query)
                 .sort(this.sortType({ sortField: sortType }))
