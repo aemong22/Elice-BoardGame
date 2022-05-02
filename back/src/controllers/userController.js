@@ -157,8 +157,9 @@ class userController {
     }
 
     // 받은 email을 이용하여 resetToken 생성, 링크 전송
-    static async resetToken(req, res, next) {
+    static async generateResetToken(req, res, next) {
         const email = req.body.email;
+        const CLIENT_BASE_URL = "http://localhost:3000";
 
         const resetToken = await userAuthService.redisToken({ email });
 
@@ -178,7 +179,7 @@ class userController {
             from: `"nuri" <${process.env.NODEMAILER_USER}>`,
             to: email,
             subject: "비밀번호 변경 링크입니다",
-            html: `<b>5분 안에 입력해주세요!!<br/><a href="http://localhost:3000/pwlink/${resetToken}">비밀번호 변경 링크</a></b>`,
+            html: `<b>5분 안에 입력해주세요!!<br/><a href="${CLIENT_BASE_URL}/pwlink/${resetToken}">비밀번호 변경 링크</a></b>`,
         });
 
         console.log("Message sent: %s", info.messageId);
