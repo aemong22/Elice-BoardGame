@@ -16,6 +16,16 @@ function Boardgame() {
         "perPage": 9,
     })
 
+    const initializeCondition = () => {
+        setCondition(current => {
+            let newCondition = { ...current };
+            newCondition.category = "";
+            newCondition.val1 = "";
+            newCondition.type = "";
+            return newCondition;
+        })
+    }
+
     const changeCondition = (key, value) => {
         setCondition(current => {
             let newCondition = { ...current };
@@ -39,7 +49,7 @@ function Boardgame() {
                         <FilterAltOutlinedIcon className='boardgame-header-menu-icon' />
                         <div className='boardgame-header-menu'>
                         {
-                            condition.category !== '' ? condition.category : null
+                            condition.category !== '' ? (<span>{condition.category} : {condition.val1}</span>): 'filter'
                         }
                         </div>
                     </div>
@@ -52,6 +62,7 @@ function Boardgame() {
             <div className={ open ? 'boardgame-category active' : 'boardgame-category' }>
                 <BoardgameCategory 
                     condition={condition}
+                    initializeCondition={initializeCondition}
                     changeCondition={changeCondition}
                     changeOpen={changeOpen}
                 />

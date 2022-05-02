@@ -19,7 +19,7 @@ function BoardgameData({ condition, changeCondition }) {
                 { withCredentials: true }
             ).then((res) => {
                 setBoardgames(res.data.boardGames);
-                setTotalPage(res.data.totalPage); 
+                setTotalPage(res.data.totalPage);
             })
         } catch (err) {
             console.log("errer message: ", err)

@@ -7,7 +7,7 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
-function BoardgameCategory({ condition, changeCondition, changeOpen }) {
+function BoardgameCategory({ condition, initializeCondition, changeCondition, changeOpen }) {
     const [openPlayer, setOpenPlayer] = useState(false);
     const [openAge, setOpenAge] = useState(false);
     const [openComplexity, setOpenComplexity] = useState(false);
@@ -32,6 +32,9 @@ function BoardgameCategory({ condition, changeCondition, changeOpen }) {
                         component="nav"
                         aria-labelledby="nested-list-subheader">
 
+                    <ListItemButton onClick={initializeCondition}>
+                      <ListItemText primary="최신 보드게임 보기" />
+                    </ListItemButton>
                     <ListItemButton onClick={() => { setOpenPlayer(!openPlayer) }}>
                       <ListItemText primary="게임 인원" />
                       {openPlayer ? <ExpandLess /> : <ExpandMore />}
@@ -45,8 +48,8 @@ function BoardgameCategory({ condition, changeCondition, changeOpen }) {
                                 onChange={()=> {
                                   changeCondition("category", "player")
                                   changeCondition("val1", data)}}
-                                checked={condition?.val1 === data} />
-                              <ListItemText primary={data} /><h5>인</h5>
+                                checked={condition?.category === "player" && condition?.val1 === data} />
+                              <ListItemText primary={data} />
                             </ListItemButton>
                           ))
                         }
@@ -66,7 +69,7 @@ function BoardgameCategory({ condition, changeCondition, changeOpen }) {
                                 onChange={()=> {
                                   changeCondition("category", "complexity")
                                   changeCondition("val1", data)}}
-                                checked={condition?.val1 === data} />
+                                checked={condition?.category === "complexity" && condition?.val1 === data} />
                               <ListItemText primary={data} />
                             </ListItemButton>
                           ))
