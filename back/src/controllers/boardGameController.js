@@ -10,6 +10,10 @@ class boardgameController {
                 page,
                 perPage,
             });
+
+            if (recentlyGames.errorMessage)
+                throw new Error(recentlyGames.errorMessage);
+
             res.status(200).json(recentlyGames);
         } catch (error) {
             next(error);
@@ -21,6 +25,11 @@ class boardgameController {
         try {
             const gameId = req.params.id;
             const games = await boardGameService.findByGameId({ gameId });
+
+            if (games.errorMessage) {
+                throw new Error(games.errorMessage);
+            }
+
             res.status(200).json(games);
         } catch (error) {
             next(error);
@@ -42,6 +51,7 @@ class boardgameController {
         } = req.query;
 
         let games = null;
+
         try {
             switch (category) {
                 case "player":
@@ -92,8 +102,8 @@ class boardgameController {
                     break;
             }
 
-            if (errorMessage) {
-                throw new Error(errorMessage);
+            if (games.errorMessage) {
+                throw new Error(games.errorMessage);
             }
 
             res.status(200).json(games);
@@ -111,6 +121,8 @@ class boardgameController {
                 page,
                 perPage,
             });
+
+            if (games.errorMessage) throw new Error(games.errorMessage);
 
             res.status(200).json({ totalPage, games });
         } catch (error) {

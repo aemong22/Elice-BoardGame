@@ -41,9 +41,8 @@ class boardGameService {
                 .skip(perPage * (page - 1))
                 .limit(perPage);
 
-        const errorMessage = !findFunc
-            ? "조건에 맞는 보드게임이 없습니다."
-            : null;
+        const errorMessage =
+            findFunc.length === 0 ? "조건에 맞는 보드게임이 없습니다." : null;
 
         const { games, totalPage } = await this.offsetPatinate(
             findFunc,
@@ -56,6 +55,10 @@ class boardGameService {
     // 최신 게임 전체 조회(보드게임 메인 페이지 default 조회)
     static async findByRecentlyGames({ page, perPage }) {
         const total = await RecentBoardGameModel.countDocuments({});
+
+        if (total === 0)
+            return { errorMessage: "저장된 보드게임 데이터가 없습니다." };
+
         const boardGames = await RecentBoardGameModel.find({})
             .skip(perPage * (page - 1))
             .limit(perPage);
@@ -68,6 +71,9 @@ class boardGameService {
     // game_id로 조회
     static async findByGameId({ gameId }) {
         const games = await BoardGameModel.findOne({ game_id: gameId });
+
+        if (!games) return { errorMessage: "game id가 존재하지 않습니다." };
+
         return games;
     }
 
@@ -88,9 +94,8 @@ class boardGameService {
             perPage,
         });
 
-        if (games.length === 0) {
-            return new Error("조회된 데이터가 없습니다.");
-        }
+        if (errorMessage) return { errorMessage };
+
         return { totalPage, games };
     }
 
@@ -106,6 +111,8 @@ class boardGameService {
             page,
             perPage,
         });
+
+        if (errorMessage) return { errorMessage };
 
         return { totalPage, games };
     }
@@ -167,6 +174,7 @@ class boardGameService {
         return { totalPage, games };
     }
 
+    // keyword 기준 보드게임 조회
     static async search({ keyword, page, perPage }) {
         const query = {
             $or: [
@@ -181,7 +189,11 @@ class boardGameService {
             perPage,
         });
 
-        if (errorMessage) return errorMessage;
+        if (errorMessage)
+            return {
+                errorMessage:
+                    "검색하신 keyword에 해당하는 보드게임이 없습니다.",
+            };
 
         return { totalPage, games };
     }

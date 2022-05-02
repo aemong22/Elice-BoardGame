@@ -68,6 +68,9 @@ class userController {
         try {
             const _id = req.params.id;
             const user = await userAuthService.getUserInfo({ _id });
+
+            if (user.errorMessage) throw new Error(user.errorMessage);
+
             res.status(200).json(user);
         } catch (error) {
             next(error);
