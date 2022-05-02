@@ -6,6 +6,8 @@ import Collapse from '@mui/material/Collapse';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import CheckIcon from '@mui/icons-material/Check';
+import ToggleButton from '@mui/material/ToggleButton';
 
 function BoardgameCategory({ condition, initializeCondition, changeCondition, changeOpen }) {
     const [openPlayer, setOpenPlayer] = useState(false);
@@ -44,11 +46,17 @@ function BoardgameCategory({ condition, initializeCondition, changeCondition, ch
                         {
                           player.map((data)=> (
                             <ListItemButton sx={{ height: '40px' }}>
-                              <input type="checkbox" 
-                                onChange={()=> {
+                              <ToggleButton
+                                sx={{ width: "25px", height: "25px", borderRadius: "50px", marginRight: "10px" }}
+                                value="check"
+                                selected={condition?.category === "player" && condition?.val1 === data}
+                                onChange={() => {
                                   changeCondition("category", "player")
-                                  changeCondition("val1", data)}}
-                                checked={condition?.category === "player" && condition?.val1 === data} />
+                                  changeCondition("val1", data)
+                                }}
+                              >
+                                <CheckIcon sx={{ width: '10px', height: '10px' }}/>
+                              </ToggleButton>
                               <ListItemText primary={data} />
                             </ListItemButton>
                           ))
@@ -65,11 +73,17 @@ function BoardgameCategory({ condition, initializeCondition, changeCondition, ch
                         {
                           complexity.map((data)=> (
                             <ListItemButton sx={{ height: '40px' }}>
-                              <input type="checkbox" 
-                                onChange={()=> {
+                              <ToggleButton
+                                sx={{ width: "25px", height: "25px", borderRadius: "50px", marginRight: "10px" }}
+                                value="check"
+                                selected={condition?.category === "complexity" && condition?.val1 === data}
+                                onChange={() => {
                                   changeCondition("category", "complexity")
-                                  changeCondition("val1", data)}}
-                                checked={condition?.category === "complexity" && condition?.val1 === data} />
+                                  changeCondition("val1", data)
+                                }}
+                              >
+                                <CheckIcon sx={{ width: '10px', height: '10px' }}/>
+                              </ToggleButton>
                               <ListItemText primary={data} />
                             </ListItemButton>
                           ))
@@ -86,11 +100,17 @@ function BoardgameCategory({ condition, initializeCondition, changeCondition, ch
                         {
                           age.map((data)=> (
                             <ListItemButton sx={{ height: '40px' }}>
-                              <input type="checkbox" 
-                                onChange={()=> {
+                              <ToggleButton
+                                sx={{ width: "25px", height: "25px", borderRadius: "50px", marginRight: "10px" }}
+                                value="check"
+                                selected={condition?.val1 === data}
+                                onChange={() => {
                                   changeCondition("category", "age")
-                                  changeCondition("val1", data)}}
-                                checked={condition?.val1 === data} />
+                                  changeCondition("val1", data)
+                                }}
+                              >
+                                <CheckIcon sx={{ width: '10px', height: '10px' }}/>
+                              </ToggleButton>
                               <ListItemText primary={data} />
                             </ListItemButton>
                           ))
@@ -107,11 +127,17 @@ function BoardgameCategory({ condition, initializeCondition, changeCondition, ch
                         {
                           theme.map((data)=> (
                             <ListItemButton sx={{ height: '40px' }}>
-                              <input type="checkbox" 
-                                onChange={()=> {
+                              <ToggleButton
+                                sx={{ width: "25px", height: "25px", borderRadius: "50px", marginRight: "10px" }}
+                                value="check"
+                                selected={condition?.val1 === data}
+                                onChange={() => {
                                   changeCondition("category", "theme")
-                                  changeCondition("val1", data)}}
-                                checked={condition?.val1 === data} />
+                                  changeCondition("val1", data)
+                                }}
+                              >
+                                <CheckIcon sx={{ width: '10px', height: '10px' }}/>
+                              </ToggleButton>
                               <ListItemText primary={data} />
                             </ListItemButton>
                           ))
@@ -128,11 +154,17 @@ function BoardgameCategory({ condition, initializeCondition, changeCondition, ch
                         {
                           time.map((data)=> (
                             <ListItemButton sx={{ height: '40px' }}>
-                              <input type="checkbox" 
-                                onChange={()=> {
+                              <ToggleButton
+                                sx={{ width: "25px", height: "25px", borderRadius: "50px", marginRight: "10px" }}
+                                value="check"
+                                selected={condition?.val1 === data}
+                                onChange={() => {
                                   changeCondition("category", "time")
-                                  changeCondition("val1", data)}}
-                                checked={condition?.val1 === data} />
+                                  changeCondition("val1", data)
+                                }}
+                              >
+                                <CheckIcon sx={{ width: '10px', height: '10px' }}/>
+                              </ToggleButton>
                               <ListItemText primary={data} />
                             </ListItemButton>
                           ))
