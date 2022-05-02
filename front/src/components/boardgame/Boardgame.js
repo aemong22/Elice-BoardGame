@@ -9,13 +9,24 @@ import SearchField from "./SearchField";
 function Boardgame() {
     const [open, setOpen] = useState(false);
     const [condition, setCondition] = useState({ 
-        "player": "",
-        "age": "",
-        "theme": "",
-        "time": "",
-        "complexity": "",
-        "type": ""
+        "category": "",
+        "val1": "",
+        "type": "", //rank
+        "page": 1,
+        "perPage": 9,
     })
+
+    const changeCondition = (key, value) => {
+        setCondition(current => {
+            let newCondition = { ...current };
+            newCondition[key] = value;
+            return newCondition;
+        })
+    }
+
+    const changeOpen = () => {
+        setOpen(!open);
+    }
 
     return (
         <>
@@ -28,24 +39,21 @@ function Boardgame() {
                         <FilterAltOutlinedIcon className='boardgame-header-menu-icon' />
                         <div className='boardgame-header-menu'>
                         {
-                            Object.keys(condition).map((key) => (
-                                condition[key] !== '' ? key : null
-                            ))
+                            condition.category !== '' ? condition.category : null
                         }
                         </div>
                     </div>
                     <SearchField />
                 </div>
                 <div className='boardgames'>
-                    <BoardgameData condition={condition} />
+                    <BoardgameData condition={condition} changeCondition={changeCondition}/>
                 </div>
             </div>
             <div className={ open ? 'boardgame-category active' : 'boardgame-category' }>
                 <BoardgameCategory 
                     condition={condition}
-                    setCondition={setCondition}
-                    open={open}
-                    setOpen={setOpen}
+                    changeCondition={changeCondition}
+                    changeOpen={changeOpen}
                 />
             </div>
         </>
