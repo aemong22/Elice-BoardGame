@@ -22,6 +22,11 @@ class boardService{
         const AllContents = await BoardContentModel.find({});
         return AllContents;
     }
+
+    static async getContent({ contentid }){
+        const getContent = await BoardContentModel.findById(contentid);
+        return getContent;
+    }
     
     // content 삭제하기
     static async deleteContent({contentid}){

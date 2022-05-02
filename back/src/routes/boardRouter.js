@@ -11,7 +11,7 @@ boardRouter.get("/boardcontents",boardServiceController.findAllContents);
 boardRouter.post("/boardcontents/create",boardServiceController.createContents);
 
 // // 선택 content 조회
-// boardRouter.get("/boardcontents/:id",boardServiceController);
+boardRouter.get("/boardcontents/:id",boardServiceController.getBoard);
 
 // // content 삭제
 // boardRouter.delete("/boardcontents/:id/delete",boardServiceController);

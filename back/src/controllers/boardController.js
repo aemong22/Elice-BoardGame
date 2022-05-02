@@ -10,6 +10,16 @@ class boardServiceController{
         }
     }
 
+static async getBoard(req, res, next){
+    try {
+        const contentid = req.params.id;
+        const getboard = await boardService.getContent({contentid});
+        res.status(200).json(getboard);
+    } catch (error) {
+        next(error);
+    }
+}
+
     static async createContents(req, res, next){
         try {
 
