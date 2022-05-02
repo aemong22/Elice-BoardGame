@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { userAuthRouter } from "./routes/userRouter";
+import { favoriteAuthRouter } from "./routes/favoriteRouter";
 
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 import { boardGameRouter } from "./routes/boardGameRouter";
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(userAuthRouter);
 app.use(boardGameRouter);
+app.use(favoriteAuthRouter);
 
 app.use(errorMiddleware);
 

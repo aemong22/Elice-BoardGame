@@ -75,4 +75,4 @@ function Boardgame() {
     )
 }
 
-export default Boardgame
+export default Boardgame;

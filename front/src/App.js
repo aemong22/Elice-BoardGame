@@ -7,10 +7,10 @@ import * as Api from "./api";
 import Home from "./components/home/Home";
 import Intro from "./components/intro/Intro";
 import Boardgame from "./components/boardgame/Boardgame";
-import About from "./components/about/About";
 import RegisterForm from "./components/user/RegisterForm";
 import BoardgameDetail from "./components/detail/BoardgameDetail";
 import GoogleLoading from "./components/user/GoogleLoading";
+import Header from "./components/Header";
 
 function App() {
   // 유저 로그인 상태 관련 코드 추가하기
@@ -42,10 +42,10 @@ function App() {
 
   return (
     <Router>
+      <Header />
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/intro" exact element={<Intro />} />
-        <Route path="/about" exact element={<About />} />
         <Route path="/boardgame" exact element={<Boardgame />} />
         <Route path="/boardgame/detail/:id" exact element={<BoardgameDetail />} />
         <Route path="/register" exact element={<RegisterForm />} />

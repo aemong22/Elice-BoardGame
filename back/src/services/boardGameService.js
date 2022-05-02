@@ -1,10 +1,10 @@
 import { BoardGameModel } from "../db/schemas/boardgame";
-import { BoardGameModel2020 } from "../db/schemas/boardgame2020";
+import { RecentBoardGameModel } from "../db/schemas/recentBoardGame";
 
 class boardGameService {
     // 정렬 type 설정
-    static sortType({ type }) {
-        switch (type) {
+    static sortType({ sortField }) {
+        switch (sortField) {
             case "rank":
                 return { rank: 1 };
             case "rating":
@@ -16,27 +16,43 @@ class boardGameService {
         }
     }
 
-    // find board game 함수화
-    static async findBoardGame({ options, type, page, perPage }) {
-        // 조건에 따른 전체 보드게임 수 조회
-        const total = await BoardGameModel.countDocuments(options);
+    // pagination을 위한 함수
+    static async offsetPatinate(findFunc, aggregator, args) {
+        const { size, currentPage } = args;
+        const games = await findFunc();
+        const total = await aggregator();
 
-        // 조건에 따른 보드게임 조회
-        const games = await BoardGameModel.find(options)
-            .sort(this.sortType({ type }))
-            .skip(perPage * (page - 1))
-            .limit(perPage);
+        let totalPage = Math.ceil(total / size);
+        return {
+            games,
+            totalPage,
+        };
+    }
 
-        // 전체 페이지 수 얻기
-        const totalPage = Math.ceil(total / perPage);
+    static async findGames({ query, sortType, page, perPage }) {
+        // total page 계산
+        const aggregator = async () =>
+            await BoardGameModel.countDocuments(query);
 
+        // 조건에 따른 보드게임 조회, pagination
+        const findFunc = async () =>
+            await BoardGameModel.find(query)
+                .sort(this.sortType({ sortField: sortType }))
+                .skip(perPage * (page - 1))
+                .limit(perPage);
+
+        const { games, totalPage } = await this.offsetPatinate(
+            findFunc,
+            aggregator,
+            { size: perPage, currentPage: page }
+        );
         return { totalPage, games };
     }
 
     // 최신 게임 전체 조회(보드게임 메인 페이지 default 조회)
     static async findByRecentlyGames({ page, perPage }) {
-        const total = await BoardGameModel2020.countDocuments({});
-        const boardGames = await BoardGameModel2020.find({})
+        const total = await RecentBoardGameModel.countDocuments({});
+        const boardGames = await RecentBoardGameModel.find({})
             .skip(perPage * (page - 1))
             .limit(perPage);
 
@@ -59,18 +75,18 @@ class boardGameService {
     }
 
     // player 기준 범위 안 보드게임 조회
-    static async findByPlayer({ playerCount, type, page, perPage }) {
+    static async findByPlayer({ playerCount, sortType, page, perPage }) {
         // 인원 수 조회 option
-        const options = {
+        const query = {
             $nor: [
                 { min_player: { $gt: playerCount } },
                 { max_player: { $lt: playerCount } },
             ],
         };
 
-        const { totalPage, games } = await this.findBoardGame({
-            options,
-            type,
+        const { totalPage, games } = await this.findGames({
+            query,
+            sortType,
             page,
             perPage,
         });
@@ -82,14 +98,14 @@ class boardGameService {
     }
 
     // 연령별 기준 보드게임 조회
-    static async findByAge({ age, type, page, perPage }) {
-        const options = {
+    static async findByAge({ age, sortType, page, perPage }) {
+        const query = {
             min_age: { $lte: age },
         };
 
-        const { totalPage, games } = await this.findBoardGame({
-            options,
-            type,
+        const { totalPage, games } = await this.findGames({
+            query,
+            sortType,
             page,
             perPage,
         });
@@ -98,13 +114,13 @@ class boardGameService {
     }
 
     // theme 기준 정렬
-    static async findByTheme({ theme, type, page, perPage }) {
-        const options = {
-            theme: { $in: [theme] },
+    static async findByTheme({ theme, sortType, page, perPage }) {
+        const query = {
+            domains: { $regex: theme, $options: "i" },
         };
-        const { totalPage, games } = await this.findBoardGame({
-            options,
-            type,
+        const { totalPage, games } = await this.findGames({
+            query,
+            sortType,
             page,
             perPage,
         });
@@ -113,17 +129,17 @@ class boardGameService {
     }
 
     // 시간 기준 정렬
-    static async findByTime({ time, type, page, perPage }) {
-        const options = {
+    static async findByTime({ time, sortType, page, perPage }) {
+        const query = {
             $nor: [
                 { min_playing_time: { $gt: time } },
                 { max_playing_time: { $lt: time } },
             ],
         };
 
-        const { totalPage, games } = await this.findBoardGame({
-            options,
-            type,
+        const { totalPage, games } = await this.findGames({
+            query,
+            sortType,
             page,
             perPage,
         });
@@ -131,16 +147,33 @@ class boardGameService {
         return { totalPage, games };
     }
 
-    static async findByComplexity({ complexity, type, page, perPage }) {
-        const options = {
+    static async findByComplexity({ complexity, sortType, page, perPage }) {
+        const query = {
             complexity_average: {
                 $gte: Math.floor(complexity),
                 $lte: Math.floor(complexity) + 1,
             },
         };
-        const { totalPage, games } = await this.findBoardGame({
-            options,
-            type,
+        const { totalPage, games } = await this.findGames({
+            query,
+            sortType,
+            page,
+            perPage,
+        });
+
+        return { totalPage, games };
+    }
+
+    static async search({ keyword, page, perPage }) {
+        const query = {
+            $or: [
+                // 문자열 포함 조회
+                { domains: { $regex: keyword, $options: "i" } },
+                { game_name: { $regex: keyword, $options: "i" } },
+            ],
+        };
+        const { totalPage, games } = await this.findGames({
+            query,
             page,
             perPage,
         });

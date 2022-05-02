@@ -17,18 +17,18 @@ class userController {
             const password = req.body.password;
             const phone_number = req.body.phone_number;
 
-            const createdUser = await userAuthService.addUser({
+            const { user, errorMessage } = await userAuthService.addUser({
                 user_name,
                 email,
                 password,
                 phone_number,
             });
 
-            if (createdUser.errorMessage) {
-                throw new Error(createdUser.errorMessage);
+            if (errorMessage) {
+                throw new Error(errorMessage);
             }
 
-            res.status(200).json(createdUser);
+            res.status(200).json(user);
         } catch (error) {
             next(error);
         }
@@ -36,7 +36,7 @@ class userController {
 
     static async findAllUser(req, res, next) {
         try {
-            const users = await userAuthService.getUser();
+            const users = await userAuthService.getUsers();
 
             res.status(200).json(users);
         } catch (error) {
@@ -48,7 +48,7 @@ class userController {
         try {
             const { email, password } = req.body;
 
-            const user = await userAuthService.getSingleUser({
+            const user = await userAuthService.getUser({
                 email,
                 password,
             });
@@ -75,22 +75,22 @@ class userController {
     }
 
     //비밀번호'만' 변경하는 controller
-    static async findPassword(req, res, next) {
+    static async resetPassword(req, res, next) {
         try {
             const resetToken = req.body.resetToken;
-            const password = req.body.password;
+            const newPassword = req.body.password;
 
-            const toUpdate = { password };
-            const resetPassword = await userAuthService.setPassword({
+            const toUpdate = { newPassword };
+            const { user, errorMessage } = await userAuthService.setPassword({
                 resetToken,
                 toUpdate,
             });
 
-            if (resetPassword.errorMessage) {
-                throw new Error(resetPassword.errorMessage);
+            if (errorMessage) {
+                throw new Error(errorMessage);
             }
 
-            res.status(200).json(resetPassword);
+            res.status(200).json(user);
         } catch (error) {
             next(error);
         }
@@ -157,8 +157,9 @@ class userController {
     }
 
     // 받은 email을 이용하여 resetToken 생성, 링크 전송
-    static async resetToken(req, res, next) {
+    static async generateResetToken(req, res, next) {
         const email = req.body.email;
+        const CLIENT_BASE_URL = "http://localhost:3000";
 
         const resetToken = await userAuthService.redisToken({ email });
 
@@ -178,7 +179,7 @@ class userController {
             from: `"nuri" <${process.env.NODEMAILER_USER}>`,
             to: email,
             subject: "비밀번호 변경 링크입니다",
-            html: `<b>5분 안에 입력해주세요!!<br/><a href="http://localhost:3000/pwlink/${resetToken}">비밀번호 변경 링크</a></b>`,
+            html: `<b>5분 안에 입력해주세요!!<br/><a href="${CLIENT_BASE_URL}/pwlink/${resetToken}">비밀번호 변경 링크</a></b>`,
         });
 
         console.log("Message sent: %s", info.messageId);
