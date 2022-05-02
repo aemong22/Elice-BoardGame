@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./Home.css";
-import Header from "../Header";
 import Chart from "./Chart";
 import Detail from "./Detail";
 import Member from "./Member";

@@ -1,6 +1,6 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../store/actions/userAction";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Button from "@mui/material/Button";
@@ -23,6 +23,10 @@ function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const userState = useSelector((state) => (state ? state.userReducer : {}));
+
+  const isLogin = !!userState?.user;
+
   const logout = () => {
     // dispatch 함수를 이용해 로그아웃함.
     dispatch(logoutUser());
@@ -32,26 +36,28 @@ function Header() {
 
   return (
     <>
-      <div className="header">
-        <ThemeProvider theme={theme}>
-          <ul className="header-navigate">
-            <li onClick={() => navigate("/")}>
-              <Button variant="text" color="primary">
-                Home
-              </Button>
-            </li>
-            <li onClick={() => navigate("/boardgame")}>
-              <Button>Boardgame</Button>
-            </li>
-            <li>
-              <Button>Mypage</Button>
-            </li>
-            <li onClick={logout} style={{ cursor: "pointer" }}>
-              <Button>Logout</Button>
-            </li>
-          </ul>
-        </ThemeProvider>
-      </div>
+      {isLogin && (
+        <div className="header">
+          <ThemeProvider theme={theme}>
+            <ul className="header-navigate">
+              <li onClick={() => navigate("/")}>
+                <Button variant="text" color="primary">
+                  Home
+                </Button>
+              </li>
+              <li onClick={() => navigate("/boardgame")}>
+                <Button>Boardgame</Button>
+              </li>
+              <li>
+                <Button>Mypage</Button>
+              </li>
+              <li onClick={logout} style={{ cursor: "pointer" }}>
+                <Button>Logout</Button>
+              </li>
+            </ul>
+          </ThemeProvider>
+        </div>
+      )}
     </>
   );
 }
