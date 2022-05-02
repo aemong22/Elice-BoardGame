@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./Home.css";
-import Header from "../Header";
 import Chart from "./Chart";
 import Detail from "./Detail";
 import Member from "./Member";
@@ -10,7 +9,9 @@ import Member from "./Member";
 function Home() {
   const navigate = useNavigate();
   const [isFetchCompleted, setIsFetchCompleted] = useState(false);
-  const userState = useSelector((state) => state.userReducer.user);
+  const userState = useSelector((state) =>
+    state ? state.userReducer.user : {}
+  );
 
   // 만약 로그인 된 상태가 아니라면 intro 페이지로 이동시키기
   useEffect(() => {
@@ -28,7 +29,6 @@ function Home() {
 
   return (
     <>
-      <Header />
       <div id="main_wrapper">
         <div id="main_title_wrapper">
           <div id="main_title">Boardmon으로 보드게임을 시작해보자!</div>
