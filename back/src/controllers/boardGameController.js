@@ -1,6 +1,16 @@
 import { boardGameService } from "../services/boardGameService";
 
 class boardgameController {
+    // insert 시에만 사용하는 함수
+    static async insertData(req, res, next) {
+        try {
+            const games = await boardGameService.insert();
+            res.status(200).json(games);
+        } catch (error) {
+            next(error);
+        }
+    }
+
     // 20년 최신 게임 전체 조회
     static async findRecentlyGames(req, res, next) {
         try {

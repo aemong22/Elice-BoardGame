@@ -4,7 +4,6 @@ const BoardGameSchema = new Schema(
     {
         index: {
             type: Number,
-            unique: true,
             required: true,
         },
         un_named: {
@@ -102,6 +101,6 @@ const BoardGameSchema = new Schema(
     }
 );
 
-const BoardGameModel = model("Boardgame", BoardGameSchema);
+const BoardGameModel = model("boardgames", BoardGameSchema);
 
 export { BoardGameModel };

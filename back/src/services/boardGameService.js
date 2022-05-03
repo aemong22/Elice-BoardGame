@@ -1,7 +1,49 @@
 import { BoardGameModel } from "../db/schemas/boardgame";
-import { RecentBoardGameModel } from "../db/schemas/recentBoardGame";
+import fs from "fs";
 
 class boardGameService {
+    // insert 후 테스트용 함수
+    static async insert() {
+        fs.readFile(
+            "/Users/nowgnas/projects/board-game-recommendation-project/back/src/controllers/finalDataset.json",
+            (err, json) => {
+                const jsonData = JSON.parse(json);
+                jsonData.data.forEach(async (element) => {
+                    const item = {
+                        //
+                        index: element.index,
+                        un_named: element.un_named,
+                        game_id: element.game_id,
+                        game_name: element.game_name,
+                        year: element.year,
+                        rank: element.rank,
+                        average_rating: element.average_rating,
+                        bayes_average: element.bayes_average,
+                        user_rated: element.user_rated,
+                        url: element.url,
+                        thumbnail: element.thumbnail,
+                        wordcloud: element.wordcloud,
+                        min_player: element.min_player,
+                        max_player: element.max_player,
+                        min_age: element.min_age,
+                        playing_time: element.playing_time,
+                        min_playing_time: element.min_playing_time,
+                        max_playing_time: element.max_playing_time,
+                        complexity_average: element.complexity_average,
+                        theme: element.theme,
+                        image: element.image,
+                        description: element.description,
+                        recommend_id: element.recommend_id,
+                    };
+                    await BoardGameModel.create(item);
+                });
+            }
+        );
+
+        const games = await BoardGameModel.create();
+        return games;
+    }
+
     // 정렬 type 설정
     static sortType({ sortField }) {
         switch (sortField) {
@@ -54,18 +96,19 @@ class boardGameService {
 
     // 최신 게임 전체 조회(보드게임 메인 페이지 default 조회)
     static async findByRecentlyGames({ page, perPage }) {
-        const total = await RecentBoardGameModel.countDocuments({});
+        const query = {
+            year: { $eq: 2020 },
+        };
 
-        if (total === 0)
-            return { errorMessage: "저장된 보드게임 데이터가 없습니다." };
+        const { totalPage, games, errorMessage } = await this.findGames({
+            query,
+            page,
+            perPage,
+        });
 
-        const boardGames = await RecentBoardGameModel.find({})
-            .skip(perPage * (page - 1))
-            .limit(perPage);
+        if (errorMessage) return { errorMessage };
 
-        const totalPage = Math.ceil(total / perPage);
-
-        return { totalPage, boardGames };
+        return { totalPage, games };
     }
 
     // game_id로 조회
@@ -120,7 +163,7 @@ class boardGameService {
     // theme 기준 정렬
     static async findByTheme({ theme, sortType, page, perPage }) {
         const query = {
-            domains: { $regex: theme, $options: "i" },
+            theme: { $in: [theme] },
         };
         const { totalPage, games, errorMessage } = await this.findGames({
             query,
