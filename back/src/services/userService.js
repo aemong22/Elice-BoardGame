@@ -142,7 +142,6 @@ class userAuthService {
             user = await UserModel.findOneAndUpdate(filter, update, option);
         }
 
-        client.disconnect();
         return user;
     }
 
