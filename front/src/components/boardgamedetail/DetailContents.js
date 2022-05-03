@@ -1,11 +1,25 @@
-import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
+import React, { useState } from "react";
+import { CssBaseline, Box, Container, Fab, Modal } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 import TagBtn from "./TagBtn";
 import "./DetailContents.css";
 
 function DetailContents({ gameData }) {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const style = {
+    position: "absolute",
+    top: "34%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "30%",
+    height: "40%",
+    bgcolor: "background.paper",
+    boxShadow: 24,
+    p: 4,
+  };
   return (
     <>
       <React.Fragment>
@@ -21,7 +35,13 @@ function DetailContents({ gameData }) {
                 width: "50%",
               }}
             >
-              <div className="image"></div>
+              <div className="image">
+                <img
+                  style={{ width: "100%" }}
+                  src={gameData.image}
+                  alt={gameData.game_name}
+                />
+              </div>
             </div>
             <div
               style={{
@@ -31,31 +51,32 @@ function DetailContents({ gameData }) {
             >
               <div className="context">
                 <div className="detail-title">{gameData.game_name}</div>
-                {/* <div className="detail-description">
-                  게임 인원 : {gameData.min_player} ~ {gameData.max_player}인용
+                <div style={{ margin: "0 10% 10% 10%" }}>
+                  <TagBtn
+                    minPlayer={gameData.min_player}
+                    maxPlayer={gameData.max_player}
+                    complexity={gameData.complexity_average}
+                    minAge={gameData.min_age}
+                    domains={gameData.domains}
+                    minPlayingTime={gameData.min_playing_time}
+                    maxPlayingTime={gameData.max_playing_time}
+                  />
                 </div>
-                <div className="detail-description">
-                  게임 난이도 : {gameData.complexity_average}
-                </div>
-                <div className="detail-description">
-                  게임 연령 : {gameData.min_age}세 이상
-                </div>
-                <div className="detail-description">
-                  테마 : {gameData.domains}
-                </div>
-                <div className="detail-description">
-                  게임 시간 : {gameData.min_playing_time} ~{" "}
-                  {gameData.max_playing_time}분
-                </div> */}
-                <TagBtn
-                  minPlayer={gameData.min_player}
-                  maxPlayer={gameData.max_player}
-                  complexity={gameData.complexity_average}
-                  minAge={gameData.min_age}
-                  domains={gameData.domains}
-                  minPlayingTime={gameData.min_playing_time}
-                  maxPlayingTime={gameData.max_playing_time}
-                />
+                <span id="wordCloudBtn">
+                  <Fab size="medium" color="primary" aria-label="add">
+                    <AddIcon onClick={handleOpen} />
+                  </Fab>
+                </span>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                  </Box>
+                </Modal>
               </div>
             </div>
           </Box>
