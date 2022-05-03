@@ -3,6 +3,7 @@ import { CssBaseline, Box, Container, Fab, Modal } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import TagBtn from "./TagBtn";
 import "./DetailContents.css";
+import DetailTab from "./DetailTab";
 
 function DetailContents({ gameData }) {
   const [open, setOpen] = useState(false);
@@ -27,7 +28,7 @@ function DetailContents({ gameData }) {
         <Container maxWidth="md">
           <Box
             className="detail-container"
-            sx={{ bgcolor: "#cfe8fc", height: "100vh" }}
+            sx={{ bgcolor: "#F4F2EF", height: "100vh", padding: "5% 5% 5% 5%" }}
           >
             <div className="container-top">
               <div className="container-top-left">
@@ -72,7 +73,9 @@ function DetailContents({ gameData }) {
               </div>
             </div>
 
-            <div className="container-bottom">아래</div>
+            <div className="container-bottom">
+              <DetailTab />
+            </div>
           </Box>
         </Container>
       </React.Fragment>
