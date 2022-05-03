@@ -334,7 +334,7 @@ paths:
         '204':
           description: "조건에 맞는 데이터가 없습니다."            
   /favorite:
-    post:
+    put:
       tags:
         - favorite
       summary: 유저별 찜 목록 추가하기
@@ -378,7 +378,30 @@ paths:
                   user:
                     type: string
                   boardgame:
-                    $ref: '#/components/schmeas/BoardGame'
+                      $ref: '#/components/schemas/BoardGame'
+  /favorite/{boardgame}:
+    get:
+      tags:
+        - favorite
+      summary: 찜한 보드게임인지 아닌지 판별
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: boardgame
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 판별 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  favorite:
+                    type: boolean
 components:
   securitySchemes:
     bearerAuth:

@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import { sign, refresh } from "../utils/jwt-utils";
 import { UserModel } from "../db/schemas/user";
 import { TokenModel } from "../db/schemas/token";
+import { FavoriteModel } from "../db/schemas/favorite";
 import { createClient } from "redis";
 
 class userAuthService {
@@ -28,6 +29,8 @@ class userAuthService {
 
         // db에 저장
         const createdUser = await UserModel.create(newUser);
+        await FavoriteModel.create({ user: createdUser._id });
+
         createdUser.errorMessage = null;
 
         return createdUser;
@@ -195,9 +198,8 @@ class userAuthService {
             return { errorMessage };
         }
 
-        // const client = createClient();
         const client = createClient({
-            url: "redis://15.165.133.111:6379",
+            url: `redis://${process.env.REDIS_URL}:6379`,
         });
 
         client.on("error", (err) => console.log("Redis Client Error", err));

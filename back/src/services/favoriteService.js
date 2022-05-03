@@ -19,10 +19,10 @@ class favoriteAuthService {
             return { errorMessage };
         }
 
-        const favorite = await FavoriteModel.create({
-            user: user._id,
-            boardgame: game._id,
-        });
+        const favorite = await FavoriteModel.updateOne(
+            { user: user._id },
+            { $push: { boardgame: game._id } }
+        );
 
         return favorite;
     }
@@ -33,6 +33,20 @@ class favoriteAuthService {
         );
 
         return favorites;
+    }
+
+    // 로그인한 유저가 찜한 보드게임인지 아닌지 판별
+    static async findDetailFavorite({ userId, boardgameId }) {
+        const favorite = await FavoriteModel.findOne({
+            userId,
+            boardgame: { $in: [boardgameId] },
+        });
+
+        if (!favorite) {
+            return false;
+        }
+
+        return true;
     }
 }
 
