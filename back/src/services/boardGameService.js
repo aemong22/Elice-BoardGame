@@ -76,7 +76,7 @@ class boardGameService {
 
     // 상세 페이지 보드게임 조회 game_id로 조회
     static async findByGameId({ gameId }) {
-        const recommendGames = [];
+        const recommendGames = {};
         // const games = await BoardGameModel.findOne({ game_id: gameId });
         const games = await this.findBoardGame({ gameId });
 
