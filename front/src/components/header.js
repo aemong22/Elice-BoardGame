@@ -33,7 +33,7 @@ function Header() {
     // 기본 페이지로 돌아감.
     navigate("/");
   };
-
+  if (window.location.pathname === "/pwlink") return null;
   return (
     <>
       {isLogin && (
@@ -48,7 +48,7 @@ function Header() {
               <li onClick={() => navigate("/boardgame")}>
                 <Button>Boardgame</Button>
               </li>
-              <li>
+              <li onClick={() => navigate("/mypage")}>
                 <Button>Mypage</Button>
               </li>
               <li onClick={logout} style={{ cursor: "pointer" }}>

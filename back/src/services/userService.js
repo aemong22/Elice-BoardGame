@@ -107,9 +107,7 @@ class userAuthService {
 
     //비밀번호 찾기 후 변경
     static async setPassword({ resetToken, toUpdate }) {
-        const client = createClient({
-            url: "boardgame.rrkmly.ng.0001.apn2.cache.amazonaws.com:6379",
-        });
+        const client = createClient();
 
         client.on("error", (err) => console.log("Redis Client Error", err));
 
@@ -141,7 +139,6 @@ class userAuthService {
 
             user = await UserModel.findOneAndUpdate(filter, update, option);
         }
-
         return user;
     }
 
