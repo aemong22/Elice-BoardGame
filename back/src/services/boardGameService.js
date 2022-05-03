@@ -68,9 +68,34 @@ class boardGameService {
         return { totalPage, games };
     }
 
+    static findBoardGame({ gameId }) {
+        const games = BoardGameModel.findOne({ game_id: gameId });
+        return games;
+    }
+
     // game_id로 조회
     static async findByGameId({ gameId }) {
-        const games = await BoardGameModel.findOne({ game_id: gameId });
+        const recommendGames = [];
+        // const games = await BoardGameModel.findOne({ game_id: gameId });
+        const games = await this.findBoardGame({ gameId });
+
+        if (games.recommend_id.length === 0)
+            games.recommend_id = "연관된 보드게임이 없습니다.";
+
+        games.recommend_id.forEach(async (element) => {
+            const singleGame = await this.findBoardGame({ gameId: element });
+
+            // console.log(singleGame.game_name);
+            // console.log(singleGame.image);
+
+            let item = {
+                name: singleGame.game_name,
+                image: singleGame.image,
+            };
+
+            recommendGames.push(item);
+            // console.log(recommendGames);
+        });
 
         if (!games) return { errorMessage: "game id가 존재하지 않습니다." };
 
