@@ -213,8 +213,6 @@ class userAuthService {
 
         client.expire(token, 300);
 
-        client.disconnect();
-
         return token;
     }
 }
