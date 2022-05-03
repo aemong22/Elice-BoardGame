@@ -13,12 +13,12 @@ function BoardgameDetail() {
   const fetchBoardgameDetail = async (boardgameId) => {
     const res = await Api.get("gameInfo", boardgameId);
     setGameData(res.data);
-    console.log(gameData);
   };
 
   useEffect(() => {
     fetchBoardgameDetail(boardgameId);
     setIsFetchCompleted(true);
+    console.log(gameData);
   }, []);
 
   if (!isFetchCompleted) {

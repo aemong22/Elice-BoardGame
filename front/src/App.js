@@ -11,7 +11,7 @@ import Intro from "./components/intro/Intro";
 import Boardgame from "./components/boardgame/Boardgame";
 import RegisterForm from "./components/user/RegisterForm";
 import Mypage from "./components/mypage/Mypage";
-import BoardgameDetail from "./components/detail/BoardgameDetail";
+import BoardgameDetail from "./components/boardgamedetail/BoardgameDetail";
 import GoogleLoading from "./components/user/GoogleLoading";
 import Header from "./components/Header";
 
