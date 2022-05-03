@@ -68,12 +68,13 @@ class boardGameService {
         return { totalPage, games };
     }
 
+    // game_id로 보드게임 조회
     static findBoardGame({ gameId }) {
         const games = BoardGameModel.findOne({ game_id: gameId });
         return games;
     }
 
-    // game_id로 조회
+    // 상세 페이지 보드게임 조회 game_id로 조회
     static async findByGameId({ gameId }) {
         const recommendGames = [];
         // const games = await BoardGameModel.findOne({ game_id: gameId });
@@ -82,6 +83,7 @@ class boardGameService {
         if (games.recommend_id.length === 0)
             games.recommend_id = "연관된 보드게임이 없습니다.";
 
+        // 연관된 보드게임 정보 얻기 위한 반복문
         games.recommend_id.forEach(async (element) => {
             const singleGame = await this.findBoardGame({ gameId: element });
 
