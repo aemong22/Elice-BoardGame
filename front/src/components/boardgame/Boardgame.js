@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import BoardgameCategory from "./BoardgameCategory";
 import Sorting from "./Sorting";
 import BoardgameData from "./BoardgameData";
+import { categoryName, categoryValue } from "./BoardgameCategoryData"
 import "./Boardgame.css";
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import SearchField from "./SearchField";
@@ -49,9 +50,7 @@ function Boardgame() {
                     <div className='boardgame-header-item' onClick={() => setOpen(!open) }>
                         <FilterAltOutlinedIcon className='boardgame-header-filtered-icon' />
                         <div className='boardgame-header-filtered'>
-                        {
-                            condition.category !== '' ? (<span>{condition.category} : {condition.val1}</span>): 'filter'
-                        }
+                        {condition.category !== '' ? `${categoryName(condition.category)} > ${categoryValue(condition.category, condition.val1)}` : '최신 보드게임 보기'}
                         </div>
                     </div>
                     <SearchField />

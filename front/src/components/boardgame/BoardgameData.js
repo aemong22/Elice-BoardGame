@@ -4,7 +4,7 @@ import BasicPagination from "./BasicPagination";
 import * as Api from "../../api";
 
 function BoardgameData({ condition, changeCondition }) {
-    const [boardgames, setBoardgames] = useState([]);
+    const [boardgames, setBoardgames] = useState(undefined);
     const [totalPage, setTotalPage] = useState(1);
 
     // 보드게임 최근 데이터 불러오기
@@ -52,7 +52,7 @@ function BoardgameData({ condition, changeCondition }) {
         (condition.category !== '' || condition.type !== '') ? conditionGamesHandler() : recentlyGamesHandler();
     }, [condition])
 
-    const boardgameList = boardgames.map((boardgame) => (
+    const boardgameList = boardgames?.map((boardgame) => (
         <BoardgameCard
             key={boardgame?.game_id}
             id={boardgame?.game_id}

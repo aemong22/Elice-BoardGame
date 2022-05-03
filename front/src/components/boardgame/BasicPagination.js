@@ -6,6 +6,7 @@ function BasicPagination({ totalPage, condition, changeCondition }) {
         if (totalPage < condition.page) {
             changeCondition("page", Number(totalPage))
         }
+        // console.log("after- totalPage: ", totalPage, "condition.page: ", condition.page)
     }, [totalPage])
 
     return (
