@@ -52,53 +52,75 @@ class boardgameController {
         } = req.query;
 
         let games = null;
-
-        switch (category) {
-            case "player":
-                games = await boardGameService.findByPlayer({
-                    playerCount: parseInt(categoryValue),
-                    sortType,
-                    page,
-                    perPage,
-                });
-                break;
-            case "age":
-                games = await boardGameService.findByAge({
-                    age: parseInt(categoryValue),
-                    sortType,
-                    page,
-                    perPage,
-                });
-                break;
-            case "theme":
-                games = await boardGameService.findByTheme({
-                    categoryValue,
-                    sortType,
-                    page,
-                    perPage,
-                });
-                break;
-            case "time":
-                games = await boardGameService.findByTime({
-                    time: parseInt(categoryValue),
-                    sortType,
-                    page,
-                    perPage,
-                });
-                break;
-            case "complexity":
-                games = await boardGameService.findByComplexity({
-                    complexity: parseFloat(categoryValue),
-                    sortType,
-                    page,
-                    perPage,
-                });
-                break;
-            default:
-                games = await boardGameService.findAllGames({ page, perPage });
-                break;
+        try {
+            switch (category) {
+                case "player":
+                    games = await boardGameService.findByPlayer({
+                        playerCount: parseInt(categoryValue),
+                        sortType,
+                        page,
+                        perPage,
+                    });
+                    break;
+                case "age":
+                    games = await boardGameService.findByAge({
+                        age: parseInt(categoryValue),
+                        sortType,
+                        page,
+                        perPage,
+                    });
+                    break;
+                case "theme":
+                    games = await boardGameService.findByTheme({
+                        theme: categoryValue,
+                        sortType,
+                        page,
+                        perPage,
+                    });
+                    break;
+                case "time":
+                    games = await boardGameService.findByTime({
+                        time: parseInt(categoryValue),
+                        sortType,
+                        page,
+                        perPage,
+                    });
+                    break;
+                case "complexity":
+                    games = await boardGameService.findByComplexity({
+                        complexity: parseFloat(categoryValue),
+                        sortType,
+                        page,
+                        perPage,
+                    });
+                    break;
+                default:
+                    games = await boardGameService.findAllGames({
+                        page,
+                        perPage,
+                    });
+                    break;
+            }
+            res.status(200).json(games);
+        } catch (error) {
+            next(error);
         }
-        res.status(200).json(games);
+    }
+
+    static async search(req, res, next) {
+        const { keyword, page, perPage } = req.query;
+
+        try {
+            const { totalPage, games } = await boardGameService.search({
+                keyword,
+                page,
+                perPage,
+            });
+
+            res.status(200).json({ totalPage, games });
+        } catch (error) {
+            next(error);
+        }
     }
 }
 

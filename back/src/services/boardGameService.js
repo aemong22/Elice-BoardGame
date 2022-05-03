@@ -22,7 +22,7 @@ class boardGameService {
         const games = await findFunc();
         const total = await aggregator();
 
-        const totalPage = Math.ceil(total / size);
+        let totalPage = Math.ceil(total / size);
         return {
             games,
             totalPage,
@@ -116,7 +116,7 @@ class boardGameService {
     // theme 기준 정렬
     static async findByTheme({ theme, sortType, page, perPage }) {
         const query = {
-            theme: { $in: [theme] },
+            domains: { $regex: theme, $options: "i" },
         };
         const { totalPage, games } = await this.findGames({
             query,
@@ -157,6 +157,23 @@ class boardGameService {
         const { totalPage, games } = await this.findGames({
             query,
             sortType,
+            page,
+            perPage,
+        });
+
+        return { totalPage, games };
+    }
+
+    static async search({ keyword, page, perPage }) {
+        const query = {
+            $or: [
+                // 문자열 포함 조회
+                { domains: { $regex: keyword, $options: "i" } },
+                { game_name: { $regex: keyword, $options: "i" } },
+            ],
+        };
+        const { totalPage, games } = await this.findGames({
+            query,
             page,
             perPage,
         });
