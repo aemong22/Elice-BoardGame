@@ -19,10 +19,10 @@ class favoriteAuthService {
             return { errorMessage };
         }
 
-        const favorite = await FavoriteModel.create({
-            user: user._id,
-            boardgame: game._id,
-        });
+        const favorite = await FavoriteModel.updateOne(
+            { user: user._id },
+            { $push: { boardgame: game._id } }
+        );
 
         return favorite;
     }

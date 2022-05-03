@@ -344,7 +344,7 @@ paths:
                   games: 
                       $ref: '#/components/schemas/BoardGame'
   /favorite:
-    post:
+    put:
       tags:
         - favorite
       summary: 유저별 찜 목록 추가하기
