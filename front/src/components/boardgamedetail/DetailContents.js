@@ -28,7 +28,7 @@ function DetailContents({ gameData }) {
         <Container maxWidth="md">
           <Box
             className="detail-container"
-            sx={{ bgcolor: "#F4F2EF", height: "100vh", padding: "5% 5% 5% 5%" }}
+            sx={{ bgcolor: "#F4F2EF", height: "100vh", padding: "0 5% 5% 5%" }}
           >
             <div className="container-top">
               <div className="container-top-left">
