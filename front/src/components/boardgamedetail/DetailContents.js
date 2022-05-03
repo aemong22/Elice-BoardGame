@@ -12,13 +12,13 @@ function DetailContents({ gameData }) {
 
   const style = {
     position: "absolute",
-    top: "34%",
+    top: "40%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: "30%",
     height: "40%",
     bgcolor: "background.paper",
-    boxShadow: 24,
+    boxShadow: 35,
     p: 4,
   };
   return (
@@ -34,7 +34,10 @@ function DetailContents({ gameData }) {
               <div className="container-top-left">
                 <div className="image">
                   <img
-                    style={{ width: "100%" }}
+                    style={{
+                      width: "100%",
+                      boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                    }}
                     src={gameData.image}
                     alt={gameData.game_name}
                   />
