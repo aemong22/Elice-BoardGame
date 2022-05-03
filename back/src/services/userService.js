@@ -197,7 +197,7 @@ class userAuthService {
 
         // const client = createClient();
         const client = createClient({
-            url: "redis://52.78.48.56:6379",
+            url: "redis://15.165.133.111:6379",
         });
 
         client.on("error", (err) => console.log("Redis Client Error", err));
