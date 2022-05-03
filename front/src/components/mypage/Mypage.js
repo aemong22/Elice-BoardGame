@@ -26,7 +26,6 @@ function Mypage() {
   const fetchPorfolioOwner = async () => {
     const res = await Api.get("currentUser");
     setOwnerData(res.data);
-    await console.log("여기당", ownerData.image);
   };
 
   useEffect(() => {

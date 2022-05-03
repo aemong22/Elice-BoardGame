@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 function FavoriteCard({ wish }) {
   const navigate = useNavigate();
+  console.log("favorite", wish);
 
   return (
     <>
-      <div>안녕</div>
+      <div>{wish}</div>
     </>
   );
 }
 
-export default FavoriteCard();
+export default FavoriteCard;

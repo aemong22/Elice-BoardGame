@@ -44,7 +44,7 @@ function Header() {
 
   useEffect(() => {
     fetchPorfolioOwner();
-  }, []);
+  }, [navigate]);
 
   if (window.location.pathname === "/pwlink") return null;
   return (
