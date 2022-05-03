@@ -68,5 +68,5 @@
 .boardgame-sort {
     display: flex;
     justify-content: end;
-    margin: 10px;
+    padding-top: 100px;
 }

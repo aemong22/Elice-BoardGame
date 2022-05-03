@@ -10,7 +10,7 @@ function BoardgameData({ condition, changeCondition }) {
     useEffect(() => {
         (condition.category !== '' || condition.type !== '') ? conditionGamesHandler() : recentlyGamesHandler();
     }, [condition])
-    
+
     // 보드게임 최근 데이터 불러오기
     const recentlyGamesHandler = async () => {
         // console.log("data condtion: ", condition);
@@ -33,7 +33,7 @@ function BoardgameData({ condition, changeCondition }) {
 
     // 보드게임 조건 데이터 불러오기
     const conditionGamesHandler = async () => {
-        // console.log("data condtion: ", condition);
+        console.log("data condtion: ", condition);
         try {
             await Api.get("games/conditions",
                 { params: {

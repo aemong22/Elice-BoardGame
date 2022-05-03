@@ -1,0 +1,35 @@
+.sorting-buttons {
+    width: 400px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sorting-buttons button {
+    width: 90px;
+    height: 30px;
+    margin-top: 10px;
+    margin-right: 10px;
+    border: none;
+    border-left: 1px solid gray;
+    background-color:white;
+    color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sorting-buttons button:nth-child(1) {
+    border: none;
+}
+
+.sorting-buttons button:hover {
+    color: black;
+    font-weight: bold;
+}
+
+.sorting-buttons.select {
+    color: black;
+    font-weight: bold;
+}

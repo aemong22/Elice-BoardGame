@@ -1,27 +1,43 @@
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import Box from '@mui/material/Box';
+import React, { useState } from 'react';
+import './Sorting.css';
+import CheckIcon from '@mui/icons-material/Check';
 
 function Sorting({ changeCondition }) {
+  const [type, setType] = useState(undefined);
+
+  const clickHandler = (value) => {
+    if (type === value) {
+      changeCondition('type', '');
+      setType('');
+    } else {
+      changeCondition('type', value);
+      setType(value);
+    }
+    
+  }
 
   return (
     <>
-        <Box
-        sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            '& > *': {
-            m: 1,
-            },
-        }}
-        >
-        <ButtonGroup variant="text" aria-label="text button group">
-            <Button sx={{ color: 'gray' }} onClick={() => changeCondition("type", "rank")}>랭킹순</Button>
-            <Button sx={{ color: 'gray' }} onClick={() => changeCondition("type", "rating")}>평점순</Button>
-            <Button sx={{ color: 'gray' }} onClick={() => changeCondition("type", "userRated")}>리뷰순</Button>
-        </ButtonGroup>
-        </Box>
+      <div className='sorting-buttons'>
+        <button type='button' 
+          onClick={() => clickHandler("rank") }
+          className={ type === 'rank' ? 'sorting-buttons select' : 'sorting-buttons' }>
+          {type === 'rank' ? <CheckIcon /> : null}
+          랭킹순
+        </button>
+        <button type='button' 
+          onClick={() => clickHandler("rating")}
+          className={ type === 'rating' ? 'sorting-buttons select' : 'sorting-buttons' }>
+          {type === 'rating' ? <CheckIcon /> : null}
+          평점순
+        </button>
+        <button type='button' 
+          onClick={() => clickHandler("userRated")}
+          className={ type === 'userRated' ? 'sorting-buttons select' : 'sorting-buttons' }>
+          {type === 'userRated' ? <CheckIcon /> : null}
+          리뷰순
+        </button>
+      </div>
     </>
   );
 }
