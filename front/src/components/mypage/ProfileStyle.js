@@ -7,15 +7,16 @@ const MyBox = styled(Box)`
   background-color: #ffffff;
   width: 70%;
   height: 100%;
-  float: right;
-  overflow-y: scroll;
+  margin: 2%;
 `;
 
 const Title = styled(Grid)`
-  font-size: 20px;
+  border-bottom: solid 1px #ebebeb;
+  font-size: 30px;
   font-weight: bold;
   color: black;
   padding: 3%;
+  margin-bottom: 3%;
 `;
 
 const StyledInput = styled(InputBase)`
@@ -25,7 +26,7 @@ const StyledInput = styled(InputBase)`
   border-radius: 8px;
   border: 1px solid #d6ccc2;
   &:hover {
-    border-color: #d4ccc3;
+    border-color: gray;
   }
 `;
 
@@ -45,7 +46,7 @@ const SubTitle = styled(Grid)`
 const SubContent = styled(Grid)`
   padding: 1%;
   height: auto;
-  margin-bottom: px;
+  margin-bottom: 5px;
 `;
 
 const HelperText = styled(FormHelperText)`

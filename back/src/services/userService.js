@@ -179,7 +179,7 @@ class userAuthService {
       await this.addUser({ user_name, email, password });
     }
 
-    const userinfo = await this.getSingleUser({ email, password });
+    const userinfo = await this.getUser({ email, password });
     return userinfo;
   }
 
@@ -193,18 +193,14 @@ class userAuthService {
       return { errorMessage };
     }
 
-    const client = createClient();
+    const client = createClient({
+      url: "redis://52.78.48.56:6379",
+    });
 
     client.on("error", (err) => console.log("Redis Client Error", err));
 
-<<<<<<< HEAD
     await client.connect();
     const token = sign(email);
-=======
-        const userinfo = await this.getUser({ email, password });
-        return userinfo;
-    }
->>>>>>> 22f04b1f621f3cef5ad9efa1ac11aac4e611bf63
 
     await client.set(token, email);
     console.log(client.get(token));

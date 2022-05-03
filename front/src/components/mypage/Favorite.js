@@ -1,27 +1,33 @@
 import { MyBox, Title, Content, Total } from "./FavoriteStyle.js";
-import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-
-import FavoriteCard from "./FavoriteCard";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+// import FavoriteCard from "./FavoriteCard";
 import * as Api from "../../api";
 
-function Favorite() {
-  const navigate = useNavigate();
+function Favorite({ ownerData }) {
   const [wishes, setWishes] = useState(undefined);
+  console.log("favorite", ownerData);
 
-  useEffect(async () => {
-    await Api.get("wishList").then((res) => setWishes(res.data));
-  }, [navigate]);
+  const FavoriteList = async () => {
+    const res = await Api.get("favorite/user");
+    setWishes(res.data);
+  };
+
+  useEffect(() => {
+    FavoriteList();
+  }, []);
 
   return (
     <>
       <MyBox>
-        <Title>Favorite</Title>
+        <Title>
+          <FavoriteIcon /> 찜 목록
+        </Title>
         <Total>Total </Total>
         <Content>찜목록 나오기</Content>
-        {wishes.map((wish) => (
+        {/* {wishes.map((wish) => (
           <FavoriteCard wish={wish} />
-        ))}
+        ))} */}
       </MyBox>
     </>
   );

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as Api from "../../api";
 import { StylesProvider } from "@material-ui/core";
 import AWS from "aws-sdk";
+import PersonIcon from "@mui/icons-material/Person";
 
 import {
   MyBox,
@@ -64,6 +65,8 @@ function Profile({ ownerData, setOwnerData }) {
   const [phone_number, setPhone_number] = useState(ownerData?.phone_number);
   const isPasswordValid = password.length >= 4;
   const isPasswordSame = password === confirmPassword;
+  const isNameValid = user_name.length >= 2;
+  const isFormValid = isPasswordValid && isPasswordSame && isNameValid;
 
   console.log("유저데이터", ownerData);
 
@@ -88,17 +91,21 @@ function Profile({ ownerData, setOwnerData }) {
   return (
     <>
       <MyBox>
-        <Title>Edit your profile</Title>
+        <Title>
+          <PersonIcon /> 회원정보 변경
+        </Title>
         <form onSubmit={handleSubmit} style={{ height: "80%" }}>
           <Content>
-            <SubTitle>프로필 사진 변경하기</SubTitle>
-            <StyledInput
-              style={{ width: "50%" }}
-              type="file"
-              id="upload"
-              className="image-upload"
-              onChange={handleFileInput}
-            />
+            <SubContent>
+              <SubTitle>프로필 사진 변경하기</SubTitle>
+              <StyledInput
+                style={{ width: "50%" }}
+                type="file"
+                id="upload"
+                className="image-upload"
+                onChange={handleFileInput}
+              />
+            </SubContent>
             <SubContent>
               <SubTitle>이름</SubTitle>
               <StyledInput
@@ -109,6 +116,9 @@ function Profile({ ownerData, setOwnerData }) {
                   setUser_name(e.target.value);
                 }}
               />
+              {isNameValid ? null : (
+                <HelperText> 2글자 이상입력해주세요.</HelperText>
+              )}
             </SubContent>
 
             <SubContent>
@@ -162,7 +172,9 @@ function Profile({ ownerData, setOwnerData }) {
             </SubContent>
             <SubContent style={{ textAlign: "center", height: "10%" }}>
               <StylesProvider injectFirst>
-                <MyButton type="submit">변경하기</MyButton>
+                <MyButton type="submit" disabled={!isFormValid}>
+                  변경하기
+                </MyButton>
               </StylesProvider>
             </SubContent>
           </Content>

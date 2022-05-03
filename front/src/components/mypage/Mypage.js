@@ -3,18 +3,20 @@ import * as Api from "../../api";
 
 import Header from "../Header";
 import Profile from "./Profile";
-// import Favorite from "./Favorite";
-import { Container, Grid } from "@mui/material";
+import Favorite from "./Favorite";
+import { Container } from "@mui/material";
 import { StylesProvider } from "@material-ui/core";
+import EmojiPeopleOutlinedIcon from "@mui/icons-material/EmojiPeopleOutlined";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 
 import {
   MyBox,
   MyBox2,
   ImgGrid,
-  Title,
   Photo,
   Name,
   MyButton,
+  SubContent,
 } from "./MypageStyle";
 
 function Mypage() {
@@ -47,21 +49,24 @@ function Mypage() {
               />
             </ImgGrid>
             <Name>{ownerData?.user_name}</Name>
-            <Grid>
+            <SubContent>
               <StylesProvider injectFirst>
-                <MyButton onClick={() => setModify(true)}>profile</MyButton>
+                <MyButton onClick={() => setModify(true)}>
+                  <EmojiPeopleOutlinedIcon />
+                  profile
+                </MyButton>
                 <MyButton id="button" onClick={() => setModify(false)}>
+                  <FavoriteBorderOutlinedIcon />
                   Favorite
                 </MyButton>
               </StylesProvider>
-            </Grid>
+            </SubContent>
           </MyBox2>
           {Modify
             ? ownerData && (
                 <Profile ownerData={ownerData} setOwnerData={setOwnerData} />
               )
-            : // <Favorite ownerData={ownerData} />
-              null}
+            : ownerData && <Favorite ownerData={ownerData} />}
         </MyBox>
       </Container>
     </>
