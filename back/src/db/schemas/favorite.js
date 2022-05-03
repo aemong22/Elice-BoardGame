@@ -6,11 +6,13 @@ const FavoriteSchema = new Schema(
             type: String,
             required: true,
         },
-        boardgame: {
-            type: Schema.Types.ObjectId,
-            required: true,
-            ref: "Boardgame",
-        },
+        boardgame: [
+            {
+                type: Schema.Types.ObjectId,
+                required: true,
+                ref: "Boardgame",
+            },
+        ],
     },
     {
         timestamps: true,
