@@ -48,6 +48,10 @@ const BoardGameSchema = new Schema(
             type: String,
             required: true,
         },
+        wordcloud: {
+            type: String,
+            required: true,
+        },
         min_player: {
             type: Number,
             required: true,
@@ -76,8 +80,8 @@ const BoardGameSchema = new Schema(
             type: Number,
             required: true,
         },
-        domains: {
-            type: String,
+        theme: {
+            type: [String],
             required: true,
         },
         image: {
@@ -90,7 +94,7 @@ const BoardGameSchema = new Schema(
         },
         recommend_id: {
             type: [Number],
-            required: true,
+            required: false,
         },
     },
     {

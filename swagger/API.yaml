@@ -441,6 +441,7 @@ components:
         - user_rated
         - url
         - thumbnail
+        - wordcloud
         - min_player
         - max_player
         - min_age
@@ -448,10 +449,9 @@ components:
         - min_playing_time
         - max_playing_time
         - complexity_average
-        - domains
+        - theme
         - image
         - description
-        - recommend_id
       properties:
         index:
           type: number
@@ -475,6 +475,8 @@ components:
           type: string
         thumbnail:
           type: string
+        wordcloud:
+          type: string
         min_player:
           type: number
         max_player:
@@ -489,80 +491,80 @@ components:
           type: number
         complexity_average:
           type: number
-        domains:
-          type: string
+        theme:
+          type: array
         image:
           type: string
         description:
           type: string
         recommend_id:
           type: array  
-    BoardGame2020:
-      type: object
-      required:
-        - index
-        - un_named
-        - game_id
-        - game_name
-        - year
-        - rank
-        - average_rating
-        - bayes_average
-        - user_rated
-        - url
-        - thumbnail
-        - min_player
-        - max_player
-        - min_age
-        - playing_time
-        - min_playing_time
-        - max_playing_time
-        - complexity_average
-        - image
-        - description
-      properties:
-        index:
-          type: number
-        un_named:
-          type: number
-        game_id:
-          type: number
-        game_name:
-          type: string
-        year:
-          type: number
-        rank:
-          type: number
-        average_rating:
-          type: number
-        bayes_average:
-          type: number
-        user_rated:
-          type: number
-        url:
-          type: string
-        thumbnail:
-          type: string
-        min_player:
-          type: number
-        max_player:
-          type: number
-        min_age:
-          type: number
-        playing_time:
-          type: number
-        min_playing_time:
-          type: number
-        max_playing_time:
-          type: number
-        complexity_average:
-          type: number
-        domains:
-          type: string
-        image:
-          type: string
-        description:
-          type: string
+    # BoardGame2020:
+    #   type: object
+    #   required:
+    #     - index
+    #     - un_named
+    #     - game_id
+    #     - game_name
+    #     - year
+    #     - rank
+    #     - average_rating
+    #     - bayes_average
+    #     - user_rated
+    #     - url
+    #     - thumbnail
+    #     - min_player
+    #     - max_player
+    #     - min_age
+    #     - playing_time
+    #     - min_playing_time
+    #     - max_playing_time
+    #     - complexity_average
+    #     - image
+    #     - description
+    #   properties:
+    #     index:
+    #       type: number
+    #     un_named:
+    #       type: number
+    #     game_id:
+    #       type: number
+    #     game_name:
+    #       type: string
+    #     year:
+    #       type: number
+    #     rank:
+    #       type: number
+    #     average_rating:
+    #       type: number
+    #     bayes_average:
+    #       type: number
+    #     user_rated:
+    #       type: number
+    #     url:
+    #       type: string
+    #     thumbnail:
+    #       type: string
+    #     min_player:
+    #       type: number
+    #     max_player:
+    #       type: number
+    #     min_age:
+    #       type: number
+    #     playing_time:
+    #       type: number
+    #     min_playing_time:
+    #       type: number
+    #     max_playing_time:
+    #       type: number
+    #     complexity_average:
+    #       type: number
+    #     domains:
+    #       type: string
+    #     image:
+    #       type: string
+    #     description:
+    #       type: string
     Favorite:
       type: object
       required:
