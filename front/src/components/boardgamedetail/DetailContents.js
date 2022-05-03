@@ -29,56 +29,50 @@ function DetailContents({ gameData }) {
             className="detail-container"
             sx={{ bgcolor: "#cfe8fc", height: "100vh" }}
           >
-            <div
-              style={{
-                backgroundColor: "gray",
-                width: "50%",
-              }}
-            >
-              <div className="image">
-                <img
-                  style={{ width: "100%" }}
-                  src={gameData.image}
-                  alt={gameData.game_name}
-                />
-              </div>
-            </div>
-            <div
-              style={{
-                backgroundColor: "#D6CCC2",
-                width: "50%",
-              }}
-            >
-              <div className="context">
-                <div className="detail-title">{gameData.game_name}</div>
-                <div style={{ margin: "0 10% 10% 10%" }}>
-                  <TagBtn
-                    minPlayer={gameData.min_player}
-                    maxPlayer={gameData.max_player}
-                    complexity={gameData.complexity_average}
-                    minAge={gameData.min_age}
-                    domains={gameData.domains}
-                    minPlayingTime={gameData.min_playing_time}
-                    maxPlayingTime={gameData.max_playing_time}
+            <div className="container-top">
+              <div className="container-top-left">
+                <div className="image">
+                  <img
+                    style={{ width: "100%" }}
+                    src={gameData.image}
+                    alt={gameData.game_name}
                   />
                 </div>
-                <span id="wordCloudBtn">
-                  <Fab size="medium" color="primary" aria-label="add">
-                    <AddIcon onClick={handleOpen} />
-                  </Fab>
-                </span>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box sx={style}>
-                    ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-                  </Box>
-                </Modal>
+              </div>
+              <div className="container-top-right">
+                <div className="detail-context">
+                  <div className="detail-title">{gameData.game_name}</div>
+                  <div style={{ margin: "0 10% 10% 10%" }}>
+                    <TagBtn
+                      minPlayer={gameData.min_player}
+                      maxPlayer={gameData.max_player}
+                      complexity={gameData.complexity_average}
+                      minAge={gameData.min_age}
+                      domains={gameData.domains}
+                      minPlayingTime={gameData.min_playing_time}
+                      maxPlayingTime={gameData.max_playing_time}
+                    />
+                  </div>
+                  <span id="wordCloudBtn">
+                    <Fab size="medium" color="primary" aria-label="add">
+                      <AddIcon onClick={handleOpen} />
+                    </Fab>
+                  </span>
+                  <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                  >
+                    <Box sx={style}>
+                      ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                    </Box>
+                  </Modal>
+                </div>
               </div>
             </div>
+
+            <div className="container-bottom">아래</div>
           </Box>
         </Container>
       </React.Fragment>
