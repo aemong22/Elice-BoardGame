@@ -1,30 +1,30 @@
-import { boardService } from "../services/boardService";
+import { communityService } from "../services/communityService";
 
-class boardServiceController{
+class communityServiceController{
     static async findAllContents(req, res, next){
         try {
-            const allContents = await boardService.getContents();
+            const allContents = await communityService.getContents();
             res.status(200).json(allContents);
         } catch (error) {
             next(error);
         }
     }
 
-    static async getBoard(req, res, next){
+    static async getCommunity(req, res, next){
         try {
             const contentid = req.params.id;
-            const getboard = await boardService.getContent({contentid});
-            res.status(200).json(getboard);
+            const getcommunity = await communityService.getContent({contentid});
+            res.status(200).json(getcommunity);
         } catch (error) {
             next(error);
         }
     }
 
-    static async deleteBoard(req, res, next){
+    static async deleteCommunity(req, res, next){
         try {
             const contentid = req.params.id;
-            const deleteboard = await boardService.deleteContent({contentid});
-            res.status(200).json(deleteboard);
+            const deletecommunity = await communityService.deleteContent({contentid});
+            res.status(200).json(deletecommunity);
             console.log("게시물이 삭제되었습니다.")
         } catch (error) {
             next(error);
@@ -36,7 +36,7 @@ class boardServiceController{
             const author = req.body.author;
             const title = req.body.title;
             const content = req.body.content;
-            const newContent = await boardService.addContent({
+            const newContent = await communityService.addContent({
                 author,
                 title,
                 content,
@@ -50,13 +50,31 @@ class boardServiceController{
         }
     }
 
+    static async updateContent(req,res,next){
+        try{
+            const updatecontent = req.body.content;
+            const contentid = req.params.id;
+
+            const updateContent = await communityService.updateContent({
+                updatecontent,
+                contentid,
+            });     
+        if (updateContent.errorMessage) {
+                throw new Error(updateContent.errorMessage);
+            }
+        res.status(200).json()
+        }
+        catch(error){
+            next(error);
+        }
+    }
 
     // 대글 관련 newComment
     static async newComment(req, res, next){
         try {
             const user_id = req.body.user_id;
             const content = req.body.content;
-            const newComment = await boardService.addComment({
+            const newComment = await communityService.addComment({
                 user_id,
                 content,
             });
@@ -74,7 +92,7 @@ class boardServiceController{
     static async deleteComment(req, res, next){
         try {
             const conmmentid = req.params.id2;
-            const deletecomment = await boardService.deleteComment({conmmentid});
+            const deletecomment = await communityService.deleteComment({conmmentid});
             res.status(200).json(deletecomment);
             console.log("게시물이 삭제되었습니다.")
         } catch (error) {
@@ -83,4 +101,4 @@ class boardServiceController{
     }
 }
 
-export {boardServiceController}
+export {communityServiceController}

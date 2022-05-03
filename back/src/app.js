@@ -4,7 +4,7 @@ import { userAuthRouter } from "./routes/userRouter";
 
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 import { boardGameRouter } from "./routes/boardGameRouter";
-import { boardRouter } from "./routes/boardRouter";
+import { communityRouter } from "./routes/communityRouter";
 
 
 const app = express();
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(userAuthRouter);
 app.use(boardGameRouter);
-app.use(boardRouter);
+app.use(communityRouter);
 
 app.use(errorMiddleware);
 

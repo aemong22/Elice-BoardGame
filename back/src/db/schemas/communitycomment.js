@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const BoardCommentSchema = new Schema(
+const CommunityCommentSchema = new Schema(
     {
         // content 내용
         content : {
@@ -20,5 +20,5 @@ const BoardCommentSchema = new Schema(
     }
 );
 
-const BoardCommentModel = model("BoardComment",BoardCommentSchema);
-export {BoardCommentModel};
+const CommunityCommentModel = model("CommunityComment",CommunityCommentSchema);
+export {CommunityCommentModel};

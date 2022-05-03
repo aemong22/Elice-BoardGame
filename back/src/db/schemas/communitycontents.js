@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const BoardContentSchema = new Schema(
+const CommunityContentSchema = new Schema(
     {
         // content 제목
         title : {
@@ -20,7 +20,7 @@ const BoardContentSchema = new Schema(
         // comment 한 개시글에 여러개 연결›
         // 배열로 설정하는데 다른스키마와 연결시켜 작성자를 제공해주어야한다.
         comment :
-            [{type : Schema.Types.ObjectId, ref : "BoardComment"}],
+            [{type : Schema.Types.ObjectId, ref : "CommunityComment"}],
         
     }, 
     {      
@@ -28,5 +28,5 @@ const BoardContentSchema = new Schema(
     }
 );
 
-const BoardContentModel = model("BoardContent",BoardContentSchema);
-export {BoardContentModel};
+const CommunityContentModel = model("CommunityContent",CommunityContentSchema);
+export {CommunityContentModel};
