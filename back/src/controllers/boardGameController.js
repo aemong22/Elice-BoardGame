@@ -1,30 +1,21 @@
 import { boardGameService } from "../services/boardGameService";
 
 class boardgameController {
-    // insert 시에만 사용하는 함수
-    static async insertData(req, res, next) {
-        try {
-            const games = await boardGameService.insert();
-            res.status(200).json(games);
-        } catch (error) {
-            next(error);
-        }
-    }
-
     // 20년 최신 게임 전체 조회
     static async findRecentlyGames(req, res, next) {
         try {
             const { page = 1, perPage = 10 } = req.query;
 
-            const recentlyGames = await boardGameService.findByRecentlyGames({
-                page,
-                perPage,
-            });
+            const { totalPage, games, errorMessage } =
+                await boardGameService.findByRecentlyGames({
+                    page,
+                    perPage,
+                });
+            console.log(games);
 
-            if (recentlyGames.errorMessage)
-                throw new Error(recentlyGames.errorMessage);
+            if (errorMessage) throw new Error(errorMessage);
 
-            res.status(200).json(recentlyGames);
+            res.status(200).json(games);
         } catch (error) {
             next(error);
         }

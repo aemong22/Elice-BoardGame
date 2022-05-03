@@ -1,49 +1,6 @@
 import { BoardGameModel } from "../db/schemas/boardgame";
-import fs from "fs";
 
 class boardGameService {
-    // insert 후 테스트용 함수
-    static async insert() {
-        fs.readFile(
-            "/Users/nowgnas/projects/board-game-recommendation-project/back/src/controllers/finalDataset.json",
-            (err, json) => {
-                const jsonData = JSON.parse(json);
-                jsonData.data.forEach(async (element) => {
-                    const item = {
-                        //
-                        index: element.index,
-                        un_named: element.un_named,
-                        game_id: element.game_id,
-                        game_name: element.game_name,
-                        year: element.year,
-                        rank: element.rank,
-                        average_rating: element.average_rating,
-                        bayes_average: element.bayes_average,
-                        user_rated: element.user_rated,
-                        url: element.url,
-                        thumbnail: element.thumbnail,
-                        wordcloud: element.wordcloud,
-                        min_player: element.min_player,
-                        max_player: element.max_player,
-                        min_age: element.min_age,
-                        playing_time: element.playing_time,
-                        min_playing_time: element.min_playing_time,
-                        max_playing_time: element.max_playing_time,
-                        complexity_average: element.complexity_average,
-                        theme: element.theme,
-                        image: element.image,
-                        description: element.description,
-                        recommend_id: element.recommend_id,
-                    };
-                    await BoardGameModel.create(item);
-                });
-            }
-        );
-
-        const games = await BoardGameModel.create();
-        return games;
-    }
-
     // 정렬 type 설정
     static sortType({ sortField }) {
         switch (sortField) {
@@ -71,7 +28,7 @@ class boardGameService {
         };
     }
 
-    static async findGames({ query, sortType, page, perPage }) {
+    static async findGames({ query, sortType = null, page, perPage }) {
         // total page 계산
         const aggregator = async () =>
             await BoardGameModel.countDocuments(query);
@@ -106,7 +63,7 @@ class boardGameService {
             perPage,
         });
 
-        if (errorMessage) return { errorMessage };
+        if (games.length === 0) return { errorMessage };
 
         return { totalPage, games };
     }
@@ -137,7 +94,7 @@ class boardGameService {
             perPage,
         });
 
-        if (errorMessage) return { errorMessage };
+        if (games.length === 0) return { errorMessage };
 
         return { totalPage, games };
     }
@@ -155,7 +112,7 @@ class boardGameService {
             perPage,
         });
 
-        if (errorMessage) return { errorMessage };
+        if (games.length === 0) return { errorMessage };
 
         return { totalPage, games };
     }
@@ -172,7 +129,7 @@ class boardGameService {
             perPage,
         });
 
-        if (errorMessage) return errorMessage;
+        if (games.length === 0) return errorMessage;
 
         return { totalPage, games };
     }
@@ -193,7 +150,7 @@ class boardGameService {
             perPage,
         });
 
-        if (errorMessage) return { errorMessage };
+        if (games.length === 0) return { errorMessage };
 
         return { totalPage, games };
     }
@@ -212,7 +169,7 @@ class boardGameService {
             perPage,
         });
 
-        if (errorMessage) return { errorMessage };
+        if (games.length === 0) return { errorMessage };
 
         return { totalPage, games };
     }
@@ -222,7 +179,7 @@ class boardGameService {
         const query = {
             $or: [
                 // 문자열 포함 조회
-                { domains: { $regex: keyword, $options: "i" } },
+                { theme: { $regex: keyword, $options: "i" } },
                 { game_name: { $regex: keyword, $options: "i" } },
             ],
         };
@@ -232,7 +189,7 @@ class boardGameService {
             perPage,
         });
 
-        if (errorMessage) return { errorMessage };
+        if (games.length === 0) return { errorMessage };
 
         return { totalPage, games };
     }
