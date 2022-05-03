@@ -11,11 +11,10 @@ class boardgameController {
                     page,
                     perPage,
                 });
-            console.log(games);
 
             if (errorMessage) throw new Error(errorMessage);
 
-            res.status(200).json(games);
+            res.status(200).json({ totalPage, games });
         } catch (error) {
             next(error);
         }
