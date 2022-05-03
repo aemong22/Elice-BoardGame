@@ -36,7 +36,7 @@ class favoriteController {
     static async getDetailFavorite(req, res, next) {
         try {
             const userId = req.currentUserId;
-            const boardgameId = req.body.boardgameId;
+            const boardgameId = req.params.boardgame;
 
             const favorite = await favoriteAuthService.findDetailFavorite({
                 userId,

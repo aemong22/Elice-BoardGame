@@ -17,7 +17,7 @@ favoriteAuthRouter.get(
 );
 
 favoriteAuthRouter.get(
-    "/favorite/boardgame",
+    "/favorite/:boardgame",
     authJWT,
     favoriteController.getDetailFavorite
 );
