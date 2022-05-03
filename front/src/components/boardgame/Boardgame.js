@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import BoardgameCategory from "./BoardgameCategory";
 import Sorting from "./Sorting";
 import BoardgameData from "./BoardgameData";
@@ -7,15 +7,16 @@ import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import SearchField from "./SearchField";
 
 function Boardgame() {
+    const header = document.getElementsByClassName('header')
     const [open, setOpen] = useState(false);
     const [condition, setCondition] = useState({ 
         "category": "",
         "val1": "",
-        "type": "", //rank
+        "type": "",
         "page": 1,
         "perPage": 9,
     })
-
+    
     const initializeCondition = () => {
         setCondition(current => {
             let newCondition = { ...current };
@@ -41,6 +42,9 @@ function Boardgame() {
     return (
         <>
             <div className={ open ? 'boardgame-container-slide' : 'boardgame-container' }>
+                {
+                    open ? header[0].classList.add('boardgame-container-slide') : header[0].classList.remove('boardgame-container-slide')
+                }
                 <div className='boardgame-header'>
                     <div className='boardgame-header-item' onClick={() => setOpen(!open) }>
                         <FilterAltOutlinedIcon className='boardgame-header-filtered-icon' />
