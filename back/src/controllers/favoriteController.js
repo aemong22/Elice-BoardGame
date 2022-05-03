@@ -31,6 +31,23 @@ class favoriteController {
             next(error);
         }
     }
+
+    //찜한 목록 가져오기 - 디테일 부분
+    static async getDetailFavorite(req, res, next) {
+        try {
+            const userId = req.currentUserId;
+            const boardgameId = req.body.boardgameId;
+
+            const favorite = await favoriteAuthService.findDetailFavorite({
+                userId,
+                boardgameId,
+            });
+
+            res.status(200).json(favorite);
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export { favoriteController };

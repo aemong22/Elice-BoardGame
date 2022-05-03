@@ -34,6 +34,20 @@ class favoriteAuthService {
 
         return favorites;
     }
+
+    // 로그인한 유저가 찜한 보드게임인지 아닌지 판별
+    static async findDetailFavorite({ userId, boardgameId }) {
+        const favorite = await FavoriteModel.findOne({
+            userId,
+            boardgame: { $in: [boardgameId] },
+        });
+
+        if (!favorite) {
+            return false;
+        }
+
+        return true;
+    }
 }
 
 export { favoriteAuthService };

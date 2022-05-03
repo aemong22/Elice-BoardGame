@@ -16,4 +16,10 @@ favoriteAuthRouter.get(
     favoriteController.getFavorites
 );
 
+favoriteAuthRouter.get(
+    "/favorite/boardgame",
+    authJWT,
+    favoriteController.getDetailFavorite
+);
+
 export { favoriteAuthRouter };
