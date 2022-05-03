@@ -4,6 +4,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import BoardgameRec from "./BoardgameRec";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -61,7 +62,7 @@ export default function DetailTab() {
         게임 설명
       </TabPanel>
       <TabPanel value={value} index={1}>
-        What else?
+        <BoardgameRec />
       </TabPanel>
     </Box>
   );

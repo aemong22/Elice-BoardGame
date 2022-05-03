@@ -8,7 +8,7 @@ function BoardgameDetail() {
   const boardgameId = params.id;
 
   const [isFetchCompleted, setIsFetchCompleted] = useState(false);
-  const [gameData, setGameData] = useState({});
+  const [gameData, setGameData] = useState(undefined);
 
   const fetchBoardgameDetail = async (boardgameId) => {
     const res = await Api.get("gameInfo", boardgameId);
@@ -18,7 +18,6 @@ function BoardgameDetail() {
   useEffect(() => {
     fetchBoardgameDetail(boardgameId);
     setIsFetchCompleted(true);
-    console.log(gameData);
   }, []);
 
   if (!isFetchCompleted) {

@@ -15,10 +15,16 @@ import BoardgameDetail from "./components/boardgamedetail/BoardgameDetail";
 import GoogleLoading from "./components/user/GoogleLoading";
 import Header from "./components/Header";
 
+import { useSelector } from "react-redux";
+
 function App() {
   // 유저 로그인 상태 관련 코드 추가하기
   const dispatch = useDispatch();
   const [isFetchCompleted, setIsFetchCompleted] = useState(false);
+
+  const userState = useSelector((state) =>
+    state ? state.userReducer.user : undefined
+  );
 
   useEffect(() => {
     const fetchCurrentUser = async () => {
@@ -49,13 +55,15 @@ function App() {
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/intro" exact element={<Intro />} />
-        <Route path="/boardgame" exact element={<Boardgame />} />
-        <Route path="/register" exact element={<RegisterForm />} />
-        <Route path="/mypage" exact element={<Mypage />} />
-        <Route path="/profile" exact element={<Profile />} />
-        <Route path="/oauth" exact element={<GoogleLoading />} />
         <Route path="/pwlink/:rtoken" exact element={<PwLink />} />
-        <Route path="/gameInfo/:id" exact element={<BoardgameDetail />} />
+        {userState && (
+          <>
+            <Route path="/gameInfo/:id" exact element={<BoardgameDetail />} />
+            <Route path="/boardgame" exact element={<Boardgame />} />
+            <Route path="/mypage" exact element={<Mypage />} />
+            <Route path="/profile" exact element={<Profile />} />
+          </>
+        )}
         <Route path="/register" exact element={<RegisterForm />} />
         <Route path="/oauth" exact element={<GoogleLoading />} />
         <Route path="*" element={<Home />} />
