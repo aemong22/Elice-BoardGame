@@ -6,10 +6,15 @@ export const categoryData = {
         "5": "5인 이상"
     },
     "age" : {
-        "9": "9세",
-        "12": "12세",
-        "15": "15세",
-        "19": "19세"
+        "9": "9세 이하",
+        "12": "12세 이하",
+        "15": "15세 이하",
+        "19": "19세 이하"
+    },
+    "time" : {
+        "30": "30분",
+        "60": "60분",
+        "120": "120분",
     },
     "complexity" : {
         "1": "쉬움",
@@ -18,18 +23,13 @@ export const categoryData = {
         "4": "최고 어려움"
     },
     "theme" : {
-        "Strategy Games": "Strategy Games",
-        "Thematic Games": "Thematic Games",
-        "Wargames": "Wargames",
-        "Family Games": "Family Games",
-        "Customizable Games": "Customizable Games",
-        "Abstract Games": "Abstract Games", 
-        "Party Games" : "Party Games",
-    },
-    "time" : {
-        "30": "30분",
-        "60": "60분",
-        "120": "120분",
+        "전략": "전략",
+        "가족": "가족",
+        "전쟁": "전쟁",
+        "형성": "형성",
+        "모음": "모음",
+        "맞춤형": "맞춤형",
+
     },
 }
 

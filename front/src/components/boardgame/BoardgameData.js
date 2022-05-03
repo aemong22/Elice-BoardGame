@@ -7,9 +7,13 @@ function BoardgameData({ condition, changeCondition }) {
     const [boardgames, setBoardgames] = useState(undefined);
     const [totalPage, setTotalPage] = useState(1);
 
+    useEffect(() => {
+        (condition.category !== '' || condition.type !== '') ? conditionGamesHandler() : recentlyGamesHandler();
+    }, [condition])
+    
     // 보드게임 최근 데이터 불러오기
     const recentlyGamesHandler = async () => {
-        console.log("data condtion: ", condition);
+        // console.log("data condtion: ", condition);
         try {
             await Api.get("recentlyGames",
                 { params: {
@@ -18,7 +22,8 @@ function BoardgameData({ condition, changeCondition }) {
                 }}, 
                 { withCredentials: true }
             ).then((res) => {
-                setBoardgames(res.data.boardGames);
+                // console.log("res.data: ", res.data)
+                setBoardgames(res.data.games);
                 setTotalPage(res.data.totalPage);
             })
         } catch (err) {
@@ -28,7 +33,7 @@ function BoardgameData({ condition, changeCondition }) {
 
     // 보드게임 조건 데이터 불러오기
     const conditionGamesHandler = async () => {
-        console.log("data condtion: ", condition);
+        // console.log("data condtion: ", condition);
         try {
             await Api.get("games/conditions",
                 { params: {
@@ -40,6 +45,7 @@ function BoardgameData({ condition, changeCondition }) {
                 }}, 
                 { withCredentials: true }
             ).then((res) => {
+                // console.log("res.data: ", res.data)
                 setBoardgames(res.data.games); 
                 setTotalPage(res.data.totalPage);
             })
@@ -48,10 +54,6 @@ function BoardgameData({ condition, changeCondition }) {
         }
     }
 
-    useEffect(() => {
-        (condition.category !== '' || condition.type !== '') ? conditionGamesHandler() : recentlyGamesHandler();
-    }, [condition])
-
     const boardgameList = boardgames?.map((boardgame) => (
         <BoardgameCard
             key={boardgame?.game_id}
@@ -59,8 +61,10 @@ function BoardgameData({ condition, changeCondition }) {
             name={boardgame?.game_name}
             min_player={boardgame?.min_player}
             max_player={boardgame?.max_player}
-            domains={boardgame?.domains === null ? '' : boardgame.domains}
+            theme={boardgame?.theme === null ? '' : boardgame.theme}
             image={boardgame?.image}
+            min_age={boardgame?.min_age}
+            max_playing_time={boardgame?.max_playing_time}
         />
     ));
 
