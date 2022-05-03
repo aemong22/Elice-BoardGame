@@ -36,7 +36,7 @@ function Mypage() {
   return (
     <>
       <Header />
-      <Container maxWidth="lg" style={{ padding: "0", marginTop: "70px" }}>
+      <Container maxWidth="lg" style={{ padding: "0", marginTop: "80px" }}>
         <MyBox>
           <MyBox2>
             <ImgGrid>

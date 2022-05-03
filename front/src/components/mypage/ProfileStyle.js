@@ -40,12 +40,12 @@ const SubTitle = styled(Grid)`
   font-size: 15px;
   color: black;
   width: 90%;
-  padding: 1%;
+  padding: 2px 0 5px 2px;
 `;
 
 const SubContent = styled(Grid)`
   padding: 1%;
-  height: auto;
+  height: 85px;
   margin-bottom: 5px;
 `;
 

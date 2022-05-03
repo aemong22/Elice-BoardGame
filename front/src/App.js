@@ -56,8 +56,6 @@ function App() {
         <Route path="/oauth" exact element={<GoogleLoading />} />
         <Route path="/pwlink/:rtoken" exact element={<PwLink />} />
         <Route path="/boardgame/detail" exact element={<BoardgameDetail />} />
-        <Route path="/register" exact element={<RegisterForm />} />
-        <Route path="/oauth" exact element={<GoogleLoading />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>

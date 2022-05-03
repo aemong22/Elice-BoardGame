@@ -135,7 +135,7 @@ function Profile({ ownerData, setOwnerData }) {
             <SubContent>
               <SubTitle>비밀번호</SubTitle>
               <StyledInput
-                type="text"
+                type="password"
                 value={password}
                 required
                 placeholder="비밀번호 변경"
@@ -149,7 +149,7 @@ function Profile({ ownerData, setOwnerData }) {
             <SubContent>
               <SubTitle>비밀번호 확인</SubTitle>
               <StyledInput
-                type="text"
+                type="password"
                 required
                 value={confirmPassword}
                 placeholder="비밀번호 확인"
