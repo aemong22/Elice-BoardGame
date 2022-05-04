@@ -90,9 +90,14 @@ class boardGameService {
     static async findByPlayer({ playerCount, sortType, page, perPage }) {
         // 인원 수 조회 option
         const query = {
-            $nor: [
-                { min_player: { $gt: playerCount } },
-                { max_player: { $lt: playerCount } },
+            $and: [
+                {
+                    $nor: [
+                        { min_player: { $gt: playerCount } },
+                        { max_player: { $lt: playerCount } },
+                    ],
+                },
+                { year: { $lt: 2020 } },
             ],
         };
 
@@ -111,7 +116,7 @@ class boardGameService {
     // 연령별 기준 보드게임 조회
     static async findByAge({ age, sortType, page, perPage }) {
         const query = {
-            min_age: { $lte: age },
+            $and: [{ min_age: { $lte: age } }, { year: { $lt: 2020 } }],
         };
 
         const { totalPage, games, errorMessage } = await this.findGames({
@@ -129,7 +134,7 @@ class boardGameService {
     // theme 기준 정렬
     static async findByTheme({ theme, sortType, page, perPage }) {
         const query = {
-            theme: { $in: [theme] },
+            $and: [{ year: { $lt: 2020 } }, { theme: { $in: [theme] } }],
         };
         const { totalPage, games, errorMessage } = await this.findGames({
             query,
@@ -146,9 +151,14 @@ class boardGameService {
     // 시간 기준 정렬
     static async findByTime({ time, sortType, page, perPage }) {
         const query = {
-            $nor: [
-                { min_playing_time: { $gt: time } },
-                { max_playing_time: { $lt: time } },
+            $and: [
+                { year: { $lt: 2020 } },
+                {
+                    $nor: [
+                        { min_playing_time: { $gt: time } },
+                        { max_playing_time: { $lt: time } },
+                    ],
+                },
             ],
         };
 
@@ -166,10 +176,15 @@ class boardGameService {
 
     static async findByComplexity({ complexity, sortType, page, perPage }) {
         const query = {
-            complexity_average: {
-                $gte: Math.floor(complexity),
-                $lte: Math.floor(complexity) + 1,
-            },
+            $and: [
+                { year: { $lt: 2020 } },
+                {
+                    complexity_average: {
+                        $gte: Math.floor(complexity),
+                        $lt: Math.floor(complexity) + 1,
+                    },
+                },
+            ],
         };
         const { totalPage, games, errorMessage } = await this.findGames({
             query,
