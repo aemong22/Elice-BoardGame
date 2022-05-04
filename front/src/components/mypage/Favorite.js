@@ -1,4 +1,4 @@
-import { MyBox, Title, Content, Total } from "./FavoriteStyle.js";
+import { MyBox, Title, Total, Content } from "./FavoriteStyle.js";
 import { useState, useEffect } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteCard from "./FavoriteCard";
@@ -26,12 +26,11 @@ function Favorite() {
                     <FavoriteIcon /> 찜 목록
                 </Title>
                 <Total>{count} / Total </Total>
-                <div>
+                <Content>
                     {wishes?.map((wish) => (
                         <FavoriteCard key={wish} wish={wish} />
                     ))}
-                </div>
-                <div>hi</div>
+                </Content>
             </MyBox>
         </>
     );

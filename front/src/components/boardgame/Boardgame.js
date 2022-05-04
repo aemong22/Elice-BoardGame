@@ -2,68 +2,91 @@ import React, { useState } from "react";
 import BoardgameCategory from "./BoardgameCategory";
 import Sorting from "./Sorting";
 import BoardgameData from "./BoardgameData";
-import { categoryName, categoryValue } from "./BoardgameCategoryData"
+import { categoryName, categoryValue } from "./BoardgameCategoryData";
 import "./Boardgame.css";
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
+import "./Boardgame.css";
+import MenuIcon from "@mui/icons-material/Menu";
 import SearchField from "./SearchField";
 
 function Boardgame() {
-    const header = document.getElementsByClassName('header')
+    const header = document.getElementsByClassName("header");
     const [open, setOpen] = useState(false);
-    const [condition, setCondition] = useState({ 
-        "category": "",
-        "val1": "",
-        "type": "",
-        "page": 1,
-        "perPage": 9,
-    })
-    
+    const [condition, setCondition] = useState({
+        category: "",
+        val1: "",
+        type: "",
+        page: 1,
+        perPage: 9,
+    });
+
     const initializeCondition = () => {
-        setCondition(current => {
+        setCondition((current) => {
             let newCondition = { ...current };
             newCondition.category = "";
             newCondition.val1 = "";
             newCondition.type = "";
             return newCondition;
-        })
-    }
+        });
+    };
 
     const changeCondition = (key, value) => {
-        setCondition(current => {
+        setCondition((current) => {
             let newCondition = { ...current };
             newCondition[key] = value;
             return newCondition;
-        })
-    }
+        });
+    };
 
     const changeOpen = () => {
         setOpen(!open);
-    }
+    };
 
     return (
         <>
-            <div className={ open ? 'boardgame-container-slide' : 'boardgame-container' }>
-                {
-                    open ? header[0].classList.add('boardgame-container-slide') : header[0].classList.remove('boardgame-container-slide')
+            <div
+                className={
+                    open ? "boardgame-container-slide" : "boardgame-container"
                 }
-                <div className='boardgame-header'>
-                    <div className='boardgame-header-item' onClick={() => setOpen(!open) }>
-                        <FilterAltOutlinedIcon className='boardgame-header-filtered-icon' />
-                        <div className='boardgame-header-filtered'>
-                        {condition.category !== '' ? `${categoryName(condition.category)} > ${categoryValue(condition.category, condition.val1)}` : '최신 보드게임 보기'}
+            >
+                {open
+                    ? header[0].classList.add("boardgame-container-slide")
+                    : header[0].classList.remove("boardgame-container-slide")}
+                <div className="boardgame-header">
+                    <div
+                        className="boardgame-header-item"
+                        onClick={() => setOpen(!open)}
+                    >
+                        <FilterAltOutlinedIcon className="boardgame-header-filtered-icon" />
+                        <div className="boardgame-header-filtered">
+                            {condition.category !== ""
+                                ? `${categoryName(
+                                      condition.category
+                                  )} > ${categoryValue(
+                                      condition.category,
+                                      condition.val1
+                                  )}`
+                                : "최신 보드게임 보기"}
                         </div>
                     </div>
                     <SearchField />
                 </div>
-                <div className='boardgame-sort'>
+                <div className="boardgame-sort">
                     <Sorting changeCondition={changeCondition} />
                 </div>
-                <div className='boardgames'>
-                    <BoardgameData condition={condition} changeCondition={changeCondition}/>
+                <div className="boardgames">
+                    <BoardgameData
+                        condition={condition}
+                        changeCondition={changeCondition}
+                    />
                 </div>
             </div>
-            <div className={ open ? 'boardgame-category active' : 'boardgame-category' }>
-                <BoardgameCategory 
+            <div
+                className={
+                    open ? "boardgame-category active" : "boardgame-category"
+                }
+            >
+                <BoardgameCategory
                     condition={condition}
                     initializeCondition={initializeCondition}
                     changeCondition={changeCondition}
@@ -71,7 +94,7 @@ function Boardgame() {
                 />
             </div>
         </>
-    )
+    );
 }
 
 export default Boardgame;
