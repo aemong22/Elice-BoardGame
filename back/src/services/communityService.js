@@ -74,9 +74,25 @@ class communityService{
     }
 
     // comment 삭제하기
-    static async deleteComment({commentid}){
-        const delComment = await CommunityCommentModel.findByIdAndDelete(commentid);
-        return delComment;
+    static async deleteComment( id2 ){
+        const delComment = await CommunityCommentModel.findByIdAndDelete(id2);  
+    }
+
+    // comment 수정하기
+    static async updateComment({id,content}){
+        const filter = {_id : id};
+        const option = {returnOriginal:false};
+        const fieldUpdate="content";
+        const updatecontent = content;
+        const updates = {[fieldUpdate]: updatecontent}
+        const UpdateComment = await CommunityCommentModel.findOneAndUpdate(
+            filter,
+            updates,
+            option,
+        )
+
+        UpdateComment.errorMessage = null;
+        return UpdateComment;
     }
 
 }

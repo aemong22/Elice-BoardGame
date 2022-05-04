@@ -27,5 +27,9 @@ communityRouter.post("/communitycontents/:id/comment",communityServiceController
 communityRouter.delete("/communitycontents/:id/comment/:id2",communityServiceController.deleteComment);
 
 // 댓글 수정하기
+communityRouter.put("/communitycontents/:id/comment/:id2/put",communityServiceController.updateComment);
+
+
+// 댓글 수정하기
 
 export{communityRouter}

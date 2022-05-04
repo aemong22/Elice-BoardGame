@@ -55,13 +55,13 @@ class communityServiceController{
             const title = req.body.title;
             const content = req.body.content;
             const id = req.params.id;
-
             const update = {title,content}
-            
+
             const updateContent = await communityService.updateContent({
                 id,
                 update,
-            });     
+            });
+
         if (updateContent.errorMessage) {
                 throw new Error(updateContent.errorMessage);
             }
@@ -93,15 +93,34 @@ class communityServiceController{
             next(error);
         }
     }
-
     // comment삭제
     static async deleteComment(req, res, next){
         try {
-            const conmmentid = req.params.id2;
-            const deletecomment = await communityService.deleteComment({conmmentid});
+            const commentid = req.params.id2;
+            const deletecomment = await communityService.deleteComment(commentid);
             res.status(200).json(deletecomment);
-            console.log("게시물이 삭제되었습니다.")
         } catch (error) {
+            next(error);
+        }
+    }
+
+    // comment 수정하기
+    static async updateComment(req,res,next){
+        try{
+            const content = req.body.content;
+            const id = req.params.id2;
+
+            const updateComments = await communityService.updateComment({
+                id,
+                content,
+            });
+
+        if (updateComments.errorMessage) {
+                throw new Error(updateComments.errorMessage);
+            }
+        res.status(200).json(updateComments)
+        }
+        catch(error){
             next(error);
         }
     }
