@@ -78,6 +78,7 @@ function BoardgameData({ condition, changeCondition }) {
       theme={boardgame?.theme === null ? "" : boardgame.theme}
       image={boardgame?.image}
       min_age={boardgame?.min_age}
+      complexity_average={boardgame?.complexity_average}
       min_playing_time={boardgame?.min_playing_time}
       max_playing_time={boardgame?.max_playing_time}
     />
