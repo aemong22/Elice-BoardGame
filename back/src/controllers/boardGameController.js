@@ -1,26 +1,20 @@
 import { boardGameService } from "../services/boardGameService";
 
 class boardgameController {
-    // 19년도 게임 전체 조회 (search 에서 사용할 것 구현)
-    static async findAllGames(req, res, next) {
-        try {
-            const allBoardGame = await boardGameService.findAllGames();
-            res.status(200).json(allBoardGame);
-        } catch (error) {
-            next(error);
-        }
-    }
-
     // 20년 최신 게임 전체 조회
     static async findRecentlyGames(req, res, next) {
         try {
             const { page = 1, perPage = 10 } = req.query;
 
-            const recentlyGames = await boardGameService.findByRecentlyGames({
-                page,
-                perPage,
-            });
-            res.status(200).json(recentlyGames);
+            const { totalPage, games, errorMessage } =
+                await boardGameService.findByRecentlyGames({
+                    page,
+                    perPage,
+                });
+
+            if (errorMessage) throw new Error(errorMessage);
+
+            res.status(200).json({ totalPage, games });
         } catch (error) {
             next(error);
         }
@@ -31,6 +25,11 @@ class boardgameController {
         try {
             const gameId = req.params.id;
             const games = await boardGameService.findByGameId({ gameId });
+
+            if (games.errorMessage) {
+                throw new Error(games.errorMessage);
+            }
+
             res.status(200).json(games);
         } catch (error) {
             next(error);
@@ -52,6 +51,7 @@ class boardgameController {
         } = req.query;
 
         let games = null;
+
         try {
             switch (category) {
                 case "player":
@@ -101,6 +101,11 @@ class boardgameController {
                     });
                     break;
             }
+
+            if (games.errorMessage) {
+                throw new Error(games.errorMessage);
+            }
+
             res.status(200).json(games);
         } catch (error) {
             next(error);
@@ -111,11 +116,14 @@ class boardgameController {
         const { keyword, page, perPage } = req.query;
 
         try {
-            const { totalPage, games } = await boardGameService.search({
-                keyword,
-                page,
-                perPage,
-            });
+            const { totalPage, games, errorMessage } =
+                await boardGameService.search({
+                    keyword,
+                    page,
+                    perPage,
+                });
+
+            if (errorMessage) throw new Error(errorMessage);
 
             res.status(200).json({ totalPage, games });
         } catch (error) {
