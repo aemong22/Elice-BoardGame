@@ -154,6 +154,23 @@
 
 ## 7. word cloud
 
+> word cloud는 메타 데이터에서 얻어진 태그들을 분석하여 중요도나 인기도 등을 고려하여 시각적으로 늘어 놓아 웹 사이트에 표시하는 것이다.  
+> <sub>출처: 위키 백과</sub>
+
+Board game의 description을 이용해서 각 게임마다 word cloud를 생성하였다. Description의 단어들만 뽑아 한글로 번역한 word cloud를 생성하였다. Word cloud를 생성한 순서는 다음과 같다.
+
+### 1. Description 전처리
+
+게임의 설명을 모두 소문자로 변경, 정규식으로 영어 단어만 남기고 nltk의 sentence_tokenize 라이브러리를 사용해 문장 단위 tokenizing을 진행합니다. 문장별로 나눈 후 nltk의 word_tokenize를 사용해 단어별로 나눠줍니다. Stop words를 지정해서 단어들 중 불용어를 삭제합니다. 예를들면 "is", "a"처럼 뜻을 가지지 않은 단어와 데이터를 보고 잘못된 단어를 stop word에 넣어 전처리를 해줍니다.
+
+### 2. 한글로 된 word cloud 생성하기
+
+서비스 사용 대상은 한국인이기 때문에 word cloud를 한글로 생성해야 합니다. Description 전처리를 통해 얻은 단어들을 모두 한글로 번역해 줍니다. 번역에 사용된 라이브러리는 python의 `googletrans`로 라이브러리를 통해 구글 번역기를 사용할 수 있습니다. 번역된 단어들을 이용해서 word cloud를 생성합니다. Word cloud 생성은 번역된 단어들을 collections.Counter 함수를 사용, 빈도수 기준으로 생성하였습니다.
+
+### 3. word cloud 예시
+
+![](https://github.com/nowgnas/elice-2nd-project-img/blob/main/wordcloud/2_224517.png?raw=true)
+
 ## 8. 버전
 
 -   1.0.0
