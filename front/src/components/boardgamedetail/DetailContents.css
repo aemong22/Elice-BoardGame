@@ -1,0 +1,57 @@
+.detail-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-top {
+  display: flex;
+  flex-direction: row;
+}
+
+.container-top-left {
+  width: 50%;
+}
+
+.container-top-right {
+  width: 50%;
+}
+
+.image {
+  width: 100%;
+  height: 40%;
+
+  margin-top: 25%;
+  padding: 5% 5% 5% 5%;
+}
+
+.detail-context {
+  width: 100%;
+  height: 50%;
+  margin-top: 35%;
+}
+
+.detail-title {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.detail-description {
+  text-align: center;
+}
+
+#wordCloudBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: 5%;
+}
+
+#favoriteBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: 5%;
+}
