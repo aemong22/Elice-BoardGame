@@ -1,3 +1,0 @@
-import "./BoardgameDetail.css"
-
-
