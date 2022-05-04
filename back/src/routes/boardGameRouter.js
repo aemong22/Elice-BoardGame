@@ -1,4 +1,6 @@
 import { Router } from "express";
+import { authJWT } from "../middlewares/authJWT";
+
 // 이후에 추가할 것
 import { boardgameController } from "../controllers/boardGameController";
 
@@ -11,7 +13,11 @@ boardGameRouter.get("/boardgame/detail/:id", boardgameController.findByGameId);
 // --------보드게임 상세 조회---------
 
 // condition with params
-boardGameRouter.get("/games/conditions", boardgameController.findByCondition);
+boardGameRouter.get(
+    "/games/conditions",
+    authJWT,
+    boardgameController.findByCondition
+);
 
 // 페이지 전체 검색
 boardGameRouter.get("/search", boardgameController.search);
