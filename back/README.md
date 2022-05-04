@@ -6,6 +6,21 @@
 -   소범기
 -   이상원
 
+## 폴더 구조
+
+```shell
+.
+└── back
+    └── src
+        ├── controllers
+        ├── db
+        ├── middlewares
+        ├── routes
+        ├── services
+        └── utils
+
+```
+
 ## 적용된 기술 및 기능
 
 -   페이지에서 사용자 인증에 refresh token 도입
