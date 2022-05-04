@@ -165,7 +165,7 @@ class userController {
         const resetToken = await userAuthService.redisToken({ email });
 
         if (!resetToken) {
-            res.status(403).json(resetToken);
+            res.status(200).json(resetToken);
         } else {
             // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
