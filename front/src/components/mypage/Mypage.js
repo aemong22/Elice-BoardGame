@@ -44,7 +44,7 @@ function Mypage() {
                         <ImgGrid>
                             <Photo
                                 style={{
-                                    backgroundImage: `url(https://pinkpig-bucket.s3.ap-northeast-2.amazonaws.com/${ownerData?.image}.jpg)`,
+                                    backgroundImage: `url(https://pinkpig-bucket.s3.ap-northeast-2.amazonaws.com/${ownerData?.image}.png)`,
                                     backgroundSize: "100% 100%",
                                     backgroundRepeat: "no-repeat",
                                 }}
