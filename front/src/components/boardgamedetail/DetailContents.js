@@ -47,15 +47,7 @@ function DetailContents({ gameData }) {
                 <div className="detail-context">
                   <div className="detail-title">{gameData.game_name}</div>
                   <div style={{ margin: "0 10% 10% 10%" }}>
-                    <TagBtn
-                      minPlayer={gameData.min_player}
-                      maxPlayer={gameData.max_player}
-                      complexity={gameData.complexity_average}
-                      minAge={gameData.min_age}
-                      domains={gameData.domains}
-                      minPlayingTime={gameData.min_playing_time}
-                      maxPlayingTime={gameData.max_playing_time}
-                    />
+                    <TagBtn gameData={gameData} />
                   </div>
                   <span id="wordCloudBtn">
                     <Fab size="medium" color="primary" aria-label="add">

@@ -1,14 +1,15 @@
 import Button from "@mui/material/Button";
 
-function TagBtn({
-  minPlayer,
-  maxPlayer,
-  complexity,
-  minAge,
-  domains,
-  minPlayingTime,
-  maxPlayingTime,
-}) {
+function TagBtn({ gameData }) {
+  const {
+    max_player,
+    min_player,
+    complexity,
+    min_age,
+    theme,
+    min_playing_time,
+    max_playing_time,
+  } = gameData;
   return (
     <>
       <Button
@@ -16,11 +17,11 @@ function TagBtn({
         disabled
         sx={{ fontSize: "0.5rem", borderRadius: "100px", m: "2px" }}
       >
-        {minPlayer === maxPlayer ? (
-          <span>{maxPlayer}인용</span>
+        {min_player === max_player ? (
+          <span>{max_player}인용</span>
         ) : (
           <span>
-            {minPlayer}~{maxPlayer}인용
+            {min_player}~{max_player}인용
           </span>
         )}
       </Button>
@@ -50,7 +51,7 @@ function TagBtn({
         disabled
         sx={{ fontSize: "0.5rem", borderRadius: "100px", m: "2px" }}
       >
-        {minAge}세 이상
+        {min_age}세 이상
       </Button>
 
       <Button
@@ -58,11 +59,11 @@ function TagBtn({
         disabled
         sx={{ fontSize: "0.5rem", borderRadius: "100px", m: "2px" }}
       >
-        {minPlayingTime === maxPlayingTime ? (
-          <span>{maxPlayingTime}분</span>
+        {min_playing_time === max_playing_time ? (
+          <span>{max_playing_time}분</span>
         ) : (
           <span>
-            {minPlayingTime}~{maxPlayingTime}분
+            {min_playing_time}~{max_playing_time}분
           </span>
         )}
       </Button>
