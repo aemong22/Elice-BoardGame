@@ -16,9 +16,9 @@
     border-bottom: #e2e2e255 solid 2px;
     display: flex;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 70px;
     color: #716F6F;
-    z-index: 999;
+    z-index: 100;
 }
 
 .boardgame-header-item {
