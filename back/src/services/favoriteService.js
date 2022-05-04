@@ -4,9 +4,10 @@ import { BoardGameModel } from "../db/schemas/boardgame";
 import mongoose from "mongoose";
 
 class favoriteAuthService {
-    static async addFavorite({ userId, boardgameId }) {
+    static async updateFavorite({ userId, boardgameId, toggle }) {
         const user = await UserModel.findOne({ _id: userId });
         const game = await BoardGameModel.findOne({ game_id: boardgameId });
+        let favorite = "";
 
         if (!user) {
             const errorMessage = "해당 메일은 가입 내역이 없습니다.";
@@ -18,10 +19,19 @@ class favoriteAuthService {
             return { errorMessage };
         }
 
-        const favorite = await FavoriteModel.updateOne(
-            { user: user._id },
-            { $push: { boardgame: game } }
-        );
+        if (toggle === "remove") {
+            favorite = await FavoriteModel.updateOne(
+                { user: user._id },
+                { $pull: { boardgame: game._id } }
+            );
+        }
+
+        if (toggle === "add") {
+            favorite = await FavoriteModel.updateOne(
+                { user: user._id },
+                { $push: { boardgame: game } }
+            );
+        }
 
         return favorite;
     }

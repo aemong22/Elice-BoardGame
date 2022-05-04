@@ -366,6 +366,8 @@ paths:
               properties:
                 boardgameId:
                   type: number
+                toggle:
+                  type: string
       responses:
         '200':
           description:
