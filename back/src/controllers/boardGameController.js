@@ -12,7 +12,7 @@ class boardgameController {
                 throw new Error(games.errorMessage);
             }
 
-            res.status(200).json({ games, recommend_ids });
+            res.status(200).json({ games, recommendGames: recommend_ids });
         } catch (error) {
             next(error);
         }

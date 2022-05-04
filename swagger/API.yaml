@@ -279,7 +279,7 @@ paths:
                 properties:
                   games:
                     $ref: '#/components/schemas/BoardGame'
-                  recommend_ids: 
+                  recommendGames: 
                     $ref: '#/components/schemas/BoardGame'
   /games/conditions:
     get:
