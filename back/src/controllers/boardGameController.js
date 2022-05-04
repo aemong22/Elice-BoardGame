@@ -1,25 +1,6 @@
 import { boardGameService } from "../services/boardGameService";
 
 class boardgameController {
-    // 20년 최신 게임 전체 조회
-    static async findRecentlyGames(req, res, next) {
-        try {
-            const { page = 1, perPage = 10 } = req.query;
-
-            const { totalPage, games, errorMessage } =
-                await boardGameService.findByRecentlyGames({
-                    page,
-                    perPage,
-                });
-
-            if (errorMessage) throw new Error(errorMessage);
-
-            res.status(200).json({ totalPage, games });
-        } catch (error) {
-            next(error);
-        }
-    }
-
     // game_id를 기준으로 19년도 보드게임 데이터 탐색
     static async findByGameId(req, res, next) {
         try {
@@ -95,7 +76,8 @@ class boardgameController {
                     });
                     break;
                 default:
-                    games = await boardGameService.findAllGames({
+                    games = await boardGameService.findByRecentlyGames({
+                        sortType,
                         page,
                         perPage,
                     });

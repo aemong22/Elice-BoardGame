@@ -258,30 +258,7 @@ paths:
           description: OAuth 회원가입 및 로그인 성공!
         '400':
           description: .env 파일에 REACT_APP_CLIENT_ID가 있나요? 구글 아이디로 가입한 계정이 있나요?
-  /recentlyGames:
-    get:
-      tags:
-        - boardGame
-      summary: 최근 보드게임 조회 
-      parameters:
-        - name: page
-          in: query
-          required: false
-          schema:
-            type: number
-        - name: perPage
-          in: query
-          required: false
-          schema:
-            type: number
-      responses:
-        '200':
-          description: "최신 보드게임 조회(20년)"
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BoardGame'
-  /gameInfo/{id}:
+  /boardgame/detail/{id}:
     get:
       tags:
         - boardGame
