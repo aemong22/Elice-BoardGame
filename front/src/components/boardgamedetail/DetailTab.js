@@ -39,8 +39,9 @@ function a11yProps(index) {
   };
 }
 
-export default function DetailTab() {
+export default function DetailTab({ gameData }) {
   const [value, setValue] = React.useState(0);
+  const { description } = gameData;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -59,7 +60,7 @@ export default function DetailTab() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        게임 설명
+        {description}
       </TabPanel>
       <TabPanel value={value} index={1}>
         <BoardgameRec />

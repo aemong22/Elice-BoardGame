@@ -61,7 +61,11 @@ function DetailContents({ gameData }) {
                     aria-describedby="modal-modal-description"
                   >
                     <Box sx={style}>
-                      ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                      <img
+                        src={gameData.wordcloud}
+                        alt="워드클라우드"
+                        style={{ width: "100%" }}
+                      />
                     </Box>
                   </Modal>
                 </div>
@@ -69,7 +73,7 @@ function DetailContents({ gameData }) {
             </div>
 
             <div className="container-bottom">
-              <DetailTab />
+              <DetailTab gameData={gameData} />
             </div>
           </Box>
         </Container>
