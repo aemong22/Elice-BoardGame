@@ -1,6 +1,4 @@
-import { Grid, Box, InputBase, FormHelperText, Card } from "@mui/material";
-
-import Button from "@material-ui/core/Button";
+import { Grid, Box, Card } from "@mui/material";
 import styled from "@emotion/styled";
 
 const MyBox = styled(Box)`
@@ -27,12 +25,16 @@ const Total = styled(Grid)`
     padding-bottom: 3%;
 `;
 
-const Content = styled(Grid)`
-    border: solid 1px;
-`;
+const Content = styled(Grid)``;
 
 const GameCard = styled(Card)`
     display: inline-block;
 `;
 
-export { MyBox, Title, Content, Total, GameCard };
+const CardContent = styled(Grid)`
+    width: 100%;
+    height: 120px;
+    padding: 10px;
+`;
+
+export { MyBox, Title, Content, Total, GameCard, CardContent };
