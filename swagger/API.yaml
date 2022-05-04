@@ -271,7 +271,16 @@ paths:
             type: number
       responses:
         '200':
-          $ref : '#/components/schemas/BoardGame'
+          description: 조회한 게임과 연관된 게임들의 정보가 반환됩니다. 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  games:
+                    $ref: '#/components/schemas/BoardGame'
+                  recommend_ids: 
+                    $ref: '#/components/schemas/BoardGame'
   /games/conditions:
     get:
       tags:

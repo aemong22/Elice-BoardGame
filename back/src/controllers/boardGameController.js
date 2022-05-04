@@ -5,13 +5,14 @@ class boardgameController {
     static async findByGameId(req, res, next) {
         try {
             const gameId = req.params.id;
-            const games = await boardGameService.findByGameId({ gameId });
+            const { games, recommend_ids } =
+                await boardGameService.findByGameId({ gameId });
 
             if (games.errorMessage) {
                 throw new Error(games.errorMessage);
             }
 
-            res.status(200).json(games);
+            res.status(200).json({ games, recommend_ids });
         } catch (error) {
             next(error);
         }
