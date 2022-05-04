@@ -367,7 +367,7 @@ paths:
                 boardgameId:
                   type: number
                 toggle:
-                  type: string
+                  type: boolean
       responses:
         '200':
           description:
@@ -398,7 +398,7 @@ paths:
                     type: string
                   boardgame:
                       $ref: '#/components/schemas/BoardGame'
-  /favorite/{boardgame}:
+  /favorite/{game_id}:
     get:
       tags:
         - favorite
@@ -406,7 +406,7 @@ paths:
       security:
         - bearerAuth: []
       parameters:
-        - name: boardgame
+        - name: game_id
           in: path
           required: true
           schema:
