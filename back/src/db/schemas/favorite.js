@@ -10,7 +10,7 @@ const FavoriteSchema = new Schema(
             {
                 type: Schema.Types.ObjectId,
                 required: false,
-                ref: "Boardgame",
+                ref: "boardgames",
             },
         ],
     },
