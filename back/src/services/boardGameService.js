@@ -52,12 +52,13 @@ class boardGameService {
     }
 
     // 최신 게임 전체 조회(보드게임 메인 페이지 default 조회)
-    static async findByRecentlyGames({ page, perPage }) {
+    static async findByRecentlyGames({ sortType, page, perPage }) {
         const query = {
             year: { $eq: 2020 },
         };
 
         const { totalPage, games, errorMessage } = await this.findGames({
+            sortType,
             query,
             page,
             perPage,
@@ -68,9 +69,34 @@ class boardGameService {
         return { totalPage, games };
     }
 
-    // game_id로 조회
+    // game_id로 보드게임 조회
+    static findBoardGame({ gameId }) {
+        const games = BoardGameModel.findOne({ game_id: gameId });
+        return games;
+    }
+
+    // 상세 페이지 보드게임 조회 game_id로 조회
     static async findByGameId({ gameId }) {
-        const games = await BoardGameModel.findOne({ game_id: gameId });
+        const recommendGames = [];
+        // const games = await BoardGameModel.findOne({ game_id: gameId });
+        const games = await this.findBoardGame({ gameId });
+
+        if (games.recommend_id.length === 0)
+            games.recommend_id = "연관된 보드게임이 없습니다.";
+
+        // 연관된 보드게임 정보 얻기 위한 반복문
+        games.recommend_id.forEach((element) => {
+            const singleGame = this.findBoardGame({ gameId: element });
+
+            let item = {
+                name: singleGame.game_name,
+                image: singleGame.image,
+            };
+
+            recommendGames.push(item);
+            // console.log(recommendGames);
+        });
+        console.log(recommendGames);
 
         if (!games) return { errorMessage: "game id가 존재하지 않습니다." };
 
