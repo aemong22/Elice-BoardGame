@@ -36,11 +36,10 @@
 }
 
 .boardgames {
-    width: 900px;
+    width: 1000px;
     margin: 30px auto;
     display: flex; 
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 
 .boardgame-category {

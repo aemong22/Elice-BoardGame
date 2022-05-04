@@ -10,14 +10,14 @@ import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Button from '@mui/material/Button';
 
-function BoardgameCard({ id, name, min_player, max_player, theme, image, min_age, max_playing_time }) {
+function BoardgameCard({ id, name, min_player, max_player, theme, image, min_age, min_playing_time, max_playing_time }) {
   const navigate = useNavigate();
 
   const maxLength = 13;
   const boardgameName = name.length > maxLength ? name.substr(0, maxLength) + '...' : name;
   
   return (
-    <Card sx={{ width: 250, maxWidth: 270, my: 10 }}>
+    <Card sx={{ width: 250, maxWidth: 270, my: 5, mx: 5 }}>
       <CardActionArea onClick={() => navigate(`/boardgame/detail/:${id}`)}>
         <CardMedia
           component="img"
@@ -47,7 +47,9 @@ function BoardgameCard({ id, name, min_player, max_player, theme, image, min_age
             { `${min_age}세 이하` }
             </Button>
             <Button variant="outlined" disabled sx={{ fontSize: '0.5rem', borderRadius: '100px', m: '2px' }}>
-              { `${max_playing_time}분` }
+              { min_playing_time === max_playing_time ? 
+              `${max_playing_time}분` : `${min_playing_time}~${max_playing_time}분`
+            }
             </Button>
             {theme[0] === '' ? null 
               : theme.map((data) => (
