@@ -7,11 +7,12 @@ import * as Api from "../../api";
 function Favorite() {
     const [wishes, setWishes] = useState(undefined);
     const [count, setCount] = useState(0);
-    const favoriteList = () => {
-        Api.get("favorite/user").then((res) => {
+    const favoriteList = async () => {
+        await Api.get("favorite/user").then((res) => {
             const favoritedata = res.data;
             setWishes(favoritedata[0].boardgame);
             setCount(wishes?.length);
+            console.log("카운트", count);
         });
     };
     useEffect(() => {
