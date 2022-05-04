@@ -1,20 +1,31 @@
-/* .boardgame-header {
+.boardgame-container {
+    width: 100%;
+    margin-left: 0;
+    transition: all 0.3s;
+}
+
+.boardgame-header {
+    position: fixed;
     width: 100%;
     height: 50px;
     background-color: white;
     border-bottom: #e2e2e255 solid 2px;
     display: flex;
     align-items: center;
-} */
-
-.boardgame-header-item {
+}
+*/ .boardgame-header-item {
     width: 150px;
     height: 100%;
     font-size: 1rem;
     margin-left: 10px;
     display: flex;
     align-items: center;
-    border-right: #e2e2e255 solid 2px;
+    /* border-right: #e2e2e255 solid 2px; */
+}
+
+.boardgame-header-item:hover {
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .boardgame-header-menu-icon {
@@ -27,8 +38,9 @@
 }
 
 .boardgames {
-    width: 900px;
-    margin: 50px 15% 50px auto; /* 수정하기 */
+    width: 990px;
+    margin: 30px auto;
+    padding-left: 100px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

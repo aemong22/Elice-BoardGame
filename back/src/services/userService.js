@@ -4,10 +4,18 @@ import { UserModel } from "../db/schemas/user";
 import { TokenModel } from "../db/schemas/token";
 import { FavoriteModel } from "../db/schemas/favorite";
 import { createClient } from "redis";
+import nodemailer from "nodemailer";
 
 class userAuthService {
     // 유저 정보 추가하기
-    static async addUser({ user_name, email, password, phone_number, image }) {
+    static async addUser({
+        user_name,
+        email,
+        password,
+        phone_number,
+        image,
+        OAuthProvider,
+    }) {
         // 아이디 중복 확인
         const user = await UserModel.findOne({ email });
         if (user) {
@@ -25,6 +33,7 @@ class userAuthService {
             password: hashPasswd,
             phone_number,
             image,
+            OAuthProvider,
         };
 
         // db에 저장
@@ -178,10 +187,11 @@ class userAuthService {
         const email = data.email;
         const user_name = data.name;
         const password = data.id;
+        const OAuthProvider = "google";
         let user = await UserModel.findOne({ email });
 
         if (!user) {
-            await this.addUser({ user_name, email, password });
+            await this.addUser({ user_name, email, password, OAuthProvider });
         }
 
         const userinfo = await this.getUser({ email, password });
@@ -191,11 +201,16 @@ class userAuthService {
     //redis 토큰 생성
     static async redisToken({ email }) {
         const user = await UserModel.findOne({ email });
+        const CLIENT_BASE_URL = "http://localhost:3000";
 
         if (!user) {
             const errorMessage =
                 "해당 이메일은 존재하지 않습니다. 다시 한 번 확인해주세요.";
             return { errorMessage };
+        }
+
+        if (user.OAuthProvider === "google") {
+            return false;
         }
 
         const client = createClient({
@@ -211,6 +226,27 @@ class userAuthService {
         console.log(client.get(token));
 
         client.expire(token, 300);
+
+        let transporter = nodemailer.createTransport({
+            service: "gmail",
+            host: "smtp.gmail.com",
+            port: 587,
+            secure: false,
+            auth: {
+                user: `${process.env.NODEMAILER_USER}`,
+                pass: `${process.env.NODEMAILER_PASS}`,
+            },
+        });
+
+        // send mail with defined transport object
+        let info = await transporter.sendMail({
+            from: `"nuri" <${process.env.NODEMAILER_USER}>`,
+            to: email,
+            subject: "비밀번호 변경 링크입니다",
+            html: `<b>5분 안에 입력해주세요!!<br/><a href="${CLIENT_BASE_URL}/pwlink/${token}">비밀번호 변경 링크</a></b>`,
+        });
+
+        console.log("Message sent: %s", info.messageId);
 
         return token;
     }
