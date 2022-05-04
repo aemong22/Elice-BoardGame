@@ -22,7 +22,7 @@ function TagBtn({ gameData }) {
       ? `${max_playing_time}분`
       : `${min_playing_time}~${max_playing_time}분`,
   ];
-  console.log(tagData);
+
   return (
     <>
       {tagData.map((tag) => (
