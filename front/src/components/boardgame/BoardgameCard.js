@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { categoryData } from "./BoardgameCategoryData"
+import { categoryData } from "./BoardgameCategoryData";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -31,9 +31,7 @@ function BoardgameCard({
 
     return (
         <Card sx={{ width: 250, maxWidth: 270, my: 5, mx: 5 }}>
-            <CardActionArea
-                onClick={() => navigate(`/boardgame/detail/${id}`)}
-            >
+            <CardActionArea onClick={() => navigate(`/boardgame/detail/${id}`)}>
                 <CardMedia
                     component="img"
                     height="240"
@@ -95,7 +93,11 @@ function BoardgameCard({
                                 m: "2px",
                             }}
                         >
-                            {categoryData["complexity"][String(Math.floor(complexity_average))]}
+                            {
+                                categoryData["complexity"][
+                                    String(Math.floor(complexity_average))
+                                ]
+                            }
                         </Button>
                         <Button
                             variant="outlined"
