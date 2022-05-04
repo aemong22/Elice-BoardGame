@@ -19,14 +19,14 @@ class favoriteAuthService {
             return { errorMessage };
         }
 
-        if (toggle === "remove") {
+        if (toggle === false) {
             favorite = await FavoriteModel.updateOne(
                 { user: user._id },
                 { $pull: { boardgame: game._id } }
             );
         }
 
-        if (toggle === "add") {
+        if (toggle === true) {
             favorite = await FavoriteModel.updateOne(
                 { user: user._id },
                 { $push: { boardgame: game } }
