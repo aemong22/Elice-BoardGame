@@ -12,7 +12,6 @@ function Favorite() {
             const favoritedata = res.data;
             setWishes(favoritedata[0].boardgame);
             setCount(wishes?.length);
-            console.log(count);
         });
     };
     useEffect(() => {
