@@ -13,7 +13,9 @@ import {
     SubContent,
     HelperText,
     MyButton,
+    GoogleTitle,
 } from "./ProfileStyle";
+import { useEffect } from "react";
 
 function Profile({ ownerData, setOwnerData }) {
     //이미지 넣는 코드
@@ -60,15 +62,14 @@ function Profile({ ownerData, setOwnerData }) {
     //회원정보 변경 코드
     const [user_name, setUser_name] = useState(ownerData.user_name);
     const email = ownerData.email;
-    const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [password, setPassword] = useState("");
     const [phone_number, setPhone_number] = useState(ownerData?.phone_number);
     const isPasswordValid = password.length >= 4;
     const isPasswordSame = password === confirmPassword;
     const isNameValid = user_name.length >= 2;
     const isFormValid = isPasswordValid && isPasswordSame && isNameValid;
-
-    console.log("유저데이터", ownerData);
+    const home = ownerData.OAuthProvider;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -90,110 +91,118 @@ function Profile({ ownerData, setOwnerData }) {
 
     return (
         <>
-            <MyBox>
-                <Title>
-                    <PersonIcon /> 회원정보 변경
-                </Title>
-                <form onSubmit={handleSubmit} style={{ height: "80%" }}>
-                    <Content>
-                        <SubContent>
-                            <SubTitle>프로필 사진 변경하기</SubTitle>
-                            <StyledInput
-                                style={{ width: "50%" }}
-                                type="file"
-                                id="upload"
-                                className="image-upload"
-                                onChange={handleFileInput}
-                            />
-                        </SubContent>
-                        <SubContent>
-                            <SubTitle>이름</SubTitle>
-                            <StyledInput
-                                type="text"
-                                required
-                                value={user_name}
-                                onChange={(e) => {
-                                    setUser_name(e.target.value);
-                                }}
-                            />
-                            {isNameValid ? null : (
-                                <HelperText>
-                                    {" "}
-                                    2글자 이상입력해주세요.
-                                </HelperText>
-                            )}
-                        </SubContent>
+            {home === "home" ? (
+                <MyBox>
+                    <Title>
+                        <PersonIcon /> 회원정보 변경
+                    </Title>
+                    <form onSubmit={handleSubmit} style={{ height: "80%" }}>
+                        <Content>
+                            <SubContent>
+                                <SubTitle>프로필 사진 변경하기</SubTitle>
+                                <StyledInput
+                                    style={{ width: "50%" }}
+                                    type="file"
+                                    id="upload"
+                                    className="image-upload"
+                                    onChange={handleFileInput}
+                                />
+                            </SubContent>
+                            <SubContent>
+                                <SubTitle>이름</SubTitle>
+                                <StyledInput
+                                    type="text"
+                                    required
+                                    value={user_name}
+                                    onChange={(e) => {
+                                        setUser_name(e.target.value);
+                                    }}
+                                />
+                                {isNameValid ? null : (
+                                    <HelperText>
+                                        2글자 이상입력해주세요.
+                                    </HelperText>
+                                )}
+                            </SubContent>
 
-                        <SubContent>
-                            <SubTitle>이메일</SubTitle>
-                            <StyledInput
-                                type="text"
-                                required
-                                disabled={true}
-                                value={ownerData.email}
-                            />
-                            <HelperText> 변경하실 수 없습니다.</HelperText>
-                        </SubContent>
+                            <SubContent>
+                                <SubTitle>이메일</SubTitle>
+                                <StyledInput
+                                    type="text"
+                                    required
+                                    disabled={true}
+                                    value={ownerData.email}
+                                />
+                                <HelperText> 변경하실 수 없습니다.</HelperText>
+                            </SubContent>
+                            <SubContent>
+                                <SubTitle>비밀번호</SubTitle>
+                                <StyledInput
+                                    type="password"
+                                    value={password}
+                                    required
+                                    placeholder="비밀번호 변경"
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
+                                />
+                                {isPasswordValid ? null : (
+                                    <HelperText>
+                                        4자리 이상 입력해주세요.
+                                    </HelperText>
+                                )}
+                            </SubContent>
 
-                        <SubContent>
-                            <SubTitle>비밀번호</SubTitle>
-                            <StyledInput
-                                type="password"
-                                value={password}
-                                required
-                                placeholder="비밀번호 변경"
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                            {isPasswordValid ? null : (
-                                <HelperText>
-                                    {" "}
-                                    4자리 이상 입력해주세요.
-                                </HelperText>
-                            )}
-                        </SubContent>
+                            <SubContent>
+                                <SubTitle>비밀번호 확인</SubTitle>
+                                <StyledInput
+                                    type="password"
+                                    required
+                                    value={confirmPassword}
+                                    placeholder="비밀번호 확인"
+                                    onChange={(e) =>
+                                        setConfirmPassword(e.target.value)
+                                    }
+                                />
+                                {isPasswordSame ? null : (
+                                    <HelperText>
+                                        비밀번호가 일치하지 않습니다.
+                                    </HelperText>
+                                )}
+                            </SubContent>
 
-                        <SubContent>
-                            <SubTitle>비밀번호 확인</SubTitle>
-                            <StyledInput
-                                type="password"
-                                required
-                                value={confirmPassword}
-                                placeholder="비밀번호 확인"
-                                onChange={(e) =>
-                                    setConfirmPassword(e.target.value)
-                                }
-                            />
-                            {isPasswordSame ? null : (
-                                <HelperText>
-                                    비밀번호가 일치하지 않습니다.
-                                </HelperText>
-                            )}
-                        </SubContent>
-
-                        <SubContent>
-                            <SubTitle>전화번호</SubTitle>
-                            <StyledInput
-                                type="text"
-                                placeholder="전화번호 변경"
-                                required
-                                value={phone_number}
-                                onChange={(e) =>
-                                    setPhone_number(e.target.value)
-                                }
-                            />
-                        </SubContent>
-                        <SubContent
-                            style={{ textAlign: "center", height: "10%" }}
-                        >
-                            <StylesProvider injectFirst>
-                                <MyButton type="submit" disabled={!isFormValid}>
-                                    변경하기
-                                </MyButton>
-                            </StylesProvider>
-                        </SubContent>
-                    </Content>
-                </form>
-            </MyBox>
+                            <SubContent>
+                                <SubTitle>전화번호</SubTitle>
+                                <StyledInput
+                                    type="text"
+                                    placeholder="전화번호 변경"
+                                    required
+                                    value={phone_number}
+                                    onChange={(e) =>
+                                        setPhone_number(e.target.value)
+                                    }
+                                />
+                            </SubContent>
+                            <SubContent
+                                style={{ textAlign: "center", height: "10%" }}
+                            >
+                                <StylesProvider injectFirst>
+                                    <MyButton
+                                        type="submit"
+                                        disabled={!isFormValid}
+                                    >
+                                        변경하기
+                                    </MyButton>
+                                </StylesProvider>
+                            </SubContent>
+                        </Content>
+                    </form>
+                </MyBox>
+            ) : (
+                <GoogleTitle>
+                    구글 로그인은 회원정보 변경을 할 수 없습니다.
+                </GoogleTitle>
+            )}
         </>
     );
 }
