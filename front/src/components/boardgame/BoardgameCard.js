@@ -29,6 +29,18 @@ function BoardgameCard({
     const boardgameName =
         name.length > maxLength ? name.substr(0, maxLength) + "..." : name;
 
+    const tagData = [
+        min_player === max_player
+            ? `${max_player}인용`
+            : `${min_player}~${max_player}인용`,
+        categoryData["complexity"][String(Math.floor(complexity_average))],
+        `${min_age}세 이상`,
+        ...theme,
+        min_playing_time === max_playing_time
+          ? `${max_playing_time}분`
+          : `${min_playing_time}~${max_playing_time}분`,
+      ];
+
     return (
         <Card sx={{ width: 250, maxWidth: 270, my: 5, mx: 5 }}>
             <CardActionArea
@@ -62,70 +74,16 @@ function BoardgameCard({
                         </CardActions>
                     </div>
                     <div style={{ height: 100, alignItems: "start" }}>
+                    {tagData.map((tag) => (
                         <Button
-                            variant="outlined"
-                            disabled
-                            sx={{
-                                fontSize: "0.5rem",
-                                borderRadius: "100px",
-                                m: "2px",
-                            }}
+                        variant="outlined"
+                        disabled
+                        sx={{ fontSize: "0.5rem", borderRadius: "100px", m: "2px" }}
+                        key={tag}
                         >
-                            {min_player === max_player
-                                ? `${max_player}인용`
-                                : `${min_player}~${max_player}인용`}
+                        {tag}
                         </Button>
-                        <Button
-                            variant="outlined"
-                            disabled
-                            sx={{
-                                fontSize: "0.5rem",
-                                borderRadius: "100px",
-                                m: "2px",
-                            }}
-                        >
-                            {`${min_age}세 이하`}
-                        </Button>
-                        <Button
-                            variant="outlined"
-                            disabled
-                            sx={{
-                                fontSize: "0.5rem",
-                                borderRadius: "100px",
-                                m: "2px",
-                            }}
-                        >
-                            {categoryData["complexity"][String(Math.floor(complexity_average))]}
-                        </Button>
-                        <Button
-                            variant="outlined"
-                            disabled
-                            sx={{
-                                fontSize: "0.5rem",
-                                borderRadius: "100px",
-                                m: "2px",
-                            }}
-                        >
-                            {min_playing_time === max_playing_time
-                                ? `${max_playing_time}분`
-                                : `${min_playing_time}~${max_playing_time}분`}
-                        </Button>
-                        {theme[0] === ""
-                            ? null
-                            : theme.map((data) => (
-                                  <Button
-                                      key={data}
-                                      variant="outlined"
-                                      disabled
-                                      sx={{
-                                          fontSize: "0.5rem",
-                                          borderRadius: "100px",
-                                          m: "2px",
-                                      }}
-                                  >
-                                      {data}
-                                  </Button>
-                              ))}
+                    ))}
                     </div>
                 </CardContent>
             </CardActionArea>
