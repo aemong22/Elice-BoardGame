@@ -26,9 +26,12 @@ class favoriteAuthService {
         return favorite;
     }
 
-    if (!game) {
-      const errorMessage = "해당 보드게임은 존재하지 않습니다.";
-      return { errorMessage };
+    static async findFavorite({ userId }) {
+        const favorites = await FavoriteModel.find({ user: userId }).populate(
+            "boardgame"
+        );
+
+        return favorites;
     }
 
     // 로그인한 유저가 찜한 보드게임인지 아닌지 판별
@@ -40,30 +43,12 @@ class favoriteAuthService {
             boardgame: { $in: [game] },
         });
 
-    return favorite;
-  }
+        if (!favorite) {
+            return false;
+        }
 
-  static async findFavorite({ userId }) {
-    const favorites = await FavoriteModel.find({ user: userId }).populate(
-      "boardgame"
-    );
-
-    return favorites;
-  }
-
-  // 로그인한 유저가 찜한 보드게임인지 아닌지 판별
-  static async findDetailFavorite({ userId, boardgameId }) {
-    const favorite = await FavoriteModel.findOne({
-      userId,
-      boardgame: { $in: [boardgameId] },
-    });
-
-    if (!favorite) {
-      return false;
+        return true;
     }
-
-    return true;
-  }
 }
 
 export { favoriteAuthService };

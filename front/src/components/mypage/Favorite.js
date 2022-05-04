@@ -12,9 +12,9 @@ function Favorite() {
             const favoritedata = res.data;
             setWishes(favoritedata[0].boardgame);
             setCount(wishes?.length);
+            console.log(count);
         });
     };
-
     useEffect(() => {
         favoriteList();
     }, []);
@@ -25,10 +25,10 @@ function Favorite() {
                 <Title>
                     <FavoriteIcon /> 찜 목록
                 </Title>
-                <Total>{count} / Total </Total>
+                <Total> {count} / Total </Total>
                 <Content>
                     {wishes?.map((wish) => (
-                        <FavoriteCard key={wish} wish={wish} />
+                        <FavoriteCard key={wish.game_id} wish={wish} />
                     ))}
                 </Content>
             </MyBox>
