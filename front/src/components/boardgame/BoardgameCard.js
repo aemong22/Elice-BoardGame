@@ -27,8 +27,7 @@ function BoardgameCard({
     const navigate = useNavigate();
     const [favoriteToggle, setFavoriteToggle] = useState(false);
     const maxLength = 13;
-    const boardgameName =
-        name.length > maxLength ? name.substr(0, maxLength) + "..." : name;
+    const boardgameName = name.length > maxLength ? name.substr(0, maxLength) + "..." : name;
 
     const tagData = [
         min_player === max_player
@@ -38,14 +37,14 @@ function BoardgameCard({
         `${min_age}세 이상`,
         ...theme,
         min_playing_time === max_playing_time
-          ? `${max_playing_time}분`
-          : `${min_playing_time}~${max_playing_time}분`,
+            ? `${max_playing_time}분`
+            : `${min_playing_time}~${max_playing_time}분`,
       ];
 
     const favoriteHandler = async () => {
-        const res = await Api.put("favorite", {
-          boardgameId: id,
-          toggle: !favoriteToggle,
+        await Api.put("favorite", {
+            boardgameId: id,
+            toggle: !favoriteToggle,
         });
         setFavoriteToggle(!favoriteToggle);
     };

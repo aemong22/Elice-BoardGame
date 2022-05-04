@@ -89,7 +89,7 @@ function BoardgameData({ condition, changeCondition }) {
       {boardgameList}
       <div style={{ width: "100%", display: "flex" }}>
         <div
-          style={{ margin: "0 auto", display: "flex", alignItems: "center" }}
+          style={{ margin: "0 auto", display: "flex", alignItems: "baseline" }}
         >
           <BasicPagination
             totalPage={totalPage}
@@ -104,10 +104,10 @@ function BoardgameData({ condition, changeCondition }) {
                 changeCondition("perPage", Number(value))
               }
             >
-              <option value="9">9</option>
-              <option value="15">15</option>
-              <option value="30">30</option>
-              <option value="90">90</option>
+              <option value="9">9개씩 보기</option>
+              <option value="15">15개씩 보기</option>
+              <option value="30">30개씩 보기</option>
+              <option value="90">90개씩 보기</option>
             </select>
           </label>
         </div>
