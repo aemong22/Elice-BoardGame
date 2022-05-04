@@ -2,14 +2,16 @@ import { favoriteAuthService } from "../services/favoriteService";
 import is from "@sindresorhus/is";
 
 class favoriteController {
-    static async addFavorite(req, res, next) {
+    static async updateFavorite(req, res, next) {
         try {
             const userId = req.currentUserId;
             const boardgameId = req.body.boardgameId;
+            const toggle = req.body.toggle;
 
-            const favorite = await favoriteAuthService.addFavorite({
+            const favorite = await favoriteAuthService.updateFavorite({
                 userId,
                 boardgameId,
+                toggle,
             });
 
             res.status(200).json(favorite);
