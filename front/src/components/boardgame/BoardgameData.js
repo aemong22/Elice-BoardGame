@@ -8,14 +8,19 @@ function BoardgameData({ condition, changeCondition }) {
   const [totalPage, setTotalPage] = useState(1);
 
   useEffect(() => {
+    conditionGamesHandler();
+  }, [condition]);
+
+  /*
+  useEffect(() => {
     condition.category !== "" || condition.type !== ""
       ? conditionGamesHandler()
       : recentlyGamesHandler();
   }, [condition]);
 
-  // 보드게임 최근 데이터 불러오기
+  보드게임 최근 데이터 불러오기
   const recentlyGamesHandler = async () => {
-    // console.log("data condtion: ", condition);
+    console.log("data condtion: ", condition);
     try {
       await Api.getQuery(
         "recentlyGames",
@@ -27,7 +32,7 @@ function BoardgameData({ condition, changeCondition }) {
         },
         { withCredentials: true }
       ).then((res) => {
-        // console.log("res.data: ", res.data)
+        console.log("res.data: ", res.data)
         setBoardgames(res.data.games);
         setTotalPage(res.data.totalPage);
       });
@@ -35,8 +40,9 @@ function BoardgameData({ condition, changeCondition }) {
       console.log("errer message: ", err);
     }
   };
+  */
 
-  // 보드게임 조건 데이터 불러오기
+  // 보드게임 데이터 불러오기
   const conditionGamesHandler = async () => {
     console.log("data condtion: ", condition);
     try {
@@ -53,7 +59,7 @@ function BoardgameData({ condition, changeCondition }) {
         },
         { withCredentials: true }
       ).then((res) => {
-        // console.log("res.data: ", res.data)
+        console.log("res.data: ", res.data)
         setBoardgames(res.data.games);
         setTotalPage(res.data.totalPage);
       });

@@ -46,7 +46,7 @@ function BoardgameCategory({ condition, initializeCondition, changeCondition, ch
           </div>
           <div className='filters-panel-wrapper'>
             <List 
-              sx={{ width: '100%', maxWidth: '260px', bgcolor: '#e2e2e2', py:'0' }}
+              sx={{ width: '100%', maxWidth: '260px', bgcolor: '#e2e2e2', py:'0', flex: 'display', flexDirection: 'column' }}
               component="nav"
               aria-labelledby="nested-list-subheader"
             >
