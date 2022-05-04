@@ -31,7 +31,6 @@ function Favorite() {
                         <FavoriteCard key={wish} wish={wish} />
                     ))}
                 </div>
-                <div>hi</div>
             </MyBox>
         </>
     );

@@ -6,7 +6,7 @@
   height: 64px;
   background-color: white;
   border-bottom: solid 1px #ebebeb;
-  transition: all 0.3s;
+  transition: 0.3s;
 }
 nav {
   max-width:1300px;
