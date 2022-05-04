@@ -71,7 +71,8 @@ class boardGameService {
 
     // 상세 페이지 보드게임 조회 game_id로 조회
     static async findByGameId({ gameId }) {
-        const games = await BoardGameModel.findOne({ game_id: gameId });
+        const game_id = Number(gameId);
+        const games = await BoardGameModel.findOne({ game_id });
 
         if (games.recommend_id.length === 0)
             games.recommend_id = "연관된 보드게임이 없습니다.";
