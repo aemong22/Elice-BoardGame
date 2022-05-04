@@ -1,9 +1,17 @@
 import React, { useState } from "react";
-import { CssBaseline, Box, Container, Fab, Modal } from "@mui/material";
+import {
+  CssBaseline,
+  Box,
+  Container,
+  Fab,
+  Modal,
+  IconButton,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import TagBtn from "./TagBtn";
-import "./DetailContents.css";
 import DetailTab from "./DetailTab";
+import "./DetailContents.css";
 
 function DetailContents({ gameData }) {
   const [open, setOpen] = useState(false);
@@ -45,6 +53,12 @@ function DetailContents({ gameData }) {
               </div>
               <div className="container-top-right">
                 <div className="detail-context">
+                  <div id="favoriteBtn">
+                    <IconButton aria-label="add to favorites">
+                      <FavoriteIcon />
+                    </IconButton>
+                  </div>
+
                   <div className="detail-title">{gameData.game_name}</div>
                   <div style={{ margin: "0 10% 10% 10%" }}>
                     <TagBtn gameData={gameData} />
