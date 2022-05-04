@@ -1,10 +1,6 @@
 .boardgame-container {
     width: 100%;
-    transition: all 0.3s;
-}
-
-.boardgame-container-slide {
-    margin-left: 260px; 
+    margin-left: 0; 
     transition: all 0.3s;
 }
 
@@ -28,7 +24,12 @@
     margin-left: 10px;
     display: flex;
     align-items: center;
-    border-right: #e2e2e255 solid 2px;
+    /* border-right: #e2e2e255 solid 2px; */
+}
+
+.boardgame-header-item:hover {
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .boardgame-header-filtered-icon {
@@ -36,8 +37,9 @@
 }
 
 .boardgames {
-    width: 1000px;
+    width: 990px;
     margin: 30px auto;
+    padding-left: 100px;
     display: flex; 
     flex-wrap: wrap;
 }
