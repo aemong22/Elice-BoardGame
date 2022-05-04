@@ -73,6 +73,7 @@ class boardGameService {
         };
 
         const { totalPage, games, errorMessage } = await this.findGames({
+            user,
             sortType,
             query,
             page,
@@ -85,20 +86,29 @@ class boardGameService {
     }
 
     // 상세 페이지 보드게임 조회 game_id로 조회
+    // favorite 부분 리팩토링 필요
     static async findByGameId({ user, gameId }) {
         const game_id = Number(gameId);
-        const games = await BoardGameModel.findOne({ game_id });
+        const game = await BoardGameModel.findOne({ game_id });
 
-        if (games.recommend_id.length === 0)
-            games.recommend_id = "연관된 보드게임이 없습니다.";
+        if (game.recommend_id.length === 0)
+            game.recommend_id = "연관된 보드게임이 없습니다.";
 
         const recommend_ids = await BoardGameModel.find({
-            game_id: { $in: games.recommend_id },
+            game_id: { $in: game.recommend_id },
         });
+
+        const favorites = await FavoriteModel.findOne({
+            userId: user,
+            boardgame: { $in: [game._id] },
+        });
+
+        const games = { ...game };
+        games._doc.favorite = favorites !== null;
 
         if (!games) return { errorMessage: "game id가 존재하지 않습니다." };
 
-        return { games, recommend_ids };
+        return { games: games._doc, recommend_ids };
     }
 
     // player 기준 범위 안 보드게임 조회
