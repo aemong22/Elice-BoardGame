@@ -29,9 +29,7 @@ function BoardgameCard({
 
     return (
         <Card sx={{ width: 250, maxWidth: 270, my: 5, mx: 5 }}>
-            <CardActionArea
-                onClick={() => navigate(`/boardgame/detail/:${id}`)}
-            >
+            <CardActionArea onClick={() => navigate(`/boardgame/detail/${id}`)}>
                 <CardMedia
                     component="img"
                     height="240"
