@@ -64,7 +64,7 @@ export default function DetailTab({ gameData }) {
                 {description}
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <BoardgameRec />
+                <BoardgameRec gameData={gameData} />
             </TabPanel>
         </Box>
     );
