@@ -37,6 +37,7 @@ function PwLink() {
               style={{ width: "80%", margin: "10px" }}
               size="small"
               label="PASSWORD"
+              type="password"
               helperText={isPasswordValid ? "" : "비밀번호는 4글자 이상입니다."}
               onChange={(e) => setPw(e.target.value)}
             />
@@ -47,6 +48,7 @@ function PwLink() {
               style={{ width: "80%", margin: "10px" }}
               size="small"
               label="CONFIRM-PASSWORD"
+              type="password"
               helperText={isPasswordSame ? "" : "비밀번호가 일치하지 않습니다."}
               onChange={(e) => setConfirmPw(e.target.value)}
             />

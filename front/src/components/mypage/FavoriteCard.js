@@ -1,14 +1,25 @@
-import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { CardContent, CardMedia, Typography } from "@mui/material";
+import { GameCard } from "./FavoriteStyle";
 
 function FavoriteCard({ wish }) {
-  const navigate = useNavigate();
-
-  return (
-    <>
-      <div>안녕</div>
-    </>
-  );
+    return (
+        <>
+            <GameCard sx={{ width: 180, my: 1, mx: 1 }}>
+                <CardMedia
+                    component="img"
+                    width="180"
+                    height="180"
+                    image={wish.image}
+                    alt="보드게임 이미지"
+                />
+                <CardContent>
+                    <Typography sx={{ fontSize: 18 }} component="div">
+                        {wish.game_name}
+                    </Typography>
+                </CardContent>
+            </GameCard>
+        </>
+    );
 }
 
-export default FavoriteCard();
+export default FavoriteCard;

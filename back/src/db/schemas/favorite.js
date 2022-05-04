@@ -14,6 +14,7 @@ const FavoriteSchema = new Schema(
             },
         ],
     },
+
     {
         timestamps: true,
     }

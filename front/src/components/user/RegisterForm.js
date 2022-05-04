@@ -79,6 +79,7 @@ function RegisterForm({ setRegister, handleClose }) {
       </Grid>
       <Grid style={{ height: "80px" }}>
         <TextField
+          type="password"
           className="register-input"
           style={{ width: "80%", margin: "10px" }}
           size="small"
@@ -89,6 +90,7 @@ function RegisterForm({ setRegister, handleClose }) {
       </Grid>
       <Grid style={{ height: "75px" }}>
         <TextField
+          type="password"
           className="register-input"
           style={{ width: "80%", margin: "10px" }}
           size="small"
