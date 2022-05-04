@@ -54,7 +54,7 @@ class boardGameService {
     // 최신 게임 전체 조회(보드게임 메인 페이지 default 조회)
     static async findByRecentlyGames({ sortType, page, perPage }) {
         const query = {
-            year: { $eq: 2020 },
+            year: { $gte: 2020 },
         };
 
         const { totalPage, games, errorMessage } = await this.findGames({
