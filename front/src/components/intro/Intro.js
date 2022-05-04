@@ -4,8 +4,8 @@ import LoginForm from "../user/LoginForm";
 import { Modal } from "@mui/material";
 import { useState } from "react";
 
-const Intro = () => {
-    const [open, setOpen] = useState(false);
+function Intro() {
+  const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
         setOpen(true);

@@ -1,4 +1,7 @@
 .header {
+  position: fixed;
+  top: 0;
+  z-index: 20;
   width: 100%;
   height: 60px;
   background-color: white;
@@ -11,11 +14,12 @@
 }
 
 .header-navigate li {
-  width: 100px;
+  width: auto;
   font-size: 1.2rem;
   margin-left: 10px;
 }
 
 .header-navigate li:last-child {
-  margin: auto 0 auto auto;
+  margin: auto 1% auto auto;
 }
+

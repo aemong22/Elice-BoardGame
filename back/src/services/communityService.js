@@ -20,19 +20,30 @@ class communityService{
     }
 
     // content수정하기
-    static async updateContent({contentid,content}){
-        const filter = {_id : contentid}
-        const updatecontent = {content : content};
-
-        const UpdateContents = await CommunityContentModel.findOneAndUpdate(
+    static async updateContent({id,update}){
+        const filter = {_id : id};
+        const option = {returnOriginal:false};
+        const fieldUpdate="title";
+        const updatetitle = update.title;
+        let updates = {[fieldUpdate]: updatetitle}
+        let UpdateContents = await CommunityContentModel.findOneAndUpdate(
             filter,
-            updatecontent
+            updates,
+            option,
         )
+
+        const fieldUpdates="content";
+        const updatecontent = update.content;
+        updates = {[fieldUpdates] : updatecontent}
+        UpdateContents = await CommunityContentModel.findOneAndUpdate(
+            filter,
+            updates,
+            option,
+        )
+
         UpdateContents.errorMessage = null;
-        
         return UpdateContents;
     }
-
 
     // 모든 content 보여주기
     static async getContents(){
@@ -53,12 +64,12 @@ class communityService{
     }
     
     // comment 추가하기
-    static async addComment({user_id,content}){
+    static async addComment({id,user_id,content}){
         const newComment = {
-            user_id,
-            comment
+            user_id: user_id,
+            content: content,
             };
-        const createNewComment = await CommunityCommentModel.create(newComment)
+        // const createNewComment = await CommunityContentModel.update({_id:id},{comment : newComment})
         createNewComment.errorMessage = null;
         
         return createNewComment;

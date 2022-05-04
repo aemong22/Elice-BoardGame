@@ -17,18 +17,18 @@ class userController {
             const password = req.body.password;
             const phone_number = req.body.phone_number;
 
-            const createdUser = await userAuthService.addUser({
+            const { user, errorMessage } = await userAuthService.addUser({
                 user_name,
                 email,
                 password,
                 phone_number,
             });
 
-            if (createdUser.errorMessage) {
-                throw new Error(createdUser.errorMessage);
+            if (errorMessage) {
+                throw new Error(errorMessage);
             }
 
-            res.status(200).json(createdUser);
+            res.status(200).json(user);
         } catch (error) {
             next(error);
         }
@@ -36,7 +36,7 @@ class userController {
 
     static async findAllUser(req, res, next) {
         try {
-            const users = await userAuthService.getUser();
+            const users = await userAuthService.getUsers();
 
             res.status(200).json(users);
         } catch (error) {
@@ -48,7 +48,7 @@ class userController {
         try {
             const { email, password } = req.body;
 
-            const user = await userAuthService.getSingleUser({
+            const user = await userAuthService.getUser({
                 email,
                 password,
             });
@@ -68,58 +68,32 @@ class userController {
         try {
             const _id = req.params.id;
             const user = await userAuthService.getUserInfo({ _id });
+
+            if (user.errorMessage) throw new Error(user.errorMessage);
+
             res.status(200).json(user);
         } catch (error) {
             next(error);
         }
     }
 
-    static async findPassword(req, res, next) {
+    //비밀번호'만' 변경하는 controller
+    static async resetPassword(req, res, next) {
         try {
-            const email = req.body.email;
+            const resetToken = req.body.resetToken;
+            const newPassword = req.body.password;
 
-            const generatedAuthNumber = Math.floor(Math.random() * 10 ** 8)
-                .toString()
-                .padStart(8, "0");
-
-            const toUpdate = { password: generatedAuthNumber };
-            const resetPassword = await userAuthService.setPassword({
-                email,
+            const toUpdate = { newPassword };
+            const { user, errorMessage } = await userAuthService.setPassword({
+                resetToken,
                 toUpdate,
             });
 
-            if (resetPassword.errorMessage) {
-                throw new Error(resetPassword.errorMessage);
+            if (errorMessage) {
+                throw new Error(errorMessage);
             }
 
-            let transporter = nodemailer.createTransport({
-                service: "gmail",
-                host: "smtp.gmail.com",
-                port: 587,
-                secure: false,
-                auth: {
-                    user: `${config.NODEMAILER_USER}`,
-                    pass: `${config.NODEMAILER_PASS}`,
-                },
-            });
-
-            // send mail with defined transport object
-            let info = await transporter.sendMail({
-                from: `"nuri" <${process.env.NODEMAILER_USER}>`,
-                to: email,
-                subject: "비밀번호 변경입니다",
-                text: generatedAuthNumber,
-                html: `<b>변경된 비밀번호 입니다.<br/>${generatedAuthNumber}</b>`,
-            });
-
-            console.log("Message sent: %s", info.messageId);
-            // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-            res.status(200).json({
-                status: "Success",
-                code: 200,
-                message: "Sent Auth Email",
-            });
+            res.status(200).json(user);
         } catch (error) {
             next(error);
         }
@@ -183,6 +157,42 @@ class userController {
         } catch (error) {
             next(error);
         }
+    }
+
+    // 받은 email을 이용하여 resetToken 생성, 링크 전송
+    static async generateResetToken(req, res, next) {
+        const email = req.body.email;
+        const CLIENT_BASE_URL = "http://localhost:3000";
+
+        const resetToken = await userAuthService.redisToken({ email });
+
+        let transporter = nodemailer.createTransport({
+            service: "gmail",
+            host: "smtp.gmail.com",
+            port: 587,
+            secure: false,
+            auth: {
+                user: `${process.env.NODEMAILER_USER}`,
+                pass: `${process.env.NODEMAILER_PASS}`,
+            },
+        });
+
+        // send mail with defined transport object
+        let info = await transporter.sendMail({
+            from: `"nuri" <${process.env.NODEMAILER_USER}>`,
+            to: email,
+            subject: "비밀번호 변경 링크입니다",
+            html: `<b>5분 안에 입력해주세요!!<br/><a href="${CLIENT_BASE_URL}/pwlink/${resetToken}">비밀번호 변경 링크</a></b>`,
+        });
+
+        console.log("Message sent: %s", info.messageId);
+        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+        res.status(200).json({
+            status: "Success",
+            code: 200,
+            message: "Sent Auth Email",
+        });
     }
 }
 

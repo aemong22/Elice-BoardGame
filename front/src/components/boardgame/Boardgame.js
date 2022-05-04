@@ -3,53 +3,47 @@ import BoardgameCategory from "./BoardgameCategory";
 import BoardgameData from "./BoardgameData";
 import Header from "../Header";
 import "./Boardgame.css";
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from "@mui/icons-material/Menu";
 import SearchField from "./SearchField";
 
 function Boardgame() {
-    const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [condition, setCondition] = useState({
+    player: "",
+    age: "",
+    theme: "",
+    time: "",
+    complexity: "",
+    type: "",
+  });
 
-    // 필터에 사용할 변수
-    const [player, setPlayer] = useState([]);
-    const [category, setCategory] = useState([]);
+  return (
+    <>
+      <div className="boardgame-header">
+        <div className="boardgame-header-item" onClick={() => setOpen(!open)}>
+          <MenuIcon className="boardgame-header-menu-icon"></MenuIcon>
+          <div className="boardgame-header-menu">Menu</div>
+        </div>
+        <SearchField />
+      </div>
+      <div className="boardgame-container">
+        <div className="boardgames">
+          <BoardgameData condition={condition} />
+        </div>
+      </div>
 
-    // useEffect(() => {
-    //     // test
-    //     console.log(player);
-    //     console.log(category);
-    //   }, [player, category]);
-
-    return (
-        <>
-            <div className='header'>
-                <Header />
-            </div>
-            <div className='boardgame-header'>
-                <div className='boardgame-header-item' onClick={() => setOpen(!open) }>
-                    <MenuIcon className='boardgame-header-menu-icon'></MenuIcon>
-                    <div className='boardgame-header-menu'>Menu</div>
-                </div>
-                <SearchField />
-            </div>
-            <div className='boardgame-container'>
-                <div className='boardgames'>
-                    <BoardgameData
-                        player={player}
-                        category={category}
-                    />
-                </div>
-            </div>
-
-            <div className={ open ? 'boardgame-category active' : 'boardgame-category' }>
-                <BoardgameCategory 
-                    player={player}
-                    setPlayer={setPlayer}
-                    category={category}
-                    setCategory={setCategory}
-                />
-            </div>
-        </>
-    )
+      <div
+        className={open ? "boardgame-category active" : "boardgame-category"}
+      >
+        <BoardgameCategory
+          condition={condition}
+          setCondition={setCondition}
+          open={open}
+          setOpen={setOpen}
+        />
+      </div>
+    </>
+  );
 }
 
-export default Boardgame
+export default Boardgame;

@@ -4,12 +4,16 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "./store/actions/userAction";
 import * as Api from "./api";
 
+import PwLink from "./components/user/PwLink";
+import Profile from "./components/mypage/Profile";
 import Home from "./components/home/Home";
 import Intro from "./components/intro/Intro";
 import Boardgame from "./components/boardgame/Boardgame";
-import About from "./components/about/About";
 import RegisterForm from "./components/user/RegisterForm";
+import Mypage from "./components/mypage/Mypage";
+import BoardgameDetail from "./components/detail/BoardgameDetail";
 import GoogleLoading from "./components/user/GoogleLoading";
+import Header from "./components/Header";
 
 function App() {
     // 유저 로그인 상태 관련 코드 추가하기
@@ -47,13 +51,21 @@ function App() {
 
     return (
         <Router>
+            <Header />
             <Routes>
                 <Route path="/" exact element={<Home />} />
                 <Route path="/intro" exact element={<Intro />} />
-                <Route path="/about" exact element={<About />} />
                 <Route path="/boardgame" exact element={<Boardgame />} />
                 <Route path="/register" exact element={<RegisterForm />} />
+                <Route path="/mypage" exact element={<Mypage />} />
+                <Route path="/profile" exact element={<Profile />} />
                 <Route path="/oauth" exact element={<GoogleLoading />} />
+                <Route path="/pwlink/:rtoken" exact element={<PwLink />} />
+                <Route
+                    path="/boardgame/detail"
+                    exact
+                    element={<BoardgameDetail />}
+                />
                 <Route path="*" element={<Home />} />
             </Routes>
         </Router>

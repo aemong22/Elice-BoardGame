@@ -10,8 +10,42 @@ servers:
 tags:
   - name: user
     description: User 스키마를 이용한 기능
-  - name: board
+  - name: boardGame
+    description: BoardGame 스키마를 이용한 기능
+  - name: favorite
+    description: Favorite 스키마를 이용한 기능
+  - name: community
+    description: community 스키마를 이용한 기능
+  - name : comment-community
+    description: comment-community 스키마를 이용한 기능
+
 paths:
+  /communitycontents/{id}/comment:
+    post:
+      tags:
+        - comment-community
+      summary : id에 해당하는 comment 추가하기 
+      parameters:
+        - name : id
+          in: path
+          required : true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                content:
+                  type: string
+      responses:
+        '200':
+          description : "id에 해당하는 comment 추가하기"
+          $ref : "#/components/schemas/CommunityComment"
+                
   /communitycontents:
     get:
       tags:
@@ -24,7 +58,7 @@ paths:
             application/json:
               schema:
                 $ref : "#/components/schemas/CommunityContent"
-                
+
   /communitycontents/create:
     post:
       tags:
@@ -47,6 +81,7 @@ paths:
         '200':
           description: "board생성 성공!"
           $ref : "#/components/schemas/CommunityContent"
+
   /communitycontents/{id}:
     get:
       tags:
@@ -61,6 +96,7 @@ paths:
       responses:
         '200':
           $ref : "#/components/schemas/CommunityContent"
+  
   /communitycontents/{id}/delete:
     delete:
       tags:
@@ -75,6 +111,33 @@ paths:
       responses:
         '200':
           $ref : "#/components/schemas/CommunityContent"
+
+  /communitycontent/{id}:
+    put:
+      tags:
+        - community
+      summary: board object_id 기준 수정
+      parameters:
+        - name : id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+      responses:
+        '200':
+          description: "board수정 성공!"
+          $ref : "#/components/schemas/CommunityContent"
+
   /user/register:
     post:
       tags:
@@ -263,10 +326,31 @@ paths:
     post:
       tags:
         - user
-      summary: 비밀번호 찾기
+      summary: 메일로 받은 토큰과 새로운 비밀번호를 받아 비밀번호'만' 변경하는 라우터
       requestBody:
          required: true
          content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                resetToken:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: 비밀번호 변경 완료
+        '404':
+          description: 토큰이 만료되었거나 해당 회원이 존재하지 않습니다.
+  /reset_token:
+    post:
+      tags:
+        - user
+      summary: 비밀번호 찾기 위한 유효 토큰 발급 및 메일 전송
+      requestBody:
+        required: true
+        content:
           application/json:
             schema:
               type: object
@@ -275,9 +359,28 @@ paths:
                   type: string
       responses:
         '200':
-          description: "mail 전송 완료"
-        '404':
-          description: "이메일이 없습니다.!"
+          description: 메일 전송 완료
+        '400':
+          description: 존재하는 회원이 없습니다.
+  /oauth/google:
+    post:
+      tags:
+        - user
+      summary: google OAuth 로그인 함수
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accessToken:
+                  type: string
+      responses:
+        '200':
+          description: OAuth 회원가입 및 로그인 성공!
+        '400':
+          description: .env 파일에 REACT_APP_CLIENT_ID가 있나요? 구글 아이디로 가입한 계정이 있나요?
   /boardGames:
     get:
       tags:
@@ -295,13 +398,24 @@ paths:
       tags:
         - boardGame
       summary: 최근 보드게임 조회 
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: number
+        - name: perPage
+          in: query
+          required: false
+          schema:
+            type: number
       responses:
         '200':
           description: "최신 보드게임 조회(20년)"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BoardGame2020'
+                $ref: '#/components/schemas/BoardGame'
   /gameInfo/{id}:
     get:
       tags:
@@ -316,32 +430,153 @@ paths:
       responses:
         '200':
           $ref : '#/components/schemas/BoardGame'
-  /games/condition:
-    post:
+  /games/conditions:
+    get:
       tags:
         - boardGame
-      summary: condition 조회 
+      summary: condition 조회 params
+      parameters:
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: val1
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: sortType
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: number
+        - name: perPage
+          in: query
+          required: false
+          schema:
+            type: number
+      responses:
+        '200':
+          description: "보드게임 검색 전체 페이지 개수와 페이지당 보드게임 정보 반환"
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  totalPage: 
+                    type: number
+                  games: 
+                    $ref: '#/components/schemas/BoardGame'
+  /search:
+    get:
+      tags:
+        - boardGame
+      summary: 페이지에서 보드게임 탐색(보드게임 이름, 테마 기준)
+      parameters:
+        - name: keyword
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: number
+        - name: perPage
+          in: query
+          required: false
+          schema:
+            type: number
+      responses:
+        '200':
+          description: "검색어에 연관된 보드게임 조회"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalPage:
+                    type: number
+                  games: 
+                      $ref: '#/components/schemas/BoardGame'
+        '204':
+          description: "조건에 맞는 데이터가 없습니다."  
+  /favorite:
+    put:
+      tags:
+        - favorite
+      summary: 유저별 찜 목록 추가하기
+      security:
+        - bearerAuth: []
       requestBody:
+        required: true
         content:
           application/json:
             schema:
               type: object
               properties:
-                player:
-                  type: string
-                age:
-                  type: string
-                theme:
-                  type: string
-                time:
-                  type: string
-                complexity:
-                  type: string
-                type:
+                boardgameId:
                   type: string
       responses:
         '200':
-          $ref: '#/components/schemas/BoardGame'
+          description:
+            찜 추가 성공
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Favorite'
+        '400':
+          description:
+            해당하는 유저나 보드게임이 존재하지 않음
+  /favorite/user:
+    get:
+      tags:
+        - favorite
+      summary: 유저별 찜 목록 가져오기
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 찜 목록 가져오기 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: string
+                  boardgame:
+                      $ref: '#/components/schemas/BoardGame'
+  /favorite/{boardgame}:
+    get:
+      tags:
+        - favorite
+      summary: 찜한 보드게임인지 아닌지 판별
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: boardgame
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 판별 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  favorite:
+                    type: boolean
 components:
   securitySchemes:
     bearerAuth:
@@ -381,6 +616,7 @@ components:
         - user_rated
         - url
         - thumbnail
+        - wordcloud
         - min_player
         - max_player
         - min_age
@@ -388,10 +624,8 @@ components:
         - min_playing_time
         - max_playing_time
         - complexity_average
-        - domains
         - image
         - description
-        - recommend_id
       properties:
         index:
           type: number
@@ -415,6 +649,8 @@ components:
           type: string
         thumbnail:
           type: string
+        wordcloud:
+          type: string
         min_player:
           type: number
         max_player:
@@ -429,82 +665,92 @@ components:
           type: number
         complexity_average:
           type: number
-        domains:
-          type: string
+        theme:
+          type: array
         image:
           type: string
         description:
           type: string
         recommend_id:
           type: array  
-    BoardGame2020:
+    # BoardGame2020:
+    #   type: object
+    #   required:
+    #     - index
+    #     - un_named
+    #     - game_id
+    #     - game_name
+    #     - year
+    #     - rank
+    #     - average_rating
+    #     - bayes_average
+    #     - user_rated
+    #     - url
+    #     - thumbnail
+    #     - min_player
+    #     - max_player
+    #     - min_age
+    #     - playing_time
+    #     - min_playing_time
+    #     - max_playing_time
+    #     - complexity_average
+    #     - image
+    #     - description
+    #   properties:
+    #     index:
+    #       type: number
+    #     un_named:
+    #       type: number
+    #     game_id:
+    #       type: number
+    #     game_name:
+    #       type: string
+    #     year:
+    #       type: number
+    #     rank:
+    #       type: number
+    #     average_rating:
+    #       type: number
+    #     bayes_average:
+    #       type: number
+    #     user_rated:
+    #       type: number
+    #     url:
+    #       type: string
+    #     thumbnail:
+    #       type: string
+    #     min_player:
+    #       type: number
+    #     max_player:
+    #       type: number
+    #     min_age:
+    #       type: number
+    #     playing_time:
+    #       type: number
+    #     min_playing_time:
+    #       type: number
+    #     max_playing_time:
+    #       type: number
+    #     complexity_average:
+    #       type: number
+    #     domains:
+    #       type: string
+    #     image:
+    #       type: string
+    #     description:
+    #       type: string
+    Favorite:
       type: object
       required:
-        - index
-        - un_named
-        - game_id
-        - game_name
-        - year
-        - rank
-        - average_rating
-        - bayes_average
-        - user_rated
-        - url
-        - thumbnail
-        - min_player
-        - max_player
-        - min_age
-        - playing_time
-        - min_playing_time
-        - max_playing_time
-        - complexity_average
-        - image
-        - description
+        - user
+        - boardgame
       properties:
-        index:
-          type: number
-        un_named:
-          type: number
-        game_id:
-          type: number
-        game_name:
+        user:
           type: string
-        year:
-          type: number
-        rank:
-          type: number
-        average_rating:
-          type: number
-        bayes_average:
-          type: number
-        user_rated:
-          type: number
-        url:
-          type: string
-        thumbnail:
-          type: string
-        min_player:
-          type: number
-        max_player:
-          type: number
-        min_age:
-          type: number
-        playing_time:
-          type: number
-        min_playing_time:
-          type: number
-        max_playing_time:
-          type: number
-        complexity_average:
-          type: number
-        domains:
-          type: string
-        image:
-          type: string
-        description:
+        boardgame:
           type: string
     
-    BoardContent:
+    CommunityContent:
         type : object
         required :
           - title
@@ -520,5 +766,17 @@ components:
             type: string
           comment:
             type: array
+
+    CommunityComment:
+          type : object
+          required :
+            - content
+            - user_id
+          properties:
+            content:
+              type: string
+            user_id:
+              type: string  
+
 security:
   - bearerAuth: []

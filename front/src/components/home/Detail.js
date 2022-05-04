@@ -1,6 +1,6 @@
 import "./Detail.css";
 
-const Detail = () => {
+function Detail() {
   return (
     <>
       <div id="detail_wrapper_top">
@@ -29,6 +29,6 @@ const Detail = () => {
       </div>
     </>
   );
-};
+}
 
 export default Detail;

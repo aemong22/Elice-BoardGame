@@ -1,5 +1,4 @@
 import { styled } from "@mui/material/styles";
-
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 

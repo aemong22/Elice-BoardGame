@@ -52,12 +52,15 @@ class communityServiceController{
 
     static async updateContent(req,res,next){
         try{
-            const updatecontent = req.body.content;
-            const contentid = req.params.id;
+            const title = req.body.title;
+            const content = req.body.content;
+            const id = req.params.id;
 
+            const update = {title,content}
+            
             const updateContent = await communityService.updateContent({
-                updatecontent,
-                contentid,
+                id,
+                update,
             });     
         if (updateContent.errorMessage) {
                 throw new Error(updateContent.errorMessage);
@@ -72,12 +75,15 @@ class communityServiceController{
     // 대글 관련 newComment
     static async newComment(req, res, next){
         try {
+            const id = req.params.id;
             const user_id = req.body.user_id;
             const content = req.body.content;
             const newComment = await communityService.addComment({
+                id,
                 user_id,
                 content,
             });
+            
             if (newComment.errorMessage) {
                 throw new Error(newComment.errorMessage);
             }

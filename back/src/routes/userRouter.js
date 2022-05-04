@@ -23,8 +23,9 @@ userAuthRouter.get("/currentUser", authJWT, userController.getCurrentUser);
 
 userAuthRouter.post("/oauth/google", userController.googleLogin);
 
+userAuthRouter.post("/reset_token", userController.generateResetToken);
 //비밀번호 찾기 API
-userAuthRouter.post("/user/reset_password", userController.findPassword);
+userAuthRouter.post("/user/reset_password", userController.resetPassword);
 
 // refresh는 리팩토링 필요..
 userAuthRouter.get("/token/refresh", refresh);
