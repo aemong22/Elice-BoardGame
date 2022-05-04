@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./Home.css";
 import Chart from "./Chart";
-import Detail from "./Detail";
+import HomeDetail from "./HomeDetail";
 import Member from "./Member";
 
 function Home() {
   const navigate = useNavigate();
   const [isFetchCompleted, setIsFetchCompleted] = useState(false);
   const userState = useSelector((state) =>
-    state ? state.userReducer.user : {}
+    state ? state.userReducer.user : undefined
   );
 
   // 만약 로그인 된 상태가 아니라면 intro 페이지로 이동시키기
@@ -55,7 +55,7 @@ function Home() {
         </div>
       </div>
       <Chart />
-      <Detail />
+      <HomeDetail />
       <Member />
     </>
   );
