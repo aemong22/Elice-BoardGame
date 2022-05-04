@@ -27,6 +27,7 @@
 .sorting-buttons button:hover {
     color: black;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .sorting-buttons.select {
