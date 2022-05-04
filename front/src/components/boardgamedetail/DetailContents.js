@@ -23,7 +23,7 @@ function DetailContents({ gameData }) {
 
   const favoriteHandler = async () => {
     const res = await Api.put("favorite", {
-      boardgameId: gameData.id,
+      boardgameId: gameData.game_id,
       toggle: !favoriteToggle,
     });
 
@@ -31,9 +31,9 @@ function DetailContents({ gameData }) {
   };
 
   const getFavorite = async () => {
-    const res = await Api.get("favorite", gameData.id);
+    const res = await Api.get("favorite", gameData.game_id);
     const favoriteData = res.data;
-    setFavoriteToggle(favoriteData.favorite);
+    setFavoriteToggle(favoriteData);
   };
 
   useEffect(() => {
