@@ -10,25 +10,25 @@ function BoardgameDetail() {
   const [isFetchCompleted, setIsFetchCompleted] = useState(false);
   const [gameData, setGameData] = useState(undefined);
 
-  const fetchBoardgameDetail = async (boardgameId) => {
+  const fetchBoardgameDetail = async () => {
     const res = await Api.get("gameInfo", boardgameId);
     setGameData(res.data);
   };
 
   useEffect(() => {
-    fetchBoardgameDetail(boardgameId);
+    fetchBoardgameDetail();
     setIsFetchCompleted(true);
   }, []);
+
+  useEffect(() => {
+    console.log(gameData);
+  }, [gameData]);
 
   if (!isFetchCompleted) {
     return <div>로딩중...</div>;
   }
 
-  return (
-    <>
-      <DetailContents gameData={gameData} />
-    </>
-  );
+  return <>{gameData && <DetailContents gameData={gameData} />}</>;
 }
 
 export default BoardgameDetail;
