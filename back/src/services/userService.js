@@ -119,7 +119,9 @@ class userAuthService {
 
     //비밀번호 찾기 후 변경
     static async setPassword({ resetToken, toUpdate }) {
-        const client = createClient();
+        const client = createClient({
+            url: `redis://${process.env.REDIS_URL}:6379`,
+        });
 
         client.on("error", (err) => console.log("Redis Client Error", err));
 
