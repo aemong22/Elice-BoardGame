@@ -5,7 +5,9 @@ const fn = function () {
     /* do your action */
 };
 
-function BoardgameRec({ gameData }) {
+function BoardgameRec({ recommendData }) {
+    console.log(recommendData);
+
     return (
         <Coverflow
             width="100%"

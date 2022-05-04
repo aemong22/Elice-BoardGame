@@ -15,7 +15,7 @@ import DetailTab from "./DetailTab";
 import * as Api from "../../api";
 import "./DetailContents.css";
 
-function DetailContents({ gameData }) {
+function DetailContents({ gameData, recommendData }) {
     const [open, setOpen] = useState(false);
     const [favoriteToggle, setFavoriteToggle] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -70,6 +70,7 @@ function DetailContents({ gameData }) {
                                     <img
                                         style={{
                                             width: "100%",
+                                            height: "100%",
                                             boxShadow:
                                                 "rgba(0, 0, 0, 0.35) 0px 5px 15px",
                                         }}
@@ -127,7 +128,10 @@ function DetailContents({ gameData }) {
                         </div>
 
                         <div className="container-bottom">
-                            <DetailTab gameData={gameData} />
+                            <DetailTab
+                                gameData={gameData}
+                                recommendData={recommendData}
+                            />
                         </div>
                     </Box>
                 </Container>

@@ -39,7 +39,7 @@ function a11yProps(index) {
     };
 }
 
-export default function DetailTab({ gameData }) {
+export default function DetailTab({ gameData, recommendData }) {
     const [value, setValue] = React.useState(0);
     const { description } = gameData;
 
@@ -63,7 +63,7 @@ export default function DetailTab({ gameData }) {
                 {description}
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <BoardgameRec gameData={gameData} />
+                <BoardgameRec recommendData={recommendData} />
             </TabPanel>
         </Box>
     );
