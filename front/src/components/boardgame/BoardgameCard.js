@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { categoryData } from "./BoardgameCategoryData"
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -18,6 +19,7 @@ function BoardgameCard({
     theme,
     image,
     min_age,
+    complexity_average,
     min_playing_time,
     max_playing_time,
 }) {
@@ -30,7 +32,7 @@ function BoardgameCard({
     return (
         <Card sx={{ width: 250, maxWidth: 270, my: 5, mx: 5 }}>
             <CardActionArea
-                onClick={() => navigate(`/boardgame/detail/:${id}`)}
+                onClick={() => navigate(`/boardgame/detail/${id}`)}
             >
                 <CardMedia
                     component="img"
@@ -83,6 +85,17 @@ function BoardgameCard({
                             }}
                         >
                             {`${min_age}세 이하`}
+                        </Button>
+                        <Button
+                            variant="outlined"
+                            disabled
+                            sx={{
+                                fontSize: "0.5rem",
+                                borderRadius: "100px",
+                                m: "2px",
+                            }}
+                        >
+                            {categoryData["complexity"][String(Math.floor(complexity_average))]}
                         </Button>
                         <Button
                             variant="outlined"
