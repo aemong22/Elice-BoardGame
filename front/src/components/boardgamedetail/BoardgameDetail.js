@@ -12,7 +12,7 @@ function BoardgameDetail() {
 
     const fetchBoardgameDetail = async () => {
         const res = await Api.get("boardgame/detail", boardgameId);
-        setGameData(res.data);
+        setGameData(res.data.games);
     };
 
     useEffect(() => {

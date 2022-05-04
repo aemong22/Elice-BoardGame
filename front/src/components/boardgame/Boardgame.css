@@ -12,9 +12,13 @@
     border-bottom: #e2e2e255 solid 2px;
     display: flex;
     align-items: center;
+    margin-top: 65px;
+    color: #716f6f;
+    z-index: 100;
 }
-*/ .boardgame-header-item {
-    width: 150px;
+
+.boardgame-header-item {
+    width: 270px;
     height: 100%;
     font-size: 1rem;
     margin-left: 10px;
@@ -28,13 +32,8 @@
     cursor: pointer;
 }
 
-.boardgame-header-menu-icon {
+.boardgame-header-filtered-icon {
     margin-right: 10px;
-}
-
-.boardgame-container {
-    width: 100%;
-    display: flex;
 }
 
 .boardgames {
@@ -43,7 +42,6 @@
     padding-left: 100px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 
 .boardgame-category {
@@ -56,34 +54,20 @@
     transition: all 0.3s;
     background-color: white;
     border-right: #e2e2e255 solid 2px;
+    overflow-y: hidden;
 }
 
 .boardgame-category.active {
     left: 0;
+    overflow-y: auto;
+}
+
+.boardgame-category.active::-webkit-scrollbar {
+    display: none;
 }
 
 .boardgame-sort {
-    width: 100%;
-    height: 60px;
     display: flex;
-}
-
-.boardgame-filterd {
-    margin: 20px;
-    font-size: 2rem;
-}
-
-.boardgame-sort-items {
-    margin: auto 0 0 auto;
-    display: flex;
-}
-
-.boardgame-sort-items li {
-    width: 100%;
-    height: 20px;
-    margin-right: 10px;
-    list-style: none;
-    text-align: center;
-    border: 1px solid gray;
-    background-color: #e3e3e3;
+    justify-content: end;
+    padding-top: 117px;
 }
