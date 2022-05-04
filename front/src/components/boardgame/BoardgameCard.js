@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { categoryData } from "./BoardgameCategoryData"
+import * as Api from "../../api";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -9,6 +10,7 @@ import { CardActionArea } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Button from "@mui/material/Button";
 
 function BoardgameCard({
@@ -24,7 +26,7 @@ function BoardgameCard({
     max_playing_time,
 }) {
     const navigate = useNavigate();
-
+    const [favoriteToggle, setFavoriteToggle] = useState(false);
     const maxLength = 13;
     const boardgameName =
         name.length > maxLength ? name.substr(0, maxLength) + "..." : name;
@@ -41,53 +43,76 @@ function BoardgameCard({
           : `${min_playing_time}~${max_playing_time}분`,
       ];
 
+    const favoriteHandler = async () => {
+        const res = await Api.put("favorite", {
+          boardgameId: id,
+          toggle: !favoriteToggle,
+        });
+        setFavoriteToggle(!favoriteToggle);
+    };
+    
+    const getFavorite = async () => {
+        const res = await Api.get("favorite", id);
+        const favoriteData = res.data;
+        setFavoriteToggle(favoriteData);
+    };
+    
+    useEffect(() => {
+        getFavorite();
+    }, []);
+
     return (
-        <Card sx={{ width: 250, maxWidth: 270, my: 5, mx: 5 }}>
-            <CardActionArea
-                onClick={() => navigate(`/boardgame/detail/${id}`)}
-            >
-                <CardMedia
-                    component="img"
-                    height="240"
-                    image={image}
-                    alt={name}
-                    sx={{ background: "gray" }}
-                />
-                <CardContent>
-                    <div
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-between",
-                        }}
-                    >
-                        <Typography gutterBottom variant="h6" component="span">
-                            {boardgameName}
-                        </Typography>
-                        <CardActions
-                            disableSpacing
-                            sx={{ margin: "auto 0 auto auto" }}
+        <div>
+            <Card sx={{ width: 250, maxWidth: 270, my: 5, mx: 5 }}>
+                <CardActionArea
+                    onClick={() => navigate(`/boardgame/detail/${id}`)}
+                >
+                    <CardMedia
+                        component="img"
+                        height="240"
+                        image={image}
+                        alt={name}
+                        sx={{ background: "gray" }}
+                    />
+                    <CardContent>
+                        <div
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                            }}
                         >
-                            <IconButton aria-label="add to favorites">
-                                <FavoriteIcon />
-                            </IconButton>
-                        </CardActions>
-                    </div>
-                    <div style={{ height: 100, alignItems: "start" }}>
-                    {tagData.map((tag) => (
-                        <Button
-                        variant="outlined"
-                        disabled
-                        sx={{ fontSize: "0.5rem", borderRadius: "100px", m: "2px" }}
-                        key={tag}
-                        >
-                        {tag}
-                        </Button>
-                    ))}
-                    </div>
-                </CardContent>
-            </CardActionArea>
-        </Card>
+                            <Typography gutterBottom variant="h6" component="span">
+                                {boardgameName}
+                            </Typography>
+                        </div>
+                        <div style={{ height: 100, alignItems: "start" }}>
+                        {tagData.map((tag) => (
+                            <Button
+                            variant="outlined"
+                            disabled
+                            sx={{ fontSize: "0.5rem", borderRadius: "100px", m: "2px" }}
+                            key={tag}
+                            >
+                            {tag}
+                            </Button>
+                        ))}
+                        </div>
+                    </CardContent>
+                </CardActionArea>
+            </Card>
+            <IconButton
+                sx={{ position: 'relative', left: 235, top: -200 }}
+                aria-label="add to favorites"
+                onClick={favoriteHandler}
+                >
+                {favoriteToggle ? (
+                    <FavoriteIcon />
+                ) : (
+                    <FavoriteBorderIcon />
+                )}
+            </IconButton>
+        </div>
     );
 }
 
