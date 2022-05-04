@@ -1,5 +1,4 @@
 import { BoardGameModel } from "../db/schemas/boardgame";
-import { RecentBoardGameModel } from "../db/schemas/recentBoardGame";
 
 class boardGameService {
     // 정렬 type 설정
@@ -29,7 +28,7 @@ class boardGameService {
         };
     }
 
-    static async findGames({ query, sortType, page, perPage }) {
+    static async findGames({ query, sortType = null, page, perPage }) {
         // total page 계산
         const aggregator = async () =>
             await BoardGameModel.countDocuments(query);
@@ -41,37 +40,41 @@ class boardGameService {
                 .skip(perPage * (page - 1))
                 .limit(perPage);
 
+        const errorMessage =
+            findFunc.length === 0 ? "조건에 맞는 보드게임이 없습니다." : null;
+
         const { games, totalPage } = await this.offsetPatinate(
             findFunc,
             aggregator,
             { size: perPage, currentPage: page }
         );
-        return { totalPage, games };
+        return { totalPage, games, errorMessage };
     }
 
     // 최신 게임 전체 조회(보드게임 메인 페이지 default 조회)
     static async findByRecentlyGames({ page, perPage }) {
-        const total = await RecentBoardGameModel.countDocuments({});
-        const boardGames = await RecentBoardGameModel.find({})
-            .skip(perPage * (page - 1))
-            .limit(perPage);
+        const query = {
+            year: { $eq: 2020 },
+        };
 
-        const totalPage = Math.ceil(total / perPage);
+        const { totalPage, games, errorMessage } = await this.findGames({
+            query,
+            page,
+            perPage,
+        });
 
-        return { totalPage, boardGames };
+        if (games.length === 0) return { errorMessage };
+
+        return { totalPage, games };
     }
 
     // game_id로 조회
     static async findByGameId({ gameId }) {
         const games = await BoardGameModel.findOne({ game_id: gameId });
-        return games;
-    }
 
-    // todo: search 에서 사용할 함수
-    static async findAllGames({ page, perPage }) {
-        // 모든 보드게임 검색 - 저장된 순서대로 나옴
-        const boardgames = await BoardGameModel.find({});
-        return boardgames;
+        if (!games) return { errorMessage: "game id가 존재하지 않습니다." };
+
+        return games;
     }
 
     // player 기준 범위 안 보드게임 조회
@@ -84,16 +87,15 @@ class boardGameService {
             ],
         };
 
-        const { totalPage, games } = await this.findGames({
+        const { totalPage, games, errorMessage } = await this.findGames({
             query,
             sortType,
             page,
             perPage,
         });
 
-        if (games.length === 0) {
-            return new Error("조회된 데이터가 없습니다.");
-        }
+        if (games.length === 0) return { errorMessage };
+
         return { totalPage, games };
     }
 
@@ -103,12 +105,14 @@ class boardGameService {
             min_age: { $lte: age },
         };
 
-        const { totalPage, games } = await this.findGames({
+        const { totalPage, games, errorMessage } = await this.findGames({
             query,
             sortType,
             page,
             perPage,
         });
+
+        if (games.length === 0) return { errorMessage };
 
         return { totalPage, games };
     }
@@ -116,14 +120,16 @@ class boardGameService {
     // theme 기준 정렬
     static async findByTheme({ theme, sortType, page, perPage }) {
         const query = {
-            domains: { $regex: theme, $options: "i" },
+            theme: { $in: [theme] },
         };
-        const { totalPage, games } = await this.findGames({
+        const { totalPage, games, errorMessage } = await this.findGames({
             query,
             sortType,
             page,
             perPage,
         });
+
+        if (games.length === 0) return errorMessage;
 
         return { totalPage, games };
     }
@@ -137,12 +143,14 @@ class boardGameService {
             ],
         };
 
-        const { totalPage, games } = await this.findGames({
+        const { totalPage, games, errorMessage } = await this.findGames({
             query,
             sortType,
             page,
             perPage,
         });
+
+        if (games.length === 0) return { errorMessage };
 
         return { totalPage, games };
     }
@@ -154,29 +162,34 @@ class boardGameService {
                 $lte: Math.floor(complexity) + 1,
             },
         };
-        const { totalPage, games } = await this.findGames({
+        const { totalPage, games, errorMessage } = await this.findGames({
             query,
             sortType,
             page,
             perPage,
         });
 
+        if (games.length === 0) return { errorMessage };
+
         return { totalPage, games };
     }
 
+    // keyword 기준 보드게임 조회
     static async search({ keyword, page, perPage }) {
         const query = {
             $or: [
                 // 문자열 포함 조회
-                { domains: { $regex: keyword, $options: "i" } },
+                { theme: { $regex: keyword, $options: "i" } },
                 { game_name: { $regex: keyword, $options: "i" } },
             ],
         };
-        const { totalPage, games } = await this.findGames({
+        const { totalPage, games, errorMessage } = await this.findGames({
             query,
             page,
             perPage,
         });
+
+        if (games.length === 0) return { errorMessage };
 
         return { totalPage, games };
     }
