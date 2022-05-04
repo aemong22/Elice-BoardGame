@@ -5,10 +5,8 @@ import BoardgameData from "./BoardgameData";
 import { categoryName, categoryValue } from "./BoardgameCategoryData";
 import "./Boardgame.css";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
-import SearchField from "./SearchField";
 
 function Boardgame() {
-    const header = document.getElementsByClassName("header");
     const [open, setOpen] = useState(false);
     const [condition, setCondition] = useState({
         category: "",
@@ -42,14 +40,7 @@ function Boardgame() {
 
     return (
         <>
-            <div
-                className={
-                    open ? "boardgame-container-slide" : "boardgame-container"
-                }
-            >
-                {open
-                    ? header[0].classList.add("boardgame-container-slide")
-                    : header[0].classList.remove("boardgame-container-slide")}
+            <div className="boardgame-container">
                 <div className="boardgame-header">
                     <div
                         className="boardgame-header-item"
@@ -67,7 +58,7 @@ function Boardgame() {
                                 : "최신 보드게임 보기"}
                         </div>
                     </div>
-                    <SearchField />
+                    {/* <SearchField /> */}
                 </div>
                 <div className="boardgame-sort">
                     <Sorting changeCondition={changeCondition} />
