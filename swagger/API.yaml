@@ -12,23 +12,23 @@ tags:
     description: User 스키마를 이용한 기능
   - name: board
 paths:
-  /boardcontents:
+  /communitycontents:
     get:
       tags:
-        - board
-      summary : 모든 board게시판 불러오기 
+        - community
+      summary : 모든 community게시판 불러오기 
       responses:
         '200':
           description : "모든 게시판을 정보를 불러온다"
           content:
             application/json:
               schema:
-                $ref : "#/components/schemas/BoardContent"
-    
-  /boardcontents/create:
+                $ref : "#/components/schemas/CommunityContent"
+                
+  /communitycontents/create:
     post:
       tags:
-        - board
+        - community
       summary : 게시판 생성하기
       requestBody:
         required: true
@@ -46,7 +46,35 @@ paths:
       responses:
         '200':
           description: "board생성 성공!"
-          $ref : "#/components/schemas/BoardContent"
+          $ref : "#/components/schemas/CommunityContent"
+  /communitycontents/{id}:
+    get:
+      tags:
+        - community
+      summary: board object_id 기준 조회
+      parameters:
+        - name : id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref : "#/components/schemas/CommunityContent"
+  /communitycontents/{id}/delete:
+    delete:
+      tags:
+        - community
+      summary: community object_id 기준 삭제
+      parameters:
+        - name : id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref : "#/components/schemas/CommunityContent"
   /user/register:
     post:
       tags:
@@ -175,20 +203,20 @@ paths:
             type: string
       requestBody:
         content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  user_name:
-                    type: string
-                  email:
-                    type: string
-                  phone_number:
-                    type: string
-                  password:
-                    type: string
-                  image:
-                    type: string
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_name:
+                  type: string
+                email:
+                  type: string
+                phone_number:
+                  type: string
+                password:
+                  type: string
+                image:
+                  type: string
       responses:
         '200':
           $ref: '#/components/schemas/User'
