@@ -1,6 +1,5 @@
 import { userAuthService } from "../services/userService";
 import is from "@sindresorhus/is";
-import nodemailer from "nodemailer";
 import axios from "axios";
 
 class userController {
@@ -162,37 +161,20 @@ class userController {
     // 받은 email을 이용하여 resetToken 생성, 링크 전송
     static async generateResetToken(req, res, next) {
         const email = req.body.email;
-        const CLIENT_BASE_URL = "http://localhost:3000";
 
         const resetToken = await userAuthService.redisToken({ email });
 
-        let transporter = nodemailer.createTransport({
-            service: "gmail",
-            host: "smtp.gmail.com",
-            port: 587,
-            secure: false,
-            auth: {
-                user: `${process.env.NODEMAILER_USER}`,
-                pass: `${process.env.NODEMAILER_PASS}`,
-            },
-        });
+        if (!resetToken) {
+            res.status(403).json(resetToken);
+        } else {
+            // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
-        // send mail with defined transport object
-        let info = await transporter.sendMail({
-            from: `"nuri" <${process.env.NODEMAILER_USER}>`,
-            to: email,
-            subject: "비밀번호 변경 링크입니다",
-            html: `<b>5분 안에 입력해주세요!!<br/><a href="${CLIENT_BASE_URL}/pwlink/${resetToken}">비밀번호 변경 링크</a></b>`,
-        });
-
-        console.log("Message sent: %s", info.messageId);
-        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-        res.status(200).json({
-            status: "Success",
-            code: 200,
-            message: "Sent Auth Email",
-        });
+            res.status(200).json({
+                status: "Success",
+                code: 200,
+                message: "Sent Auth Email",
+            });
+        }
     }
 }
 

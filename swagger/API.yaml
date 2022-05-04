@@ -271,7 +271,16 @@ paths:
             type: number
       responses:
         '200':
-          $ref : '#/components/schemas/BoardGame'
+          description: 조회한 게임과 연관된 게임들의 정보가 반환됩니다. 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  games:
+                    $ref: '#/components/schemas/BoardGame'
+                  recommendGames: 
+                    $ref: '#/components/schemas/BoardGame'
   /games/conditions:
     get:
       tags:
@@ -367,7 +376,7 @@ paths:
                 boardgameId:
                   type: number
                 toggle:
-                  type: string
+                  type: boolean
       responses:
         '200':
           description:
@@ -398,7 +407,7 @@ paths:
                     type: string
                   boardgame:
                       $ref: '#/components/schemas/BoardGame'
-  /favorite/{boardgame}:
+  /favorite/{game_id}:
     get:
       tags:
         - favorite
@@ -406,7 +415,7 @@ paths:
       security:
         - bearerAuth: []
       parameters:
-        - name: boardgame
+        - name: game_id
           in: path
           required: true
           schema:
