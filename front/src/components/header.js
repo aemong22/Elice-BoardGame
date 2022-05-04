@@ -9,97 +9,103 @@ import * as Api from "../api";
 import "./Header.css";
 
 const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#716F6F",
-      darker: "#F4F2EF",
+    palette: {
+        primary: {
+            main: "#716F6F",
+            darker: "#F4F2EF",
+        },
+        neutral: {
+            main: "#64748B",
+            contrastText: "#fff",
+        },
     },
-    neutral: {
-      main: "#64748B",
-      contrastText: "#fff",
-    },
-  },
 });
 
 function Header() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const userState = useSelector((state) => (state ? state.userReducer : {}));
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const userState = useSelector((state) => (state ? state.userReducer : {}));
 
-  const isLogin = !!userState?.user;
+    const isLogin = !!userState?.user;
 
-  const logout = () => {
-    // dispatch 함수를 이용해 로그아웃함.
-    dispatch(logoutUser());
-    // 기본 페이지로 돌아감.
-    navigate("/");
-  };
+    const logout = () => {
+        // dispatch 함수를 이용해 로그아웃함.
+        dispatch(logoutUser());
+        // 기본 페이지로 돌아감.
+        navigate("/");
+    };
 
-  const [ownerData, setOwnerData] = useState(undefined);
+    const [ownerData, setOwnerData] = useState(undefined);
 
-  const fetchPorfolioOwner = async () => {
-    const res = await Api.get("currentUser");
-    setOwnerData(res.data);
-  };
+    const fetchPorfolioOwner = async () => {
+        const res = await Api.get("currentUser");
+        setOwnerData(res.data);
+    };
 
-  useEffect(() => {
-    fetchPorfolioOwner();
-  }, [navigate]);
+    useEffect(() => {
+        fetchPorfolioOwner();
+    }, [navigate]);
 
-  if (window.location.pathname === "/pwlink") return null;
-  return (
-    <>
-      {isLogin && (
-        <div className="header">
-          <nav>
-            <ThemeProvider theme={theme}>
-              <ul className="home">
-                <li onClick={() => navigate("/")}>
-                  <Button variant="text" color="primary">
-                    BoardMon
-                  </Button>
-                </li>
-              </ul>
-              <ul className="menu">
-                <li onClick={() => navigate("/boardgame")}>
-                  <Button>Boardgame</Button>
-                </li>
-                <li onClick={() => navigate("/comunication")}>
-                  <Button>comunication</Button>
-                </li>
-                <li id="menu" style={{ cursor: "pointer" }}>
-                  <Grid
-                    id="profile"
-                    style={{
-                      backgroundImage: `url(https://pinkpig-bucket.s3.ap-northeast-2.amazonaws.com/${ownerData?.image}.jpg)`,
-                      backgroundSize: "100% 100%",
-                      backgroundRepeat: "no-repeat",
-                      float: "left",
-                    }}
-                  />
-                  <ArrowDropDownIcon />
-                  <MenuList id="submenu">
-                    <MenuItem className="item" disabled={true}>
-                      Hi {ownerData?.user_name}
-                    </MenuItem>
-                    <MenuItem
-                      className="item"
-                      onClick={() => navigate("/mypage")}
-                    >
-                      Mypage
-                    </MenuItem>
-                    <MenuItem className="item" onClick={() => logout()}>
-                      Logout
-                    </MenuItem>
-                  </MenuList>
-                </li>
-              </ul>
-            </ThemeProvider>
-          </nav>
-        </div>
-      )}
-    </>
-  );
+    if (window.location.pathname === "/pwlink") return null;
+    return (
+        <>
+            {isLogin && (
+                <div className="header">
+                    <nav>
+                        <ThemeProvider theme={theme}>
+                            <ul className="home">
+                                <li onClick={() => navigate("/")}>
+                                    <Button variant="text" color="primary">
+                                        BoardMon
+                                    </Button>
+                                </li>
+                            </ul>
+                            <ul className="menu">
+                                <li onClick={() => navigate("/boardgame")}>
+                                    <Button>Boardgame</Button>
+                                </li>
+                                <li onClick={() => navigate("/comunication")}>
+                                    <Button>comunication</Button>
+                                </li>
+                                <li id="menu" style={{ cursor: "pointer" }}>
+                                    <Grid
+                                        id="profile"
+                                        style={{
+                                            backgroundImage: `url(https://pinkpig-bucket.s3.ap-northeast-2.amazonaws.com/${ownerData?.image}.png)`,
+                                            backgroundSize: "100% 100%",
+                                            backgroundRepeat: "no-repeat",
+                                            float: "left",
+                                        }}
+                                    />
+                                    <ArrowDropDownIcon />
+                                    <MenuList id="submenu">
+                                        <MenuItem
+                                            className="item"
+                                            disabled={true}
+                                        >
+                                            Hi {ownerData?.user_name}
+                                        </MenuItem>
+                                        <MenuItem
+                                            className="item"
+                                            onClick={() => navigate("/mypage")}
+                                        >
+                                            Mypage
+                                        </MenuItem>
+                                        <MenuItem
+                                            className="item"
+                                            onClick={() => logout()}
+                                        >
+                                            Logout
+                                        </MenuItem>
+                                    </MenuList>
+                                </li>
+                            </ul>
+                        </ThemeProvider>
+                    </nav>
+                </div>
+            )}
+        </>
+    );
 }
 
 export default Header;
