@@ -22,7 +22,6 @@ import {
 function Mypage() {
     const [Modify, setModify] = useState(true);
     const [ownerData, setOwnerData] = useState(undefined);
-
     const fetchPorfolioOwner = async () => {
         const res = await Api.get("currentUser");
         setOwnerData(res.data);
