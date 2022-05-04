@@ -61,12 +61,11 @@ function App() {
             <Routes>
                 <Route path="/" exact element={<Home />} />
                 <Route path="/intro" exact element={<Intro />} />
-                <Route path="/boardgame" exact element={<Boardgame />} />
                 <Route path="/pwlink/:rtoken" exact element={<PwLink />} />
                 {userState && (
                     <>
                         <Route
-                            path="/gameInfo/:id"
+                            path="/boardgame/detail/:id"
                             exact
                             element={<BoardgameDetail />}
                         />
@@ -80,15 +79,7 @@ function App() {
                     </>
                 )}
                 <Route path="/register" exact element={<RegisterForm />} />
-                <Route path="/mypage" exact element={<Mypage />} />
-                <Route path="/profile" exact element={<Profile />} />
                 <Route path="/oauth" exact element={<GoogleLoading />} />
-                <Route path="/pwlink/:rtoken" exact element={<PwLink />} />
-                <Route
-                    path="/boardgame/detail"
-                    exact
-                    element={<BoardgameDetail />}
-                />
                 <Route path="*" element={<Home />} />
             </Routes>
         </Router>

@@ -5,8 +5,6 @@ import BoardgameData from "./BoardgameData";
 import { categoryName, categoryValue } from "./BoardgameCategoryData";
 import "./Boardgame.css";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
-import "./Boardgame.css";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchField from "./SearchField";
 
 function Boardgame() {

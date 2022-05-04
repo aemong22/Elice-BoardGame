@@ -9,7 +9,7 @@ const fn = function () {
   /* do your action */
 };
 
-function BoardgameRec() {
+function BoardgameRec({ gameData }) {
   return (
     <Coverflow
       width="100%"
