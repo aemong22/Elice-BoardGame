@@ -11,7 +11,7 @@ function BoardgameDetail() {
   const [gameData, setGameData] = useState(undefined);
 
   const fetchBoardgameDetail = async () => {
-    const res = await Api.get("gameInfo", boardgameId);
+    const res = await Api.get("boardgame/detail", boardgameId);
     setGameData(res.data);
   };
 
