@@ -65,11 +65,9 @@ class communityService{
     
     // comment 추가하기
     static async addComment({id,user_id,content}){
-        const newComment = {
-            user_id: user_id,
-            content: content,
-            };
-        // const createNewComment = await CommunityContentModel.update({_id:id},{comment : newComment})
+        const newComment = {user_id,content} 
+        const CommunityComment= await CommunityCommentModel.create(newComment)
+        const createNewComment = await CommunityContentModel.updateOne({_id : id},{$push:{comment : CommunityComment }})
         createNewComment.errorMessage = null;
         
         return createNewComment;
@@ -77,7 +75,7 @@ class communityService{
 
     // comment 삭제하기
     static async deleteComment({commentid}){
-        const delComment = await CommunityCommentModel.findByIdAndDelete({id : commentid});
+        const delComment = await CommunityCommentModel.findByIdAndDelete(commentid);
         return delComment;
     }
 
