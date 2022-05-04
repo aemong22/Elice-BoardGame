@@ -9,14 +9,20 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import TagBtn from "./TagBtn";
 import DetailTab from "./DetailTab";
 import "./DetailContents.css";
 
 function DetailContents({ gameData }) {
   const [open, setOpen] = useState(false);
+  const [favoriteToggle, setFavoriteToggle] = useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const favoriteHandler = () => {
+    setFavoriteToggle(!favoriteToggle);
+  };
 
   const style = {
     position: "absolute",
@@ -54,8 +60,15 @@ function DetailContents({ gameData }) {
               <div className="container-top-right">
                 <div className="detail-context">
                   <div id="favoriteBtn">
-                    <IconButton aria-label="add to favorites">
-                      <FavoriteIcon />
+                    <IconButton
+                      aria-label="add to favorites"
+                      onClick={favoriteHandler}
+                    >
+                      {favoriteToggle ? (
+                        <FavoriteIcon />
+                      ) : (
+                        <FavoriteBorderIcon />
+                      )}
                     </IconButton>
                   </div>
 
