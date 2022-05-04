@@ -10,15 +10,14 @@ import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Button from '@mui/material/Button';
 
-function BoardgameCard({ id, name, min_player, max_player, domains, image }) {
+function BoardgameCard({ id, name, min_player, max_player, theme, image, min_age, min_playing_time, max_playing_time }) {
   const navigate = useNavigate();
-  
+
   const maxLength = 13;
   const boardgameName = name.length > maxLength ? name.substr(0, maxLength) + '...' : name;
-  const domainList = (domains === '' ? ['nothing'] : domains.split(','));
   
   return (
-    <Card sx={{ width: 250, maxWidth: 270, my: 10 }}>
+    <Card sx={{ width: 250, maxWidth: 270, my: 5, mx: 5 }}>
       <CardActionArea onClick={() => navigate(`/boardgame/detail/:${id}`)}>
         <CardMedia
           component="img"
@@ -40,14 +39,22 @@ function BoardgameCard({ id, name, min_player, max_player, domains, image }) {
           </div>
           <div style={{ height: 100, alignItems: 'start' }}>
             <Button variant="outlined" disabled sx={{ fontSize: '0.5rem', borderRadius: '100px', m: '2px' }}>
-              { min_player === max_player ? 
-                <span>{max_player}인용</span> : <span>{min_player}~{max_player}인용</span>
-              }
+            { min_player === max_player ? 
+              `${max_player}인용` : `${min_player}~${max_player}인용`
+            }
             </Button>
-            {domainList[0] === '' ? null 
-              : domainList.map((domain) => (
-                <Button key={domain} variant="outlined" disabled sx={{ fontSize: '0.5rem', borderRadius: '100px', m: '2px' }}>
-                  {domain}
+            <Button variant="outlined" disabled sx={{ fontSize: '0.5rem', borderRadius: '100px', m: '2px' }}>
+            { `${min_age}세 이하` }
+            </Button>
+            <Button variant="outlined" disabled sx={{ fontSize: '0.5rem', borderRadius: '100px', m: '2px' }}>
+              { min_playing_time === max_playing_time ? 
+              `${max_playing_time}분` : `${min_playing_time}~${max_playing_time}분`
+            }
+            </Button>
+            {theme[0] === '' ? null 
+              : theme.map((data) => (
+                <Button key={data} variant="outlined" disabled sx={{ fontSize: '0.5rem', borderRadius: '100px', m: '2px' }}>
+                  {data}
                 </Button>
             ))}
           </div>

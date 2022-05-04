@@ -3,69 +3,87 @@ import BoardgameCard from "./BoardgameCard";
 import BasicPagination from "./BasicPagination";
 import * as Api from "../../api";
 
-function BoardgameData({ condition }) {
-    const [first, setFirst] = useState(false);  // 수정하기
-    const [boardgames, setBoardgames] = useState([]);
+function BoardgameData({ condition, changeCondition }) {
+    const [boardgames, setBoardgames] = useState(undefined);
+    const [totalPage, setTotalPage] = useState(1);
 
-    const [limit, setLimit] = useState(9);
-    const [page, setPage] = useState(1);
-    const offset = (page - 1) * limit;
-
-    // 보드게임 전체 데이터 불러오기
     useEffect(() => {
+        (condition.category !== '' || condition.type !== '') ? conditionGamesHandler() : recentlyGamesHandler();
+    }, [condition])
+
+    // 보드게임 최근 데이터 불러오기
+    const recentlyGamesHandler = async () => {
+        // console.log("data condtion: ", condition);
         try {
-            Api.get("recentlyGames").then((res) => {
-                setBoardgames(res.data);
+            await Api.get("recentlyGames",
+                { params: {
+                    page: condition.page,
+                    perPage: condition.perPage,
+                }}, 
+                { withCredentials: true }
+            ).then((res) => {
+                // console.log("res.data: ", res.data)
+                setBoardgames(res.data.games);
+                setTotalPage(res.data.totalPage);
             })
-            setFirst(true)
         } catch (err) {
             console.log("errer message: ", err)
         }
-    }, []);
+    }
 
     // 보드게임 조건 데이터 불러오기
-    useEffect(() => {
+    const conditionGamesHandler = async () => {
+        console.log("data condtion: ", condition);
         try {
-            first && Api.post("games/condition", condition).then((res) => {
-                setBoardgames(res.data);
-            });
+            await Api.get("games/conditions",
+                { params: {
+                    category: condition.category,
+                    val1: condition.val1,
+                    type: condition.type,
+                    page: condition.page,
+                    perPage: condition.perPage,
+                }}, 
+                { withCredentials: true }
+            ).then((res) => {
+                // console.log("res.data: ", res.data)
+                setBoardgames(res.data.games); 
+                setTotalPage(res.data.totalPage);
+            })
         } catch (err) {
             console.log("errer message: ", err)
         }
-    }, [condition]);
+    }
 
-    const boardgameList = boardgames.map((boardgame) => (
+    const boardgameList = boardgames?.map((boardgame) => (
         <BoardgameCard
-            key={boardgame.game_id}
-            id={boardgame.game_id}
-            name={boardgame.game_name}
-            min_player={boardgame.min_player}
-            max_player={boardgame.max_player}
-            domains={boardgame.domains === null ? '' : boardgame.domains}
-            image={boardgame.image}
+            key={boardgame?.game_id}
+            id={boardgame?.game_id}
+            name={boardgame?.game_name}
+            min_player={boardgame?.min_player}
+            max_player={boardgame?.max_player}
+            theme={boardgame?.theme === null ? '' : boardgame.theme}
+            image={boardgame?.image}
+            min_age={boardgame?.min_age}
+            min_playing_time={boardgame?.min_playing_time}
+            max_playing_time={boardgame?.max_playing_time}
         />
     ));
 
-    // console.log(boardgameList);
-
     return (
         <>
-            {boardgameList.slice(offset, offset + limit)}
-
-            {/* Pagination */}
+            {boardgameList}
             <div style={{ width: '100%', display: 'flex' }}>
                 <div style={{ margin: '0 auto', display: 'flex', alignItems: 'center' }}>
                 <BasicPagination 
-                    total={boardgameList.length}
-                    limit={limit}
-                    page={page}
-                    setPage={setPage}
+                    totalPage={totalPage}
+                    condition={condition}
+                    changeCondition={changeCondition}
                 />
                 <label>
                     <select
                         type="number"
-                        value={limit}
-                        onChange={({ target: { value }}) => setLimit(Number(value))}
+                        value={condition.perPage}
+                        onChange={({ target: { value }}) => changeCondition("perPage", Number(value))}
                     >
                         <option value="9">9</option>
                         <option value="15">15</option>

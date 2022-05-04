@@ -58,7 +58,11 @@ function App() {
         <Route path="/pwlink/:rtoken" exact element={<PwLink />} />
         {userState && (
           <>
-            <Route path="/gameInfo/:id" exact element={<BoardgameDetail />} />
+            <Route
+              path="/boardgame/detail/:id"
+              exact
+              element={<BoardgameDetail />}
+            />
             <Route path="/boardgame" exact element={<Boardgame />} />
             <Route path="/mypage" exact element={<Mypage />} />
             <Route path="/profile" exact element={<Profile />} />
