@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useParams, useEffect } from "react";
 import {
   CssBaseline,
   Box,
@@ -12,17 +12,33 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import TagBtn from "./TagBtn";
 import DetailTab from "./DetailTab";
+import * as Api from "../../api";
 import "./DetailContents.css";
 
 function DetailContents({ gameData }) {
   const [open, setOpen] = useState(false);
-  const [favoriteToggle, setFavoriteToggle] = useState(true);
+  const [favoriteToggle, setFavoriteToggle] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const favoriteHandler = () => {
+  const favoriteHandler = async () => {
+    const res = await Api.put("favorite", {
+      boardgameId: gameData.id,
+      toggle: !favoriteToggle,
+    });
+
     setFavoriteToggle(!favoriteToggle);
   };
+
+  const getFavorite = async () => {
+    const res = await Api.get("favorite", gameData.id);
+    const favoriteData = res.data;
+    setFavoriteToggle(favoriteData.favorite);
+  };
+
+  useEffect(() => {
+    getFavorite();
+  }, []);
 
   const style = {
     position: "absolute",
