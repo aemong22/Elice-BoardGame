@@ -33,7 +33,7 @@ class communityServiceController{
 
     static async createContents(req, res, next){
         try {
-            const author = req.body.author;
+            const author = req.currentUserId;
             const title = req.body.title;
             const content = req.body.content;
             const newContent = await communityService.addContent({
@@ -76,7 +76,7 @@ class communityServiceController{
     static async newComment(req, res, next){
         try {
             const id = req.params.id;
-            const user_id = req.body.user_id;
+            const user_id = req.currentUserId;
             const content = req.body.content;
             const newComment = await communityService.addComment({
                 id,
@@ -97,7 +97,7 @@ class communityServiceController{
     static async deleteComment(req, res, next){
         try {
             const commentid = req.params.id2;
-            const deletecomment = await communityService.deleteComment(commentid);
+            const deletecomment = await communityService.deleteComment({commentid});
             res.status(200).json(deletecomment);
         } catch (error) {
             next(error);

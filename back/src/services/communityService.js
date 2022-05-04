@@ -25,7 +25,7 @@ class communityService{
         const option = {returnOriginal:false};
         const fieldUpdate="title";
         const updatetitle = update.title;
-        let updates = {[fieldUpdate]: updatetitle}
+        let updates = {fieldUpdate:updatetitle}
         let UpdateContents = await CommunityContentModel.findOneAndUpdate(
             filter,
             updates,
@@ -34,7 +34,7 @@ class communityService{
 
         const fieldUpdates="content";
         const updatecontent = update.content;
-        updates = {[fieldUpdates] : updatecontent}
+        updates = {fieldUpdates:updatecontent}
         UpdateContents = await CommunityContentModel.findOneAndUpdate(
             filter,
             updates,
@@ -74,8 +74,8 @@ class communityService{
     }
 
     // comment 삭제하기
-    static async deleteComment( id2 ){
-        const delComment = await CommunityCommentModel.findByIdAndDelete(id2);  
+    static async deleteComment( {commentid} ){
+        const delComment = await CommunityCommentModel.findOneAndDelete({_id:commentid});  
     }
 
     // comment 수정하기
