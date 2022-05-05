@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { Box, Container, CssBaseline, Divider } from "@mui/material/";
 import ContentsDetail from "./ContentsDetail";
 import ContentEditForm from "./ContentEditForm";
-// import * as Api from "../../api";
+import * as Api from "../../api";
 
 function CommunityContent() {
     const navigate = useNavigate();
     const params = useParams();
+    const contentId = params.id;
     const [content, setContent] = useState(undefined);
     const [isEditable, setIsEditable] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
@@ -21,11 +23,12 @@ function CommunityContent() {
     const fetchContentInfo = async (contentId) => {
         try {
             const res = await Api.get("communitycontents", contentId);
-            if (res.data?.author === userState?.user_name) {
+            if (res.data?.author === userState?._id) {
                 setIsEditable(true);
             } else {
                 setIsEditable(false);
             }
+            console.log(res.data);
             setContent(res.data);
             setIsFetchCompleted(true);
             console.log(res.data);
@@ -35,23 +38,23 @@ function CommunityContent() {
     };
 
     useEffect(() => {
-        fetchContentInfo(params.postId);
+        fetchContentInfo(contentId);
     }, [params]);
 
     if (!isFetchCompleted) {
         return "loading...";
     }
 
-    const deleteNavigate = async () => {
-        try {
-            if (window.confirm("게시글을 삭제하시겠습니까?")) {
-                await Api.delete(`communitycontents/${params.id}/delete`);
-                navigate(`/freeboard`);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    // const deleteNavigate = async () => {
+    //     try {
+    //         if (window.confirm("게시글을 삭제하시겠습니까?")) {
+    //             await Api.delete(`communitycontents/${params.id}/delete`);
+    //             navigate(`/freeboard`);
+    //         }
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
 
     return (
         <React.Fragment>

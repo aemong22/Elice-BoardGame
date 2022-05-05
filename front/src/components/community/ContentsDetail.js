@@ -34,16 +34,23 @@ function ContentsDetail({
                         Word of the Day
                     </Typography>
                 </CardContent>
+
                 <CardActions disableSpacing>
-                    <IconButton
-                        onClick={() => navigate("/communitycontents/create")}
-                        sx={{ marginLeft: "auto" }}
-                    >
-                        <EditIcon />
-                    </IconButton>
-                    <IconButton>
-                        <DeleteIcon />
-                    </IconButton>
+                    {isEditable && (
+                        <>
+                            <IconButton
+                                onClick={() =>
+                                    navigate("/communitycontents/create")
+                                }
+                                sx={{ marginLeft: "auto" }}
+                            >
+                                <EditIcon />
+                            </IconButton>
+                            <IconButton>
+                                <DeleteIcon />
+                            </IconButton>
+                        </>
+                    )}
                 </CardActions>
             </Card>
         </>
