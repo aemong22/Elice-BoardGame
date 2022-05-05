@@ -12,9 +12,9 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function ContentsDetail({ setIsEditing, isEditable, handleDelete }) {
+function ContentsDetail({ setIsEditing, isEditable, handleDelete, contents }) {
     const navigate = useNavigate();
-
+    const { title, content, createdAt, author } = contents;
     return (
         <>
             <Card sx={{ minWidth: 275 }}>
@@ -27,8 +27,8 @@ function ContentsDetail({ setIsEditing, isEditable, handleDelete }) {
                             목록
                         </Button>
                     }
-                    title="게시글 제목"
-                    subheader="작성자 | 날짜"
+                    title={title}
+                    subheader={`${author} | ${createdAt.slice(0, 10)}`}
                 />
                 <CardContent>
                     <Typography
@@ -36,7 +36,7 @@ function ContentsDetail({ setIsEditing, isEditable, handleDelete }) {
                         color="text.secondary"
                         gutterBottom
                     >
-                        Word of the Day
+                        {content}
                     </Typography>
                 </CardContent>
 
