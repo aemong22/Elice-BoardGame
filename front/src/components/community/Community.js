@@ -1,87 +1,125 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-// import { Container, Button, ListGroup, Row, Col, Card, ToggleButton } from 'react-bootstrap';
+import {
+    List,
+    ListItemButton,
+    ListSubheader,
+    Box,
+    Container,
+    ListItemText,
+    CssBaseline,
+    Divider,
+} from "@mui/material/";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import IconButton from "@mui/material/IconButton";
+import * as Api from "../../api";
 
-// import * as Api from '../../api';
-import { UserStateContext } from "../../App";
-import { FreeBoardSkeleton } from "../Skeletons";
-
-function Freeboard() {
+function community() {
     const navigate = useNavigate();
-    const userState = useContext(UserStateContext);
-    const [allPosts, setAllPosts] = useState([]);
-    const [myPosts, setMyPosts] = useState([]);
-    const [checked, setChecked] = useState(false);
+    const [allContents, setAllContents] = useState(undefined);
     const [isFetchCompleted, setIsFetchCompleted] = useState(false);
 
-    const fetchPostsInfo = async () => {
+    const fetchContentsInfo = async () => {
         try {
-            //   const { data: tempAllPosts } = await Api.get('freeboardlist');
-            //   setAllPosts(tempAllPosts);
-            //   const { data: tempMyPosts } = await Api.get('freeboardlist', userState.user?.id);
-            //   setMyPosts(tempMyPosts);
-            //   setIsFetchCompleted(true);
+            const res = await Api.get("communitycontents");
+            setAllContents(res.data);
+            setIsFetchCompleted(true);
+            console.log(res.data);
         } catch (error) {
             console.log(error);
         }
     };
 
-    //   useEffect(() => {
-    //     if (!userState.user) {
-    //       navigate('/login');
-    //       return;
-    //     }
-    //     fetchPostsInfo();
-    //   }, [userState, navigate]);
-
-    const toggleCheck = () => {
-        setChecked(!checked);
-    };
+    useEffect(() => {
+        fetchContentsInfo();
+    }, []);
 
     if (!isFetchCompleted) {
-        return <FreeBoardSkeleton />;
+        return <div>로딩중...</div>;
     }
+
     return (
-        <Container style={{ position: "relative", minHeight: "100vh" }}>
-            <Container className="mt-3">
-                <ToggleButton
-                    className="mb-2"
-                    id="toggle-check"
-                    type="checkbox"
-                    variant="outline-primary"
-                    checked={checked}
-                    onChange={toggleCheck}
+        <React.Fragment>
+            <CssBaseline />
+            <Container maxWidth="md">
+                <Box
+                    sx={{
+                        width: "100%",
+                        height: "100vh",
+                        marginTop: "60px",
+                    }}
                 >
-                    {checked ? "모든 게시글 보기" : "내가 쓴 게시글 보기"}
-                </ToggleButton>
-                <Button
-                    variant="primary"
-                    style={{ position: "absolute", right: 13 }}
-                    onClick={() => navigate(`/freeboard/create`)}
-                >
-                    게시글 작성
-                </Button>
-            </Container>
-            <Card className="mt-4">
-                <Card.Header className="text-center">자유게시판</Card.Header>
-                <ListGroup variant="flush">
-                    {(checked ? myPosts : allPosts).map((post) => (
-                        <ListGroup.Item
-                            key={post._id}
-                            onClick={() => navigate(`/freeboard/${post._id}`)}
+                    <List
+                        sx={{
+                            width: "100%",
+                            bgcolor: "background.paper",
+                        }}
+                        aria-labelledby="nested-list-subheader"
+                    >
+                        <ListSubheader
+                            component="div"
+                            id="nested-list-subheader"
+                            style={{
+                                textAlign: "center",
+                                width: "100%",
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                            }}
                         >
-                            <Row style={{ cursor: "pointer" }}>
-                                <Col md={4}>{post.title}</Col>{" "}
-                                <Col md={{ span: 4, offset: 4 }}>
-                                    {post.name}
-                                </Col>
-                            </Row>
-                        </ListGroup.Item>
-                    ))}
-                </ListGroup>
-            </Card>
-        </Container>
+                            <span>자유게시판</span>
+                            <IconButton
+                                onClick={() =>
+                                    navigate("/communitycontents/create")
+                                }
+                            >
+                                <BorderColorIcon />
+                            </IconButton>
+                        </ListSubheader>
+                        <ListSubheader
+                            component="div"
+                            id="nested-list-subheader"
+                            style={{
+                                textAlign: "center",
+                                width: "100%",
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                                padding: "0 5% 0 5%",
+                            }}
+                        >
+                            <span>번호</span>
+                            <span>제목</span>
+                            <span>작성자</span>
+                            <span>날짜</span>
+                        </ListSubheader>
+                        <Divider />
+                        {allContents?.map((content, idx) => (
+                            <ListItemButton style={{ width: "100%" }}>
+                                <ListItemText
+                                    secondary={idx}
+                                    sx={{ width: 20 }}
+                                />
+                                <ListItemText
+                                    secondary={content.title}
+                                    style={{ textAlign: "center" }}
+                                />
+                                <ListItemText
+                                    secondary={content.author}
+                                    style={{ textAlign: "center" }}
+                                />
+                                <ListItemText
+                                    secondary={content.createdAt.slice(0, 10)}
+                                    style={{ textAlign: "end" }}
+                                />
+                            </ListItemButton>
+                        ))}
+                    </List>
+                </Box>
+            </Container>
+        </React.Fragment>
     );
 }
 
-export default Freeboard;
+export default community;

@@ -14,6 +14,7 @@ import Mypage from "./components/mypage/Mypage";
 import BoardgameDetail from "./components/boardgamedetail/BoardgameDetail";
 import GoogleLoading from "./components/user/GoogleLoading";
 import Header from "./components/Header";
+import Community from "./components/community/Community";
 
 import { useSelector } from "react-redux";
 
@@ -76,6 +77,11 @@ function App() {
                         />
                         <Route path="/mypage" exact element={<Mypage />} />
                         <Route path="/profile" exact element={<Profile />} />
+                        <Route
+                            path="/community"
+                            exact
+                            element={<Community />}
+                        />
                     </>
                 )}
                 <Route path="/register" exact element={<RegisterForm />} />
