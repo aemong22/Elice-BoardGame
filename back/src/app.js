@@ -5,6 +5,8 @@ import { favoriteAuthRouter } from "./routes/favoriteRouter";
 
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 import { boardGameRouter } from "./routes/boardGameRouter";
+import { communityRouter } from "./routes/communityRouter";
+
 
 const app = express();
 
@@ -19,6 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(userAuthRouter);
 app.use(boardGameRouter);
+app.use(communityRouter);
 app.use(favoriteAuthRouter);
 
 app.use(errorMiddleware);
