@@ -6,13 +6,11 @@ import * as Api from "../../api";
 
 function Favorite() {
     const [wishes, setWishes] = useState(undefined);
-    const [count, setCount] = useState(0);
+
     const favoriteList = async () => {
         await Api.get("favorite/user").then((res) => {
             const favoritedata = res.data;
             setWishes(favoritedata[0].boardgame);
-            setCount(wishes?.length);
-            console.log("카운트", count);
         });
     };
     useEffect(() => {
@@ -25,7 +23,12 @@ function Favorite() {
                 <Title>
                     <FavoriteIcon /> 찜 목록
                 </Title>
-                <Total> {count} / Total </Total>
+                <Total>
+                    <span style={{ color: "black", fontSize: "23px" }}>
+                        {wishes?.length}
+                    </span>
+                    {"  "} Total
+                </Total>
                 <Content>
                     {wishes?.map((wish) => (
                         <FavoriteCard key={wish.game_id} wish={wish} />
