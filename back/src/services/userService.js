@@ -252,6 +252,21 @@ class userAuthService {
 
         return token;
     }
+
+    //oauth 로그인 및 회원가입을 위한 함수
+    static async findOrCreate({ data }) {
+        const email = data.email;
+        const user_name = data.name;
+        const password = data.id;
+        let user = await UserModel.findOne({ email });
+
+        if (!user) {
+            await this.addUser({ user_name, email, password });
+        }
+
+        const userinfo = await this.getSingleUser({ email, password });
+        return userinfo;
+    }
 }
 
 export { userAuthService };

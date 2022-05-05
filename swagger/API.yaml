@@ -14,7 +14,130 @@ tags:
     description: BoardGame 스키마를 이용한 기능
   - name: favorite
     description: Favorite 스키마를 이용한 기능
+  - name: community
+    description: community 스키마를 이용한 기능
+  - name : comment-community
+    description: comment-community 스키마를 이용한 기능
+
 paths:
+  /communitycontents/{id}/comment:
+    post:
+      tags:
+        - comment-community
+      summary : id에 해당하는 comment 추가하기 
+      parameters:
+        - name : id
+          in: path
+          required : true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                content:
+                  type: string
+      responses:
+        '200':
+          description : "id에 해당하는 comment 추가하기"
+          $ref : "#/components/schemas/CommunityComment"
+                
+  /communitycontents:
+    get:
+      tags:
+        - community
+      summary : 모든 community게시판 불러오기 
+      responses:
+        '200':
+          description : "모든 게시판을 정보를 불러온다"
+          content:
+            application/json:
+              schema:
+                $ref : "#/components/schemas/CommunityContent"
+
+  /communitycontents/create:
+    post:
+      tags:
+        - community
+      summary : 게시판 생성하기
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                author:
+                  type: string
+                title:
+                  type: string
+                content:
+                  type: string
+      responses:
+        '200':
+          description: "board생성 성공!"
+          $ref : "#/components/schemas/CommunityContent"
+
+  /communitycontents/{id}:
+    get:
+      tags:
+        - community
+      summary: board object_id 기준 조회
+      parameters:
+        - name : id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref : "#/components/schemas/CommunityContent"
+  
+  /communitycontents/{id}/delete:
+    delete:
+      tags:
+        - community
+      summary: community object_id 기준 삭제
+      parameters:
+        - name : id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref : "#/components/schemas/CommunityContent"
+
+  /communitycontent/{id}:
+    put:
+      tags:
+        - community
+      summary: board object_id 기준 수정
+      parameters:
+        - name : id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+      responses:
+        '200':
+          description: "board수정 성공!"
+          $ref : "#/components/schemas/CommunityContent"
+
   /user/register:
     post:
       tags:
@@ -143,20 +266,20 @@ paths:
             type: string
       requestBody:
         content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  user_name:
-                    type: string
-                  email:
-                    type: string
-                  phone_number:
-                    type: string
-                  password:
-                    type: string
-                  image:
-                    type: string
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_name:
+                  type: string
+                email:
+                  type: string
+                phone_number:
+                  type: string
+                password:
+                  type: string
+                image:
+                  type: string
       responses:
         '200':
           $ref: '#/components/schemas/User'
@@ -602,5 +725,34 @@ components:
           type: string
         boardgame:
           type: string
+    
+    CommunityContent:
+        type : object
+        required :
+          - title
+          - content
+          - author
+          - comment
+        properties :
+          title:
+            type: string
+          content:
+            type: string
+          author:
+            type: string
+          comment:
+            type: array
+
+    CommunityComment:
+          type : object
+          required :
+            - content
+            - user_id
+          properties:
+            content:
+              type: string
+            user_id:
+              type: string  
+
 security:
   - bearerAuth: []
