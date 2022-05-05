@@ -11,11 +11,7 @@ function PwLink() {
     const isPasswordSame = pw === confirmPw;
     const isPasswordValid = pw.length >= 4;
     const isFormValid = isPasswordValid && isPasswordSame;
-<<<<<<< HEAD
     const navigate = useNavigate();
-=======
-    console.log(rtoken);
->>>>>>> 625848e9a41ccd02b11880b91317bc75fd09b0c0
 
     const handleSubmit = async (e) => {
         e.preventDefault();
