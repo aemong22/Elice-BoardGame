@@ -153,6 +153,8 @@ class userAuthService {
 
             user = await UserModel.findOneAndUpdate(filter, update, option);
         }
+
+        await client.disconnect();
         return user;
     }
 
@@ -250,6 +252,7 @@ class userAuthService {
 
         console.log("Message sent: %s", info.messageId);
 
+        await client.disconnect();
         return token;
     }
 }
