@@ -45,16 +45,16 @@ function CommunityContent() {
         return "loading...";
     }
 
-    // const deleteNavigate = async () => {
-    //     try {
-    //         if (window.confirm("게시글을 삭제하시겠습니까?")) {
-    //             await Api.delete(`communitycontents/${params.id}/delete`);
-    //             navigate(`/freeboard`);
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
+    const handleDelete = async () => {
+        try {
+            if (window.confirm("게시글을 삭제하시겠습니까?")) {
+                await Api.delete(`communitycontents/${params.id}/delete`);
+                navigate("/community");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <React.Fragment>
@@ -77,6 +77,7 @@ function CommunityContent() {
                             setIsEditing={setIsEditing}
                             isEditable={isEditable}
                             isEditing={isEditing}
+                            handleDelete={handleDelete}
                         />
                     )}
                 </Box>

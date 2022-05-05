@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import {
     Card,
     CardHeader,
@@ -11,17 +12,21 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function ContentsDetail({
-    setIsEditable,
-    setIsEditing,
-    isEditable,
-    isEditing,
-}) {
+function ContentsDetail({ setIsEditing, isEditable, handleDelete }) {
+    const navigate = useNavigate();
+
     return (
         <>
             <Card sx={{ minWidth: 275 }}>
                 <CardHeader
-                    action={<Button size="small">목록</Button>}
+                    action={
+                        <Button
+                            size="small"
+                            onClick={() => navigate("/community")}
+                        >
+                            목록
+                        </Button>
+                    }
                     title="게시글 제목"
                     subheader="작성자 | 날짜"
                 />
@@ -39,14 +44,12 @@ function ContentsDetail({
                     {isEditable && (
                         <>
                             <IconButton
-                                onClick={() =>
-                                    navigate("/communitycontents/create")
-                                }
+                                onClick={() => setIsEditing(true)}
                                 sx={{ marginLeft: "auto" }}
                             >
                                 <EditIcon />
                             </IconButton>
-                            <IconButton>
+                            <IconButton onClick={() => handleDelete()}>
                                 <DeleteIcon />
                             </IconButton>
                         </>
