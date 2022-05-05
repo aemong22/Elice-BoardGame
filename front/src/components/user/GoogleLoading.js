@@ -12,7 +12,6 @@ const GoogleLoading = () => {
 
     const googleLogin = async () => {
         try {
-            console.log("asdfasdf", accessToken);
             const { data } = await Api.post("oauth/google", { accessToken });
             const jwtToken = data.token;
             sessionStorage.setItem("userToken", jwtToken);

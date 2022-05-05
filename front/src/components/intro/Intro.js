@@ -5,7 +5,7 @@ import { Modal } from "@mui/material";
 import { useState } from "react";
 
 function Intro() {
-  const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
         setOpen(true);
@@ -38,6 +38,6 @@ function Intro() {
             </div>
         </div>
     );
-};
+}
 
 export default Intro;

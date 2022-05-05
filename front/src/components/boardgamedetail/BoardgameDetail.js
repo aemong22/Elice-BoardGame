@@ -9,10 +9,12 @@ function BoardgameDetail() {
 
     const [isFetchCompleted, setIsFetchCompleted] = useState(false);
     const [gameData, setGameData] = useState(undefined);
+    const [recommendData, setRecommendData] = useState(undefined);
 
     const fetchBoardgameDetail = async () => {
         const res = await Api.get("boardgame/detail", boardgameId);
-        setGameData(res.data);
+        setGameData(res.data.games);
+        setRecommendData(res.data.recommendGames);
     };
 
     useEffect(() => {
@@ -24,7 +26,16 @@ function BoardgameDetail() {
         return <div>로딩중...</div>;
     }
 
-    return <>{gameData && <DetailContents gameData={gameData} />}</>;
+    return (
+        <>
+            {gameData && (
+                <DetailContents
+                    gameData={gameData}
+                    recommendData={recommendData}
+                />
+            )}
+        </>
+    );
 }
 
 export default BoardgameDetail;
