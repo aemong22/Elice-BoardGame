@@ -18,11 +18,12 @@ const Title = styled(Grid)`
 `;
 
 const Total = styled(Grid)`
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
-    color: black;
+    color: #d4ccc3;
     text-align: right;
     padding-bottom: 3%;
+    padding-right: 3%;
 `;
 
 const Content = styled(Grid)``;
