@@ -6,21 +6,6 @@
 -   소범기
 -   이상원
 
-## 폴더 구조
-
-```shell
-.
-└── back
-    └── src
-        ├── controllers
-        ├── db
-        ├── middlewares
-        ├── routes
-        ├── services
-        └── utils
-
-```
-
 ## MVP(Minimum Viable Product)
 
 총 4가지의 MVP가 구현되어 있습니다. User, BoardGame, Favorite, Community로 구성되어 있습니다.
@@ -42,6 +27,21 @@
 ### Community
 
 사용자들이 게시글과 댓글을 작성할 수 있는 MVP입니다. 사용자는 Community에서 게시글을 적고 함께 게임할 사람을 찾거나 게임에 대해 의견을 서로 공유할 수 있습니다.
+
+## 폴더 구조
+
+```shell
+.
+└── back
+    └── src
+        ├── controllers
+        ├── db
+        ├── middlewares
+        ├── routes
+        ├── services
+        └── utils
+
+```
 
 ### contollers
 
