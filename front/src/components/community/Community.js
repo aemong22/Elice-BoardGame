@@ -1,16 +1,85 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router";
-import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import ListSubheader from "@mui/material/ListSubheader";
+import List from "@mui/material/List";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Divider from "@mui/material/Divider";
+import { width } from "@mui/system";
 
 function community() {
     return (
         <React.Fragment>
             <CssBaseline />
             <Container maxWidth="md">
-                <Box sx={{ bgcolor: "#cfe8fc", height: "100vh" }} />
+                <Box
+                    sx={{
+                        width: "100%",
+                        bgcolor: "#cfe8fc",
+                        height: "100vh",
+                        marginTop: "60px",
+                    }}
+                >
+                    <List
+                        sx={{
+                            width: "100%",
+                            bgcolor: "background.paper",
+                        }}
+                        aria-labelledby="nested-list-subheader"
+                    >
+                        <ListSubheader
+                            component="div"
+                            id="nested-list-subheader"
+                            style={{
+                                textAlign: "center",
+                                width: "100%",
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                            }}
+                        >
+                            <span>자유게시판</span>
+                            <span>글쓰기</span>
+                        </ListSubheader>
+                        <ListSubheader
+                            component="div"
+                            id="nested-list-subheader"
+                            style={{
+                                textAlign: "center",
+                                width: "100%",
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                                padding: "0 5% 0 5%",
+                            }}
+                        >
+                            <span>번호</span>
+                            <span>제목</span>
+                            <span>작성자</span>
+                            <span>날짜</span>
+                        </ListSubheader>
+                        <Divider />
+                        <ListItemButton style={{ width: "100%" }}>
+                            <ListItemText secondary="번호" sx={{ width: 20 }} />
+                            <ListItemText
+                                secondary="글제목"
+                                style={{ textAlign: "center" }}
+                            />
+                            <ListItemText
+                                secondary="작성자"
+                                style={{ textAlign: "center" }}
+                            />
+                            <ListItemText
+                                secondary="날짜"
+                                style={{ textAlign: "end" }}
+                            />
+                        </ListItemButton>
+                    </List>
+                </Box>
             </Container>
         </React.Fragment>
     );

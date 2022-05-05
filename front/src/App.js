@@ -14,6 +14,7 @@ import Mypage from "./components/mypage/Mypage";
 import BoardgameDetail from "./components/boardgamedetail/BoardgameDetail";
 import GoogleLoading from "./components/user/GoogleLoading";
 import Header from "./components/Header";
+import Community from "./components/community/Community";
 
 import { useSelector } from "react-redux";
 
