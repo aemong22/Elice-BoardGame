@@ -11,6 +11,7 @@ import {
     Divider,
 } from "@mui/material/";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import IconButton from "@mui/material/IconButton";
 import * as Api from "../../api";
 
 function community() {
@@ -68,11 +69,13 @@ function community() {
                             }}
                         >
                             <span>자유게시판</span>
-                            <BorderColorIcon
+                            <IconButton
                                 onClick={() =>
                                     navigate("/communitycontents/create")
                                 }
-                            />
+                            >
+                                <BorderColorIcon />
+                            </IconButton>
                         </ListSubheader>
                         <ListSubheader
                             component="div"
