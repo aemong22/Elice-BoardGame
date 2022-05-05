@@ -3,12 +3,15 @@ import BoardgameCategory from "./BoardgameCategory";
 import Sorting from "./Sorting";
 import BoardgameData from "./BoardgameData";
 import { categoryName, categoryValue } from "./BoardgameCategoryData";
+import BoardgameRandomCard from "./BoardgameRandomCard";
+import BounceAnimation from "./BounceAnimation";
 import "./Boardgame.css";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 
 function Boardgame() {
     const [open, setOpen] = useState(false);
+    const [recommend, setReconnend] = useState(true);
     const [condition, setCondition] = useState({
         category: "",
         val1: "",
@@ -44,6 +47,21 @@ function Boardgame() {
             <div className="boardgame-container">
                 <div className="boardgame-info">
                     <div className="boardgame-info-title">보드게임</div>
+                    <div 
+                        className={recommend ? "boardgame-recommend-active" : "boardgame-recommend"} 
+                        onClick={()=> setReconnend(!recommend)}
+                    >
+                        {
+                            recommend ? <BoardgameRandomCard /> : (
+                                <div className="boardgame-recommend-container">
+                                    <BounceAnimation />
+                                    <div className="boardgame-recommend-title">
+                                        무슨 <span style={{ color: "#A98E64" }}>보드게임</span>을 해야 할지 모르겠다면?
+                                    </div>
+                                </div>
+                            )
+                        }
+                    </div>
                     <div className="boardgame-info-filtered">
                         <HomeOutlinedIcon />
                         <div>{condition.category !== ""
