@@ -75,7 +75,7 @@ function LoginForm({ handleClose }) {
             } else if (reset.data === false) {
                 alert("구글 로그인입니다.");
             } else {
-                alert("존재하지 않는 이메일입니다여기이이?.");
+                alert("존재하지 않는 이메일입니다.");
             }
         } catch (err) {
             alert("존재하지 않는 이메일입니다.");
