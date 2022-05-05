@@ -1,20 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 import { Box, Container, CssBaseline, Divider } from "@mui/material/";
 import ContentsDetail from "./ContentsDetail";
+import ContentEditForm from "./ContentEditForm";
 // import * as Api from "../../api";
 
-function CommunityContents() {
+function CommunityContent() {
     const navigate = useNavigate();
-    const [contents, setContents] = useState(undefined);
+    const params = useParams();
+    const [content, setContent] = useState(undefined);
     const [isEditable, setIsEditable] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [isFetchCompleted, setIsFetchCompleted] = useState(false);
 
-    const fetchContentsInfo = async () => {
+    const userState = useSelector((state) =>
+        state ? state.userReducer.user : undefined
+    );
+
+    const fetchContentInfo = async (contentId) => {
         try {
-            const res = await Api.get("communitycontents");
-            setContents(res.data);
+            const res = await Api.get("communitycontents", contentId);
+            if (res.data?.author === userState?.user_name) {
+                setIsEditable(true);
+            } else {
+                setIsEditable(false);
+            }
+            setContent(res.data);
             setIsFetchCompleted(true);
             console.log(res.data);
         } catch (error) {
@@ -22,13 +34,24 @@ function CommunityContents() {
         }
     };
 
-    // useEffect(() => {
-    //     fetchContentsInfo();
-    // }, []);
+    useEffect(() => {
+        fetchContentInfo(params.postId);
+    }, [params]);
 
-    // if (!isFetchCompleted) {
-    //     return <div>로딩중...</div>;
-    // }
+    if (!isFetchCompleted) {
+        return "loading...";
+    }
+
+    const deleteNavigate = async () => {
+        try {
+            if (window.confirm("게시글을 삭제하시겠습니까?")) {
+                await Api.delete(`communitycontents/${params.id}/delete`);
+                navigate(`/freeboard`);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <React.Fragment>
@@ -43,15 +66,23 @@ function CommunityContents() {
                     }}
                 >
                     <Divider />
-
-                    <ContentsDetail />
+                    {isEditing ? (
+                        <ContentEditForm />
+                    ) : (
+                        <ContentsDetail
+                            setIsEditable={setIsEditable}
+                            setIsEditing={setIsEditing}
+                            isEditable={isEditable}
+                            isEditing={isEditing}
+                        />
+                    )}
                 </Box>
             </Container>
         </React.Fragment>
     );
 }
 
-export default CommunityContents;
+export default CommunityContent;
 
 // import React, { useContext, useState, useEffect } from "react";
 // import { useNavigate, useParams } from "react-router-dom";

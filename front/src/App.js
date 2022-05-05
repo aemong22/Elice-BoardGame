@@ -15,7 +15,7 @@ import BoardgameDetail from "./components/boardgamedetail/BoardgameDetail";
 import GoogleLoading from "./components/user/GoogleLoading";
 import Header from "./components/Header";
 import Community from "./components/community/Community";
-import CommunityContents from "./components/community/CommunityContents";
+import CommunityContent from "./components/community/CommunityContent";
 import ContentAddForm from "./components/community/ContentAddForm";
 
 import { useSelector } from "react-redux";
@@ -87,7 +87,7 @@ function App() {
                         <Route
                             path="/communitycontents/:id"
                             exact
-                            element={<CommunityContents />}
+                            element={<CommunityContent />}
                         />
                         <Route
                             path="/communitycontents/create"
