@@ -14,9 +14,10 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import IconButton from "@mui/material/IconButton";
 // import * as Api from "../../api";
 
-function ContentsDetail() {
+function CommunityContents() {
     const navigate = useNavigate();
     const [contents, setContents] = useState(undefined);
+    const [isEditable, setIsEditable] = useState(false);
     const [isFetchCompleted, setIsFetchCompleted] = useState(false);
 
     const fetchContentsInfo = async () => {
@@ -55,7 +56,7 @@ function ContentsDetail() {
     );
 }
 
-export default ContentsDetail;
+export default CommunityContents;
 
 // import React, { useContext, useState, useEffect } from "react";
 // import { useNavigate, useParams } from "react-router-dom";
