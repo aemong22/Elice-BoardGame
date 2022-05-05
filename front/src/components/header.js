@@ -64,8 +64,8 @@ function Header() {
                                 <li onClick={() => navigate("/boardgame")}>
                                     <Button>Boardgame</Button>
                                 </li>
-                                <li onClick={() => navigate("/comunication")}>
-                                    <Button>comunication</Button>
+                                <li onClick={() => navigate("/community")}>
+                                    <Button>community</Button>
                                 </li>
                                 <li id="menu" style={{ cursor: "pointer" }}>
                                     <Grid

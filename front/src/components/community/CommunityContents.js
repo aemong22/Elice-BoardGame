@@ -8,6 +8,7 @@ function CommunityContents() {
     const navigate = useNavigate();
     const [contents, setContents] = useState(undefined);
     const [isEditable, setIsEditable] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
     const [isFetchCompleted, setIsFetchCompleted] = useState(false);
 
     const fetchContentsInfo = async () => {
