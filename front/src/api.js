@@ -18,7 +18,7 @@ async function get(endpoint, params = "") {
     });
 }
 
-async function getQuery(endpoint, params = "") {
+async function getQuery(endpoint, { params = "" }) {
     console.log(
         `%cGET 요청 ${serverUrl + endpoint + "?" + params}`,
         "color: #a25cd1;"
