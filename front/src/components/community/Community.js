@@ -1,17 +1,39 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import ListSubheader from "@mui/material/ListSubheader";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
-import { width } from "@mui/system";
+import {
+    List,
+    ListItemButton,
+    ListSubheader,
+    Box,
+    Container,
+    ListItemText,
+    CssBaseline,
+    Divider,
+} from "@mui/material/";
 
 function community() {
+    const navigate = useNavigate();
+    const [allContents, setAllContents] = useState(undefined);
+    const [isFetchCompleted, setIsFetchCompleted] = useState(false);
+
+    // const fetchContentsInfo = async () => {
+    //     try {
+    //         const res = await Api.get("communitycontents");
+    //         setAllContents(res.data);
+    //         setIsFetchCompleted(true);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     fetchPostsInfo();
+    // }, []);
+
+    // if (!isFetchCompleted) {
+    //     return <div>로딩중...</div>;
+    // }
+
     return (
         <React.Fragment>
             <CssBaseline />
