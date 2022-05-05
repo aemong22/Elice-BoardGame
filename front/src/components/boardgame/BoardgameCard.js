@@ -23,9 +23,10 @@ function BoardgameCard({
     complexity_average,
     min_playing_time,
     max_playing_time,
+    favorite,
 }) {
     const navigate = useNavigate();
-    const [favoriteToggle, setFavoriteToggle] = useState(false);
+    const [favoriteToggle, setFavoriteToggle] = useState(favorite);
     const maxLength = 13;
     const boardgameName = name.length > maxLength ? name.substr(0, maxLength) + "..." : name;
 
@@ -39,7 +40,13 @@ function BoardgameCard({
         min_playing_time === max_playing_time
             ? `${max_playing_time}분`
             : `${min_playing_time}~${max_playing_time}분`,
-      ];
+    ];
+
+    const getFavorite = async () => {
+        const res = await Api.get("favorite", id);
+        const favoriteData = res.data;
+        setFavoriteToggle(favoriteData);
+    };
 
     const favoriteHandler = async () => {
         await Api.put("favorite", {
@@ -47,17 +54,13 @@ function BoardgameCard({
             toggle: !favoriteToggle,
         });
         setFavoriteToggle(!favoriteToggle);
-    };
-    
-    const getFavorite = async () => {
-        const res = await Api.get("favorite", id);
-        const favoriteData = res.data;
-        setFavoriteToggle(favoriteData);
-    };
-    
-    useEffect(() => {
         getFavorite();
-    }, []);
+    };
+
+    
+    // useEffect(() => {
+    //     getFavorite();
+    // }, [favoriteToggle]);
 
     return (
         <div>

@@ -81,6 +81,7 @@ function BoardgameData({ condition, changeCondition }) {
       complexity_average={boardgame?.complexity_average}
       min_playing_time={boardgame?.min_playing_time}
       max_playing_time={boardgame?.max_playing_time}
+      favorite={boardgame?.favorite}
     />
   ));
 
