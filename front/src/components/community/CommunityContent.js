@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { Box, Container, CssBaseline, Divider } from "@mui/material/";
 import ContentsDetail from "./ContentsDetail";
 import ContentEditForm from "./ContentEditForm";
+import Comments from "../comment/Comments";
 import * as Api from "../../api";
 
 function CommunityContent() {
@@ -77,6 +78,11 @@ function CommunityContent() {
                                 setIsEditing={setIsEditing}
                                 isEditable={isEditable}
                                 handleDelete={handleDelete}
+                            />
+                            <Comments
+                                userId={userState._id}
+                                userName={userState.user_name}
+                                contentId={contents._id}
                             />
                         </>
                     )}
