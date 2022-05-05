@@ -76,6 +76,11 @@ function App() {
                         />
                         <Route path="/mypage" exact element={<Mypage />} />
                         <Route path="/profile" exact element={<Profile />} />
+                        <Route
+                            path="/community"
+                            exact
+                            element={<Community />}
+                        />
                     </>
                 )}
                 <Route path="/register" exact element={<RegisterForm />} />
