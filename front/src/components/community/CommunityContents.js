@@ -1,17 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import {
-    List,
-    ListItemButton,
-    ListSubheader,
-    Box,
-    Container,
-    ListItemText,
-    CssBaseline,
-    Divider,
-} from "@mui/material/";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
-import IconButton from "@mui/material/IconButton";
+import { Box, Container, CssBaseline, Divider } from "@mui/material/";
+import ContentsDetail from "./ContentsDetail";
 // import * as Api from "../../api";
 
 function CommunityContents() {
@@ -50,7 +40,11 @@ function CommunityContents() {
                         marginTop: "60px",
                         backgroundColor: "gray",
                     }}
-                ></Box>
+                >
+                    <Divider />
+
+                    <ContentsDetail />
+                </Box>
             </Container>
         </React.Fragment>
     );
