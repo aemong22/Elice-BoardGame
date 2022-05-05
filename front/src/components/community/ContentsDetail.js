@@ -1,3 +1,62 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import {
+    List,
+    ListItemButton,
+    ListSubheader,
+    Box,
+    Container,
+    ListItemText,
+    CssBaseline,
+    Divider,
+} from "@mui/material/";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import IconButton from "@mui/material/IconButton";
+// import * as Api from "../../api";
+
+function ContentsDetail() {
+    const navigate = useNavigate();
+    const [contents, setContents] = useState(undefined);
+    const [isFetchCompleted, setIsFetchCompleted] = useState(false);
+
+    const fetchContentsInfo = async () => {
+        try {
+            const res = await Api.get("communitycontents");
+            setContents(res.data);
+            setIsFetchCompleted(true);
+            console.log(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    // useEffect(() => {
+    //     fetchContentsInfo();
+    // }, []);
+
+    // if (!isFetchCompleted) {
+    //     return <div>로딩중...</div>;
+    // }
+
+    return (
+        <React.Fragment>
+            <CssBaseline />
+            <Container maxWidth="md">
+                <Box
+                    sx={{
+                        width: "100%",
+                        height: "100vh",
+                        marginTop: "60px",
+                        backgroundColor: "gray",
+                    }}
+                ></Box>
+            </Container>
+        </React.Fragment>
+    );
+}
+
+export default ContentsDetail;
+
 // import React, { useContext, useState, useEffect } from "react";
 // import { useNavigate, useParams } from "react-router-dom";
 // import { Container, Button, Card, Col, Row } from "react-bootstrap";

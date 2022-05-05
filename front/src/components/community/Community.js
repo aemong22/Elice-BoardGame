@@ -14,7 +14,7 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import IconButton from "@mui/material/IconButton";
 import * as Api from "../../api";
 
-function community() {
+function Community() {
     const navigate = useNavigate();
     const [allContents, setAllContents] = useState(undefined);
     const [isFetchCompleted, setIsFetchCompleted] = useState(false);
@@ -129,4 +129,4 @@ function community() {
     );
 }
 
-export default community;
+export default Community;
