@@ -82,6 +82,11 @@ function App() {
                             exact
                             element={<Community />}
                         />
+                        <Route
+                            path="/communitycontents/:id"
+                            exact
+                            element={<ContentDetail />}
+                        />
                     </>
                 )}
                 <Route path="/register" exact element={<RegisterForm />} />

@@ -96,7 +96,14 @@ function community() {
                         </ListSubheader>
                         <Divider />
                         {allContents?.map((content, idx) => (
-                            <ListItemButton style={{ width: "100%" }}>
+                            <ListItemButton
+                                style={{ width: "100%" }}
+                                onClick={() =>
+                                    navigate(
+                                        `/communitycontents/${content._id}`
+                                    )
+                                }
+                            >
                                 <ListItemText
                                     secondary={idx}
                                     sx={{ width: 20 }}
