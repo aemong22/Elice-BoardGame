@@ -5,37 +5,14 @@ import { Container, Form, Row, Col, Button } from "react-bootstrap";
 import { UserStateContext } from "../../App";
 // import * as Api from '../../api';
 
-function PostEditForm() {
+function ContentEditForm() {
     const navigate = useNavigate();
     const params = useParams();
-    const userState = useContext(UserStateContext);
-    const [postInfo, setPostInfo] = useState(null);
-    const [isFetchCompleted, setIsFetchCompleted] = useState(false);
 
-    const fetchPostInfo = async (postId) => {
-        try {
-            //   const { data: postData } = await Api.get('freeboard', postId);
-            //   setPostInfo(postData);
-            //   setIsFetchCompleted(true);
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
 
-    //   useEffect(() => {
-    //     if (!userState.user) {
-    //       navigate('/login');
-    //       return;
-    //     }
-
-    //     fetchPostInfo(params.postId);
-    //   }, [params, userState, navigate]);
-
-    const handlePostValue = (name, value) => {
-        setPostInfo((prev) => ({ ...prev, [name]: value }));
-    };
-
-    const handleSubmit = async (e) => {
+    const handleEdit = async (e) => {
         e.preventDefault();
         try {
             await Api.put(`freeboard/${postInfo._id}`, {
@@ -46,10 +23,6 @@ function PostEditForm() {
             console.log(error);
         }
     };
-
-    if (!isFetchCompleted) {
-        return "loading...";
-    }
 
     return (
         <Container>
@@ -103,4 +76,4 @@ function PostEditForm() {
     );
 }
 
-export default PostEditForm;
+export default ContentEditForm;

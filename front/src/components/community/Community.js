@@ -9,7 +9,7 @@ import {
     ListItemText,
     CssBaseline,
     Divider,
-} from "@mui/material/";
+} from "@mui/material";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import IconButton from "@mui/material/IconButton";
 import * as Api from "../../api";
