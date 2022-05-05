@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../store/actions/userAction";
@@ -65,7 +65,7 @@ function Header() {
                                     <Button>Boardgame</Button>
                                 </li>
                                 <li onClick={() => navigate("/community")}>
-                                    <Button>community</Button>
+                                    <Button>Community</Button>
                                 </li>
                                 <li id="menu" style={{ cursor: "pointer" }}>
                                     <Grid

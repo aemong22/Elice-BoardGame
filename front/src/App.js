@@ -16,6 +16,7 @@ import GoogleLoading from "./components/user/GoogleLoading";
 import Header from "./components/Header";
 import Community from "./components/community/Community";
 import CommunityContents from "./components/community/CommunityContents";
+import ContentAddForm from "./components/community/ContentAddForm";
 
 import { useSelector } from "react-redux";
 
@@ -87,6 +88,11 @@ function App() {
                             path="/communitycontents/:id"
                             exact
                             element={<CommunityContents />}
+                        />
+                        <Route
+                            path="/communitycontents/create"
+                            exact
+                            element={<ContentAddForm />}
                         />
                     </>
                 )}
