@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { categoryData } from "./BoardgameCategoryData"
 import * as Api from "../../api";
@@ -42,29 +42,23 @@ function BoardgameCard({
             : `${min_playing_time}~${max_playing_time}분`,
     ];
 
-    const getFavorite = async () => {
-        const res = await Api.get("favorite", id);
-        const favoriteData = res.data;
-        setFavoriteToggle(favoriteData);
-    };
-
     const favoriteHandler = async () => {
-        await Api.put("favorite", {
-            boardgameId: id,
-            toggle: !favoriteToggle,
-        });
-        setFavoriteToggle(!favoriteToggle);
-        getFavorite();
+        try {
+            const res = await Api.put("favorite", {
+                boardgameId: id,
+                toggle: !favoriteToggle,
+            }).then(() => {
+                console.log("favorite: ", !favoriteToggle)
+                setFavoriteToggle(!favoriteToggle); 
+            });
+        } catch (err) {
+            console.log("errer message: ", err);
+          }
     };
-
-    
-    // useEffect(() => {
-    //     getFavorite();
-    // }, [favoriteToggle]);
 
     return (
-        <div>
-            <Card sx={{ width: 250, maxWidth: 270, my: 5, mx: 5 }}>
+        <div style={{ width: 250, margin: 50 }}>
+            <Card sx={{ width: '100%' }}>
                 <CardActionArea
                     onClick={() => navigate(`/boardgame/detail/${id}`)}
                 >
@@ -103,7 +97,7 @@ function BoardgameCard({
                 </CardActionArea>
             </Card>
             <IconButton
-                sx={{ position: 'relative', left: 235, top: -200 }}
+                sx={{ position: 'relative', left: 200, top: -160 }}
                 aria-label="add to favorites"
                 onClick={favoriteHandler}
                 >
