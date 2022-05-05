@@ -65,17 +65,18 @@ class communityService{
     
     // comment 추가하기
     static async addComment({id,user_id,content}){
-        const newComment = {user_id,content} 
-        const CommunityComment= await CommunityCommentModel.create(newComment)
-        const createNewComment = await CommunityContentModel.updateOne({_id : id},{$push:{comment : CommunityComment }})
+        const newComment = {user_id,content} ;
+        const CommunityComment= await CommunityCommentModel.create(newComment);
+        const createNewComment = await CommunityContentModel.updateOne({_id : id},{$push:{comment : CommunityComment }});
         createNewComment.errorMessage = null;
         
         return createNewComment;
     }
 
     // comment 삭제하기
-    static async deleteComment( {commentid} ){
-        const delComment = await CommunityCommentModel.findOneAndDelete({_id:commentid});
+    static async deleteComment( {cotentid,commentid} ){
+        const delComment = await CommunityCommentModel.findByIdAndDelete({_id:commentid});
+        const delContent = await CommunityContentModel.findOneAndUpdate({_id:cotentid},{'$pull':{comment:commentid}});
     }
 
     // comment 수정하기
@@ -89,8 +90,7 @@ class communityService{
             filter,
             updates,
             option,
-        )
-
+        );
         UpdateComment.errorMessage = null;
         return UpdateComment;
     }

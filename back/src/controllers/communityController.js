@@ -96,8 +96,10 @@ class communityServiceController{
     // comment삭제
     static async deleteComment(req, res, next){
         try {
+            const cotentid = req.params.id;
             const commentid = req.params.id2;
-            const deletecomment = await communityService.deleteComment({commentid});
+            console.log("1 "+cotentid)
+            const deletecomment = await communityService.deleteComment({cotentid,commentid});
             res.status(200).json(deletecomment);
         } catch (error) {
             next(error);
