@@ -37,15 +37,55 @@ paths:
             schema:
               type: object
               properties:
-                user_id:
-                  type: string
                 content:
                   type: string
       responses:
         '200':
           description : "id에 해당하는 comment 추가하기"
           $ref : "#/components/schemas/CommunityComment"
-                
+  /communitycontents/{cotentId}/comment/{commentId}:
+    delete:
+      tags:
+        - comment-community
+      summary: 댓글 삭제하기
+      parameters:
+        - name : cotentId
+          in: path
+          required : true
+          schema:
+            type: string
+        - name : commentId
+          in: path
+          required : true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 댓글 삭제 성공
+  /communitycontent/comment/{commentId}:
+    put:
+      tags:
+       - comment-community
+      summary: 댓글 수정하기
+      parameters:
+        - name : commentId
+          in: path
+          required : true
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+      responses:
+        '200':
+          description: 댓글 수정 성공
+
   /communitycontents:
     get:
       tags:
@@ -71,8 +111,6 @@ paths:
             schema:
               type: object
               properties:
-                author:
-                  type: string
                 title:
                   type: string
                 content:
@@ -111,7 +149,6 @@ paths:
       responses:
         '200':
           $ref : "#/components/schemas/CommunityContent"
-
   /communitycontent/{id}:
     put:
       tags:

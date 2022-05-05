@@ -7,31 +7,62 @@ import { authJWT } from "../middlewares/authJWT";
 const communityRouter = Router();
 
 // 전체 content 조회
-communityRouter.get("/communitycontents",authJWT,communityServiceController.findAllContents);
+communityRouter.get(
+    "/communitycontents",
+    authJWT,
+    communityServiceController.findAllContents
+);
 
 // content 추가하기
-communityRouter.post("/communitycontents/create",authJWT,communityServiceController.createContents);
+communityRouter.post(
+    "/communitycontents/create",
+    authJWT,
+    communityServiceController.createContents
+);
 
 // 선택 content 조회
-communityRouter.get("/communitycontents/:id",authJWT,communityServiceController.getCommunity);
+communityRouter.get(
+    "/communitycontents/:id",
+    authJWT,
+    communityServiceController.getCommunity
+);
 
 // content 삭제
-communityRouter.delete("/communitycontents/:id/delete",authJWT,communityServiceController.deleteCommunity);
+communityRouter.delete(
+    "/communitycontents/:id/delete",
+    authJWT,
+    communityServiceController.deleteCommunity
+);
 
 // content 수정하기
-communityRouter.put("/communitycontent/:id",authJWT,communityServiceController.updateContent);
+communityRouter.put(
+    "/communitycontent/:id",
+    authJWT,
+    communityServiceController.updateContent
+);
 // 게시물 수정
 
 // 댓글 넣기
-communityRouter.post("/communitycontents/:id/comment",authJWT,communityServiceController.newComment);
+communityRouter.post(
+    "/communitycontents/:id/comment",
+    authJWT,
+    communityServiceController.newComment
+);
 
 // 댓글 삭제하기
-communityRouter.delete("/communitycontents/:id/comment/:id2",authJWT,communityServiceController.deleteComment);
+communityRouter.delete(
+    "/communitycontents/:cotentId/comment/:commentId",
+    authJWT,
+    communityServiceController.deleteComment
+);
 
 // 댓글 수정하기
-communityRouter.put("/communitycontents/:id/comment/:id2/put",authJWT,communityServiceController.updateComment);
-
+communityRouter.put(
+    "/communitycontent/comment/:commentId",
+    authJWT,
+    communityServiceController.updateComment
+);
 
 // 댓글 수정하기
 
-export{communityRouter}
+export { communityRouter };

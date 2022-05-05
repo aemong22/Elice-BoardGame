@@ -38,10 +38,6 @@ function Intro() {
             </div>
         </div>
     );
-<<<<<<< HEAD
 }
-=======
-};
->>>>>>> 8bbe8c0a36a998f25748896684cefe11b56ff988
 
 export default Intro;
