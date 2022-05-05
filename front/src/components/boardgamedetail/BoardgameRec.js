@@ -1,69 +1,41 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Coverflow from "react-coverflow";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
 
-const fn = function () {
-  /* do your action */
-};
+function BoardgameRec({ recommendData }) {
+    const navigate = useNavigate();
 
-function BoardgameRec({ gameData }) {
-  return (
-    <Coverflow
-      width="100%"
-      height="300"
-      displayQuantityOfSide={2}
-      navigation={false}
-      enableScroll={true}
-      clickable={true}
-      active={0}
-    >
-      {/* <Card sx={{ width: 50, my: 10, height: 100 }}>
-        <CardMedia component="img" image="/image/garam_pic.png" alt="garam" />
-        <CardContent>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <Typography gutterBottom variant="h6" component="span">
-              보드게임이름
-            </Typography>
-          </div>
-        </CardContent>
-      </Card> */}
+    const recommendGames = recommendData?.map((data) => (
+        <div
+            onClick={() => navigate(`/boardgame/detail/${data.game_id}`)}
+            key={data.game_id}
+            role="menuitem"
+            tabIndex="2"
+        >
+            <img
+                src={data.image}
+                alt={data.game_name}
+                style={{
+                    display: "block",
+                    width: "100%",
+                }}
+            />
+        </div>
+    ));
 
-      <div
-        onClick={() => fn()}
-        onKeyDown={() => fn()}
-        role="menuitem"
-        tabIndex="0"
-      >
-        <img
-          src="/image/aerim_pic.png"
-          alt="title or description"
-          style={{
-            display: "block",
-            width: "100%",
-          }}
-        />
-      </div>
-      <img
-        src="image/path"
-        alt="title or description"
-        data-action="http://andyyou.github.io/react-coverflow/"
-      />
-      <img
-        src="image/path"
-        alt="title or description"
-        data-action="http://andyyou.github.io/react-coverflow/"
-      />
-    </Coverflow>
-  );
+    return (
+        <Coverflow
+            width="100%"
+            height="250"
+            displayQuantityOfSide={2}
+            navigation={false}
+            enableScroll={true}
+            clickable={true}
+            active={0}
+        >
+            {recommendGames}
+        </Coverflow>
+    );
 }
 
 export default BoardgameRec;

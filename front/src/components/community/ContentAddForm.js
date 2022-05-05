@@ -1,10 +1,10 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { Container, Button, Box, Grid } from "@mui/material";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
+import { MyButton, MyButton2 } from "./CommunityStyle";
+import WriteForm from "./WriteForm";
 
 import * as Api from "../../api";
-import { UserStateContext } from "../../App";
 
 function ContentAddForm() {
     const navigate = useNavigate();
@@ -14,13 +14,12 @@ function ContentAddForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            if (window.confirm("게시글을 등록 하겠습니까?")) {
-                await Api.post("communitycontents/create", {
-                    title,
-                    content,
-                });
-                navigate(`/community`);
-            }
+            await Api.post("communitycontents/create", {
+                title,
+                content,
+            });
+            alert("게시글 등록을 성공하였습니다.");
+            navigate(`/community`);
         } catch (error) {
             alert("게시글 등록에 실패하였습니다.", error);
         }
@@ -37,42 +36,17 @@ function ContentAddForm() {
                 }}
             >
                 <form onSubmit={handleSubmit}>
-                    <Grid
-                        sx={{
-                            width: "100%",
-                            height: "80px",
-                            marginBottom: "20px",
-                        }}
-                    >
-                        <TextareaAutosize
-                            placeholder="제목을 입력하세요"
-                            style={{
-                                width: "99%",
-                                height: "90%",
-                            }}
-                            onChange={(e) => setTitle(e.target.value)}
-                        />
-                    </Grid>
-
+                    <WriteForm
+                        title={title}
+                        setTitle={setTitle}
+                        content={content}
+                        setContent={setContent}
+                    />
                     <Grid>
-                        <TextareaAutosize
-                            minRows={1}
-                            placeholder="내용을 입력하세요"
-                            style={{ width: "99%", height: "500px" }}
-                            onChange={(e) => setContent(e.target.value)}
-                        />
-                    </Grid>
-
-                    <Grid>
-                        <Grid>
-                            <Button type="submit">등록</Button>
-                            <Button
-                                variant="secondary"
-                                onClick={() => navigate(`/community`)}
-                            >
-                                취소
-                            </Button>
-                        </Grid>
+                        <MyButton type="submit">등록</MyButton>
+                        <MyButton2 onClick={() => navigate(`/community`)}>
+                            취소
+                        </MyButton2>
                     </Grid>
                 </form>
             </Box>

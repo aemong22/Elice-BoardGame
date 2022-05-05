@@ -1,6 +1,6 @@
 .boardgame-container {
     width: 100%;
-    margin-left: 0; 
+    margin-left: 0;
     transition: all 0.3s;
 }
 
@@ -13,7 +13,7 @@
     display: flex;
     align-items: center;
     margin-top: 65px;
-    color: #716F6F;
+    color: #716f6f;
     z-index: 100;
 }
 
@@ -40,7 +40,7 @@
     width: 990px;
     margin: 30px auto;
     padding-left: 100px;
-    display: flex; 
+    display: flex;
     flex-wrap: wrap;
 }
 

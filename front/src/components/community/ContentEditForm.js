@@ -1,9 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Container, Form, Row, Col, Button } from "react-bootstrap";
+import { MyButton, MyButton2 } from "./CommunityStyle";
 
-import { UserStateContext } from "../../App";
-// import * as Api from '../../api';
+import * as Api from "../../api";
 
 function ContentEditForm() {
     const navigate = useNavigate();
@@ -15,64 +14,40 @@ function ContentEditForm() {
     const handleEdit = async (e) => {
         e.preventDefault();
         try {
-            await Api.put(`freeboard/${postInfo._id}`, {
+            await Api.put(`communitycontent/${id}`, {
                 ...postInfo,
             });
-            navigate(`/freeboard/${postInfo._id}`);
+            navigate(`/communitycontent/${id}`);
         } catch (error) {
+            alert("게시글 수정을 실패하였습니다.");
             console.log(error);
         }
     };
 
     return (
-        <Container>
-            <Row className="justify-content-md-center">
-                <Col lg={8}>
-                    <Form onSubmit={handleSubmit} className="mt-3">
-                        <Form.Group controlId="postAddTitle">
-                            <Form.Label>제목</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={postInfo.title}
-                                onChange={(e) =>
-                                    handlePostValue("title", e.target.value)
-                                }
-                            />
-                        </Form.Group>
-                        <Form.Group controlId="postAddContext">
-                            <Form.Label>내용</Form.Label>
-                            <Form.Control
-                                as="textarea"
-                                rows={20}
-                                value={postInfo.content}
-                                onChange={(e) =>
-                                    handlePostValue("content", e.target.value)
-                                }
-                            />
-                        </Form.Group>
-                        <Form.Group as={Row} className="mt-3 text-center">
-                            <Col>
-                                <Button
-                                    variant="primary"
-                                    type="submit"
-                                    className="me-2"
-                                >
-                                    등록
-                                </Button>
-                                <Button
-                                    variant="secondary"
-                                    onClick={() =>
-                                        navigate(`/freeboard/${postInfo._id}`)
-                                    }
-                                >
-                                    취소
-                                </Button>
-                            </Col>
-                        </Form.Group>
-                    </Form>
-                </Col>
-            </Row>
-        </Container>
+        <Box
+            sx={{
+                width: "100%",
+                height: "100%",
+                marginTop: "70px",
+                textAlign: "center",
+            }}
+        >
+            <form onSubmit={handleEdit}>
+                <WriteForm
+                    title={title}
+                    setTitle={setTitle}
+                    content={content}
+                    setContent={setContent}
+                />
+                <Grid>
+                    <MyButton type="submit">편집</MyButton>
+                    <MyButton2 onClick={() => navigate(`/community`)}>
+                        취소
+                    </MyButton2>
+                </Grid>
+            </form>
+        </Box>
     );
 }
 
