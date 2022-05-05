@@ -16,23 +16,23 @@ function community() {
     const [allContents, setAllContents] = useState(undefined);
     const [isFetchCompleted, setIsFetchCompleted] = useState(false);
 
-    // const fetchContentsInfo = async () => {
-    //     try {
-    //         const res = await Api.get("communitycontents");
-    //         setAllContents(res.data);
-    //         setIsFetchCompleted(true);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
+    const fetchContentsInfo = async () => {
+        try {
+            const res = await Api.get("communitycontents");
+            setAllContents(res.data);
+            setIsFetchCompleted(true);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
-    // useEffect(() => {
-    //     fetchPostsInfo();
-    // }, []);
+    useEffect(() => {
+        fetchPostsInfo();
+    }, []);
 
-    // if (!isFetchCompleted) {
-    //     return <div>로딩중...</div>;
-    // }
+    if (!isFetchCompleted) {
+        return <div>로딩중...</div>;
+    }
 
     return (
         <React.Fragment>
@@ -85,21 +85,26 @@ function community() {
                             <span>날짜</span>
                         </ListSubheader>
                         <Divider />
-                        <ListItemButton style={{ width: "100%" }}>
-                            <ListItemText secondary="번호" sx={{ width: 20 }} />
-                            <ListItemText
-                                secondary="글제목"
-                                style={{ textAlign: "center" }}
-                            />
-                            <ListItemText
-                                secondary="작성자"
-                                style={{ textAlign: "center" }}
-                            />
-                            <ListItemText
-                                secondary="날짜"
-                                style={{ textAlign: "end" }}
-                            />
-                        </ListItemButton>
+                        {/* {allContents?.map((content, idx) => (
+                            <ListItemButton style={{ width: "100%" }}>
+                                <ListItemText
+                                    secondary={idx}
+                                    sx={{ width: 20 }}
+                                />
+                                <ListItemText
+                                    secondary={content.title}
+                                    style={{ textAlign: "center" }}
+                                />
+                                <ListItemText
+                                    secondary={content.author}
+                                    style={{ textAlign: "center" }}
+                                />
+                                <ListItemText
+                                    secondary="날짜"
+                                    style={{ textAlign: "end" }}
+                                />
+                            </ListItemButton>
+                        ))} */}
                     </List>
                 </Box>
             </Container>
