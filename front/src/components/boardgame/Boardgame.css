@@ -1,45 +1,64 @@
 .boardgame-container {
     width: 100%;
-    margin-left: 0; 
-    transition: all 0.3s;
-}
-
-.boardgame-header {
-    position: fixed;
-    width: 100%;
-    height: 50px;
-    background-color: white;
-    border-bottom: #e2e2e255 solid 2px;
-    display: flex;
-    align-items: center;
     margin-top: 65px;
-    color: #716F6F;
-    z-index: 100;
 }
 
-.boardgame-header-item {
-    width: 270px;
-    height: 100%;
-    font-size: 1rem;
-    margin-left: 10px;
+.boardgame-info {
+    width: 1300px;
+    margin: 0 auto;
+}
+
+.boardgame-info-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 100px;
+}
+
+.boardgame-info-filtered {
+    margin: 30px 5px 0 0;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    color: gray;
+    font-size: small;
+}
+
+.boardgame-info-box {
+    height: 80px;
+    margin-top: 10px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
-    /* border-right: #e2e2e255 solid 2px; */
+    background-color: #f3f0ec;
 }
 
-.boardgame-header-item:hover {
-    font-weight: bold;
+.boardgame-filter-button {
+    width: 50px;
+    margin-left: 10px;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
     cursor: pointer;
 }
 
-.boardgame-header-filtered-icon {
-    margin-right: 10px;
+.boardgame-filter-value {
+    font-weight: bold;
+    font-size: large;
+}
+
+.boardgame-sort {
+    display: flex;
+    justify-content: end;
 }
 
 .boardgames {
-    width: 990px;
+    width: 1300px;
     margin: 30px auto;
-    padding-left: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.boardgame-data {
+    width: 1050px;
     display: flex; 
     flex-wrap: wrap;
 }
@@ -52,8 +71,7 @@
     left: -260px;
     z-index: 999;
     transition: all 0.3s;
-    background-color: white;
-    border-right: #e2e2e255 solid 2px;
+    background-color: rgb(50, 50, 50);
     overflow-y: hidden;
 }
 
@@ -64,10 +82,4 @@
 
 .boardgame-category.active::-webkit-scrollbar {
     display: none;
-}
-
-.boardgame-sort {
-    display: flex;
-    justify-content: end;
-    padding-top: 117px;
 }
