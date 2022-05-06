@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardHeader } from "@mui/material";
 import CommentCard from "./CommentCard";
 import CommentEditForm from "./CommentEditForm";
 
 function Comments({ comments }) {
     const [isEditing, setIsEditing] = useState(false);
+
+    useEffect(() => {
+        console.log(comments);
+    }, [comments]);
+
     return (
         <>
             <Card sx={{ width: "100%" }}>
@@ -15,7 +20,13 @@ function Comments({ comments }) {
                 ) : (
                     <>
                         {comments?.map((comment) => (
-                            <CommentCard comment={comment} />
+                            <CommentCard
+                                userName={comment.user_id.user_name}
+                                userId={comment.user_id._id}
+                                content={comment.content}
+                                setIsEditing={setIsEditing}
+                                key={comment._id}
+                            />
                         ))}
                     </>
                 )}
