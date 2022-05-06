@@ -104,11 +104,13 @@ class boardgameController {
     }
 
     static async search(req, res, next) {
+        const user = req.currentUserId;
         const { keyword, page, perPage } = req.query;
 
         try {
             const { totalPage, games, errorMessage } =
                 await boardGameService.search({
+                    user,
                     keyword,
                     page,
                     perPage,

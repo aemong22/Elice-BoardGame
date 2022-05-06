@@ -58,7 +58,7 @@ function BoardgameCard({
 
     return (
         <div style={{ width: 250, margin: 50 }}>
-            <Card sx={{ width: '100%' }}>
+            <Card sx={{ width: '100%', boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",}}>
                 <CardActionArea
                     onClick={() => navigate(`/boardgame/detail/${id}`)}
                 >
@@ -97,7 +97,7 @@ function BoardgameCard({
                 </CardActionArea>
             </Card>
             <IconButton
-                sx={{ position: 'relative', left: 200, top: -160 }}
+                sx={{ position: 'relative', left: 200, top: -160, color: "#FF5A5A" }}
                 aria-label="add to favorites"
                 onClick={favoriteHandler}
                 >
