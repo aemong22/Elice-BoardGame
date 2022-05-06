@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import BoardgameCategory from "./BoardgameCategory";
-import Sorting from "./Sorting";
 import BoardgameData from "./BoardgameData";
+import BoardgameCategory from "./BoardgameCategory";
 import { categoryName, categoryValue } from "./BoardgameCategoryData";
 import BoardgameRandomCard from "./BoardgameRandomCard";
+import Sorting from "./Sorting";
+import SearchField from "./SearchField"
 import BounceAnimation from "./BounceAnimation";
 import "./Boardgame.css";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
@@ -12,6 +13,7 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 function Boardgame() {
     const [open, setOpen] = useState(false);
     const [recommend, setRecommend] = useState(false);
+    const [search, setSearch] = useState(undefined);
     const [condition, setCondition] = useState({
         category: "",
         val1: "",
@@ -40,6 +42,10 @@ function Boardgame() {
 
     const changeOpen = () => {
         setOpen(!open);
+    };
+
+    const changeSearch = (value) => {
+        setSearch(value);
     };
 
     return (
@@ -90,8 +96,11 @@ function Boardgame() {
                             : "최신 보드게임 보기"}
                         </div>
                     </div>
-                    <div className="boardgame-sort">
-                        <Sorting changeCondition={changeCondition} />
+                    <div className="boardgame-control-box">
+                        <SearchField changeSearch={changeSearch} />
+                        <div className="boardgame-sort">
+                            <Sorting changeCondition={changeCondition} />
+                        </div>
                     </div>
                 </div>
                 <div className="boardgames">
@@ -99,6 +108,7 @@ function Boardgame() {
                         <BoardgameData
                             condition={condition}
                             changeCondition={changeCondition}
+                            search={search}
                         />
                     </div>
                 </div>

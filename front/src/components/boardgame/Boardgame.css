@@ -64,6 +64,12 @@
     background-color: #f3f0ec;
 }
 
+.boardgame-control-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
 .boardgame-filter-button {
     width: 50px;
     margin-left: 10px;

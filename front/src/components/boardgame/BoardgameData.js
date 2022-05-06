@@ -3,7 +3,7 @@ import BoardgameCard from "./BoardgameCard";
 import BasicPagination from "./BasicPagination";
 import * as Api from "../../api";
 
-function BoardgameData({ condition, changeCondition }) {
+function BoardgameData({ condition, changeCondition, search }) {
   const [boardgames, setBoardgames] = useState(undefined);
   const [totalPage, setTotalPage] = useState(1);
 
@@ -11,21 +11,21 @@ function BoardgameData({ condition, changeCondition }) {
     conditionGamesHandler();
   }, [condition]);
 
-  /*
-  useEffect(() => {
-    condition.category !== "" || condition.type !== ""
-      ? conditionGamesHandler()
-      : recentlyGamesHandler();
-  }, [condition]);
+  useEffect(()=> {
+    searchGamesHandler();
+  }, [search])
 
-  보드게임 최근 데이터 불러오기
-  const recentlyGamesHandler = async () => {
+  // 보드게임 조건 데이터 불러오기
+  const conditionGamesHandler = async () => {
     console.log("data condtion: ", condition);
     try {
       await Api.getQuery(
-        "recentlyGames",
+        "games/conditions",
         {
           params: {
+            category: condition.category,
+            val1: condition.val1,
+            type: condition.type,
             page: condition.page,
             perPage: condition.perPage,
           },
@@ -40,19 +40,16 @@ function BoardgameData({ condition, changeCondition }) {
       console.log("errer message: ", err);
     }
   };
-  */
 
-  // 보드게임 데이터 불러오기
-  const conditionGamesHandler = async () => {
-    console.log("data condtion: ", condition);
+  // 보드게임 검색 데이터 불러오기
+  const searchGamesHandler = async () => {
+    console.log("data search/condtion: ", search, condition);
     try {
       await Api.getQuery(
-        "games/conditions",
+        "search",
         {
           params: {
-            category: condition.category,
-            val1: condition.val1,
-            type: condition.type,
+            keyword: search,
             page: condition.page,
             perPage: condition.perPage,
           },
