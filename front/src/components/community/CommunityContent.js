@@ -24,7 +24,7 @@ function CommunityContent() {
     const fetchContentInfo = async (contentId) => {
         try {
             const res = await Api.get("communitycontents", contentId);
-            if (res.data?.author === userState?._id) {
+            if (res.data?.author === userState?.user_name) {
                 setIsEditable(true);
             } else {
                 setIsEditable(false);
