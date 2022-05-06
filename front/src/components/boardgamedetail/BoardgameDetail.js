@@ -12,15 +12,22 @@ function BoardgameDetail() {
     const [recommendData, setRecommendData] = useState(undefined);
 
     const fetchBoardgameDetail = async () => {
-        const res = await Api.get("boardgame/detail", boardgameId);
-        setGameData(res.data.games);
-        setRecommendData(res.data.recommendGames);
-        console.log("게임데이타", GameData);
+        try {
+            await Api.get(
+                "boardgame/detail", 
+                boardgameId).then((res) => {
+                    setGameData(res.data.games);
+                    setRecommendData(res.data.recommendGames);
+                    setIsFetchCompleted(true);
+                    console.log("게임데이타", res.data.games);
+            });
+        } catch (err) {
+            console.log("errer message: ", err);
+        }
     };
 
     useEffect(() => {
         fetchBoardgameDetail();
-        setIsFetchCompleted(true);
     }, [boardgameId]);
 
     if (!isFetchCompleted) {
