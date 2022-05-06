@@ -12,7 +12,7 @@ const MyBox = styled(Grid)`
     paddin-bottom: 15%;
     box-shadow: 5px 5px 12px -10px rgba(0, 0, 0, 1);
 `;
-//f3f0ec
+
 const MyBox2 = styled(Grid)`
     border-radius: 10px;
     background-color: #f3f0ec;

@@ -1,7 +1,6 @@
 import { FavoriteModel } from "../db/schemas/favorite";
 import { UserModel } from "../db/schemas/user";
 import { BoardGameModel } from "../db/schemas/boardgame";
-import mongoose from "mongoose";
 
 class favoriteAuthService {
     static async updateFavorite({ userId, boardgameId, toggle }) {
