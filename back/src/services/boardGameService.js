@@ -16,9 +16,9 @@ class boardGameService {
         }
     }
 
-    static async favoriteGame({ userId, _id }) {
+    static async favoriteGame({ user, _id }) {
         const favorite = await FavoriteModel.findOne({
-            userId,
+            user,
             boardgame: { $in: [_id] },
         });
         return favorite !== null;
@@ -58,7 +58,7 @@ class boardGameService {
         // favorite 필드 추가
         const games = someGames.map(async (value) => {
             const favorite = await this.favoriteGame({
-                userId: user,
+                user,
                 _id: value._id,
             });
 
@@ -104,7 +104,7 @@ class boardGameService {
         });
 
         const favorite = await this.favoriteGame({
-            userId: user,
+            user,
             _id: game._id,
         });
 
@@ -240,7 +240,7 @@ class boardGameService {
     }
 
     // keyword 기준 보드게임 조회
-    static async search({ keyword, page, perPage }) {
+    static async search({ user, keyword, page, perPage }) {
         const query = {
             $or: [
                 // 문자열 포함 조회
