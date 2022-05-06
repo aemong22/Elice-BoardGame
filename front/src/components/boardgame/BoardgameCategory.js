@@ -41,8 +41,8 @@ function BoardgameCategory({ condition, initializeCondition, changeCondition, ch
     <>
       <div className='theme-modal-container'>
         <section className='filters-panel'>
-          <div className='filters-panel-button-close' onClick={changeOpen} style={{ display: 'flex', margin: '15px' }}>
-            <CloseOutlinedIcon sx={{ marginLeft: 'auto' }} />
+          <div className='filters-panel-button-close' onClick={changeOpen} style={{ display: 'flex', margin: '15px', cursor:'pointer' }}>
+            <CloseOutlinedIcon sx={{ marginLeft: 'auto', color: 'white' }} />
           </div>
           <div className='filters-panel-wrapper'>
             <List 
@@ -50,13 +50,13 @@ function BoardgameCategory({ condition, initializeCondition, changeCondition, ch
               component="nav"
               aria-labelledby="nested-list-subheader"
             >
-              <ListItemButton onClick={()=> initializeCondition()}>
+              <ListItemButton sx={{ backgroundColor: 'rgb(50, 50, 50)', color: 'white' }}onClick={()=> initializeCondition()}>
                 <ListItemText primary="최신 보드게임 보기" />
               </ListItemButton>
               {
                 Object.keys(categoryData).map((category) => (
                   <div>
-                  <ListItemButton onClick={() => openCategoryHandler(category)}>
+                  <ListItemButton sx={{ backgroundColor: 'rgb(50, 50, 50)', color: 'rgb(150, 150, 150)' }} onClick={() => openCategoryHandler(category)}>
                     <ListItemText primary={categoryName(category)} />
                     {getCategoryStateHandler(category) ? <ExpandLess /> : <ExpandMore />}
                   </ListItemButton>
@@ -64,7 +64,7 @@ function BoardgameCategory({ condition, initializeCondition, changeCondition, ch
                     <List component="div" disablePadding sx={{ bgcolor: 'background.paper' }}>
                       {
                         Object.keys(categoryData[category]).map((data) => (
-                          <ListItemButton sx={{ height: '40px' }}>
+                          <ListItemButton sx={{ height: '35px', fontSize: 15, fontWeight: 'bold', color: 'rgb(110, 110, 110)' }}>
                             <ToggleButton
                               sx={{ width: "25px", height: "25px", borderRadius: "50px", marginRight: "10px" }}
                               value="check"
@@ -75,7 +75,7 @@ function BoardgameCategory({ condition, initializeCondition, changeCondition, ch
                             >
                               <CheckIcon sx={{ width: '10px', height: '10px' }}/>
                             </ToggleButton>
-                            <ListItemText primary={categoryValue(category, data)} />
+                            {categoryValue(category, data)}
                           </ListItemButton>
                         ))
                       }

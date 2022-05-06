@@ -104,11 +104,13 @@ class boardgameController {
     }
 
     static async search(req, res, next) {
+        const user = req.currentUserId;
         const { keyword, page, perPage } = req.query;
 
         try {
             const { totalPage, games, errorMessage } =
                 await boardGameService.search({
+                    user,
                     keyword,
                     page,
                     perPage,
@@ -117,6 +119,18 @@ class boardgameController {
             if (errorMessage) throw new Error(errorMessage);
 
             res.status(200).json({ totalPage, games });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // random boardgame
+    static async randomGame(req, res, next) {
+        try {
+            // 0~467
+            const index = Math.floor(Math.random() * 467);
+            const game = await boardGameService.randomBoardGame({ index });
+            res.status(200).json(game);
         } catch (error) {
             next(error);
         }

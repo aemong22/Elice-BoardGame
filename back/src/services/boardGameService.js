@@ -16,17 +16,23 @@ class boardGameService {
         }
     }
 
-    // pagination을 위한 함수
-    static async offsetPatinate(findFunc, aggregator, args) {
-        const { size, currentPage } = args;
-        const someGames = await findFunc();
+    static async favoriteGame({ user, _id }) {
+        const favorite = await FavoriteModel.findOne({
+            user,
+            boardgame: { $in: [_id] },
+        });
+        return favorite !== null;
+    }
+
+    // page 계산
+    static async paginate({ aggregator, currentPage, perPage }) {
         const total = await aggregator();
 
-        let totalPage = Math.ceil(total / size);
-        return {
-            someGames,
-            totalPage,
-        };
+        let totalPage = Math.ceil(total / perPage);
+        if (currentPage > totalPage) {
+            currentPage = totalPage;
+        }
+        return { currPage: currentPage, totalPage };
     }
 
     static async findGames({ user, query, sortType = null, page, perPage }) {
@@ -34,31 +40,30 @@ class boardGameService {
         const aggregator = async () =>
             await BoardGameModel.countDocuments(query);
 
+        const { currPage, totalPage } = await this.paginate({
+            aggregator,
+            currentPage: page,
+            perPage,
+        });
+
         // 조건에 따른 보드게임 조회, pagination
-        const findFunc = async () =>
-            await BoardGameModel.find(query)
-                .sort(this.sortType({ sortField: sortType }))
-                .skip(perPage * (page - 1))
-                .limit(perPage);
+        const someGames = await BoardGameModel.find(query)
+            .sort(this.sortType({ sortField: sortType }))
+            .skip(perPage * (currPage - 1))
+            .limit(perPage);
 
         const errorMessage =
-            findFunc.length === 0 ? "조건에 맞는 보드게임이 없습니다." : null;
-
-        // favorite 조회
-        let { someGames, totalPage } = await this.offsetPatinate(
-            findFunc,
-            aggregator,
-            { size: perPage, currentPage: page }
-        );
+            someGames.length === 0 ? "조건에 맞는 보드게임이 없습니다." : null;
 
         // favorite 필드 추가
         const games = someGames.map(async (value) => {
-            const favorites = await FavoriteModel.findOne({
-                userId: user,
-                boardgame: { $in: [value._id] },
+            const favorite = await this.favoriteGame({
+                user,
+                _id: value._id,
             });
+
             const valueAdd = { ...value };
-            valueAdd._doc.favorite = favorites !== null;
+            valueAdd._doc.favorite = favorite;
             return valueAdd._doc;
         });
         const prom = await Promise.all(games);
@@ -98,13 +103,13 @@ class boardGameService {
             game_id: { $in: game.recommend_id },
         });
 
-        const favorites = await FavoriteModel.findOne({
-            userId: user,
-            boardgame: { $in: [game._id] },
+        const favorite = await this.favoriteGame({
+            user,
+            _id: game._id,
         });
 
         const games = { ...game };
-        games._doc.favorite = favorites !== null;
+        games._doc.favorite = favorite;
 
         if (!games) return { errorMessage: "game id가 존재하지 않습니다." };
 
@@ -235,7 +240,7 @@ class boardGameService {
     }
 
     // keyword 기준 보드게임 조회
-    static async search({ keyword, page, perPage }) {
+    static async search({ user, keyword, page, perPage }) {
         const query = {
             $or: [
                 // 문자열 포함 조회
@@ -253,6 +258,12 @@ class boardGameService {
         if (games.length === 0) return { errorMessage };
 
         return { totalPage, games };
+    }
+
+    // 보드게임 랜덤 조회
+    static randomBoardGame({ index }) {
+        const randomGame = BoardGameModel.findOne({ index });
+        return randomGame;
     }
 }
 

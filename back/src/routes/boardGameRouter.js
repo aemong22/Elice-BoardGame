@@ -22,6 +22,8 @@ boardGameRouter.get(
     authJWT,
     boardgameController.findByCondition
 );
+// random 게임
+boardGameRouter.get("/randomgame", authJWT, boardgameController.randomGame);
 
 // 페이지 전체 검색
 boardGameRouter.get("/search", authJWT, boardgameController.search);
