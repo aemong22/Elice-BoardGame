@@ -235,7 +235,7 @@ class boardGameService {
     }
 
     // keyword 기준 보드게임 조회
-    static async search({ keyword, page, perPage }) {
+    static async search({ user, keyword, page, perPage }) {
         const query = {
             $or: [
                 // 문자열 포함 조회
