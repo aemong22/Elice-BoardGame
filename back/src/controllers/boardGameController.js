@@ -121,6 +121,18 @@ class boardgameController {
             next(error);
         }
     }
+
+    // random boardgame
+    static async randomGame(req, res, next) {
+        try {
+            // 0~467
+            const index = Math.floor(Math.random() * 467);
+            const game = await boardGameService.randomBoardGame({ index });
+            res.status(200).json(game);
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export { boardgameController };

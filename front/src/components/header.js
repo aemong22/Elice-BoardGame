@@ -1,9 +1,9 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../store/actions/userAction";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { IconButton, MenuList, MenuItem, Button, Grid } from "@mui/material";
+import { MenuList, MenuItem, Button, Grid } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import * as Api from "../api";
 import "./Header.css";

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { Container, Button, Box, Grid } from "@mui/material";
+import { Container, Box, Grid } from "@mui/material";
 import { MyButton, MyButton2 } from "./CommunityStyle";
 import WriteForm from "./WriteForm";
 

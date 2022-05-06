@@ -31,7 +31,13 @@ function Favorite() {
                 </Total>
                 <Content>
                     {wishes?.map((wish) => (
-                        <FavoriteCard key={wish.game_id} wish={wish} />
+                        <FavoriteCard
+                            key={wish.game_id}
+                            wish={wish}
+                            onLikeClick={() => {
+                                favoriteList();
+                            }}
+                        />
                     ))}
                 </Content>
             </MyBox>

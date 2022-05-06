@@ -18,7 +18,6 @@ import {
 import { useEffect } from "react";
 
 function Profile({ ownerData, setOwnerData }) {
-    //이미지 넣는 코드
     const region = "ap-northeast-2";
     const bucket = "pinkpig-bucket";
 
@@ -29,11 +28,9 @@ function Profile({ ownerData, setOwnerData }) {
     });
 
     const handleFileInput = async (e) => {
-        // input 태그를 통해 선택한 파일 객체
         console.log(ownerData._id);
         const file = e.target.files[0];
 
-        // img 필드에 id값 업로드
         await Api.put(`user/${ownerData._id}`, {
             image: ownerData._id,
         });

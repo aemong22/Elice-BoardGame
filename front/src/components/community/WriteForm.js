@@ -1,5 +1,5 @@
-import { Container, Button, Box, Grid } from "@mui/material";
-import { TitleWrite, Write, MyButton, MyButton2 } from "./CommunityStyle";
+import { Grid } from "@mui/material";
+import { TitleWrite, Write } from "./CommunityStyle";
 
 function WriteForm({ title, setTitle, content, setContent }) {
     return (
