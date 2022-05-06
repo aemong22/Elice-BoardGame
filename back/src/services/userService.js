@@ -205,7 +205,7 @@ class userAuthService {
     //redis 토큰 생성
     static async redisToken({ email }) {
         const user = await UserModel.findOne({ email });
-        const CLIENT_BASE_URL = "http://localhost:3000";
+        const CLIENT_BASE_URL = "elice-kdt-ai-4th-team11.elicecoding.com";
 
         if (!user) {
             const errorMessage =
@@ -254,21 +254,6 @@ class userAuthService {
 
         await client.disconnect();
         return token;
-    }
-
-    //oauth 로그인 및 회원가입을 위한 함수
-    static async findOrCreate({ data }) {
-        const email = data.email;
-        const user_name = data.name;
-        const password = data.id;
-        let user = await UserModel.findOne({ email });
-
-        if (!user) {
-            await this.addUser({ user_name, email, password });
-        }
-
-        const userinfo = await this.getSingleUser({ email, password });
-        return userinfo;
     }
 }
 
