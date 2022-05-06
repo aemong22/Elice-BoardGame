@@ -20,7 +20,7 @@ function BoardgameDetail() {
     useEffect(() => {
         fetchBoardgameDetail();
         setIsFetchCompleted(true);
-    }, []);
+    }, [boardgameId]);
 
     if (!isFetchCompleted) {
         return <div>로딩중...</div>;

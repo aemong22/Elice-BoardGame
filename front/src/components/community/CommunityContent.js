@@ -64,7 +64,6 @@ function CommunityContent() {
                         width: "100%",
                         height: "100vh",
                         marginTop: "60px",
-                        backgroundColor: "gray",
                     }}
                 >
                     <Divider />
