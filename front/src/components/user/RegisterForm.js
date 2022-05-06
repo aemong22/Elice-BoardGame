@@ -109,12 +109,13 @@ function RegisterForm({ setRegister, handleClose }) {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />
             </Grid>
-            <Grid style={{ height: "60px" }}>
+            <Grid style={{ height: "70px" }}>
                 <TextField
                     className="register-input"
                     style={{ width: "80%", margin: "10px" }}
                     size="small"
                     label="PHONE-NUMBER"
+                    helperText={"필수입력아닙니다."}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                 />
             </Grid>

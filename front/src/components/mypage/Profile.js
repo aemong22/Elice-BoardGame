@@ -173,7 +173,6 @@ function Profile({ ownerData, setOwnerData }) {
                                 <StyledInput
                                     type="text"
                                     placeholder="전화번호 변경"
-                                    required
                                     value={phone_number}
                                     onChange={(e) =>
                                         setPhone_number(e.target.value)

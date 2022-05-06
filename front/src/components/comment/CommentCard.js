@@ -29,7 +29,7 @@ function CommentCard({ userName, userId, content, commentId, contentId }) {
 
     const handleDelete = async () => {
         try {
-            if (window.confirm("게시글을 삭제하시겠습니까?")) {
+            if (window.confirm("댓글을 삭제하시겠습니까?")) {
                 await Api.delete(
                     `communitycontents/${contentId}/comment/${commentId}`
                 );
@@ -54,6 +54,7 @@ function CommentCard({ userName, userId, content, commentId, contentId }) {
                 }
                 title={userName}
             />
+
             <CardContent>
                 <Typography
                     sx={{ fontSize: 14 }}
