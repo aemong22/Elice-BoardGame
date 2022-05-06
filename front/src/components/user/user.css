@@ -20,13 +20,6 @@
   width: 65px;
   margin: 10px;
 }
-.login-input {
-  margin-top: 20px;
-  border-radius: 5px;
-  width: 81%;
-  padding: 10px;
-  border: 1px solid #d6ccc2;
-}
 
 #modal > .login-button {
   margin-bottom: 10px;

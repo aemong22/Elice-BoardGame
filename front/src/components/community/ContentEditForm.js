@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MyButton, MyButton2 } from "./CommunityStyle";
-import { Container, Box, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import WriteForm from "./WriteForm";
 
 import * as Api from "../../api";
@@ -18,6 +18,7 @@ function ContentEditForm({ contents, setContents, setIsEditing, contentId }) {
                 title,
                 content,
             });
+            alert("게시글을 수정하였습니다.");
             setContents((prevState) => {
                 return { ...prevState, title, content };
             });
@@ -45,7 +46,7 @@ function ContentEditForm({ contents, setContents, setIsEditing, contentId }) {
                     setContent={setContent}
                 />
                 <Grid>
-                    <MyButton type="submit">편집</MyButton>
+                    <MyButton type="submit">수정 완료</MyButton>
                     <MyButton2 onClick={() => setIsEditing(false)}>
                         취소
                     </MyButton2>

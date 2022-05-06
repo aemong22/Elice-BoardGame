@@ -26,33 +26,28 @@ function LoginForm({ handleClose }) {
             );
     };
 
-    //위 validateEmail 함수를 통해 이메일 형태 적합 여부를 확인함.
     const isEmailValid = validateEmail(email);
-    // 비밀번호가 4글자 이상인지 여부를 확인함.
+
     const isPasswordValid = password.length >= 4;
-    //
-    // 이메일과 비밀번호 조건이 동시에 만족되는지 확인함.
     const isFormValid = isEmailValid && isPasswordValid;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            // "user/login" 엔드포인트로 post요청함.
             const res = await Api.post("user/login", {
                 email,
                 password,
             });
-            // 유저 정보는 response의 data임.
+
             const user = res.data;
-            // JWT 토큰은 유저 정보의 token임.
+
             const jwtToken = user.token;
-            // sessionStorage에 "userToken"이라는 키로 JWT 토큰을 저장함.
+
             sessionStorage.setItem("userToken", jwtToken);
-            // userDispatch 함수를 이용해 로그인 성공 상태로 만듦.
+
             dispatch(loginUser(user));
 
-            // 기본 페이지로 이동함.
             navigate("/", { replace: true });
         } catch (err) {
             alert("이메일 또는 비밀번호가 유효하지 않습니다.");
@@ -107,7 +102,6 @@ function LoginForm({ handleClose }) {
                         <>
                             <Grid className="login">
                                 <TextField
-                                    id="login-input"
                                     type="email"
                                     style={{
                                         width: "80%",
@@ -176,7 +170,6 @@ function LoginForm({ handleClose }) {
                             <Box id="findPw">비밀번호 재설정</Box>
 
                             <TextField
-                                id="login-input"
                                 type="email"
                                 style={{
                                     width: "80%",
