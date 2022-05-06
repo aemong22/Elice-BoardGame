@@ -13,7 +13,7 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 function Boardgame() {
     const [open, setOpen] = useState(false);
     const [recommend, setRecommend] = useState(false);
-    const [search, setSearch] = useState(undefined);
+    const [search, setSearch] = useState("");
     const [condition, setCondition] = useState({
         category: "",
         val1: "",
