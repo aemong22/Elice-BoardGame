@@ -50,7 +50,9 @@ class communityService {
 
     // 모든 content 보여주기
     static async getContents() {
-        const AllContents = await CommunityContentModel.find({});
+        const AllContents = await CommunityContentModel.find({}).sort({
+            createdAt: -1,
+        });
         return AllContents;
     }
 
