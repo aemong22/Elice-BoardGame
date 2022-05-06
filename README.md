@@ -88,31 +88,24 @@
 
 ### Intro
 
-<img width="1512" alt="스크린샷 2022-04-29 오후 5 05 31" src="https://user-images.githubusercontent.com/55802893/165907289-64001600-b2e2-4a50-89ad-09bb3607d0a3.png">
+![user](https://user-images.githubusercontent.com/55802893/167119226-d1059ef0-fd9d-474e-831f-e63c2c0bd3be.png)
 
--   사용자가 서비스에 입장 시 가장 먼저 만나는 화면입니다.
+-   intro 페이지에서 Get stated를 누르게되면 일반 로그인, 구글 로그인, 회원가입, 비밀번호 찾기 동작을 할 수 있습니다.
 
-### Login
+### Home
 
-<img width="922" alt="스크린샷 2022-04-29 오후 5 05 51" src="https://user-images.githubusercontent.com/55802893/165907349-7b94924e-5df9-4535-b757-3c77f05069d4.png">
+![home](https://user-images.githubusercontent.com/55802893/167116794-c40f3576-118d-4313-a69e-e0a401e969fc.png)
 
-<img width="711" alt="스크린샷 2022-04-29 오후 5 13 55" src="https://user-images.githubusercontent.com/55802893/165907984-941ef5bd-a1ce-432d-bd32-0ef0f48a7343.png">
+-   사용자가 로그인한 후 만나게 되는 페이지 입니다.
+-   매년 출시된 보드게임의 수를 확인할 수 있습니다.
+-   서비스를 개발한 개발자들의 한마디를 볼 수 있습니다.
 
--   사용자 로그인 및 회원가입 화면 입니다.
+### Mypage & logout
 
-### Main Page
+![mypage](https://user-images.githubusercontent.com/55802893/167118287-857e0116-1482-42e1-927e-2cb195e87f3a.png)
 
-<img width="1512" alt="스크린샷 2022-04-29 오후 5 06 39" src="https://user-images.githubusercontent.com/55802893/165907446-22eff141-122b-4392-87b4-4f9f60628c47.png">
-
-<img width="1509" alt="스크린샷 2022-04-29 오후 5 06 54" src="https://user-images.githubusercontent.com/55802893/165907485-0db78dd7-8dfe-46b1-b319-8976c657382c.png">
-
--   로그인 후 보게되는 페이지입니다.
-
-### Boardgame Page
-
-<img width="1490" alt="스크린샷 2022-04-29 오후 5 07 50" src="https://user-images.githubusercontent.com/55802893/165907515-df403681-0f0c-43b4-addd-2e8b5bbc5894.png">
-
--   조건에 따른 보드게임을 조회할 수 있는 페이지입니다.
+-   오른쪽 상단 프로필을 누르게 되면 Mypage와 logout 버튼을 누를 수 있습니다.
+-   Mypage에서는 사용자의 정보를 수정할 수 있고, favorite에서 사용자가 찜(하트)한 보드게임을 확인할 수 있습니다.
 
 ## 5. 프로젝트 팀원 역할 분담
 
