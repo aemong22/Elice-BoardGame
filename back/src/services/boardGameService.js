@@ -16,6 +16,14 @@ class boardGameService {
         }
     }
 
+    static async favoriteGame({ userId, _id }) {
+        const favorite = await FavoriteModel.findOne({
+            userId,
+            boardgame: { $in: [_id] },
+        });
+        return favorite !== null;
+    }
+
     // pagination을 위한 함수
     static async offsetPatinate(findFunc, aggregator, args) {
         const { size, currentPage } = args;
@@ -53,12 +61,13 @@ class boardGameService {
 
         // favorite 필드 추가
         const games = someGames.map(async (value) => {
-            const favorites = await FavoriteModel.findOne({
+            const favorite = await this.favoriteGame({
                 userId: user,
-                boardgame: { $in: [value._id] },
+                _id: value._id,
             });
+
             const valueAdd = { ...value };
-            valueAdd._doc.favorite = favorites !== null;
+            valueAdd._doc.favorite = favorite;
             return valueAdd._doc;
         });
         const prom = await Promise.all(games);
@@ -98,13 +107,13 @@ class boardGameService {
             game_id: { $in: game.recommend_id },
         });
 
-        const favorites = await FavoriteModel.findOne({
+        const favorite = await this.favoriteGame({
             userId: user,
-            boardgame: { $in: [game._id] },
+            _id: game._id,
         });
 
         const games = { ...game };
-        games._doc.favorite = favorites !== null;
+        games._doc.favorite = favorite;
 
         if (!games) return { errorMessage: "game id가 존재하지 않습니다." };
 
@@ -253,6 +262,12 @@ class boardGameService {
         if (games.length === 0) return { errorMessage };
 
         return { totalPage, games };
+    }
+
+    // 보드게임 랜덤 조회
+    static randomBoardGame({ index }) {
+        const randomGame = BoardGameModel.findOne({ index });
+        return randomGame;
     }
 }
 
