@@ -24,7 +24,6 @@ function Community() {
             const res = await Api.get("communitycontents");
             setAllContents(res.data);
             setIsFetchCompleted(true);
-            console.log(res.data);
         } catch (error) {
             console.log(error);
         }

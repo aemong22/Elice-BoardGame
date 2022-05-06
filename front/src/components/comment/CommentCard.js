@@ -8,10 +8,10 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import * as Api from "../../api";
 
-function CommentCard({ userName, userId, content, setIsEditing }) {
+function CommentCard({ userName, userId, content, commentId, contentId }) {
     const navigate = useNavigate();
     const [isEditable, setIsEditable] = useState(false);
     const [isFetchCompleted, setIsFetchCompleted] = useState(false);
@@ -27,19 +27,26 @@ function CommentCard({ userName, userId, content, setIsEditing }) {
         }
     }, []);
 
+    const handleDelete = async () => {
+        try {
+            if (window.confirm("게시글을 삭제하시겠습니까?")) {
+                await Api.delete(
+                    `communitycontents/${contentId}/comment/${commentId}`
+                );
+                navigate(`/communitycontents/${contentId}`);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <Card sx={{ minWidth: 275 }}>
             <CardHeader
                 action={
                     isEditable && (
                         <>
-                            <IconButton
-                                onClick={() => setIsEditing(true)}
-                                sx={{ marginLeft: "auto" }}
-                            >
-                                <EditIcon />
-                            </IconButton>
-                            <IconButton onClick={() => handleDelete()}>
+                            <IconButton onClick={handleDelete}>
                                 <DeleteIcon />
                             </IconButton>
                         </>
