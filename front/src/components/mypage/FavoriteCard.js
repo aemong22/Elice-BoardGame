@@ -9,7 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { GameCard, CardContent } from "./FavoriteStyle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import * as Api from "../../api";
 
 function FavoriteCard({ wish, onLikeClick }) {
