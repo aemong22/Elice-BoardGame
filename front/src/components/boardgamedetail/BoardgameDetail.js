@@ -15,6 +15,7 @@ function BoardgameDetail() {
         const res = await Api.get("boardgame/detail", boardgameId);
         setGameData(res.data.games);
         setRecommendData(res.data.recommendGames);
+        console.log("게임데이타", GameData);
     };
 
     useEffect(() => {
