@@ -45,7 +45,7 @@ function Member() {
             quote: "전 이만 가보겠습니다.",
         },
     };
-    console.log(Object.keys(member)[2]);
+
     return (
         <div className="member-container">
             <div className="member-background">
