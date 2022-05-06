@@ -1,715 +1,793 @@
 openapi: 3.0.0
 info:
-  version: 1.0.0
-  title: board_game_project
-  description: 'elice 2nd project'
+    version: 1.0.0
+    title: board_game_project
+    description: "elice 2nd project"
 servers:
-  # Added by API Auto Mocking Plugin
-  - description: SwaggerHub API Auto Mocking
-    url: http://localhost:5001
+    # Added by API Auto Mocking Plugin
+    - description: SwaggerHub API Auto Mocking
+      url: http://localhost:5001
 tags:
-  - name: user
-    description: User 스키마를 이용한 기능
-  - name: boardGame
-    description: BoardGame 스키마를 이용한 기능
-  - name: favorite
-    description: Favorite 스키마를 이용한 기능
+    - name: user
+      description: User 스키마를 이용한 기능
+    - name: boardGame
+      description: BoardGame 스키마를 이용한 기능
+    - name: favorite
+      description: Favorite 스키마를 이용한 기능
+    - name: community
+      description: community 스키마를 이용한 기능
+    - name: comment-community
+      description: comment-community 스키마를 이용한 기능
+
 paths:
-  /communitycontents/{id}/comment:
-    post:
-      tags:
-        - comment-community
-      summary : id에 해당하는 comment 추가하기 
-      parameters:
-        - name : id
-          in: path
-          required : true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
+    /communitycontents/{id}/comment:
+        post:
+            tags:
+                - comment-community
+            summary: id에 해당하는 comment 추가하기
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            requestBody:
                 content:
-                  type: string
-      responses:
-        '200':
-          description : "id에 해당하는 comment 추가하기"
-          $ref : "#/components/schemas/CommunityComment"
-  /communitycontents/{cotentId}/comment/{commentId}:
-    delete:
-      tags:
-        - comment-community
-      summary: 댓글 삭제하기
-      parameters:
-        - name : cotentId
-          in: path
-          required : true
-          schema:
-            type: string
-        - name : commentId
-          in: path
-          required : true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: 댓글 삭제 성공
-  /communitycontent/comment/{commentId}:
-    put:
-      tags:
-       - comment-community
-      summary: 댓글 수정하기
-      parameters:
-        - name : commentId
-          in: path
-          required : true
-          schema:
-            type: string
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                content:
+                                    type: string
+            responses:
+                "200":
+                    description: "id에 해당하는 comment 추가하기"
+                    $ref: "#/components/schemas/CommunityComment"
+    /communitycontents/{cotentId}/comment/{commentId}:
+        delete:
+            tags:
+                - comment-community
+            summary: 댓글 삭제하기
+            parameters:
+                - name: cotentId
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                - name: commentId
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    description: 댓글 삭제 성공
+    /communitycontent/comment/{commentId}:
+        put:
+            tags:
+                - comment-community
+            summary: 댓글 수정하기
+            parameters:
+                - name: commentId
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            requestBody:
+                required: false
                 content:
-                  type: string
-      responses:
-        '200':
-          description: 댓글 수정 성공
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                content:
+                                    type: string
+            responses:
+                "200":
+                    description: 댓글 수정 성공
 
-  /communitycontents:
-    get:
-      tags:
-        - community
-      summary : 모든 community게시판 불러오기 
-      responses:
-        '200':
-          description : "모든 게시판을 정보를 불러온다"
-          content:
-            application/json:
-              schema:
-                $ref : "#/components/schemas/CommunityContent"
+    /communitycontents:
+        get:
+            tags:
+                - community
+            summary: 모든 community게시판 불러오기
+            responses:
+                "200":
+                    description: "모든 게시판을 정보를 불러온다"
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/CommunityContent"
 
-  /communitycontents/create:
-    post:
-      tags:
-        - community
-      summary : 게시판 생성하기
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                title:
-                  type: string
+    /communitycontents/create:
+        post:
+            tags:
+                - community
+            summary: 게시판 생성하기
+            requestBody:
+                required: true
                 content:
-                  type: string
-      responses:
-        '200':
-          description: "board생성 성공!"
-          $ref : "#/components/schemas/CommunityContent"
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                title:
+                                    type: string
+                                content:
+                                    type: string
+            responses:
+                "200":
+                    description: "board생성 성공!"
+                    $ref: "#/components/schemas/CommunityContent"
 
-  /communitycontents/{id}:
-    get:
-      tags:
-        - community
-      summary: board object_id 기준 조회
-      parameters:
-        - name : id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          $ref : "#/components/schemas/CommunityContent"
-  
-  /communitycontents/{id}/delete:
-    delete:
-      tags:
-        - community
-      summary: community object_id 기준 삭제
-      parameters:
-        - name : id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          $ref : "#/components/schemas/CommunityContent"
-  /communitycontent/{id}:
-    put:
-      tags:
-        - community
-      summary: board object_id 기준 수정
-      parameters:
-        - name : id
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                title:
-                  type: string
+    /communitycontents/{id}:
+        get:
+            tags:
+                - community
+            summary: board object_id 기준 조회
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    $ref: "#/components/schemas/CommunityContent"
+
+    /communitycontents/{id}/delete:
+        delete:
+            tags:
+                - community
+            summary: community object_id 기준 삭제
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    $ref: "#/components/schemas/CommunityContent"
+    /communitycontent/{id}:
+        put:
+            tags:
+                - community
+            summary: board object_id 기준 수정
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            requestBody:
                 content:
-                  type: string
-      responses:
-        '200':
-          description: "board수정 성공!"
-          $ref : "#/components/schemas/CommunityContent"
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                title:
+                                    type: string
+                                content:
+                                    type: string
+            responses:
+                "200":
+                    description: "board수정 성공!"
+                    $ref: "#/components/schemas/CommunityContent"
 
-  /user/register:
-    post:
-      tags:
-        - user
-      summary: 회원가입
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/User"
-      responses:
-        '200':
-          description: "회원가입 성공!"
-        '404':
-          description: "백엔드 실행하셨나요? 포트번호는 5001번 인가요?"
-  /user/login:
-    post:
-      tags:
-        - user
-      summary: 로그인
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                password:
-                  type: string
-      responses:
-        '200':
-          description: "로그인 성공"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  token:
-                    type: string
-                  _id:
-                    type: string
-                  email:
-                    type: string
-                  user_name:
-                    type: string
-                  phone_number:
-                    type: string
-                  refresh_token:
-                    type: string
-                  errorMessage:
-                    type: string
-                    default: null
-        '400':
-          description: "없는 이메일 입니다."
-        '404':
-          description: "백엔드 실행하셨나요? 포트번호는 5001번 인가요?"
-  /token/refresh:
-    get:
-      tags:
-        - user
-      summary: access token 확인 및 refresh token 재발급하는 곳!
-      security:
-        - bearerAuth: []
-      parameters:
-        - name: Refresh
-          in: header
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: refresh token이 유효하므로 access token 재발급 완료
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  ok:
-                    type: boolean
-                  data:
-                    type: object
-                    properties:
-                      accessToken:
-                        type: string
-                      refreshToken:
-                        type: string
-        '401':
-          description: access token, refresh token 모두 만료되었습니다
-        '400':
-          description: token이 헤더에 없거나 access token이 만료되지 않았습니다.
-  /users/{id}:
-    get:
-      tags:
-        - user
-      summary: 개인 유저 정보 가져오기
-      security:
-        - bearerAuth: []
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          $ref: '#/components/schemas/User'
-        '400':
-          description: access token이 유효하지 않습니다.
-  /user/{id}:
-    put:
-      tags:
-        - user
-      summary: 개인 유저 정보 수정하기
-      security:
-        - bearerAuth: []
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  user_name:
-                    type: string
-                  email:
-                    type: string
-                  phone_number:
-                    type: string
-                  password:
-                    type: string
-                  image:
-                    type: string
-      responses:
-        '200':
-          $ref: '#/components/schemas/User'
-        '400':
-          description: access token이 유효하지 않습니다.
-  /currentUser:
-    get:
-      tags:
-        - user
-      summary: 현재 유저의 정보 가져오기
-      security:
-        - bearerAuth: []
-      responses:
-        '200':
-          description: 유저 정보 가져오기 성공
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  _id:
-                    type: string
-                  user_name:
-                    type: string
-                  email:
-                    type: string
-                  phone_number:
-                    type: string
-                  image:
-                    type: string
-  /users:
-    get:
-      tags:
-        - user
-      summary: 유저 목록 출력(DB 확인용)
-      responses:
-        '200':
-          description: "userlist get"
-          content:
-            application/json:
-              schema:
-                $ref : "#/components/schemas/User"
-  /user/reset_password:
-    post:
-      tags:
-        - user
-      summary: 메일로 받은 토큰과 새로운 비밀번호를 받아 비밀번호'만' 변경하는 라우터
-      requestBody:
-         required: true
-         content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                resetToken:
-                  type: string
-                password:
-                  type: string
-      responses:
-        '200':
-          description: 비밀번호 변경 완료
-        '404':
-          description: 토큰이 만료되었거나 해당 회원이 존재하지 않습니다.
-  /reset_token:
-    post:
-      tags:
-        - user
-      summary: 비밀번호 찾기 위한 유효 토큰 발급 및 메일 전송
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-      responses:
-        '200':
-          description: 메일 전송 완료
-        '400':
-          description: 존재하는 회원이 없습니다.
-  /oauth/google:
-    post:
-      tags:
-        - user
-      summary: google OAuth 로그인 함수
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                accessToken:
-                  type: string
-      responses:
-        '200':
-          description: OAuth 회원가입 및 로그인 성공!
-        '400':
-          description: .env 파일에 REACT_APP_CLIENT_ID가 있나요? 구글 아이디로 가입한 계정이 있나요?
-  /boardgame/detail/{id}:
-    get:
-      tags:
-        - boardGame
-      summary: board game game_id 기준 조회
-      security:
-        - bearerAuth: []
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: number
-      responses:
-        '200':
-          description: 조회한 게임과 연관된 게임들의 정보가 반환됩니다. 
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  games:
-                    $ref: '#/components/schemas/BoardGame'
-                  recommendGames: 
-                    $ref: '#/components/schemas/BoardGame'
-  /games/conditions:
-    get:
-      tags:
-        - boardGame
-      summary: condition 조회 params
-      security:
-        - bearerAuth: []
-      parameters:
-        - name: category
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: val1
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: sortType
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: page
-          in: query
-          required: false
-          schema:
-            type: number
-        - name: perPage
-          in: query
-          required: false
-          schema:
-            type: number
-      responses:
-        '200':
-          description: "보드게임 검색 전체 페이지 개수와 페이지당 보드게임 정보 반환"
-          content:
-            application/json:
-              schema: 
-                type: object
-                properties:
-                  totalPage: 
-                    type: number
-                  games: 
-                    $ref: '#/components/schemas/BoardGame'
-  /search:
-    get:
-      tags:
-        - boardGame
-      summary: 페이지에서 보드게임 탐색(보드게임 이름, 테마 기준)
-      parameters:
-        - name: keyword
-          in: query
-          required: true
-          schema:
-            type: string
-        - name: page
-          in: query
-          required: false
-          schema:
-            type: number
-        - name: perPage
-          in: query
-          required: false
-          schema:
-            type: number
-      responses:
-        '200':
-          description: "검색어에 연관된 보드게임 조회"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  totalPage:
-                    type: number
-                  games: 
-                      $ref: '#/components/schemas/BoardGame'
-        '204':
-          description: "조건에 맞는 데이터가 없습니다."  
-  /randomgame:
-    get:
-      tags:
-        - boardGame
-      summary: 랜덤으로 보드게임 하나 추천하기 
-      security:
-        - bearerAuth: []
-      responses:
-        '200':
-          description: 랜덤 보드게임 정보 반환 
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BoardGame'
-  /favorite:
-    put:
-      tags:
-        - favorite
-      summary: 유저별 찜 목록 추가하기
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                boardgameId:
-                  type: number
-                toggle:
-                  type: boolean
-      responses:
-        '200':
-          description:
-            찜 추가 성공
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Favorite'
-        '400':
-          description:
-            해당하는 유저나 보드게임이 존재하지 않음
-  /favorite/user:
-    get:
-      tags:
-        - favorite
-      summary: 유저별 찜 목록 가져오기
-      security:
-        - bearerAuth: []
-      responses:
-        '200':
-          description: 찜 목록 가져오기 성공
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  user:
-                    type: string
-                  boardgame:
-                      $ref: '#/components/schemas/BoardGame'
-  /favorite/{game_id}:
-    get:
-      tags:
-        - favorite
-      summary: 찜한 보드게임인지 아닌지 판별
-      security:
-        - bearerAuth: []
-      parameters:
-        - name: game_id
-          in: path
-          required: true
-          schema:
-            type: number
-      responses:
-        '200':
-          description: 판별 성공
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  favorite:
-                    type: boolean
+    /user/register:
+        post:
+            tags:
+                - user
+            summary: 회원가입
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/User"
+            responses:
+                "200":
+                    description: "회원가입 성공!"
+                "404":
+                    description: "백엔드 실행하셨나요? 포트번호는 5001번 인가요?"
+    /user/login:
+        post:
+            tags:
+                - user
+            summary: 로그인
+            security:
+                - bearerAuth: []
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                email:
+                                    type: string
+                                password:
+                                    type: string
+            responses:
+                "200":
+                    description: "로그인 성공"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    token:
+                                        type: string
+                                    _id:
+                                        type: string
+                                    email:
+                                        type: string
+                                    user_name:
+                                        type: string
+                                    phone_number:
+                                        type: string
+                                    refresh_token:
+                                        type: string
+                                    errorMessage:
+                                        type: string
+                                        default: null
+                "400":
+                    description: "없는 이메일 입니다."
+                "404":
+                    description: "백엔드 실행하셨나요? 포트번호는 5001번 인가요?"
+    /token/refresh:
+        get:
+            tags:
+                - user
+            summary: access token 확인 및 refresh token 재발급하는 곳!
+            security:
+                - bearerAuth: []
+            parameters:
+                - name: Refresh
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    description: refresh token이 유효하므로 access token 재발급 완료
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    ok:
+                                        type: boolean
+                                    data:
+                                        type: object
+                                        properties:
+                                            accessToken:
+                                                type: string
+                                            refreshToken:
+                                                type: string
+                "401":
+                    description: access token, refresh token 모두 만료되었습니다
+                "400":
+                    description: token이 헤더에 없거나 access token이 만료되지 않았습니다.
+    /users/{id}:
+        get:
+            tags:
+                - user
+            summary: 개인 유저 정보 가져오기
+            security:
+                - bearerAuth: []
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    $ref: "#/components/schemas/User"
+                "400":
+                    description: access token이 유효하지 않습니다.
+    /user/{id}:
+        put:
+            tags:
+                - user
+            summary: 개인 유저 정보 수정하기
+            security:
+                - bearerAuth: []
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                user_name:
+                                    type: string
+                                email:
+                                    type: string
+                                phone_number:
+                                    type: string
+                                password:
+                                    type: string
+                                image:
+                                    type: string
+            responses:
+                "200":
+                    $ref: "#/components/schemas/User"
+                "400":
+                    description: access token이 유효하지 않습니다.
+    /currentUser:
+        get:
+            tags:
+                - user
+            summary: 현재 유저의 정보 가져오기
+            security:
+                - bearerAuth: []
+            responses:
+                "200":
+                    description: 유저 정보 가져오기 성공
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    _id:
+                                        type: string
+                                    user_name:
+                                        type: string
+                                    email:
+                                        type: string
+                                    phone_number:
+                                        type: string
+                                    image:
+                                        type: string
+    /users:
+        get:
+            tags:
+                - user
+            summary: 유저 목록 출력(DB 확인용)
+            responses:
+                "200":
+                    description: "userlist get"
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/User"
+    /user/reset_password:
+        post:
+            tags:
+                - user
+            summary: 메일로 받은 토큰과 새로운 비밀번호를 받아 비밀번호'만' 변경하는 라우터
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                resetToken:
+                                    type: string
+                                password:
+                                    type: string
+            responses:
+                "200":
+                    description: 비밀번호 변경 완료
+                "404":
+                    description: 토큰이 만료되었거나 해당 회원이 존재하지 않습니다.
+    /reset_token:
+        post:
+            tags:
+                - user
+            summary: 비밀번호 찾기 위한 유효 토큰 발급 및 메일 전송
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                email:
+                                    type: string
+            responses:
+                "200":
+                    description: 메일 전송 완료
+                "400":
+                    description: 존재하는 회원이 없습니다.
+    /oauth/google:
+        post:
+            tags:
+                - user
+            summary: google OAuth 로그인 함수
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                accessToken:
+                                    type: string
+            responses:
+                "200":
+                    description: OAuth 회원가입 및 로그인 성공!
+                "400":
+                    description: .env 파일에 REACT_APP_CLIENT_ID가 있나요? 구글 아이디로 가입한 계정이 있나요?
+    /boardgame/detail/{id}:
+        get:
+            tags:
+                - boardGame
+            summary: board game game_id 기준 조회
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: number
+            responses:
+                "200":
+                    description: 조회한 게임과 연관된 게임들의 정보가 반환됩니다.
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    games:
+                                        $ref: "#/components/schemas/BoardGame"
+                                    recommendGames:
+                                        $ref: "#/components/schemas/BoardGame"
+    /games/conditions:
+        get:
+            tags:
+                - boardGame
+            summary: condition 조회 params
+            parameters:
+                - name: category
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: val1
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: sortType
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: page
+                  in: query
+                  required: false
+                  schema:
+                      type: number
+                - name: perPage
+                  in: query
+                  required: false
+                  schema:
+                      type: number
+            responses:
+                "200":
+                    description: "보드게임 검색 전체 페이지 개수와 페이지당 보드게임 정보 반환"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    totalPage:
+                                        type: number
+                                    games:
+                                        $ref: "#/components/schemas/BoardGame"
+    /search:
+        get:
+            tags:
+                - boardGame
+            summary: 페이지에서 보드게임 탐색(보드게임 이름, 테마 기준)
+            parameters:
+                - name: keyword
+                  in: query
+                  required: true
+                  schema:
+                      type: string
+                - name: page
+                  in: query
+                  required: false
+                  schema:
+                      type: number
+                - name: perPage
+                  in: query
+                  required: false
+                  schema:
+                      type: number
+            responses:
+                "200":
+                    description: "검색어에 연관된 보드게임 조회"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    totalPage:
+                                        type: number
+                                    games:
+                                        $ref: "#/components/schemas/BoardGame"
+                "204":
+                    description: "조건에 맞는 데이터가 없습니다."
+    /favorite:
+        put:
+            tags:
+                - favorite
+            summary: 유저별 찜 목록 추가하기
+            security:
+                - bearerAuth: []
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                boardgameId:
+                                    type: number
+                                toggle:
+                                    type: boolean
+            responses:
+                "200":
+                    description: 찜 추가 성공
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Favorite"
+                "400":
+                    description: 해당하는 유저나 보드게임이 존재하지 않음
+    /favorite/user:
+        get:
+            tags:
+                - favorite
+            summary: 유저별 찜 목록 가져오기
+            security:
+                - bearerAuth: []
+            responses:
+                "200":
+                    description: 찜 목록 가져오기 성공
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    user:
+                                        type: string
+                                    boardgame:
+                                        $ref: "#/components/schemas/BoardGame"
+    /favorite/{game_id}:
+        get:
+            tags:
+                - favorite
+            summary: 찜한 보드게임인지 아닌지 판별
+            security:
+                - bearerAuth: []
+            parameters:
+                - name: game_id
+                  in: path
+                  required: true
+                  schema:
+                      type: number
+            responses:
+                "200":
+                    description: 판별 성공
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    favorite:
+                                        type: boolean
 components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-  schemas:
-    User:
-      type: object
-      required:
-        - user_name
-        - email
-        - password
-        - phone_number
-      properties:
-        user_name:
-          type: string
-        email:
-          type: string
-        password:
-          type: string
-        phone_number:
-          type: string
-        image:
-          type: string
-    BoardGame:
-      type: object
-      required:
-        - index
-        - un_named
-        - game_id
-        - game_name
-        - year
-        - rank
-        - average_rating
-        - bayes_average
-        - user_rated
-        - url
-        - thumbnail
-        - wordcloud
-        - min_player
-        - max_player
-        - min_age
-        - playing_time
-        - min_playing_time
-        - max_playing_time
-        - complexity_average
-        - image
-        - description
-      properties:
-        index:
-          type: number
-        un_named:
-          type: number
-        game_id:
-          type: number
-        game_name:
-          type: string
-        year:
-          type: number
-        rank:
-          type: number
-        average_rating:
-          type: number
-        bayes_average:
-          type: number
-        user_rated:
-          type: number
-        url:
-          type: string
-        thumbnail:
-          type: string
-        wordcloud:
-          type: string
-        min_player:
-          type: number
-        max_player:
-          type: number
-        min_age:
-          type: number
-        playing_time:
-          type: number
-        min_playing_time:
-          type: number
-        max_playing_time:
-          type: number
-        complexity_average:
-          type: number
-        theme:
-          items:
-            type: array
-        image:
-          type: string
-        description:
-          type: string
-        recommend_id:
-          items:
-            type: array  
-    Favorite:
-      type: object
-      required:
-        - user
-        - boardgame
-      properties:
-        user:
-          type: string
-        boardgame:
-          type: string
+    securitySchemes:
+        bearerAuth:
+            type: http
+            scheme: bearer
+            bearerFormat: JWT
+    schemas:
+        User:
+            type: object
+            required:
+                - user_name
+                - email
+                - password
+                - phone_number
+            properties:
+                user_name:
+                    type: string
+                email:
+                    type: string
+                password:
+                    type: string
+                phone_number:
+                    type: string
+                image:
+                    type: string
+        BoardGame:
+            type: object
+            required:
+                - index
+                - un_named
+                - game_id
+                - game_name
+                - year
+                - rank
+                - average_rating
+                - bayes_average
+                - user_rated
+                - url
+                - thumbnail
+                - wordcloud
+                - min_player
+                - max_player
+                - min_age
+                - playing_time
+                - min_playing_time
+                - max_playing_time
+                - complexity_average
+                - image
+                - description
+            properties:
+                index:
+                    type: number
+                un_named:
+                    type: number
+                game_id:
+                    type: number
+                game_name:
+                    type: string
+                year:
+                    type: number
+                rank:
+                    type: number
+                average_rating:
+                    type: number
+                bayes_average:
+                    type: number
+                user_rated:
+                    type: number
+                url:
+                    type: string
+                thumbnail:
+                    type: string
+                wordcloud:
+                    type: string
+                min_player:
+                    type: number
+                max_player:
+                    type: number
+                min_age:
+                    type: number
+                playing_time:
+                    type: number
+                min_playing_time:
+                    type: number
+                max_playing_time:
+                    type: number
+                complexity_average:
+                    type: number
+                theme:
+                    type: array
+                image:
+                    type: string
+                description:
+                    type: string
+                recommend_id:
+                    type: array
+        # BoardGame2020:
+        #   type: object
+        #   required:
+        #     - index
+        #     - un_named
+        #     - game_id
+        #     - game_name
+        #     - year
+        #     - rank
+        #     - average_rating
+        #     - bayes_average
+        #     - user_rated
+        #     - url
+        #     - thumbnail
+        #     - min_player
+        #     - max_player
+        #     - min_age
+        #     - playing_time
+        #     - min_playing_time
+        #     - max_playing_time
+        #     - complexity_average
+        #     - image
+        #     - description
+        #   properties:
+        #     index:
+        #       type: number
+        #     un_named:
+        #       type: number
+        #     game_id:
+        #       type: number
+        #     game_name:
+        #       type: string
+        #     year:
+        #       type: number
+        #     rank:
+        #       type: number
+        #     average_rating:
+        #       type: number
+        #     bayes_average:
+        #       type: number
+        #     user_rated:
+        #       type: number
+        #     url:
+        #       type: string
+        #     thumbnail:
+        #       type: string
+        #     min_player:
+        #       type: number
+        #     max_player:
+        #       type: number
+        #     min_age:
+        #       type: number
+        #     playing_time:
+        #       type: number
+        #     min_playing_time:
+        #       type: number
+        #     max_playing_time:
+        #       type: number
+        #     complexity_average:
+        #       type: number
+        #     domains:
+        #       type: string
+        #     image:
+        #       type: string
+        #     description:
+        #       type: string
+        Favorite:
+            type: object
+            required:
+                - user
+                - boardgame
+            properties:
+                user:
+                    type: string
+                boardgame:
+                    type: string
+
+        CommunityContent:
+            type: object
+            required:
+                - title
+                - content
+                - author
+                - comment
+            properties:
+                title:
+                    type: string
+                content:
+                    type: string
+                author:
+                    type: string
+                comment:
+                    type: array
+
+        CommunityComment:
+            type: object
+            required:
+                - content
+                - user_id
+            properties:
+                content:
+                    type: string
+                user_id:
+                    type: string
+
 security:
-  - bearerAuth: []
+    - bearerAuth: []

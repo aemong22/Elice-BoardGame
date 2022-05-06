@@ -24,14 +24,13 @@ function CommunityContent() {
     const fetchContentInfo = async (contentId) => {
         try {
             const res = await Api.get("communitycontents", contentId);
-            if (res.data?.author === userState?._id) {
+            if (res.data?.author === userState?.user_name) {
                 setIsEditable(true);
             } else {
                 setIsEditable(false);
             }
             setContents(res.data);
             setIsFetchCompleted(true);
-            console.log(res.data);
         } catch (error) {
             console.log(error);
         }
@@ -65,7 +64,6 @@ function CommunityContent() {
                         width: "100%",
                         height: "100vh",
                         marginTop: "60px",
-                        backgroundColor: "gray",
                     }}
                 >
                     <Divider />
@@ -85,9 +83,8 @@ function CommunityContent() {
                                 handleDelete={handleDelete}
                             />
                             <Comments
-                                userId={userState._id}
-                                userName={userState.user_name}
-                                contentId={contents._id}
+                                comments={contents.comment}
+                                contentId={contentId}
                             />
                         </>
                     )}
