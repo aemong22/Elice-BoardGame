@@ -14,6 +14,11 @@ tags:
       description: BoardGame 스키마를 이용한 기능
     - name: favorite
       description: Favorite 스키마를 이용한 기능
+    - name: community
+      description: community 스키마를 이용한 기능
+    - name: comment-community
+      description: comment-community 스키마를 이용한 기능
+
 paths:
     /communitycontents/{id}/comment:
         post:
@@ -32,14 +37,55 @@ paths:
                         schema:
                             type: object
                             properties:
-                                user_id:
-                                    type: string
                                 content:
                                     type: string
             responses:
                 "200":
                     description: "id에 해당하는 comment 추가하기"
                     $ref: "#/components/schemas/CommunityComment"
+    /communitycontents/{cotentId}/comment/{commentId}:
+        delete:
+            tags:
+                - comment-community
+            summary: 댓글 삭제하기
+            parameters:
+                - name: cotentId
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                - name: commentId
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    description: 댓글 삭제 성공
+    /communitycontent/comment/{commentId}:
+        put:
+            tags:
+                - comment-community
+            summary: 댓글 수정하기
+            parameters:
+                - name: commentId
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            requestBody:
+                required: false
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                content:
+                                    type: string
+            responses:
+                "200":
+                    description: 댓글 수정 성공
+
     /communitycontents:
         get:
             tags:
@@ -52,6 +98,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: "#/components/schemas/CommunityContent"
+
     /communitycontents/create:
         post:
             tags:
@@ -64,8 +111,6 @@ paths:
                         schema:
                             type: object
                             properties:
-                                author:
-                                    type: string
                                 title:
                                     type: string
                                 content:
@@ -74,6 +119,7 @@ paths:
                 "200":
                     description: "board생성 성공!"
                     $ref: "#/components/schemas/CommunityContent"
+
     /communitycontents/{id}:
         get:
             tags:
@@ -88,6 +134,7 @@ paths:
             responses:
                 "200":
                     $ref: "#/components/schemas/CommunityContent"
+
     /communitycontents/{id}/delete:
         delete:
             tags:
@@ -127,6 +174,7 @@ paths:
                 "200":
                     description: "board수정 성공!"
                     $ref: "#/components/schemas/CommunityContent"
+
     /user/register:
         post:
             tags:
@@ -636,6 +684,72 @@ components:
                     type: string
                 recommend_id:
                     type: array
+        # BoardGame2020:
+        #   type: object
+        #   required:
+        #     - index
+        #     - un_named
+        #     - game_id
+        #     - game_name
+        #     - year
+        #     - rank
+        #     - average_rating
+        #     - bayes_average
+        #     - user_rated
+        #     - url
+        #     - thumbnail
+        #     - min_player
+        #     - max_player
+        #     - min_age
+        #     - playing_time
+        #     - min_playing_time
+        #     - max_playing_time
+        #     - complexity_average
+        #     - image
+        #     - description
+        #   properties:
+        #     index:
+        #       type: number
+        #     un_named:
+        #       type: number
+        #     game_id:
+        #       type: number
+        #     game_name:
+        #       type: string
+        #     year:
+        #       type: number
+        #     rank:
+        #       type: number
+        #     average_rating:
+        #       type: number
+        #     bayes_average:
+        #       type: number
+        #     user_rated:
+        #       type: number
+        #     url:
+        #       type: string
+        #     thumbnail:
+        #       type: string
+        #     min_player:
+        #       type: number
+        #     max_player:
+        #       type: number
+        #     min_age:
+        #       type: number
+        #     playing_time:
+        #       type: number
+        #     min_playing_time:
+        #       type: number
+        #     max_playing_time:
+        #       type: number
+        #     complexity_average:
+        #       type: number
+        #     domains:
+        #       type: string
+        #     image:
+        #       type: string
+        #     description:
+        #       type: string
         Favorite:
             type: object
             required:
@@ -646,6 +760,7 @@ components:
                     type: string
                 boardgame:
                     type: string
+
         CommunityContent:
             type: object
             required:
@@ -662,6 +777,7 @@ components:
                     type: string
                 comment:
                     type: array
+
         CommunityComment:
             type: object
             required:
@@ -672,5 +788,6 @@ components:
                     type: string
                 user_id:
                     type: string
+
 security:
     - bearerAuth: []
