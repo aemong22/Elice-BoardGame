@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../store/actions/userAction";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { IconButton, MenuList, MenuItem, Button, Grid } from "@mui/material";
+import { MenuList, MenuItem, Button, Grid } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import * as Api from "../api";
 import "./Header.css";
@@ -64,8 +64,8 @@ function Header() {
                                 <li onClick={() => navigate("/boardgame")}>
                                     <Button>Boardgame</Button>
                                 </li>
-                                <li onClick={() => navigate("/comunication")}>
-                                    <Button>comunication</Button>
+                                <li onClick={() => navigate("/community")}>
+                                    <Button>Community</Button>
                                 </li>
                                 <li id="menu" style={{ cursor: "pointer" }}>
                                     <Grid

@@ -4,25 +4,31 @@ import {
     Button,
     IconButton,
     CardActions,
+    CardActionArea,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { GameCard, CardContent } from "./FavoriteStyle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import * as Api from "../../api";
 
-function FavoriteCard({ wish }) {
+function FavoriteCard({ wish, onLikeClick }) {
     const [like, setLike] = useState(true);
+    const navigate = useNavigate();
 
     const favoriteHandler = () => {
         Api.put("favorite", {
             boardgameId: wish.game_id,
             toggle: !like,
+        }).then(() => {
+            setLike(!like);
+            if (typeof onLikeClick === "function") {
+                onLikeClick();
+            }
         });
-        setLike(!like);
     };
-    useEffect(() => {});
 
-    const maxLength = 11;
+    const maxLength = 10;
     const boardgameName =
         wish.game_name.length > maxLength
             ? wish.game_name.substr(0, maxLength) + "..."
@@ -32,13 +38,19 @@ function FavoriteCard({ wish }) {
         <>
             {like ? (
                 <GameCard sx={{ width: 170, my: 2, mx: 1.5 }}>
-                    <CardMedia
-                        component="img"
-                        width="170"
-                        height="170"
-                        image={wish.image}
-                        alt="보드게임 이미지"
-                    />
+                    <CardActionArea
+                        onClick={() =>
+                            navigate(`/boardgame/detail/${wish.game_id}`)
+                        }
+                    >
+                        <CardMedia
+                            component="img"
+                            width="170"
+                            height="170"
+                            image={wish.image}
+                            alt="보드게임 이미지"
+                        />
+                    </CardActionArea>
                     <CardContent>
                         <div
                             style={{

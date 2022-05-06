@@ -60,14 +60,21 @@ function DetailContents({ gameData, recommendData }) {
                         className="detail-container"
                         sx={{
                             bgcolor: "#F4F2EF",
-                            height: "100vh",
+                            height: "auto",
+                            minHeight: "100vh",
                             padding: "0 5% 5% 5%",
                         }}
                     >
                         <div className="container-top">
                             <div className="container-top-left">
-                                <div className="image">
-                                    <img
+                                <div
+                                    className="image"
+                                    style={{
+                                        backgroundImage: `url("${gameData.image}")`,
+                                        backgroundColor: "red",
+                                    }}
+                                >
+                                    {/* <img
                                         style={{
                                             width: "100%",
                                             height: "100%",
@@ -76,7 +83,7 @@ function DetailContents({ gameData, recommendData }) {
                                         }}
                                         src={gameData.image}
                                         alt={gameData.game_name}
-                                    />
+                                    /> */}
                                 </div>
                             </div>
                             <div className="container-top-right">
