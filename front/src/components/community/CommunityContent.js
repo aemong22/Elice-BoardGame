@@ -79,11 +79,7 @@ function CommunityContent() {
                                 isEditable={isEditable}
                                 handleDelete={handleDelete}
                             />
-                            <Comments
-                                userId={userState._id}
-                                userName={userState.user_name}
-                                contentId={contents._id}
-                            />
+                            <Comments comments={contents.comment} />
                         </>
                     )}
                 </Box>
