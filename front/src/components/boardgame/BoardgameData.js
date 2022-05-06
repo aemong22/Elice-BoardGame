@@ -12,7 +12,9 @@ function BoardgameData({ condition, changeCondition, search }) {
   }, [condition]);
 
   useEffect(()=> {
-    searchGamesHandler();
+    if (search) {
+      searchGamesHandler();
+    }
   }, [search])
 
   // 보드게임 조건 데이터 불러오기
