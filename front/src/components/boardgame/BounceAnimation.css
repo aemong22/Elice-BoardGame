@@ -20,6 +20,7 @@
     background-image: url("/public/image/monster.png");
     background-size: cover;
     border-radius:50% 50% 50% 50%;
+    cursor: pointer;
     
     animation-name: bounce; 
     animation-duration: 0.5s;
