@@ -1,11 +1,5 @@
 import * as React from "react";
-import {
-    CardActions,
-    CardContent,
-    CardHeader,
-    Typography,
-    Button,
-} from "@mui/material";
+import { CardContent, CardHeader, Typography } from "@mui/material";
 
 function CommentCard({ comment }) {
     const { user_id: user_name, content } = comment;
