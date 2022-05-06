@@ -19,8 +19,6 @@ function SearchField({ changeSearch }) {
                     width: 300,
                     height: 50,
                     marginTop: "5px",
-                    // backgroundColor: "#f8f8f8",
-                    // borderRadius: "10px",
                 }}> 
                 <SearchIcon sx={{ marginLeft: "25px" }}/>
                 <input 
