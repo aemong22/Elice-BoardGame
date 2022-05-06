@@ -64,7 +64,7 @@ function BoardgameCategory({ condition, initializeCondition, changeCondition, ch
                     <List component="div" disablePadding sx={{ bgcolor: 'background.paper' }}>
                       {
                         Object.keys(categoryData[category]).map((data) => (
-                          <ListItemButton sx={{ height: '35px', fontSize: 15, backgroundColor: '#f3f0ec', color: 'rgb(50, 50, 50)' }}>
+                          <ListItemButton sx={{ height: '35px', fontSize: 15, fontWeight: 'bold', color: 'rgb(110, 110, 110)' }}>
                             <ToggleButton
                               sx={{ width: "25px", height: "25px", borderRadius: "50px", marginRight: "10px" }}
                               value="check"
