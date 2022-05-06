@@ -7,6 +7,7 @@ function SearchField({ changeSearch }) {
     const submit = (event) => { 
         event.preventDefault();
         changeSearch(search);
+        setSearch("");
     }
 
     return (
@@ -25,6 +26,7 @@ function SearchField({ changeSearch }) {
                     name="list" 
                     type="text" 
                     placeholder="Search..." 
+                    autocomplete="off"
                     style={{ 
                         border: "0 solid black", 
                         outline: "none",

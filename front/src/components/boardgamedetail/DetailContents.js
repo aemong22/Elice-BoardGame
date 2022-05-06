@@ -17,28 +17,23 @@ import "./DetailContents.css";
 
 function DetailContents({ gameData, recommendData }) {
     const [open, setOpen] = useState(false);
-    const [favoriteToggle, setFavoriteToggle] = useState(false);
+    const [favoriteToggle, setFavoriteToggle] = useState(gameData.favorite);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     const favoriteHandler = async () => {
-        const res = await Api.put("favorite", {
-            boardgameId: gameData.game_id,
-            toggle: !favoriteToggle,
-        });
-
-        setFavoriteToggle(!favoriteToggle);
+        try {
+            const res = await Api.put("favorite", {
+                boardgameId: gameData.game_id,
+                toggle: !favoriteToggle,
+            }).then(() => {
+                console.log("favorite: ", !favoriteToggle)
+                setFavoriteToggle(!favoriteToggle); 
+            });
+        } catch (err) {
+            console.log("errer message: ", err);
+          }
     };
-
-    const getFavorite = async () => {
-        const res = await Api.get("favorite", gameData.game_id);
-        const favoriteData = res.data;
-        setFavoriteToggle(favoriteData);
-    };
-
-    useEffect(() => {
-        getFavorite();
-    }, []);
 
     const style = {
         position: "absolute",
