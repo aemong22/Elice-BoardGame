@@ -70,7 +70,12 @@ function CommunityContent() {
                 >
                     <Divider />
                     {isEditing ? (
-                        <ContentEditForm />
+                        <ContentEditForm
+                            setIsEditing={setIsEditing}
+                            contentId={contentId}
+                            contents={contents}
+                            setContents={setContents}
+                        />
                     ) : (
                         <>
                             <ContentsDetail

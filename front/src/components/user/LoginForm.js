@@ -67,7 +67,7 @@ function LoginForm({ handleClose }) {
             const reset = await Api.post(`reset_token`, {
                 email,
             });
-            console.log("여기이이", reset);
+
             if (reset.data.status === "Success") {
                 alert("메일을 전송했습니다.");
                 // 로그인 페이지로 이동함.
