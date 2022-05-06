@@ -2,7 +2,7 @@ import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 
-function CommentEdidtForm({ handlePost, contentId }) {
+function CommentAddForm({ contentId }) {
     const [comment, setComment] = useState("");
 
     const handlePost = async (e) => {
@@ -34,4 +34,4 @@ function CommentEdidtForm({ handlePost, contentId }) {
     );
 }
 
-export default CommentEdidtForm;
+export default CommentAddForm;
