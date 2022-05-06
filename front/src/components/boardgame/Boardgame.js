@@ -11,7 +11,7 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 
 function Boardgame() {
     const [open, setOpen] = useState(false);
-    const [recommend, setReconnend] = useState(true);
+    const [recommend, setRecommend] = useState(false);
     const [condition, setCondition] = useState({
         category: "",
         val1: "",
@@ -49,7 +49,7 @@ function Boardgame() {
                     <div className="boardgame-info-title">보드게임</div>
                     <div 
                         className={recommend ? "boardgame-recommend-active" : "boardgame-recommend"} 
-                        onClick={()=> setReconnend(!recommend)}
+                        onClick={()=> setRecommend(!recommend)}
                     >
                         {
                             recommend ? <BoardgameRandomCard /> : (
