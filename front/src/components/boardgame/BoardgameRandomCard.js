@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import * as Api from "../../api";
 
 function BoardgameRandomCard() {
   const [boardgames, setBoardgames] = useState(undefined);
   const [animation, setAnimation] = useState(false);
   const randomGameID = [316554, 246900, 296151]
+  const navigate = useNavigate();
 
   useEffect(() => {
     RandomGameHandler();
@@ -24,11 +26,10 @@ function BoardgameRandomCard() {
     }
   };
 
-  
-
   return (
     <div
-      style={{ width: "200px", height: "200px", margin: "0 auto" }}>
+      onClick={() => navigate(`/boardgame/detail/316554`)}
+      style={{ width: "200px", height: "200px", margin: "0 auto", }}>
         {
           animation ? <img
             style={{
