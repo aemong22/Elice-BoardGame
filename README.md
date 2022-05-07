@@ -189,7 +189,8 @@
 
 
 -   if 시간이 충분했다면...
-    -   최근 추천시스템은 content-base filtering과 collaborative filtering을 합친 hybrid 시스템을 많이 사용한다. 또는 Machine Learning을 활용한 추천시스템을 제작할 수 있다. hybrid 시스템의 경우에는 추천시스템의 제작의 목적에 따라 다양한 ensemble방법들이 우리팀은 content-base filtering과 collaborative filtering을 구현했지만 수치적으로 타당하게 근거를 줄 수 있는 collaborative filtering을 선택했다. 그리고 Machine Learning을 확실하게 적용하기 위해서는 data에 대한 domain지식이 충분해야한다. 그러나 kaggle data는 미국 사용자에 대한 정보로 model을 구성해야 하기 때문에 data를 한국사람의 data로 대표할 수 없고, 보드게임에 대한 구체적인 domain 지식이 부족했다. 따라서 정확한 모델을 만들 수 없고, 모델을 제작한다 하더라도 python을 js에서 동작하는 지식이 부족했다. 위의 두가지 문제를 해결한다면 한국인에 더 친화적인 추천 model을 만들 수 있다 생각한다.
+    -  최근 추천시스템은 content-base filtering과 collaborative filtering을 합친 hybrid 시스템을 많이 사용한다. 또는 Machine Learning을 활용한 추천시스템을 제작할 수 있다. hybrid 시스템의 경우에는 추천시스템의 제작의 목적에 따라 다양한 ensemble방법들이 우리팀은 content-base filtering과 collaborative filtering을 구현했지만 수치적으로 타당하게 근거를 줄 수 있는 collaborative filtering을 선택했다. 또한 collaborative filtering을 사용함으로 생기는 문제점을 보안하기 위해 다양한 기능을 추가하여 보안했다.
+    Machine Learning을 확실하게 적용하기 위해서는 data에 대한 domain지식이 충분해야한다. 그러나 kaggle data는 미국 사용자에 대한 정보로 model을 구성해야 하기 때문에 data를 한국사람의 data로 대표할 수 없고, 보드게임에 대한 구체적인 domain 지식이 부족했다. 따라서 정확한 모델을 만들 수 없고, 모델을 제작한다 하더라도 python을 js에서 real-time으로 동작하는 구현대하여 시간적인 여력이 부족했다. 위의 두가지 문제를 해결한다면 한국인에 더 친화적인 추천 model을 만들 수 있다 생각한다.
 
 ## 7. word cloud
 
