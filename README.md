@@ -21,6 +21,30 @@
 
 -   추천 시스템 참고 코드
 
+### 기술 스택
+
+-   python
+-   jupyter
+-   colab
+-   javascript
+-   react
+-   mongoDB
+
+#### [Board Games Dataset](https://www.kaggle.com/datasets/bananalee67/board-games-dataset)
+
+-   인원 수, 연령, 리뷰 수 등의 데이터
+
+#### [Fantastic Board Games: TU Wien DOPP 3 Submission](https://www.kaggle.com/code/bananalee67/fantastic-board-games-tu-wien-dopp-3-submission)
+
+## 데이터 전처리
+
+-   Data에서 필요한 feature을 추출 진행
+    -   데이터 셋 축소를 위해 2022년 1월 19일 기준으로 rank 500위 안에 드는 data set을 선별했다.
+    -   축소된 데이터 셋의 보드게임 추천시스템 구축 과 시각화 및 워드 클라우드에 필요한 feature를 선별하여 병합하는 데이터 전처리 과정을 진행했다.(player 수, 게임 time, 랭킹, image URL, 게임 설명, 게임 난이도, 게임 나이 제한, 게임 카테고리, 게임 제작년도 등등)
+-   추천 시스템 구축
+    -   Item-based CF을 이용하기 위해 2022년 1월 8일의 랭킹의 500위안에든 게임중 2019년 5월까지 1600만개의 유저가 보드게임에 대한 평가정보를 filtering과정을 진행했다.
+    -   이를 유저 - 게임 에대한 평가의 matrix를 구성하여 cosine similarity를 통해 유사한 게임 5개를 추출하여 새로운 feature로 recommandation list를 만들어 추가하였다.
+
 ### 사용한 언어 및 프레임워크
 
 -   Python
@@ -88,31 +112,24 @@
 
 ### Intro
 
-<img width="1512" alt="스크린샷 2022-04-29 오후 5 05 31" src="https://user-images.githubusercontent.com/55802893/165907289-64001600-b2e2-4a50-89ad-09bb3607d0a3.png">
+![user](https://user-images.githubusercontent.com/55802893/167119226-d1059ef0-fd9d-474e-831f-e63c2c0bd3be.png)
 
--   사용자가 서비스에 입장 시 가장 먼저 만나는 화면입니다.
+-   intro 페이지에서 Get stated를 누르게되면 일반 로그인, 구글 로그인, 회원가입, 비밀번호 찾기 동작을 할 수 있습니다.
 
-### Login
+### Home
 
-<img width="922" alt="스크린샷 2022-04-29 오후 5 05 51" src="https://user-images.githubusercontent.com/55802893/165907349-7b94924e-5df9-4535-b757-3c77f05069d4.png">
+![home](https://user-images.githubusercontent.com/55802893/167116794-c40f3576-118d-4313-a69e-e0a401e969fc.png)
 
-<img width="711" alt="스크린샷 2022-04-29 오후 5 13 55" src="https://user-images.githubusercontent.com/55802893/165907984-941ef5bd-a1ce-432d-bd32-0ef0f48a7343.png">
+-   사용자가 로그인한 후 만나게 되는 페이지 입니다.
+-   매년 출시된 보드게임의 수를 확인할 수 있습니다.
+-   서비스를 개발한 개발자들의 한마디를 볼 수 있습니다.
 
--   사용자 로그인 및 회원가입 화면 입니다.
+### Mypage & logout
 
-### Main Page
+![mypage](https://user-images.githubusercontent.com/55802893/167118287-857e0116-1482-42e1-927e-2cb195e87f3a.png)
 
-<img width="1512" alt="스크린샷 2022-04-29 오후 5 06 39" src="https://user-images.githubusercontent.com/55802893/165907446-22eff141-122b-4392-87b4-4f9f60628c47.png">
-
-<img width="1509" alt="스크린샷 2022-04-29 오후 5 06 54" src="https://user-images.githubusercontent.com/55802893/165907485-0db78dd7-8dfe-46b1-b319-8976c657382c.png">
-
--   로그인 후 보게되는 페이지입니다.
-
-### Boardgame Page
-
-<img width="1490" alt="스크린샷 2022-04-29 오후 5 07 50" src="https://user-images.githubusercontent.com/55802893/165907515-df403681-0f0c-43b4-addd-2e8b5bbc5894.png">
-
--   조건에 따른 보드게임을 조회할 수 있는 페이지입니다.
+-   오른쪽 상단 프로필을 누르게 되면 Mypage와 logout 버튼을 누를 수 있습니다.
+-   Mypage에서는 사용자의 정보를 수정할 수 있고, favorite에서 사용자가 찜(하트)한 보드게임을 확인할 수 있습니다.
 
 ## 5. 프로젝트 팀원 역할 분담
 
@@ -160,20 +177,34 @@
 
 ## 6. 데이터 분석 (추천 시스템)
 
--   Collarborative Filtering
+> Collaborative filtering
 
-    -   Item-based CF : 게임 사용자들의 매긴 게임 평점들과 유사한 패턴으로 평점이 부여된 보드게임을 추천하는 방식
-    -   가정 : `이전 게임 사용자들이 미래에 동일한 보드게임 성향을 갖는다`
-    -   explicit data collection : 2000년도 부터 2019년 까지 보드게임 사용자들의 댓글을 통한 게임 평저믈 사용
-    -   사용자들의 보드게임 평점을 Vector형식으로 나타내여 보드게임 들의 cosine similarity를 사용하여 비슷한 유형의 게임을 1~5위의 추천 게임 feature을 제공
+-   User-based CF(해당 고객이 선호하는 상품들 중에 내가 아직 접하지 않은 상품을 추천하는 방식) 과 Item-based CF(내가 평점을 매긴 상품의 평점들과 유사한 패턴으로 평점을 부여된 상품을 추천하는 방식)
 
--   문제점
+    -   우리는 `Item-based CF`를 사용한다.
 
-    -   cold star problem : 기존에 게임 사용자가 제공한 평점의 데이터 기반으로 추천하기 때문에, 새로운 보드게임에 대해서는 추천할 수 없는문제 발생 -> 보드게임 랭킹 500안에 있는 2020년 이후의 최신게임은 새로운 카테고리를 통해 정보를 제공하여 해결
-    -   계산 효율 저하 -> 보드 게임 랭킹 500위 안에있는 게임만을 활용하여 계산량을 낮춤
+-   `과거에 동일한 사람들이 미래에 동일한 성향을 갖을 거라는 가정에 기초를 두고있다.`
+
+-   사용자의 행동으로 부터 모델을 만들때 명시적인 형태로 제공가능함
+
+-   이 모델을 사용함으로써 생기는 문제
+
+    -   cold star 문제 : 기존에 고객이 취했던 평점 데이터기반으로 추천하기 때문에, 신규 게임에 대해서는 추천할 수 없는 문제가 발생한다
+
+        -   해결방법 : 20년부터 22년의 최신 게임에 대해서는 새로운 DB를 구성하여 제공해준다.
+
+    -   long tail 문제 : 사용자들이 관심이 많은 컨텐츠만 보여준다.
+
+        -   해결방법 : random으로 보여주는 추천게임을 만들어 관심이 없어도 게임을 보여준다.
+
+    -   계산 효율이 저하
+
+    -   모델의 생성으로 인해 생기는 문제점 해결방안 정리
+    -   2022년기준 rank 500위 안에 생기는 보드게임을 기반으로 data set을 축소하여 추천시스템을 제공한다. 사실 Content-base filtering이 더욱 많은양의 데이터와 계산량이 들어가기 때문에 우리는 Collaborative filtering을 선택했다. 또한 우리는 Item-based CF를 cosine similarity를 사용하여 추천 게임에 대한 근거를 제공할 수 있는 모델을 선택했다. 위에 언급한 cold star문제와 long tail문제를 해결하기 위해 제작한 홈페이지에 해결방안을 접목하여 디자인했다.
 
 -   if 시간이 충분했다면...
-    -   최근 추천시스템은 content-base filtering과 collaborative filtering을 합친 hybrid 시스템을 많이 사용한다. 또는 Machine Learning을 활용한 추천시스템을 제작할 수 있다. hybrid 시스템의 경우에는 추천시스템의 제작의 목적에 따라 다양한 ensemble방법들이 존재하고, 구체적인 방법론 보다는 직관에 의존한 방법론이 많았다. 저희팀은 content-base filtering과 collaborative filtering을 구현했지만 수치적으로 타당하게 근거를 줄 수 있는 collaborative filtering을 선택했다. 그리고 Machine Learning을 확실하게 적용하기 위해서는 data에 대한 domain지식이 충분해야한다. 그러나 kaggle data는 미국 사용자에 대한 정보로 model을 구성해야 하기 때문에 data를 한국사람의 data로 대표할 수 없고, 보드게임에 대한 구체적인 domain 지식이 부족했다. 따라서 정확한 모델을 만들 수 없고, 모델을 제작한다 하더라도 python을 js에서 동작하는 지식이 부족했다. 위의 두가지 문제를 해결한다면 한국인에 더 친화적인 model을 만들 수 있다 생각한다.
+    -   최근 추천시스템은 content-base filtering과 collaborative filtering을 합친 hybrid 시스템을 많이 사용한다. 또는 Machine Learning을 활용한 추천시스템을 제작할 수 있다. hybrid 시스템의 경우에는 추천시스템의 제작의 목적에 따라 다양한 ensemble방법들이 우리팀은 content-base filtering과 collaborative filtering을 구현했지만 수치적으로 타당하게 근거를 줄 수 있는 collaborative filtering을 선택했다. 또한 collaborative filtering을 사용함으로 생기는 문제점을 보안하기 위해 다양한 기능을 추가하여 보안했다.
+        Machine Learning을 확실하게 적용하기 위해서는 data에 대한 domain지식이 충분해야한다. 그러나 kaggle data는 미국 사용자에 대한 정보로 model을 구성해야 하기 때문에 data를 한국사람의 data로 대표할 수 없고, 보드게임에 대한 구체적인 domain 지식이 부족했다. 따라서 정확한 모델을 만들 수 없고, 모델을 제작한다 하더라도 python을 js에서 real-time으로 동작하는 구현대하여 시간적인 여력이 부족했다. 위의 두가지 문제를 해결한다면 한국인에 더 친화적인 추천 model을 만들 수 있다 생각한다.
 
 ## 7. word cloud
 
@@ -207,8 +238,6 @@ Board game의 description을 이용해서 각 게임마다 word cloud를 생성�
 사용자가 비밀번호를 기억하지 못해 비밀번호 초기화가 필요한 경우 사용자의 메일로 비밀번호를 변경할 링크를 보내줍니다. Reset token을 사용해서 5분 내에 링크에 접속해 비밀번호를 변경하는 방식입니다. Redis를 AWS ElasticCache에 설치해 사용하려고 했으나 AWS 내부에서만 접근이 가능해 기능 구현을 위해서는 redis를 EC2에 설치해서 사용해야 했습니다. 하지만 EC2에 설치 후 테스트 과정에서 연결이 끊기거나 EC2에 접속이 안되는 이슈가 발생했습니다.
 
 EC2 연결 오류가 발생하면 서버를 새로 생성해 연결하는 방식으로 해결했습니다.
-
-### react rendering 관련 어려움
 
 ## 9. 버전
 
