@@ -22,7 +22,7 @@ function ContentAddForm() {
             toast.info("게시글 등록을 성공하였습니다.");
             navigate(`/community`);
         } catch (error) {
-            toast.err("게시글 등록에 실패하였습니다.", error);
+            toast.error("게시글 등록에 실패하였습니다.", error);
         }
     };
 

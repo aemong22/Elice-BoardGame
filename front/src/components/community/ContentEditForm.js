@@ -25,7 +25,7 @@ function ContentEditForm({ contents, setContents, setIsEditing, contentId }) {
             });
             setIsEditing(false);
         } catch (error) {
-            toast.err("게시글 수정을 실패하였습니다.");
+            toast.error("게시글 수정을 실패하였습니다.");
             console.log(error);
         }
     };

@@ -46,7 +46,7 @@ function RegisterForm({ setRegister, handleClose }) {
             // 페이지 이동 loginForm으로 이동할 수 있게 수정하기
             navigate("/");
         } catch (err) {
-            toast.err("회원가입에 실패하였습니다.", err);
+            toast.error("회원가입에 실패하였습니다.", err);
         }
     };
 
