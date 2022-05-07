@@ -19,6 +19,23 @@
 
 #### [Fantastic Board Games: TU Wien DOPP 3 Submission](https://www.kaggle.com/code/bananalee67/fantastic-board-games-tu-wien-dopp-3-submission)
 
+-   추천 시스템 참고 코드
+
+### 기술 스택
+
+-   python
+-   jupyter
+-   colab
+-   javascript
+-   react
+-   mongoDB
+
+#### [Board Games Dataset](https://www.kaggle.com/datasets/bananalee67/board-games-dataset)
+
+-   인원 수, 연령, 리뷰 수 등의 데이터
+
+#### [Fantastic Board Games: TU Wien DOPP 3 Submission](https://www.kaggle.com/code/bananalee67/fantastic-board-games-tu-wien-dopp-3-submission)
+
 ## 데이터 전처리
 
 -   Data에서 필요한 feature을 추출 진행
@@ -75,7 +92,7 @@
 
 ## 3. 프로젝트 기능 설명
 
-### 카테고리에 따른 보드게임 조회
+`BOARDMON`은 사람들과 함께 집에서 시간을 보낼 수 있는 하나의 방향성을 제시하여, 즐거움을 선사합니다. 보드게임에 대해 잘 모르는 입문자도 쉽게 접근할 수 있습니다. 또한 보드게임을 이미 많이 해보신 분들에게는 카테고리에 맞는 보드게임을 추천함으로써 다양한 보드게임을 접하게 해주며, 선택하는데 어려움을 줄여줍니다.
 
 약 500여개의 보드게임의 정보를 모두 확인하고 선택하기는 쉬운일이 아닙니다. `BOARDMON`은 인원 수, 연령, 게임 플레이 시간, 테마, 난이도에 따른 보드게임을 조회할 수 있습니다. 또한 랭킹, 평점, 리뷰 순으로 정렬하여 인기있는 보드게임을 확인할 수 있습니다.
 
