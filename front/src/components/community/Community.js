@@ -10,6 +10,13 @@ import {
     CssBaseline,
     Divider,
 } from "@mui/material";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import IconButton from "@mui/material/IconButton";
 import * as Api from "../../api";
@@ -67,7 +74,11 @@ function Community() {
                                 alignItems: "center",
                             }}
                         >
-                            <span>자유게시판</span>
+                            <span
+                                style={{ fontSize: "1rem", fontWeight: "700" }}
+                            >
+                                자유게시판
+                            </span>
                             <IconButton
                                 onClick={() =>
                                     navigate("/communitycontents/create")
@@ -76,52 +87,51 @@ function Community() {
                                 <BorderColorIcon />
                             </IconButton>
                         </ListSubheader>
-                        <ListSubheader
-                            component="div"
-                            id="nested-list-subheader"
-                            style={{
-                                textAlign: "center",
-                                width: "100%",
-                                display: "flex",
-                                flexDirection: "row",
-                                justifyContent: "space-between",
-                                padding: "0 5% 0 5%",
-                            }}
-                        >
-                            <span>번호</span>
-                            <span>제목</span>
-                            <span>작성자</span>
-                            <span>날짜</span>
-                        </ListSubheader>
-                        <Divider />
-                        {allContents?.map((content, idx) => (
-                            <ListItemButton
-                                style={{ width: "100%" }}
-                                onClick={() =>
-                                    navigate(
-                                        `/communitycontents/${content._id}`
-                                    )
-                                }
-                            >
-                                <ListItemText
-                                    secondary={idx}
-                                    sx={{ width: 20 }}
-                                />
-                                <ListItemText
-                                    secondary={content.title}
-                                    style={{ textAlign: "center" }}
-                                />
-                                <ListItemText
-                                    secondary={content.author}
-                                    style={{ textAlign: "center" }}
-                                />
-                                <ListItemText
-                                    secondary={content.createdAt.slice(0, 10)}
-                                    style={{ textAlign: "end" }}
-                                />
-                            </ListItemButton>
-                        ))}
                     </List>
+                    <Divider />
+                    <TableContainer component={Paper}>
+                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>번호</TableCell>
+                                    <TableCell align="center">제목</TableCell>
+                                    <TableCell align="center">작성자</TableCell>
+                                    <TableCell align="right">날짜</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {allContents?.map((content, idx) => (
+                                    <TableRow
+                                        key={content.name}
+                                        sx={{
+                                            "&:last-child td, &:last-child th":
+                                                { border: 0 },
+                                        }}
+                                        onClick={() =>
+                                            navigate(
+                                                `/communitycontents/${content._id}`
+                                            )
+                                        }
+                                        style={{ cursor: "pointer" }}
+                                        hover={true}
+                                    >
+                                        <TableCell component="th" scope="row">
+                                            {idx}
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            {content.title}
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            {content.author}
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            {content.createdAt.slice(0, 10)}
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
                 </Box>
             </Container>
         </React.Fragment>

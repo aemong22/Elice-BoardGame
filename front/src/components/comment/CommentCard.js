@@ -9,12 +9,22 @@ import {
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Confirm from "../Confirm";
 import * as Api from "../../api";
 
 function CommentCard({ userName, userId, content, commentId, contentId }) {
     const navigate = useNavigate();
     const [isEditable, setIsEditable] = useState(false);
-    const [isFetchCompleted, setIsFetchCompleted] = useState(false);
+    const [open, setOpen] = useState(false);
+    const confirmTitle = "댓글을 삭제하실 건가요?";
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     const userState = useSelector((state) =>
         state ? state.userReducer.user : undefined
     );
@@ -29,12 +39,10 @@ function CommentCard({ userName, userId, content, commentId, contentId }) {
 
     const handleDelete = async () => {
         try {
-            if (window.confirm("댓글을 삭제하시겠습니까?")) {
-                await Api.delete(
-                    `communitycontents/${contentId}/comment/${commentId}`
-                );
-                navigate(`/communitycontents/${contentId}`);
-            }
+            await Api.delete(
+                `communitycontents/${contentId}/comment/${commentId}`
+            );
+            navigate(`/communitycontents/${contentId}`);
         } catch (error) {
             console.log(error);
         }
@@ -46,9 +54,15 @@ function CommentCard({ userName, userId, content, commentId, contentId }) {
                 action={
                     isEditable && (
                         <>
-                            <IconButton onClick={handleDelete}>
+                            <IconButton onClick={handleClickOpen}>
                                 <DeleteIcon />
                             </IconButton>
+                            <Confirm
+                                open={open}
+                                handleClose={handleClose}
+                                handleDelete={handleDelete}
+                                title={confirmTitle}
+                            />
                         </>
                     )
                 }
