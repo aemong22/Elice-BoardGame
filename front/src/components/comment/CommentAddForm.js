@@ -16,7 +16,7 @@ function CommentAddForm({ contentId }) {
             navigate(`/communitycontents/${contentId}`);
             setComment("");
         } catch (error) {
-            alert("댓글 생성에 실패하였습니다.");
+            toast.err("댓글 생성에 실패하였습니다.");
             console.log(error);
         }
     };

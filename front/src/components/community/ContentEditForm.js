@@ -4,6 +4,7 @@ import { Box, Grid } from "@mui/material";
 import WriteForm from "./WriteForm";
 
 import * as Api from "../../api";
+import { toast } from "react-toastify";
 
 function ContentEditForm({ contents, setContents, setIsEditing, contentId }) {
     console.log(contents);
@@ -18,13 +19,13 @@ function ContentEditForm({ contents, setContents, setIsEditing, contentId }) {
                 title,
                 content,
             });
-            alert("게시글을 수정하였습니다.");
+            toast.info("게시글을 수정하였습니다.");
             setContents((prevState) => {
                 return { ...prevState, title, content };
             });
             setIsEditing(false);
         } catch (error) {
-            alert("게시글 수정을 실패하였습니다.");
+            toast.err("게시글 수정을 실패하였습니다.");
             console.log(error);
         }
     };
