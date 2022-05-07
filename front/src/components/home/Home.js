@@ -31,12 +31,15 @@ function Home() {
         <>
             <div id="main_wrapper">
                 <div id="main_title_wrapper">
-                    <div id="main_title">언제까지 루미큐브만 하실 거예요!!</div>
+                    <div id="main_title">
+                        "아니, 언제까지 루미큐브만 하실 거예요!!"
+                    </div>
                     <div id="subtitle">
                         세상엔 너무 많은 보드게임이 있어 무엇을 골라야 할지
                         고민이 될 때
                         <br />
-                        Boardmon을 통해 보드게임을 추천받고, 선택해보세요.
+                        <span style={{ color: "#A98E64" }}>Boardmon</span>을
+                        통해 보드게임을 추천받고, 선택해보세요.
                     </div>
                     <div id="plus">자세히 보기</div>
                 </div>
