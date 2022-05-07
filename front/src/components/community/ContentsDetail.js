@@ -11,25 +11,14 @@ import {
 } from "@mui/material/";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Confirm from "../Confirm";
 
 const theme = createTheme({
     palette: {
         primary: {
-            main: "#716F6F",
-            darker: "#F4F2EF",
-        },
-        warning: {
-            main: "#CD5642",
-            darker: "#A44636",
-        },
-        neutral: {
-            main: "#64748B",
-            contrastText: "#fff",
+            main: "#A88E66",
+            darker: "#67573F",
         },
     },
 });
@@ -38,7 +27,7 @@ function ContentsDetail({ setIsEditing, isEditable, handleDelete, contents }) {
     const navigate = useNavigate();
     const { title, content, createdAt, author } = contents;
     const [open, setOpen] = useState(false);
-
+    const confirmTitle = "게시글을 삭제하실 건가요?";
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -56,6 +45,7 @@ function ContentsDetail({ setIsEditing, isEditable, handleDelete, contents }) {
                             <Button
                                 size="small"
                                 onClick={() => navigate("/community")}
+                                color="primary"
                             >
                                 목록
                             </Button>
@@ -85,36 +75,12 @@ function ContentsDetail({ setIsEditing, isEditable, handleDelete, contents }) {
                                 <IconButton onClick={() => handleClickOpen()}>
                                     <DeleteIcon />
                                 </IconButton>
-                                <Dialog
+                                <Confirm
                                     open={open}
-                                    onClose={handleClose}
-                                    aria-labelledby="responsive-dialog-title"
-                                >
-                                    <DialogContent sx={{ bgcolor: "#F3F0EC" }}>
-                                        <DialogTitle
-                                            id="alert-dialog-title"
-                                            sx={{ color: "#4C3C2E" }}
-                                        >
-                                            {"게시글을 삭제하시겠습니까?"}
-                                        </DialogTitle>
-                                        <DialogActions>
-                                            <Button
-                                                variant="text"
-                                                color="warning"
-                                                autoFocus
-                                                onClick={handleClose}
-                                            >
-                                                취소
-                                            </Button>
-                                            <Button
-                                                onClick={() => handleDelete()}
-                                                autoFocus
-                                            >
-                                                확인
-                                            </Button>
-                                        </DialogActions>
-                                    </DialogContent>
-                                </Dialog>
+                                    handleClose={handleClose}
+                                    handleDelete={handleDelete}
+                                    title={confirmTitle}
+                                />
                             </>
                         )}
                     </CardActions>
