@@ -19,7 +19,14 @@
 
 #### [Fantastic Board Games: TU Wien DOPP 3 Submission](https://www.kaggle.com/code/bananalee67/fantastic-board-games-tu-wien-dopp-3-submission)
 
--   추천 시스템 참고 코드
+## 데이터 전처리
+
+- Data에서 필요한 feature을 추출 진행
+    - 데이터 셋 축소를 위해 2022년 1월 19일 기준으로 rank 500위 안에 드는 data set을 선별했다.
+    - 축소된 데이터 셋의 보드게임 추천시스템 구축 과 시각화 및 워드 클라우드에 필요한 feature를 선별하여 병합하는 데이터 전처리 과정을 진행했다.(player 수, 게임 time, 랭킹, image URL, 게임 설명, 게임 난이도, 게임 나이 제한, 게임 카테고리, 게임 제작년도 등등)
+- 추천 시스템 구축
+    - Item-based CF을 이용하기 위해 2022년 1월 8일의 랭킹의 500위안에든 게임중 2019년 5월까지 1600만개의 유저가 보드게임에 대한 평가정보를 filtering과정을 진행했다.
+    - 이를 유저 - 게임 에대한 평가의 matrix를 구성하여 cosine similarity를 통해 유사한 게임 5개를 추출하여 새로운 feature로 recommandation list를 만들어 추가하였다. 
 
 ### 사용한 언어 및 프레임워크
 
@@ -160,20 +167,29 @@
 
 ## 6. 데이터 분석 (추천 시스템)
 
--   Collarborative Filtering
+> Collaborative filtering
+- User-based CF(해당 고객이 선호하는 상품들 중에 내가 아직 접하지 않은 상품을 추천하는 방식) 과 Item-based CF(내가 평점을 매긴 상품의 평점들과 유사한 패턴으로 평점을 부여된 상품을 추천하는 방식)
+    - 우리는 `Item-based CF`를 사용한다.
 
-    -   Item-based CF : 게임 사용자들의 매긴 게임 평점들과 유사한 패턴으로 평점이 부여된 보드게임을 추천하는 방식
-    -   가정 : `이전 게임 사용자들이 미래에 동일한 보드게임 성향을 갖는다`
-    -   explicit data collection : 2000년도 부터 2019년 까지 보드게임 사용자들의 댓글을 통한 게임 평저믈 사용
-    -   사용자들의 보드게임 평점을 Vector형식으로 나타내여 보드게임 들의 cosine similarity를 사용하여 비슷한 유형의 게임을 1~5위의 추천 게임 feature을 제공
+- `과거에 동일한 사람들이 미래에 동일한 성향을 갖을 거라는 가정에 기초를 두고있다.`
 
--   문제점
+- 사용자의 행동으로 부터 모델을 만들때 명시적인 형태로 제공가능함
 
-    -   cold star problem : 기존에 게임 사용자가 제공한 평점의 데이터 기반으로 추천하기 때문에, 새로운 보드게임에 대해서는 추천할 수 없는문제 발생 -> 보드게임 랭킹 500안에 있는 2020년 이후의 최신게임은 새로운 카테고리를 통해 정보를 제공하여 해결
-    -   계산 효율 저하 -> 보드 게임 랭킹 500위 안에있는 게임만을 활용하여 계산량을 낮춤
+- 이 모델을 사용함으로써 생기는 문제
+    - cold star 문제 : 기존에 고객이 취했던 평점 데이터기반으로 추천하기 때문에, 신규 게임에 대해서는 추천할 수 없는 문제가 발생한다
+        - 해결방법 : 20년부터 22년의 최신 게임에 대해서는 새로운 DB를 구성하여 제공해준다.
+
+    - long tail 문제 : 사용자들이 관심이 많은 컨텐츠만 보여준다.
+        - 해결방법 : random으로 보여주는 추천게임을 만들어 관심이 없어도 게임을 보여준다.
+
+    - 계산 효율이 저하 
+
+    - 모델의 생성으로 인해 생기는 문제점 해결방안 정리
+     - 2022년기준 rank 500위 안에 생기는 보드게임을 기반으로 data set을 축소하여 추천시스템을 제공한다. 사실 Content-base filtering이 더욱 많은양의 데이터와 계산량이 들어가기 때문에 우리는 Collaborative filtering을 선택했다. 또한 우리는 Item-based CF를 cosine similarity를 사용하여 추천 게임에 대한 근거를 제공할 수 있는 모델을 선택했다. 위에 언급한 cold star문제와 long tail문제를 해결하기 위해 제작한 홈페이지에 해결방안을 접목하여 디자인했다.
+
 
 -   if 시간이 충분했다면...
-    -   최근 추천시스템은 content-base filtering과 collaborative filtering을 합친 hybrid 시스템을 많이 사용한다. 또는 Machine Learning을 활용한 추천시스템을 제작할 수 있다. hybrid 시스템의 경우에는 추천시스템의 제작의 목적에 따라 다양한 ensemble방법들이 존재하고, 구체적인 방법론 보다는 직관에 의존한 방법론이 많았다. 저희팀은 content-base filtering과 collaborative filtering을 구현했지만 수치적으로 타당하게 근거를 줄 수 있는 collaborative filtering을 선택했다. 그리고 Machine Learning을 확실하게 적용하기 위해서는 data에 대한 domain지식이 충분해야한다. 그러나 kaggle data는 미국 사용자에 대한 정보로 model을 구성해야 하기 때문에 data를 한국사람의 data로 대표할 수 없고, 보드게임에 대한 구체적인 domain 지식이 부족했다. 따라서 정확한 모델을 만들 수 없고, 모델을 제작한다 하더라도 python을 js에서 동작하는 지식이 부족했다. 위의 두가지 문제를 해결한다면 한국인에 더 친화적인 model을 만들 수 있다 생각한다.
+    -   최근 추천시스템은 content-base filtering과 collaborative filtering을 합친 hybrid 시스템을 많이 사용한다. 또는 Machine Learning을 활용한 추천시스템을 제작할 수 있다. hybrid 시스템의 경우에는 추천시스템의 제작의 목적에 따라 다양한 ensemble방법들이 우리팀은 content-base filtering과 collaborative filtering을 구현했지만 수치적으로 타당하게 근거를 줄 수 있는 collaborative filtering을 선택했다. 그리고 Machine Learning을 확실하게 적용하기 위해서는 data에 대한 domain지식이 충분해야한다. 그러나 kaggle data는 미국 사용자에 대한 정보로 model을 구성해야 하기 때문에 data를 한국사람의 data로 대표할 수 없고, 보드게임에 대한 구체적인 domain 지식이 부족했다. 따라서 정확한 모델을 만들 수 없고, 모델을 제작한다 하더라도 python을 js에서 동작하는 지식이 부족했다. 위의 두가지 문제를 해결한다면 한국인에 더 친화적인 추천 model을 만들 수 있다 생각한다.
 
 ## 7. word cloud
 
