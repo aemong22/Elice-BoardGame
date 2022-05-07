@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
     CssBaseline,
     Box,
@@ -6,6 +7,7 @@ import {
     Fab,
     Modal,
     IconButton,
+    Button,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -21,6 +23,7 @@ function DetailContents({ gameData, recommendData }) {
     const [favoriteToggle, setFavoriteToggle] = useState(gameData.favorite);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const navigate = useNavigate();
 
     const favoriteHandler = async () => {
         try {
@@ -28,7 +31,6 @@ function DetailContents({ gameData, recommendData }) {
                 boardgameId: gameData.game_id,
                 toggle: !favoriteToggle,
             }).then(() => {
-                console.log("favorite: ", !favoriteToggle);
                 setFavoriteToggle(!favoriteToggle);
             });
         } catch (err) {
@@ -63,14 +65,18 @@ function DetailContents({ gameData, recommendData }) {
                     >
                         <div className="container-top">
                             <div className="container-top-left">
-                                <div
-                                    className="image"
-                                    style={{
-                                        backgroundImage: `url("${gameData.image}")`,
-                                        backgroundColor: "red",
+                                <Button
+                                    variant="contained"
+                                    onClick={() => navigate("/boardgame")}
+                                    sx={{
+                                        borderRadius: "100px",
+                                        m: "3%",
                                     }}
                                 >
-                                    {/* <img
+                                    뒤로가기
+                                </Button>
+                                <div className="image">
+                                    <img
                                         style={{
                                             width: "100%",
                                             height: "100%",
@@ -79,7 +85,7 @@ function DetailContents({ gameData, recommendData }) {
                                         }}
                                         src={gameData.image}
                                         alt={gameData.game_name}
-                                    /> */}
+                                    />
                                 </div>
                             </div>
                             <div className="container-top-right">
@@ -132,9 +138,21 @@ function DetailContents({ gameData, recommendData }) {
                             </div>
                         </div>
                         <div className="container-middle">
-                            <DoughnutChart field={"랭킹"} value={gameData.rank} totalValue={500}/>
-                            <DoughnutChart field={"평점"} value={gameData.average_rating} totalValue={10}/>
-                            <DoughnutChart field={"리뷰"}  value={gameData.user_rated} totalValue={0}/>
+                            <DoughnutChart
+                                field={"랭킹"}
+                                value={gameData.rank}
+                                totalValue={500}
+                            />
+                            <DoughnutChart
+                                field={"평점"}
+                                value={gameData.average_rating}
+                                totalValue={10}
+                            />
+                            <DoughnutChart
+                                field={"리뷰"}
+                                value={gameData.user_rated}
+                                totalValue={0}
+                            />
                         </div>
                         <div className="container-bottom">
                             <DetailTab

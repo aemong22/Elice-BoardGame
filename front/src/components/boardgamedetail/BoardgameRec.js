@@ -26,12 +26,13 @@ function BoardgameRec({ recommendData }) {
     return (
         <Coverflow
             width="100%"
-            height="250"
+            height="240"
             displayQuantityOfSide={2}
-            navigation={false}
-            enableScroll={true}
+            navigation={true}
+            enableScroll={false}
             clickable={true}
-            active={0}
+            currentFigureScale={1}
+            otherFigureScale={0.9}
         >
             {recommendGames}
         </Coverflow>
