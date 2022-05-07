@@ -205,7 +205,8 @@ class userAuthService {
     //redis 토큰 생성
     static async redisToken({ email }) {
         const user = await UserModel.findOne({ email });
-        const CLIENT_BASE_URL = "elice-kdt-ai-4th-team11.elicecoding.com";
+        const CLIENT_BASE_URL =
+            "http://elice-kdt-ai-4th-team11.elicecoding.com";
 
         if (!user) {
             const errorMessage =
