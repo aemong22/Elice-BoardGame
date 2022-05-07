@@ -56,7 +56,7 @@ function Header() {
                             <ul className="home">
                                 <li onClick={() => navigate("/")}>
                                     <Button variant="text" color="primary">
-                                        BoardMon
+                                        <div className='home-logo' />
                                     </Button>
                                 </li>
                             </ul>
