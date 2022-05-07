@@ -7,6 +7,7 @@ import { loginUser } from "../../store/actions/userAction";
 import { useNavigate } from "react-router-dom";
 import { Button, Grid, TextField, Box } from "@mui/material";
 import OAuthBtn from "./OAuthBtn";
+import { toast } from "react-toastify";
 
 function LoginForm({ handleClose }) {
     const [findPW, setFindPW] = useState(false);
@@ -50,7 +51,7 @@ function LoginForm({ handleClose }) {
 
             navigate("/", { replace: true });
         } catch (err) {
-            alert("이메일 또는 비밀번호가 유효하지 않습니다.");
+            toast.error("이메일 또는 비밀번호가 유효하지 않습니다.");
         }
         console.log(email, password);
     };
@@ -64,16 +65,16 @@ function LoginForm({ handleClose }) {
             });
 
             if (reset.data.status === "Success") {
-                alert("메일을 전송했습니다.");
+                toast.info("메일을 전송했습니다.");
                 // 로그인 페이지로 이동함.
                 setFindPW(false);
             } else if (reset.data === false) {
-                alert("구글 로그인입니다.");
+                toast.info("구글 로그인입니다.");
             } else {
-                alert("존재하지 않는 이메일입니다.");
+                toast.error("존재하지 않는 이메일입니다.");
             }
         } catch (err) {
-            alert("존재하지 않는 이메일입니다.");
+            toast.error("존재하지 않는 이메일입니다.");
             console.log("비밀번호 전송에 실패했습니다.", err);
         }
     };

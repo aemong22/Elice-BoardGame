@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { Container, Box, Grid } from "@mui/material";
 import { MyButton, MyButton2 } from "./CommunityStyle";
 import WriteForm from "./WriteForm";
+import { toast } from "react-toastify";
 
 import * as Api from "../../api";
 
@@ -18,10 +19,10 @@ function ContentAddForm() {
                 title,
                 content,
             });
-            alert("게시글 등록을 성공하였습니다.");
+            toast.info("게시글 등록을 성공하였습니다.");
             navigate(`/community`);
         } catch (error) {
-            alert("게시글 등록에 실패하였습니다.", error);
+            toast.error("게시글 등록에 실패하였습니다.", error);
         }
     };
 

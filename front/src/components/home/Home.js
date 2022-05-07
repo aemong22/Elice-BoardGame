@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import "./Home.css";
 import Chart from "./Chart";
@@ -40,7 +41,9 @@ function Home() {
                         <br />
                         Boardmon을 통해 보드게임을 추천받고, 선택해보세요.
                     </div>
-                    <div id="plus">자세히 보기</div>
+                    <Button id="plus" onClick={() => navigate("/boardgame")}>
+                        자세히 보기
+                    </Button>
                 </div>
 
                 <div id="main_visual_wrapper">
