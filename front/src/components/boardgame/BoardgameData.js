@@ -63,6 +63,7 @@ function BoardgameData({ condition, changeCondition, search }) {
         setTotalPage(res.data.totalPage);
       });
     } catch (err) {
+      alert("일치하는 보드게임이 없습니다.");
       console.log("errer message: ", err);
     }
   };
