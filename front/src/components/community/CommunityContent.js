@@ -46,10 +46,8 @@ function CommunityContent() {
 
     const handleDelete = async () => {
         try {
-            if (window.confirm("게시글을 삭제하시겠습니까?")) {
-                await Api.delete(`communitycontents/${params.id}/delete`);
-                navigate("/community");
-            }
+            await Api.delete(`communitycontents/${params.id}/delete`);
+            navigate("/community");
         } catch (error) {
             console.log(error);
         }
