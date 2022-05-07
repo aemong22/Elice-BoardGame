@@ -24,7 +24,7 @@ function CommunityContent() {
     const fetchContentInfo = async (contentId) => {
         try {
             const res = await Api.get("communitycontents", contentId);
-            if (res.data?.author === userState?.user_name) {
+            if (res.data?.userId === userState?._id) {
                 setIsEditable(true);
             } else {
                 setIsEditable(false);
@@ -35,6 +35,9 @@ function CommunityContent() {
             console.log(error);
         }
     };
+    useEffect(() => {
+        console.log(contents);
+    }, [contents]);
 
     useEffect(() => {
         fetchContentInfo(contentId);
@@ -46,10 +49,8 @@ function CommunityContent() {
 
     const handleDelete = async () => {
         try {
-            if (window.confirm("게시글을 삭제하시겠습니까?")) {
-                await Api.delete(`communitycontents/${params.id}/delete`);
-                navigate("/community");
-            }
+            await Api.delete(`communitycontents/${params.id}/delete`);
+            navigate("/community");
         } catch (error) {
             console.log(error);
         }

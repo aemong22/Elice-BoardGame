@@ -48,6 +48,20 @@ function Member() {
 
     return (
         <div className="member-container">
+            <div
+                style={{
+                    width: "100%",
+                    textAlign: "center",
+                    fontSize: "2.5rem",
+                    fontWeight: "600",
+                    color: "#4c3c2e",
+                }}
+            >
+                [어? 이게 되네??] 팀원 소개{" "}
+                <span style={{ fontSize: "1.5rem", color: "#A98E64" }}>
+                    #도라에몽과 5진구들
+                </span>
+            </div>
             <div className="member-background">
                 <div className="member-sizer"></div>
 

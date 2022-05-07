@@ -28,8 +28,11 @@ function TagBtn({ gameData }) {
             {tagData.map((tag) => (
                 <Button
                     variant="outlined"
-                    disabled
-                    sx={{ fontSize: "0.5rem", borderRadius: "100px", m: "2px" }}
+                    sx={{
+                        fontSize: "0.5rem",
+                        borderRadius: "100px",
+                        m: "2px",
+                    }}
                     key={tag}
                 >
                     {tag}

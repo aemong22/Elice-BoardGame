@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { categoryData } from "./BoardgameCategoryData"
+import { categoryData } from "./BoardgameCategoryData";
 import * as Api from "../../api";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -28,7 +28,8 @@ function BoardgameCard({
     const navigate = useNavigate();
     const [favoriteToggle, setFavoriteToggle] = useState(favorite);
     const maxLength = 13;
-    const boardgameName = name.length > maxLength ? name.substr(0, maxLength) + "..." : name;
+    const boardgameName =
+        name.length > maxLength ? name.substr(0, maxLength) + "..." : name;
 
     const tagData = [
         min_player === max_player
@@ -48,17 +49,22 @@ function BoardgameCard({
                 boardgameId: id,
                 toggle: !favoriteToggle,
             }).then(() => {
-                console.log("favorite: ", !favoriteToggle)
-                setFavoriteToggle(!favoriteToggle); 
+                console.log("favorite: ", !favoriteToggle);
+                setFavoriteToggle(!favoriteToggle);
             });
         } catch (err) {
             console.log("errer message: ", err);
-          }
+        }
     };
 
     return (
         <div style={{ width: 250, margin: 50 }}>
-            <Card sx={{ width: '100%', boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",}}>
+            <Card
+                sx={{
+                    width: "100%",
+                    boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                }}
+            >
                 <CardActionArea
                     onClick={() => navigate(`/boardgame/detail/${id}`)}
                 >
@@ -77,35 +83,43 @@ function BoardgameCard({
                                 justifyContent: "space-between",
                             }}
                         >
-                            <Typography gutterBottom variant="h6" component="span">
+                            <Typography
+                                gutterBottom
+                                variant="h6"
+                                component="span"
+                            >
                                 {boardgameName}
                             </Typography>
                         </div>
                         <div style={{ height: 100, alignItems: "start" }}>
-                        {tagData.map((tag) => (
-                            <Button
-                            variant="outlined"
-                            disabled
-                            sx={{ fontSize: "0.5rem", borderRadius: "100px", m: "2px" }}
-                            key={tag}
-                            >
-                            {tag}
-                            </Button>
-                        ))}
+                            {tagData.map((tag) => (
+                                <Button
+                                    variant="outlined"
+                                    sx={{
+                                        fontSize: "0.5rem",
+                                        borderRadius: "100px",
+                                        m: "2px",
+                                    }}
+                                    key={tag}
+                                >
+                                    {tag}
+                                </Button>
+                            ))}
                         </div>
                     </CardContent>
                 </CardActionArea>
             </Card>
             <IconButton
-                sx={{ position: 'relative', left: 200, top: -160, color: "#FF5A5A" }}
+                sx={{
+                    position: "relative",
+                    left: 200,
+                    top: -160,
+                    color: "#FF5A5A",
+                }}
                 aria-label="add to favorites"
                 onClick={favoriteHandler}
-                >
-                {favoriteToggle ? (
-                    <FavoriteIcon />
-                ) : (
-                    <FavoriteBorderIcon />
-                )}
+            >
+                {favoriteToggle ? <FavoriteIcon /> : <FavoriteBorderIcon />}
             </IconButton>
         </div>
     );
