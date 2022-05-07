@@ -14,6 +14,7 @@ import TagBtn from "./TagBtn";
 import DetailTab from "./DetailTab";
 import * as Api from "../../api";
 import "./DetailContents.css";
+import DoughnutChart from "./DoughnutChart";
 
 function DetailContents({ gameData, recommendData }) {
     const [open, setOpen] = useState(false);
@@ -128,7 +129,11 @@ function DetailContents({ gameData, recommendData }) {
                                 </div>
                             </div>
                         </div>
-
+                        <div className="container-middle">
+                            <DoughnutChart field={"랭킹"} value={gameData.rank} totalValue={500}/>
+                            <DoughnutChart field={"평점"} value={gameData.average_rating} totalValue={10}/>
+                            <DoughnutChart field={"리뷰"}  value={gameData.user_rated} totalValue={0}/>
+                        </div>
                         <div className="container-bottom">
                             <DetailTab
                                 gameData={gameData}
