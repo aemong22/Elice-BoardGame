@@ -37,10 +37,6 @@ function Community() {
     };
 
     useEffect(() => {
-        console.log(allContents);
-    }, [allContents]);
-
-    useEffect(() => {
         fetchContentsInfo();
     }, []);
 
