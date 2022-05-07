@@ -29,7 +29,12 @@
 
 .detail_title {
     font-size: 2.5rem;
-    margin-left: 100px;
     font-weight: 700;
     color: #4c3c2e;
+}
+
+.detail_subtitle {
+    color: gray;
+    font-size: 1.5rem;
+    margin-bottom: 1%;
 }

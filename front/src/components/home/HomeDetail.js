@@ -4,7 +4,18 @@ function HomeDetail() {
     return (
         <>
             <div id="detail_wrapper_top">
-                <div className="detail_title">원하는 인원수로</div>
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                    }}
+                >
+                    <div className="detail_title">보드게임 메이트 찾기</div>
+                    <div className="detail_subtitle">
+                        Boardmon에서 보드게임 메이트를 구해보세요.
+                    </div>
+                </div>
                 <img
                     alt="친구끼리 보드게임"
                     src="/image/detail_visual.png"
@@ -17,10 +28,33 @@ function HomeDetail() {
                     src="/image/detail_visual2.png"
                     style={{ width: "40%" }}
                 />
-                <div className="detail_title">400여종의 보드게임</div>
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                    }}
+                >
+                    <div className="detail_title">500여종의 보드게임</div>
+                    <div className="detail_subtitle">
+                        최신게임부터 띵작까지 원하는 테마별로
+                    </div>
+                </div>
             </div>
             <div id="detail_wrapper_bottom">
-                <div className="detail_title">이젠 뭘 적어야 하나</div>
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                    }}
+                >
+                    <div className="detail_title">원하는 인원 수로</div>
+                    <div className="detail_subtitle">
+                        인원 수 말고도 다양한 카테고리를 보고 싶다면 아래를
+                        눌러보세요!
+                    </div>
+                </div>
                 <img
                     alt="보드게임 가족끼리"
                     src="/image/detail_visual3.png"
