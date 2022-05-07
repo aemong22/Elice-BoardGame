@@ -70,7 +70,7 @@ function DetailContents({ gameData, recommendData }) {
                                     onClick={() => navigate("/boardgame")}
                                     sx={{
                                         borderRadius: "100px",
-                                        m: "3%",
+                                        m: "2% 0 5% 0",
                                     }}
                                 >
                                     뒤로가기
@@ -116,6 +116,7 @@ function DetailContents({ gameData, recommendData }) {
                                             size="medium"
                                             color="primary"
                                             aria-label="add"
+                                            style={{ zIndex: "10" }}
                                         >
                                             <AddIcon onClick={handleOpen} />
                                         </Fab>
