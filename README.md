@@ -118,7 +118,7 @@
 
 ### Home
 
-![home](https://user-images.githubusercontent.com/55802893/167116794-c40f3576-118d-4313-a69e-e0a401e969fc.png)
+![home2](https://user-images.githubusercontent.com/55802893/167263432-13841cbc-cfca-45be-a13a-91ce72249fa4.png)
 
 -   사용자가 로그인한 후 만나게 되는 페이지 입니다.
 -   매년 출시된 보드게임의 수를 확인할 수 있습니다.
@@ -126,10 +126,18 @@
 
 ### Mypage & logout
 
-![mypage](https://user-images.githubusercontent.com/55802893/167118287-857e0116-1482-42e1-927e-2cb195e87f3a.png)
+![mypage2](https://user-images.githubusercontent.com/55802893/167263568-d6f2daf7-10d0-4785-b97e-d6277fcbed9e.png)
 
 -   오른쪽 상단 프로필을 누르게 되면 Mypage와 logout 버튼을 누를 수 있습니다.
 -   Mypage에서는 사용자의 정보를 수정할 수 있고, favorite에서 사용자가 찜(하트)한 보드게임을 확인할 수 있습니다.
+
+### Boardgame
+
+![boardgame](https://user-images.githubusercontent.com/55802893/167263621-ea69f872-d388-4719-98fd-cf5ccd4d57de.png)
+
+-   무작위로 추천되는 보드게임을 확인할 수 있습니다.
+-   원하는 조건에 따른 보드게임을 볼 수 있습니다.
+-   하트를 눌러 보드게임을 찜할 수 있고 마이 페이지에서 찜한 보드게임을 확인할 수 있습니다.
 
 ## 5. 프로젝트 팀원 역할 분담
 
