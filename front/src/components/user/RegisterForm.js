@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Api from "../../api";
 import { Button, Grid, TextField, Box } from "@mui/material";
+import { toast } from "react-toastify";
 import "./user.css";
 
 function RegisterForm({ setRegister, handleClose }) {
@@ -45,7 +46,7 @@ function RegisterForm({ setRegister, handleClose }) {
             // 페이지 이동 loginForm으로 이동할 수 있게 수정하기
             navigate("/");
         } catch (err) {
-            alert("회원가입에 실패하였습니다.", err);
+            toast.error("회원가입에 실패하였습니다.", err);
         }
     };
 

@@ -56,7 +56,7 @@ function Header() {
                             <ul className="home">
                                 <li onClick={() => navigate("/")}>
                                     <Button variant="text" color="primary">
-                                        BoardMon
+                                        <div className='home-logo' />
                                     </Button>
                                 </li>
                             </ul>
@@ -71,7 +71,7 @@ function Header() {
                                     <Grid
                                         id="profile"
                                         style={{
-                                            backgroundImage: `url(https://pinkpig-bucket.s3.ap-northeast-2.amazonaws.com/${ownerData?.image}.png)`,
+                                            backgroundImage: `url(https://elice-boardgame-project.s3.ap-northeast-2.amazonaws.com/${ownerData?.image}.png)`,
                                             backgroundSize: "100% 100%",
                                             backgroundRepeat: "no-repeat",
                                             float: "left",

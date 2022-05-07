@@ -3,6 +3,13 @@ import * as Api from "../../api";
 import { StylesProvider } from "@material-ui/core";
 import AWS from "aws-sdk";
 import PersonIcon from "@mui/icons-material/Person";
+import { toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
+
+// CALL IT ONCE IN YOUR APP
+if (typeof window !== "undefined") {
+    injectStyle();
+}
 
 import {
     MyBox,
@@ -15,7 +22,6 @@ import {
     MyButton,
     GoogleTitle,
 } from "./ProfileStyle";
-import { useEffect } from "react";
 
 function Profile({ ownerData, setOwnerData }) {
     const region = "ap-northeast-2";
@@ -47,11 +53,13 @@ function Profile({ ownerData, setOwnerData }) {
         const promise = upload.promise();
         promise.then(
             function () {
-                alert("이미지 업로드에 성공했습니다.");
-                window.location.reload();
+                toast.info("이미지 업로드에 성공했습니다.");
+                window.setTimeout(function () {
+                    location.reload();
+                }, 2000);
             },
             function (err) {
-                return console.log("오류가 발생했습니다: ", err);
+                return toast.error("이미지 업로드에 실패하였습니다.");
             }
         );
     };
@@ -83,7 +91,7 @@ function Profile({ ownerData, setOwnerData }) {
         setPassword("");
         setConfirmPassword("");
 
-        alert("정보를 수정했습니다.");
+        toast.info("정보를 수정하였습니다.");
     };
 
     return (

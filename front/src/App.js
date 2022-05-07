@@ -19,6 +19,7 @@ import CommunityContent from "./components/community/CommunityContent";
 import ContentAddForm from "./components/community/ContentAddForm";
 
 import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
 
 function App() {
     // 유저 로그인 상태 관련 코드 추가하기
@@ -60,6 +61,13 @@ function App() {
 
     return (
         <Router>
+            <ToastContainer
+                autoClose={3000}
+                style={{
+                    width: "400px",
+                    fontSize: "20px",
+                }}
+            />
             <Header />
             <Routes>
                 <Route path="/" exact element={<Home />} />

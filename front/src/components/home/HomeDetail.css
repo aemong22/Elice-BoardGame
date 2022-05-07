@@ -32,3 +32,14 @@
     margin-left: 100px;
     font-weight: 700;
 }
+
+#plus {
+    background-color: #ffffff;
+    border:none;
+}
+
+#plus:hover {
+    border:solid 1px gray;
+    background-color: #ffffff;
+  }
+
