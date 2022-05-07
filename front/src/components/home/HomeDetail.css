@@ -39,3 +39,14 @@
     font-size: 1.5rem;
     margin-bottom: 1%;
 }
+
+#plus {
+    background-color: #ffffff;
+    border:none;
+}
+
+#plus:hover {
+    border:solid 1px gray;
+    background-color: #ffffff;
+  }
+

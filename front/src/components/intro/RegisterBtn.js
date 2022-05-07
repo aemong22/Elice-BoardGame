@@ -47,7 +47,7 @@ const IOSSwitch = styled((props) => (
         boxSizing: "border-box",
         width: 130,
         height: 50,
-        borderRadius: 30 / 1,
+        borderRadius: 17 / 1,
     },
     "& .MuiSwitch-thumb:before": {
         content: "'Get started'",
