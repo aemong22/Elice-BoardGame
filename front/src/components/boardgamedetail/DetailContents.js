@@ -27,12 +27,12 @@ function DetailContents({ gameData, recommendData }) {
                 boardgameId: gameData.game_id,
                 toggle: !favoriteToggle,
             }).then(() => {
-                console.log("favorite: ", !favoriteToggle)
-                setFavoriteToggle(!favoriteToggle); 
+                console.log("favorite: ", !favoriteToggle);
+                setFavoriteToggle(!favoriteToggle);
             });
         } catch (err) {
             console.log("errer message: ", err);
-          }
+        }
     };
 
     const style = {
@@ -89,7 +89,9 @@ function DetailContents({ gameData, recommendData }) {
                                             onClick={favoriteHandler}
                                         >
                                             {favoriteToggle ? (
-                                                <FavoriteIcon />
+                                                <FavoriteIcon
+                                                    sx={{ color: "#FF5A5A" }}
+                                                />
                                             ) : (
                                                 <FavoriteBorderIcon />
                                             )}
