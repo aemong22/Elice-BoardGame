@@ -17,9 +17,32 @@ import Header from "./components/Header";
 import Community from "./components/community/Community";
 import CommunityContent from "./components/community/CommunityContent";
 import ContentAddForm from "./components/community/ContentAddForm";
-
 import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+    palette: {
+        // primary: {
+
+        // },
+        default: {
+            main: "#716F6F",
+            darker: "#F4F2EF",
+        },
+        warning: {
+            main: "#CD5642",
+            darker: "#A44636",
+        },
+        neutral: {
+            main: "#A88E66",
+            contrastText: "#67573F",
+        },
+    },
+    typography: {
+        fontFamily: "'Jua', sans-serif",
+    },
+});
 
 function App() {
     // 유저 로그인 상태 관련 코드 추가하기
@@ -60,55 +83,61 @@ function App() {
     }
 
     return (
-        <Router>
-            <ToastContainer
-                autoClose={3000}
-                style={{
-                    width: "400px",
-                    fontSize: "20px",
-                }}
-            />
-            <Header />
-            <Routes>
-                <Route path="/" exact element={<Home />} />
-                <Route path="/intro" exact element={<Intro />} />
-                <Route path="/pwlink/:rtoken" exact element={<PwLink />} />
-                {userState && (
-                    <>
-                        <Route
-                            path="/boardgame/detail/:id"
-                            exact
-                            element={<BoardgameDetail />}
-                        />
-                        <Route
-                            path="/boardgame"
-                            exact
-                            element={<Boardgame />}
-                        />
-                        <Route path="/mypage" exact element={<Mypage />} />
-                        <Route path="/profile" exact element={<Profile />} />
-                        <Route
-                            path="/community"
-                            exact
-                            element={<Community />}
-                        />
-                        <Route
-                            path="/communitycontents/:id"
-                            exact
-                            element={<CommunityContent />}
-                        />
-                        <Route
-                            path="/communitycontents/create"
-                            exact
-                            element={<ContentAddForm />}
-                        />
-                    </>
-                )}
-                <Route path="/register" exact element={<RegisterForm />} />
-                <Route path="/oauth" exact element={<GoogleLoading />} />
-                <Route path="*" element={<Home />} />
-            </Routes>
-        </Router>
+        <ThemeProvider theme={theme}>
+            <Router>
+                <ToastContainer
+                    autoClose={3000}
+                    style={{
+                        width: "400px",
+                        fontSize: "20px",
+                    }}
+                />
+                <Header />
+                <Routes>
+                    <Route path="/" exact element={<Home />} />
+                    <Route path="/intro" exact element={<Intro />} />
+                    <Route path="/pwlink/:rtoken" exact element={<PwLink />} />
+                    {userState && (
+                        <>
+                            <Route
+                                path="/boardgame/detail/:id"
+                                exact
+                                element={<BoardgameDetail />}
+                            />
+                            <Route
+                                path="/boardgame"
+                                exact
+                                element={<Boardgame />}
+                            />
+                            <Route path="/mypage" exact element={<Mypage />} />
+                            <Route
+                                path="/profile"
+                                exact
+                                element={<Profile />}
+                            />
+                            <Route
+                                path="/community"
+                                exact
+                                element={<Community />}
+                            />
+                            <Route
+                                path="/communitycontents/:id"
+                                exact
+                                element={<CommunityContent />}
+                            />
+                            <Route
+                                path="/communitycontents/create"
+                                exact
+                                element={<ContentAddForm />}
+                            />
+                        </>
+                    )}
+                    <Route path="/register" exact element={<RegisterForm />} />
+                    <Route path="/oauth" exact element={<GoogleLoading />} />
+                    <Route path="*" element={<Home />} />
+                </Routes>
+            </Router>
+        </ThemeProvider>
     );
 }
 

@@ -31,17 +31,6 @@
     margin-bottom: 1%;
 }
 
-#plus {
-    width: 150px;
-    height: 40px;
-    margin-top: 15px;
-    border: 2px solid gray;
-    border-radius: 15px;
-    line-height: 40px;
-    font-size: 1rem;
-    color: gray;
-}
-
 #main_visual_wrapper {
     width: 100%;
     display: flex;

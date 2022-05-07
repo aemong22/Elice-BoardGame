@@ -66,13 +66,13 @@ function CommentCard({ userName, userId, content, commentId, contentId }) {
                         </>
                     )
                 }
-                title={userName}
+                subheader={userName}
             />
 
             <CardContent>
                 <Typography
                     sx={{ fontSize: 14 }}
-                    color="text.secondary"
+                    color="text.primary"
                     gutterBottom
                 >
                     {content}

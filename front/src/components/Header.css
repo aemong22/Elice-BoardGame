@@ -69,4 +69,5 @@ nav {
     height: var(--logo-size);
     background-image: url("/public/image/monster.png");
     background-size: cover;
+    margin-right: 10px;
 }

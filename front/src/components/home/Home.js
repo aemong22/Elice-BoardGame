@@ -42,7 +42,12 @@ function Home() {
                         <span style={{ color: "#A98E64" }}>Boardmon</span>을
                         통해 보드게임을 추천받고, 선택해보세요.
                     </div>
-                    <Button id="plus" onClick={() => navigate("/boardgame")}>
+                    <Button
+                        size="large"
+                        variant="outlined"
+                        color="default"
+                        onClick={() => navigate("/boardgame")}
+                    >
                         자세히 보기
                     </Button>
                 </div>
