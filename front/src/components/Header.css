@@ -63,3 +63,10 @@ nav {
     padding: 10px;
     width: 120px;
 }
+
+.home-logo {
+    width: var(--logo-size);
+    height: var(--logo-size);
+    background-image: url("/public/image/monster.png");
+    background-size: cover;
+}
