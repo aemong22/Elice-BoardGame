@@ -6,8 +6,6 @@
 -   송가람
 -   안민영
 
-## MVP(Minimum Viable Product)
-
 ## 폴더 구조
 
 ```shell
@@ -53,6 +51,10 @@ mypage에서는 사용자 정보를 수정할 수 있습니다. 사용자의 개
 
 ### store
 
-dispatch -> action으로 전역 선택을 만들어줌
+Action에 따라 reducer에서 새로운 상태를 업데이트 하고 store에 저장합니다. store의 상태는 변하지 않으며, action이 발생할 때마다 새로운 객체가 만들어 집니다.
 
 ## 적용된 기술 및 기능
+
+-   redux 사용
+-   mui css 사용
+-   react-chartjs로 그래프 그리기
