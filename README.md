@@ -92,7 +92,7 @@
 
 ## 3. 프로젝트 기능 설명
 
-`BOARDMON`은 사람들과 함께 집에서 시간을 보낼 수 있는 하나의 방향성을 제시하여, 즐거움을 선사합니다. 보드게임에 대해 잘 모르는 입문자도 쉽게 접근할 수 있습니다. 또한 보드게임을 이미 많이 해보신 분들에게는 카테고리에 맞는 보드게임을 추천함으로써 다양한 보드게임을 접하게 해주며, 선택하는데 어려움을 줄여줍니다.
+### 카테고리에 따른 보드게임 조회
 
 약 500여개의 보드게임의 정보를 모두 확인하고 선택하기는 쉬운일이 아닙니다. `BOARDMON`은 인원 수, 연령, 게임 플레이 시간, 테마, 난이도에 따른 보드게임을 조회할 수 있습니다. 또한 랭킹, 평점, 리뷰 순으로 정렬하여 인기있는 보드게임을 확인할 수 있습니다.
 
@@ -112,31 +112,24 @@
 
 ### Intro
 
-<img width="1512" alt="스크린샷 2022-04-29 오후 5 05 31" src="https://user-images.githubusercontent.com/55802893/165907289-64001600-b2e2-4a50-89ad-09bb3607d0a3.png">
+![user](https://user-images.githubusercontent.com/55802893/167119226-d1059ef0-fd9d-474e-831f-e63c2c0bd3be.png)
 
--   사용자가 서비스에 입장 시 가장 먼저 만나는 화면입니다.
+-   intro 페이지에서 Get stated를 누르게되면 일반 로그인, 구글 로그인, 회원가입, 비밀번호 찾기 동작을 할 수 있습니다.
 
-### Login
+### Home
 
-<img width="922" alt="스크린샷 2022-04-29 오후 5 05 51" src="https://user-images.githubusercontent.com/55802893/165907349-7b94924e-5df9-4535-b757-3c77f05069d4.png">
+![home](https://user-images.githubusercontent.com/55802893/167116794-c40f3576-118d-4313-a69e-e0a401e969fc.png)
 
-<img width="711" alt="스크린샷 2022-04-29 오후 5 13 55" src="https://user-images.githubusercontent.com/55802893/165907984-941ef5bd-a1ce-432d-bd32-0ef0f48a7343.png">
+-   사용자가 로그인한 후 만나게 되는 페이지 입니다.
+-   매년 출시된 보드게임의 수를 확인할 수 있습니다.
+-   서비스를 개발한 개발자들의 한마디를 볼 수 있습니다.
 
--   사용자 로그인 및 회원가입 화면 입니다.
+### Mypage & logout
 
-### Main Page
+![mypage](https://user-images.githubusercontent.com/55802893/167118287-857e0116-1482-42e1-927e-2cb195e87f3a.png)
 
-<img width="1512" alt="스크린샷 2022-04-29 오후 5 06 39" src="https://user-images.githubusercontent.com/55802893/165907446-22eff141-122b-4392-87b4-4f9f60628c47.png">
-
-<img width="1509" alt="스크린샷 2022-04-29 오후 5 06 54" src="https://user-images.githubusercontent.com/55802893/165907485-0db78dd7-8dfe-46b1-b319-8976c657382c.png">
-
--   로그인 후 보게되는 페이지입니다.
-
-### Boardgame Page
-
-<img width="1490" alt="스크린샷 2022-04-29 오후 5 07 50" src="https://user-images.githubusercontent.com/55802893/165907515-df403681-0f0c-43b4-addd-2e8b5bbc5894.png">
-
--   조건에 따른 보드게임을 조회할 수 있는 페이지입니다.
+-   오른쪽 상단 프로필을 누르게 되면 Mypage와 logout 버튼을 누를 수 있습니다.
+-   Mypage에서는 사용자의 정보를 수정할 수 있고, favorite에서 사용자가 찜(하트)한 보드게임을 확인할 수 있습니다.
 
 ## 5. 프로젝트 팀원 역할 분담
 
@@ -245,8 +238,6 @@ Board game의 description을 이용해서 각 게임마다 word cloud를 생성�
 사용자가 비밀번호를 기억하지 못해 비밀번호 초기화가 필요한 경우 사용자의 메일로 비밀번호를 변경할 링크를 보내줍니다. Reset token을 사용해서 5분 내에 링크에 접속해 비밀번호를 변경하는 방식입니다. Redis를 AWS ElasticCache에 설치해 사용하려고 했으나 AWS 내부에서만 접근이 가능해 기능 구현을 위해서는 redis를 EC2에 설치해서 사용해야 했습니다. 하지만 EC2에 설치 후 테스트 과정에서 연결이 끊기거나 EC2에 접속이 안되는 이슈가 발생했습니다.
 
 EC2 연결 오류가 발생하면 서버를 새로 생성해 연결하는 방식으로 해결했습니다.
-
-### react rendering 관련 어려움
 
 ## 9. 버전
 
