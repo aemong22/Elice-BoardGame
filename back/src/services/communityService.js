@@ -8,6 +8,7 @@ class communityService {
         const author = await UserModel.findOne({ _id: userId });
         const comment = [];
         const newContent = {
+            userId,
             author: author.user_name,
             title,
             content,
