@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# Front End
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Member
 
-## Available Scripts
+-   김애림
+-   송가람
+-   안민영
 
-In the project directory, you can run:
+## 폴더 구조
 
-### `npm start`
+```shell
+.
+└── front
+    ├── public
+    │   └── image
+    └── src
+        ├── components
+        │   ├── boardgame
+        │   ├── boardgamedetail
+        │   ├── home
+        │   ├── intro
+        │   ├── mypage
+        │   └── user
+        └── store
+            ├── actions
+            └── reducers
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### components
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+총 6개의 폴더가 존재합니다.
 
-### `npm test`
+**boardgame**:  
+보드게임 조회 시 받아온 보드게임 데이터들을 카드 형식으로 보여줍니다. 백엔드에서 보여줄 페이지의 값을 받아 pagination을 적용시켜 줍니다.  
+사용자는 보드게임 조회 시 원하는 카테고리와 정렬 방식을 선택할 수 있습니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**boardgamedetail**:
+사용자가 보드게임 리스트에서 하나를 선택했을 때 보드게임의 상세 페이지를 보여줍니다. 상세 페이지에는 백엔드에서 보드게임 정보를 받아와 보여주고 유사한 보드게임을 함께 보여줍니다.
 
-### `npm run build`
+**home**:
+사용자가 로그인을 하게되면 만나는 첫 페이지 입니다. BOARDMON 서비스의 메인 페이지이며 매년 출시된 보드게임의 추세를 확인할 수 있습니다.  
+페이지 하단에는 BOARDMON 서비스를 개발한 사람들을 보여줍니다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**intro**
+사용자가 BOARDMON 서비스에 도착하게 되면 만나게 되는 페이지 입니다.  
+"Get Started"를 클릭하게되면 사용자는 회원가입, 로그인(구글 로그인), 비밀번호 찾기 동작을 할 수 있습니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**mypage**
+사용자가 BOARDMON 서비스에 가입되어 있는 본인의 정보를 확인할 수 있는 페이지입니다.  
+mypage에서는 사용자 정보를 수정할 수 있습니다. 사용자의 개인정보와 사용자가 찜해놓은 보드게임을 한 눈에 확인할 수 있습니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### store
 
-### `npm run eject`
+Action에 따라 reducer에서 새로운 상태를 업데이트 하고 store에 저장합니다. store의 상태는 변하지 않으며, action이 발생할 때마다 새로운 객체가 만들어 집니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 적용된 기술 및 기능
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+-   redux 사용
+-   mui css 사용
+-   react-chartjs로 그래프 그리기

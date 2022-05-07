@@ -1,0 +1,39 @@
+:root {
+    --drop-height: 20px;
+    --logo-size: 30px;
+    --offset: 100px;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: var(--logo-size);
+    height: var(--logo-size);
+    border-radius: 100%;
+    /* background-color: salmon; */
+    background-image: url("/public/image/monster.png");
+    background-size: cover;
+    border-radius:50% 50% 50% 50%;
+    cursor: pointer;
+    
+    animation-name: bounce; 
+    animation-duration: 0.5s;
+    animation-direction: alternate;
+    animation-timing-function: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+    animation-iteration-count: infinite;
+}
+  
+@keyframes bounce {
+    from { 
+      transform: translateY(0) scale(1);
+    }
+    to   { 
+      transform: translateY(var(--drop-height)) scale(1, 0.7);
+    }
+}
