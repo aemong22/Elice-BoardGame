@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
     CssBaseline,
     Box,
@@ -6,6 +7,7 @@ import {
     Fab,
     Modal,
     IconButton,
+    Button,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -20,6 +22,7 @@ function DetailContents({ gameData, recommendData }) {
     const [favoriteToggle, setFavoriteToggle] = useState(gameData.favorite);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const navigate = useNavigate();
 
     const favoriteHandler = async () => {
         try {
@@ -27,12 +30,11 @@ function DetailContents({ gameData, recommendData }) {
                 boardgameId: gameData.game_id,
                 toggle: !favoriteToggle,
             }).then(() => {
-                console.log("favorite: ", !favoriteToggle)
-                setFavoriteToggle(!favoriteToggle); 
+                setFavoriteToggle(!favoriteToggle);
             });
         } catch (err) {
             console.log("errer message: ", err);
-          }
+        }
     };
 
     const style = {
@@ -62,14 +64,18 @@ function DetailContents({ gameData, recommendData }) {
                     >
                         <div className="container-top">
                             <div className="container-top-left">
-                                <div
-                                    className="image"
-                                    style={{
-                                        backgroundImage: `url("${gameData.image}")`,
-                                        backgroundColor: "red",
+                                <Button
+                                    variant="contained"
+                                    onClick={() => navigate("/boardgame")}
+                                    sx={{
+                                        borderRadius: "100px",
+                                        m: "3%",
                                     }}
                                 >
-                                    {/* <img
+                                    뒤로가기
+                                </Button>
+                                <div className="image">
+                                    <img
                                         style={{
                                             width: "100%",
                                             height: "100%",
@@ -78,7 +84,7 @@ function DetailContents({ gameData, recommendData }) {
                                         }}
                                         src={gameData.image}
                                         alt={gameData.game_name}
-                                    /> */}
+                                    />
                                 </div>
                             </div>
                             <div className="container-top-right">
