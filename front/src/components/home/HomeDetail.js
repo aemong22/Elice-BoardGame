@@ -51,8 +51,7 @@ function HomeDetail() {
                 >
                     <div className="detail_title">원하는 인원 수로</div>
                     <div className="detail_subtitle">
-                        인원 수 말고도 다양한 카테고리를 보고 싶다면 아래를
-                        눌러보세요!
+                        다양한 카테고리를 보고 싶다면 아래를 눌러보세요!
                     </div>
                 </div>
                 <img

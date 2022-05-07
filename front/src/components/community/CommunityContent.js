@@ -24,7 +24,7 @@ function CommunityContent() {
     const fetchContentInfo = async (contentId) => {
         try {
             const res = await Api.get("communitycontents", contentId);
-            if (res.data?.author === userState?.user_name) {
+            if (res.data?.userId === userState?._id) {
                 setIsEditable(true);
             } else {
                 setIsEditable(false);
@@ -35,6 +35,9 @@ function CommunityContent() {
             console.log(error);
         }
     };
+    useEffect(() => {
+        console.log(contents);
+    }, [contents]);
 
     useEffect(() => {
         fetchContentInfo(contentId);
