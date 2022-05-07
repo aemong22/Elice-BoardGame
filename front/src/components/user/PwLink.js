@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import * as Api from "../../api";
 import { TextField } from "@mui/material";
 import { MyBox, Title, SubContent, MyButton } from "./PwLinkStyle";
+import { toast } from "react-toastify";
 
 function PwLink() {
     const { rtoken } = useParams();
@@ -20,11 +21,11 @@ function PwLink() {
                 resetToken: rtoken,
                 password: pw,
             });
-            alert("비밀번호 변경 성공");
+            toast.info("비밀번호 변경 성공");
 
             navigate("/");
         } catch (err) {
-            alert("비밀번호 변경 실패");
+            toast.error("비밀번호 변경 실패");
             console.log("실패이유", err);
         }
     };
