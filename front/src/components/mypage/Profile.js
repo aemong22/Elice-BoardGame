@@ -19,7 +19,7 @@ import { useEffect } from "react";
 
 function Profile({ ownerData, setOwnerData }) {
     const region = "ap-northeast-2";
-    const bucket = "pinkpig-bucket";
+    const bucket = "elice-boardgame-project";
 
     AWS.config.update({
         region: region,
